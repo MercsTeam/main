@@ -1,4 +1,4 @@
-SoundLibrary = 
+var SoundLibrary = 
 {
 	mainTheme : "MERCS_THEME_JAN21.mp3",
 	clickOn : "330048__paulmorek__beep-04-positive.wav",
@@ -6,6 +6,9 @@ SoundLibrary =
 	skill : "330063__paulmorek__swish-02-2015-06-21.wav",
 	endRound : "346425__soneproject__ecofuture3.wav"
 };
+
+var soundPath = "https://raw.githubusercontent.com/MercsTeam/main/master/Mercs_sound_library";
+//var soundPath = "http://nickcomics.ca/Brock/Mercs/sounds";
 
 function SoundPlayer(loop)
 {	
@@ -18,8 +21,7 @@ function SoundPlayer(loop)
 
 	this.start = function(name)
 	{
-		//this.soundObj.src = "mercs_sound_library/" + SoundLibrary[name];
-		this.soundObj.src = "http://nickcomics.ca/Brock/Mercs/sounds/" + SoundLibrary[name];
+		this.soundObj.src = soundPath + "/" + SoundLibrary[name];
 		this.soundObj.play();
 	};
 
