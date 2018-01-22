@@ -4,6 +4,7 @@ function Skill(n)
 {
 	this.selected = false;
 	this.active = true;
+	this.imageURL = "";
     
     this.name = n;
     this.description = "Description of Skill.";
@@ -82,7 +83,7 @@ function Skill(n)
 				{
 					if(this.type == SkillType.Offensive)
 					{
-						alert("Offensive!!");
+						//alert("Offensive!!");
 
 						target[i].attack.modifier = this.oppAttackMod;
 						target[i].defence.modifier = this.oppDefenceMod;
