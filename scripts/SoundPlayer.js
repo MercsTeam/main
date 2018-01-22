@@ -19,7 +19,7 @@ function SoundPlayer(loop)
 	this.start = function(name)
 	{
 		//this.soundObj.src = "mercs_sound_library/" + SoundLibrary[name];
-		this.soundObj.src = "https://raw.githubusercontent.com/MercsTeam/main/master/mercs_sound_library/" + SoundLibrary[name];
+		this.soundObj.src = "http://nickcomics.ca/Brock/Mercs/sounds/" + SoundLibrary[name];
 		this.soundObj.play();
 	};
 
