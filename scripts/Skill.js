@@ -80,11 +80,12 @@ function Skill(n)
 					if(this.selfImmunity) target[i].immune = true;
 					if(this.blocksDamage) target[i].blocksDamage = true;
 					
-					gameLog.write(string.format("PLAYER{0}: {1} {2} {3}", 
+					gameLog.write(string.format("PLAYER{0}: {1} {2} {3} {4}", 
 						(self.player == player1 ? "1" : "2"),
 						self.name, 
 						self.getLastAttack().text,
-						(this.selfHealthAdd != 0 ? this.selfHealthAdd + " RESTORE." : "")
+						(this.selfHealthAdd != 0 ? this.selfHealthAdd + " RESTORE." : ""),
+						(this.blocksDamage ? " BLOCK DAMAGE ON." : "")
 					));
 				}				
 				else
