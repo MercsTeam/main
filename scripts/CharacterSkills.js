@@ -13,6 +13,11 @@ function Retreat()
 
 		if(c3.active)
 		{
+			gameLog.write(string.format("PLAYER{0}: {1} retreats!", 
+				(player == player1 ? 1 : 2), 
+				player.getCharacterByPosition(pos).name
+			));
+			
 			if(pos == 1)
 			{
 				c1.position = 3;
@@ -44,7 +49,7 @@ function Retreat()
 				p = player.characters[i].position;
 				coords = player.characterCoords[(p == 1 ? "First" : (p == 2 ? "Second" : "Third"))];
 				player.characters[i].updateGameObject(coords);	
-			}
+			}			
 		}
 	};
 }
