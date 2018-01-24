@@ -128,7 +128,7 @@ function Skill(n)
 						damage = target[i].calculateDamage(self, getTypeBonus(self.type, target[i].type));
 						target[i].health.base = Math.max(0, target[i].health.base - damage);	
 						
-						gameLog.write(string.format(string.format("PLAYER{0}: {1} does {2} damage to {3}.", 
+						gameLog.write(string.format("PLAYER{0}: {1} does {2} damage to {3}.", 
 							(self.player == player1 ? "1" : "2"),
 							self.name, 
 							target[i].name,
