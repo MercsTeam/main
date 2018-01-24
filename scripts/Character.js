@@ -180,11 +180,11 @@ function Character()
 		B1 is the attack buffs currently active on the attacking merc, and B2 is the defence buffs currently active on the defending merc. Buffs can value from 1.25 to 1.5, and debuffs value from 0.5 to 0.75. If no buffs are applied, this value is 1.
 		M is the attack value of the move being used by the attacking merc
 		T is the type bonus which is 1 for no bonus, 1.25 for an effective matchup, and 0.75 for an ineffective matchup
-		F is the defending merc’s Defense stat
+		F is the defending mercâ€™s Defense stat
 	*/
 	this.calculateDamage = function(attacker, bonus)
 	{
-		if(this.blocksDamage) return;
+		if(this.blocksDamage) return 0;
 
 		var damage = ((attacker.attack.base * attacker.attack.modifier) + attacker.getSelectedSkill().attackValue) * bonus - (this.defence.base * this.defence.modifier);
 		//alert(string.format("(({0} * {1}) + {2}) * {3} - ({4} * {5}) = {6}", attacker.attack.base, attacker.attack.modifier, attacker.getSelectedSkill().attackValue, bonus, this.defence.base, this.defence.modifier, damage));
