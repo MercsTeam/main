@@ -187,7 +187,7 @@ function Character()
 		if(this.blocksDamage) return 0;
 
 		var damage = ((attacker.attack.base * attacker.attack.modifier) + attacker.getSelectedSkill().attackValue) * bonus - (this.defence.base * this.defence.modifier);
-		//alert(string.format("(({0} * {1}) + {2}) * {3} - ({4} * {5}) = {6}", attacker.attack.base, attacker.attack.modifier, attacker.getSelectedSkill().attackValue, bonus, this.defence.base, this.defence.modifier, damage));
+		alert(string.format("(({0} * {1}) + {2}) * {3} - ({4} * {5}) = {6}", attacker.attack.base, attacker.attack.modifier, attacker.getSelectedSkill().attackValue, bonus, this.defence.base, this.defence.modifier, damage));
 
 		return damage;
 	};
