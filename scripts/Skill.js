@@ -62,6 +62,7 @@ function Skill(n)
 	this.doAction = function(self, target)
 	{
 		var r = Math.random();
+		var damage = 0;
 
 		for(var i = 0; i < target.length; i++)
 		{
@@ -123,8 +124,16 @@ function Skill(n)
 							else
 								target[i].stunned = true;
 						}
-
-						target[i].health.base = Math.max(0, target[i].health.base - target[i].calculateDamage(self, getTypeBonus(self.type, target[i].type)));						
+						
+						damage = target[i].calculateDamage(self, getTypeBonus(self.type, target[i].type));
+						target[i].health.base = Math.max(0, target[i].health.base - damage);	
+						
+						gameLog.write(string.format(string.format("PLAYER{0}: {1} does {2} damage to {3}",.", 
+							(self.player == player1 ? "1" : "2"),
+							self.name, 
+							target[i].name
+							damage
+						));
 					}
 					else
 					{
