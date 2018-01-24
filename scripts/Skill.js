@@ -131,8 +131,8 @@ function Skill(n)
 						gameLog.write(string.format("PLAYER{0}: {1} does {2} damage to {3}.", 
 							(self.player == player1 ? "1" : "2"),
 							self.name, 
-							target[i].name,
-							damage
+							damage,
+							target[i].name
 						));
 					}
 					else
