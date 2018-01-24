@@ -1,9 +1,9 @@
 var SoundLibrary = 
 {
 	mainTheme : "MERCS_THEME_JAN21.mp3",
-	clickOn : "330048__paulmorek__beep-04-positive.wav",
-	clickOff : "330049__paulmorek__beep-04-negative.wav",
-	skill : "330063__paulmorek__swish-02-2015-06-21.wav",
+	clickOn : "330048__paulmorek__beep-04-positive.mp3",
+	clickOff : "330049__paulmorek__beep-04-negative.mp3",
+	skill : "330063__paulmorek__swish-02-2015-06-21.mp3",
 	endRound : "346425__soneproject__ecofuture3.mp3"
 };
 
