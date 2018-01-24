@@ -2,7 +2,7 @@
 <html lang="en-CA">
     <head>
         <!--base href="https://mercsteam.github.io/main/" /-->
-        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <title>Merc TT Demo</title>
         <link rel="stylesheet" href="style/style.css" />
         
@@ -13,6 +13,7 @@
         <script src="scripts/CharacterSkills.js"></script>
         <script src="scripts/Characters.js"></script>
 
+		<script src="scripts/Credits.js"></script>
 		<script src="scripts/SoundPlayer.js"></script>
         
         <script>
@@ -30,7 +31,7 @@
 			}
             
             const CHARACTERS_PER_TEAM = 3;
-            
+          
             window.onload = function()
             {
 				music.start("mainTheme");
@@ -874,6 +875,8 @@
                     </div>
                 </div>
             </div>
+
+			<div id="credits"></div>
         </div>
     </body>
 </html>
