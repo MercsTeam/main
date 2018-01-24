@@ -10,7 +10,11 @@ function Skill(n)
     this.description = "Description of Skill.";
     this.type = SkillType.NotSet;
     
+	//can this skill affect multiple enemies
     this.multiTarget = false;
+
+	//can this skill aid your ally
+	this.affectAlly = false;
     
 	this.blocksDamage = false;
     this.repeatable = true;

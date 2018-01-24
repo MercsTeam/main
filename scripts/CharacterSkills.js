@@ -1,7 +1,5 @@
 function Retreat()
 {
-	//var selected = false;
-
 	this.type = SkillType.Reusable;
 	this.description = "Causes character to rotate into inactive position.";
 
@@ -107,6 +105,7 @@ function RicochetShot()
     this.attackValue = 50;
     this.multiTarget = true;
     this.accuracy = 0.2;
+	this.bleedProb = 1.0;
     this.description = "Medium damage to both frontline targets. Very high chance (80%) of missing. Critical hit results in Penetrating Shot that causes bleeding.";
 }
 RicochetShot.prototype = new Skill("Ricochet Shot");
@@ -194,6 +193,7 @@ function HighWinds()
     this.oppSpeedMod = 0.5;
     this.duration = 4;
 	this.multiTarget = true;
+	this.affectAlly = true;
     this.description = "Summons high winds across the battlefield, increasing the speed of allies(+50%) and reducing the speed of enemies (-50%). Lasts 3-5 rounds.";
 
 	this.doAction = function(self, target)
@@ -218,6 +218,7 @@ function Wish()
     this.allySpeedMod = 1.25;
     this.allyImmunity = true;
     this.allyHealthAdd = 25;
+	this.affectAlly = true;
     this.description = "Grants an ally increased attack, defence, speed, (+25%) immunity, and minor healing (+25 HP).";
 }
 Wish.prototype = new Skill("Wish");
