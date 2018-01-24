@@ -79,6 +79,13 @@ function Skill(n)
 
 					if(this.selfImmunity) target[i].immune = true;
 					if(this.blocksDamage) target[i].blocksDamage = true;
+					
+					gameLog.write(string.format("PLAYER{0}: {1} {2} {3}", 
+						(self.player == player1 ? "1" : "2"),
+						self.name, 
+						self.getLastAttack().text,
+						(this.selfHealthAdd != 0 ? this.selfHealthAdd + " RESTORE." : "")
+					));
 				}				
 				else
 				{
@@ -127,13 +134,7 @@ function Skill(n)
 						
 						damage = target[i].calculateDamage(self, getTypeBonus(self.type, target[i].type));
 						target[i].health.base = Math.max(0, target[i].health.base - damage);	
-						
-						/*gameLog.write(string.format("PLAYER{0}: {1} does {2} damage to {3}.", 
-							(self.player == player1 ? "1" : "2"),
-							self.name, 
-							damage,
-							target[i].name
-						));*/
+
 						gameLog.write(string.format("PLAYER{0}: {1} {2} {3} DAMAGE.", 
 							(self.player == player1 ? "1" : "2"),
 							self.name, 
@@ -151,6 +152,13 @@ function Skill(n)
 						target[i].health.base += this.allyHealthAdd;
 
 						if(this.allyImmunity) target[i].immune = true;
+						
+						gameLog.write(string.format("PLAYER{0}: {1} {2} {3}", 
+							(self.player == player1 ? "1" : "2"),
+							self.name, 
+							self.getLastAttack().text,
+							(this.allyHealthAdd != 0 ? string.format("ALLY {0} RESTORE", this.allyHealthAdd) : "")
+						));
 					}
 				}							
 			}			
