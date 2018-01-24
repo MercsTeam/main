@@ -179,3 +179,32 @@ nav a { padding:4% 2%;margin:2% 0; }
 
 .p2-skillImg { border:solid 4px #999966 }
 .p2-skillImg span { text-align:right;color:#999966 }
+
+#credits
+{
+	visibility:hidden;
+	position:absolute;
+	top:25%;left:25%;
+	border-radius:5%;
+
+	background-color:rgba(0,0,0,0.7);
+	padding:3%;	
+	
+	height:calc(50% - 80px);
+	width:calc(50% - 80px);
+}
+marquee
+{
+	height:100%;width:100%;
+	background-color:#000000;
+	color:#ffffff;
+	font-size:x-large;
+}
+h1 { font-size:90%;text-align:center;text-decoration:underline; }
+dl
+{
+	text-align:center;
+	margin:0;padding-bottom:50px;
+}
+dt { margin-top:20px;font-size:60%;font-weight:bold;text-transform:uppercase }
+dd { margin:0;padding:0 }
