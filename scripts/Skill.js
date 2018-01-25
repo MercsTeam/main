@@ -74,10 +74,10 @@ function Skill(n)
 			{
 				if(target[i] == self)
 				{
-					target[i].attack.modifier = this.selfAttackMod;
-					target[i].defence.modifier = this.selfDefenceMod;
-					target[i].speed.modifier = this.selfSpeedMod;
-					target[i].accuracy.modifier = this.selfAccuracyMod;
+					if(this.selfAttackMod != 1.0) target[i].attack.modifier = this.selfAttackMod;
+					if(this.selfDefenceMod != 1.0) target[i].defence.modifier = this.selfDefenceMod;
+					if(this.selfSpeedMod != 1.0) target[i].speed.modifier = this.selfSpeedMod;
+					if(this.selfAccuracyMod != 1.0) target[i].accuracy.modifier = this.selfAccuracyMod;
 					
 					target[i].health.base += this.selfHealthAdd;
 
@@ -98,10 +98,10 @@ function Skill(n)
 					{
 						//alert("Offensive!!");
 
-						target[i].attack.modifier = this.oppAttackMod;
-						target[i].defence.modifier = this.oppDefenceMod;
-						target[i].speed.modifier = this.oppSpeedMod;
-						target[i].accuracy.modifier = this.oppAccuracyMod;
+						if(this.oppAttackMod != 1.0) target[i].attack.modifier = this.oppAttackMod;
+						if(this.oppDefenceMod != 1.0) target[i].defence.modifier = this.oppDefenceMod;
+						if(this.oppSpeedMod != 1.0) target[i].speed.modifier = this.oppSpeedMod;
+						if(this.oppAccuracyMod != 1.0) target[i].accuracy.modifier = this.oppAccuracyMod;
 
 						if(r <= this.stunProb) target[i].stunned = true;
 						if(r <= this.dazeProb) target[i].dazed = true;
@@ -149,10 +149,10 @@ function Skill(n)
 					}
 					else
 					{
-						target[i].attack.modifier = this.allyAttackMod;
-						target[i].defence.modifier = this.allyDefenceMod;
-						target[i].speed.modifier = this.allySpeedMod;
-						target[i].accuracy.modifier = this.allyAccuracyMod;
+						if(this.allyAttackMod != 1.0) target[i].attack.modifier = this.allyAttackMod;
+						if(this.allyDefenceMod != 1.0) target[i].defence.modifier = this.allyDefenceMod;
+						if(this.allySpeedMod != 1.0) target[i].speed.modifier = this.allySpeedMod;
+						if(this.allyAccuracyMod != 1.0) target[i].accuracy.modifier = this.allyAccuracyMod;
 
 						target[i].health.base += this.allyHealthAdd;
 

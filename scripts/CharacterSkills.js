@@ -85,7 +85,7 @@ function Focus()
 {
     this.type = SkillType.Reusable;
     this.selfAttackMod = 1.5;
-    this.description = "Strengthens the attack stat (+50%) until big sword guy is swapped to an inactive state, or dies.";
+    this.description = "Strengthens the attack stat (+50%) until Artur Hobbe is swapped to an inactive state, or dies.";
 	this.imageURL = "characters/BSGComicStills/FRONT-Focus.jpg";
 }
 Focus.prototype = new Skill("Focus");

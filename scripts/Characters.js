@@ -1,5 +1,5 @@
 //var availableCharacters = [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Alien, Caveman, CowboyGuy, HiveDrone, SpaceGirl, Pirate, Witch ];
-var availableCharacters = [ BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy ];
+var availableCharacters = [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy ];
 
 var textureBaseURL = "https://raw.githubusercontent.com/MercsTeam/threejs-testing/master/textures/";
 
@@ -11,10 +11,17 @@ function BigSwordGuy()
     this.type = CharacterType.Physical;
 
     this.skills = [ new SwordChop(), new SweepingStrike(), new DefensiveStance(), new Focus(), new Retreat() ];
-    this.state = 
+    /*this.state = 
     {
 		IDLE_FRONT : { img : "bigswordguy/idle.front.png", wrap : false, animate : null },
 		IDLE_BACK  : { img : "bigswordguy/idle.back.png", wrap : true, animate : null },
+		SLASH_FRONT : { img : "bigswordguy/slash.front.png", wrap : false, animate : { hor : 30, vert : 1, num : 30, dur : 33 } }	    
+    };*/
+
+	this.state = 
+    {
+		IDLE_FRONT : { img : "bsg_idle_front.png", wrap : false, animate : null },
+		IDLE_BACK  : { img : "bsg_idle_back.png", wrap : true, animate : null },
 		SLASH_FRONT : { img : "bigswordguy/slash.front.png", wrap : false, animate : { hor : 30, vert : 1, num : 30, dur : 33 } }	    
     };
 
@@ -40,6 +47,20 @@ function SniperGirl()
 
     this.skills = [ new Headshot(), new RicochetShot(), new TakeAim(), new Camouflage(), new Retreat() ];
 
+	this.state = 
+    {
+		IDLE_FRONT : { img : "snipergirl_idle_front.png", wrap : false, animate : null },
+		IDLE_BACK  : { img : "snipergirl_idle_back.png", wrap : true, animate : null }
+    };
+
+	this.health = { base : 200, modifier : 1.0  };
+    
+	this.defence = { base : 50, modifier : 1.0, duration : -1 };
+    this.attack = { base : 50, modifier : 1.0, duration : -1 };
+    this.speed = { base : 100, modifier : 1.0, duration : -1 };
+	
+	this.accuracy = { modifier : 1.0, duration : -1 };
+
     this.backstory = "A crack-shot special forces veteran, this career soldier grew disinterested in civilian life after the war and turned to mercenary work. If you can afford her rate, and you can find her, maybe you can hire Artemis.";
 }
 SniperGirl.prototype = new Character();
@@ -52,6 +73,20 @@ function Mage()
 	this.type = CharacterType.Magic;
 
     this.skills = [ new Fireball(), new LightningStorm(), new DivineShield(), new PoolMana(), new Retreat() ];
+
+	this.state = 
+    {
+		IDLE_FRONT : { img : "mage_idle_front.png", wrap : false, animate : null },
+		IDLE_BACK  : { img : "mage_idle_back.png", wrap : true, animate : null }
+    };
+
+	this.health = { base : 200, modifier : 1.0  };
+    
+	this.defence = { base : 50, modifier : 1.0, duration : -1 };
+    this.attack = { base : 50, modifier : 1.0, duration : -1 };
+    this.speed = { base : 100, modifier : 1.0, duration : -1 };
+	
+	this.accuracy = { modifier : 1.0, duration : -1 };
 
     this.backstory = "This reclusive wizard had her first taste of fame and wealth after a quest to slay a dragon. Now Zocoma has a taste for the spotlight and uses her powers for profiteering.";
 }
@@ -66,6 +101,20 @@ function Djinn()
 
     this.skills = [ new LightningStrike(), new CloudBarrier(), new HighWinds(), new Wish(), new Retreat() ];
 
+	this.state = 
+    {
+		IDLE_FRONT : { img : "djinn_idle_front.png", wrap : false, animate : null },
+		IDLE_BACK  : { img : "djinn_idle_back.png", wrap : true, animate : null }
+    };
+
+	this.health = { base : 200, modifier : 1.0  };
+    
+	this.defence = { base : 50, modifier : 1.0, duration : -1 };
+    this.attack = { base : 50, modifier : 1.0, duration : -1 };
+    this.speed = { base : 100, modifier : 1.0, duration : -1 };
+	
+	this.accuracy = { modifier : 1.0, duration : -1 };
+
     this.backstory = "He lifts.";
 }
 Djinn.prototype = new Character();
@@ -78,6 +127,20 @@ function Cyborg()
 	this.type = CharacterType.Finesse;
 
     this.skills = [ new IntegratedBattleSystem(), new ElectronicBarrier(), new NanobotRepairs(), new PassiveEffect(), new Retreat() ];
+
+	this.state = 
+    {
+		IDLE_FRONT : { img : "cyborg_idle_front.png", wrap : false, animate : null },
+		IDLE_BACK  : { img : "cyborg_idle_back.png", wrap : true, animate : null }
+    };
+
+	this.health = { base : 200, modifier : 1.0  };
+    
+	this.defence = { base : 50, modifier : 1.0, duration : -1 };
+    this.attack = { base : 50, modifier : 1.0, duration : -1 };
+    this.speed = { base : 100, modifier : 1.0, duration : -1 };
+	
+	this.accuracy = { modifier : 1.0, duration : -1 };
 
     this.backstory = "After the hovertrain accident that killed his tycoon parents and left his body broken, He spent months in intensive care, clawing at the last shreds of his life. "
 		+ "With the help of an experimental transhumanist program, Proto was offered a second chance. Now almost eighty percent cybernetic, Proto uses his lightning fast synapses "

@@ -196,7 +196,8 @@ function Character()
 	{
 		var state = this.state[sprite];
 		
-		var texture  = new THREE.TextureLoader().load(textureBaseURL + state.img);
+		//var texture  = new THREE.TextureLoader().load(textureBaseURL + state.img);
+		var texture  = new THREE.TextureLoader().load("images/sprites/" + state.img);
 		if(state.wrap) texture.wrapS = THREE.RepeatWrapping;
 		
 		var material = new THREE.MeshLambertMaterial( { map : texture, transparent : true } );
@@ -205,7 +206,7 @@ function Character()
 		this.obj.position.x = coords.x;   
 		this.obj.position.y = coords.y;   
 		this.obj.position.z = coords.z;
-		this.obj.rotation.y = Math.PI * 1.6;
+		this.obj.rotation.y = Math.PI * 1.5;
 		
 		this.charanim = null;
 		if(state.animate)
@@ -226,19 +227,19 @@ function Character()
 		if(marker)
 		{
 			this.marker.setX(coords.x);
-			this.marker.setY(coords.y - 2.4);
+			this.marker.setY(coords.y - 4.4);
 			this.marker.setZ(coords.z);
 		}
 	};
 
 	this.createHealthBar = function(coords)
 	{
-		var geometry = new THREE.PlaneGeometry( 4, 0.5, 32 );
+		var geometry = new THREE.PlaneGeometry( 3, 0.5, 32 );
 		var material = new THREE.MeshBasicMaterial( {color: 0x00CC33, side: THREE.DoubleSide} );
 		
 		this.healthbar = new THREE.Mesh( geometry, material );
 		this.healthbar.position.x = coords.x;
-		this.healthbar.position.y = coords.y + 4;
+		this.healthbar.position.y = coords.y + 3.5;
 		this.healthbar.position.z = coords.z;
 		this.healthbar.rotation.y = Math.PI * 1.6;
 		return this.healthbar;
@@ -246,7 +247,7 @@ function Character()
 
 	this.updateHealthBar = function()
 	{
-		var width = Math.max(0.001, this.health.base / 200 * 4);
+		var width = Math.max(0.001, this.health.base / 200 * 3);
 		var barColor = (width < 1 ? 0xFF2424 : 0x00CC33);
 		
 		this.healthbar.geometry = new THREE.PlaneGeometry( width, 0.5, 32 );
@@ -260,13 +261,13 @@ function Character()
 		this.obj.position.z = coords.z;
 		
 		this.healthbar.position.x = coords.x;
-		this.healthbar.position.y = coords.y + 4;
+		this.healthbar.position.y = coords.y + 3.5;
 		this.healthbar.position.z = coords.z;
 		
 		if(this.marker)
 		{
 			this.marker.setX(coords.x);
-			this.marker.setY(coords.y - 2.4);
+			this.marker.setY(coords.y - 4.4);
 			this.marker.setZ(coords.z);
 		}
 	};
