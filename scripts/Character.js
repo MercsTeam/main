@@ -44,6 +44,7 @@ function Character()
     this.type = CharacterType.NotSet;   
 	
 	this.defeatImage = "";
+	this.defaultHealth = 0;
 
     this.colour = 0x000000;
     this.obj = null;
@@ -60,6 +61,11 @@ function Character()
     this.retreat = false;	
     this.position = -1;
     this.target = -1;
+
+	this.getHealthPct = function()
+	{
+		return this.health.base / this.defaultHealth;
+	}	
 
 	this.getAlly = function()
 	{
@@ -247,7 +253,7 @@ function Character()
 
 	this.updateHealthBar = function()
 	{
-		var width = Math.max(0.001, this.health.base / 200 * 3);
+		var width = Math.max(0.001, this.getHealthPct() * 3);
 		var barColor = (width < 1 ? 0xFF2424 : 0x00CC33);
 		
 		this.healthbar.geometry = new THREE.PlaneGeometry( width, 0.5, 32 );

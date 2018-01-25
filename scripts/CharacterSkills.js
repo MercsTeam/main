@@ -277,3 +277,87 @@ function PassiveEffect()
 	}
 }
 PassiveEffect.prototype = new Skill("Passive Effect");
+
+function StormStrike()
+{
+	this.type = SkillType.Offensive;
+	this.attackValue = 50;
+	this.selfSpeedMod = 1.25;
+	this.accuracy = 0.25;
+}
+StormStrike.prototype = new Skill("Storm Strike");
+
+function SingleShot()
+{
+	this.type = SkillType.Offensive;
+	this.attackValue = 40;
+
+	this.doAction = function(self, target)
+	{
+		if(target.getHealthPct() < 0.25)
+		{
+			this.attackValue *= 2;
+		}
+
+		target.health.base = Math.max(0, target.calculateDamage(self, getTypeBonus(self.type, target.type)));
+		if(target.health.base == 0)
+		{
+			self.attack.modifier = 1.25;
+			self.speed.modified = 1.25;
+		}
+	}	
+}
+SingleShot.prototype = new Skill("Single Shot");
+
+function Parry()
+{
+	this.type = SkillType.Defensive;
+	this.blocksDamage = true;
+	this.accuracy = 0.25;
+
+	this.doAction = function(self, target)
+	{
+		self.blocksDamage = this.blocksDamage;
+
+		var r = Math.random();
+		var targetAttack = target.getLastAttack();
+
+		if(r <= this.accuracy && targetAttack.type == SkillType.Offensive)
+		{
+			target.health.base -= (targetAttack.attackValue * 0.25);
+		}
+	};
+}
+Parry.prototype = new Skill("Parry");
+
+
+function Maelstrom()
+{
+	this.type = SkillType.Reusable;
+	this.duration = 3;
+	this.accuracy = 0.25;
+	this.allySpeedMod = 1.25;
+	this.multiTarget = true;
+	
+	this.doAction = function(self, target)
+	{
+		self.health.modifer = 0.75;		
+
+		var r = Math.random();
+		if(r <= this.accuracy)
+		{
+			ally = self.getAlly()
+			ally.speed.modifier = this.allySpeedMod;
+			ally.health.duration = this.duration;
+		}
+
+		var h = target[0];
+		for(var i = 0; i < target.length; i++)
+		{
+			if(target[i].health.base > h.health.base) h = target[i];
+		}
+		h.health.base -= 25;
+	};
+}
+Maelstrom.prototype = new Skill("Maelstrom");
+
