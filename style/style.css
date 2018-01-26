@@ -156,6 +156,7 @@ textarea { font-size:12pt;padding:2px;height:auto;background-color:#000000;color
 
 a { display:block;font-size:28pt;margin:0;padding:0;background:red;text-decoration:none;padding:2%; }
 nav a { padding:4% 2%;margin:2% 0; }
+a.audio-off { background-image:url('../images/muted.png');background-repeat:no-repeat;background-position:center right; }
 
 #imgViewer
 {
