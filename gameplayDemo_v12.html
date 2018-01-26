@@ -26,6 +26,8 @@
 
 			function toggleSound()
 			{
+				document.querySelector("nav a:nth-child(2)").classList.toggle("audio-off");
+
 				music.mute(!music.isMuted());
 				uiSound.mute(!uiSound.isMuted());
 			}
