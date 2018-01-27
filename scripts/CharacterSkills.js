@@ -96,6 +96,7 @@ function Headshot()
     this.attackValue = 100;
     this.accuracy = 0.4;
     this.description = "High damage single-target attack, with a high chance (60%) of missing.";
+    this.imageURL = "characters/SniperGirlComicStills/SG-Headshot.jpg";
 }
 Headshot.prototype = new Skill("Headshot");
 
