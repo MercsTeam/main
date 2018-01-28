@@ -601,6 +601,8 @@
 				var FLOOR_URL = "https://raw.githubusercontent.com/MercsTeam/threejs-testing/master/textures/floor/steelfloor.jpg";
 				var m1, m2;
 
+				var backgrounds = [ "mars.jpg", "Spacecity.png", "Underwater.png" ];				
+
 				function loadArena()
 				{
 					if (Detector.webgl)
@@ -627,7 +629,9 @@
 						gp.insertBefore(renderer.domElement, gp.childNodes[0]);
 
 						//create background
-						var bkgrdTexture = new THREE.TextureLoader().load("images/backgrounds/mars.jpg");
+						var r = Math.floor(Math.random() * backgrounds.length);
+
+						var bkgrdTexture = new THREE.TextureLoader().load(string.format("images/backgrounds/{0}", backgrounds[r]));
 						var backgroundMesh = new THREE.Mesh(
 							new THREE.PlaneGeometry(2, 2, 0),
 							new THREE.MeshBasicMaterial({ map: bkgrdTexture })
