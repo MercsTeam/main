@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<title>Mercs Universe</title>
+		<style type="text/css">
+			body { font-family:Helvetica, Arial, Sans;width:100%;margin:0;padding:0;background-color:#000000 }
+			#content{ width:900px;margin:0 auto;color:#37B38A; }
+			.pageHeader { width:900px;height:60px;vertical-align:middle;font-size:50pt;letter-spacing:0.1em;padding:5px;margin-bottom:5px;font-weight:bold; }
+
+			p { text-indent:0;margin:10px 0;width:350px;text-align:justify; }
+			q { font-style:italic;color:#174F3D; }
+			#characterName{ font-size:36pt; }
+			#characterName span { font-size:11pt;letter-spacing:normal;font-weight:normal;text-transform:uppercase; }
+
+			#rateChart { background-color:#37B38A;text-transform:uppercase;padding:0 5px 5px 5px;border-radius:10px; }
+			
+			.tableHead th { color:#000000;font-size:8pt;font-weight:bold;padding-left:5px; }		
+			.power_rating { font-weight:bold;font-size:large; }
+			.not_set { background-color:#227157; }			
+			
+			#character_img 
+			{ 
+				width:510px;height:750px;
+				margin-left:1em;margin-bottom:10px;
+				
+				float:right;
+
+				border:solid 4px #37B38A;
+				border-radius:5%; 
+
+				background-repeat:no-repeat;
+				background-position:center;
+			}
+
+			.good { background-color:#4284FD !important;color:#174F3D; }
+			.evil { background-color:#991717 !important;color:#2B9573; }
+			.neutral { background-color:#CAEEE2 !important;color:#174F3D; }
+
+			#character_img img { padding:5px; }
+
+			button 
+			{
+				border:none;border-radius:5px;
+				background-color:#37B38A;color:#174F3D;
+				width:150px;height:auto; 
+				padding:5px;
+				font-size:large;
+			}
+		</style>
+		
+		<script src="../scripts/QueryString.js"></script>
+		<script src="../scripts/util.js"></script>
+		
+		<script src="../scripts/Skill.js"></script>
+		<script src="../scripts/Character.js"></script>
+		<script src="../scripts/CharacterSkills.js"></script>		
+		<script src="../scripts/Characters.js"></script>
+
+		<script type="text/javascript">
+			const SCALE_MAX = 10;	
+
+			const MAX_HEALTH = 250;
+			const MAX_ATTACK = 65;
+			const MAX_DEFENCE = 60;
+			const MAX_SPEED = 135;
+
+			var id = Request.QueryString["id"];	
+			var character;
+
+			var characters = [
+				{ obj : new Alien(), gender : "N/A", hair : "N/A", eye : "N/A", powerRatings : null },
+				{ obj : new BigSwordGuy(), gender : "M", hair : "brown", eye : "blue", powerRatings : null }, 
+				{ obj : new Caveman(), gender : "M", hair : "black", eye : "brown", powerRatings : null },
+				{ obj : new CowboyGuy(), gender : "M", hair : "brown", eye : "turquoise", powerRatings : null },
+				{ obj : new Cyborg(), gender : "M", hair : "N/A", eye : "red", powerRatings : null },
+				{ obj : new Djinn(), gender : "M", hair : "black", eye : "yellow", powerRatings : null },
+				{ obj : new HiveDrone(), gender : "M", hair : "N/A", eye : "red", powerRatings : null },				
+				{ obj : new Mage(), gender : "F", hair : "blue", eye : "yellow", powerRatings : null },				
+				{ obj : new Pirate(), gender : "M", hair : "back", eye : "turquoise", powerRatings : null },
+				{ obj : new SpaceGirl(), gender : "F", hair : "brown", eye : "green", powerRatings : null },
+				{ obj : new SniperGirl(), gender : "F", hair : "blonde", eye : "blue", powerRatings : null },
+				{ obj : new Witch(), gender : "F", hair : "N/A", eye : "yellow", powerRatings : null }
+			];
+
+			window.onload = function()
+			{
+				character = characters[id];
+				character.powerRatings = 
+				{
+					"Health"	: getRating(character.obj.health, MAX_HEALTH),
+					"Attack"	: getRating(character.obj.attack, MAX_ATTACK),
+					"Defence"	: getRating(character.obj.defence, MAX_DEFENCE),
+					"Speed"		: getRating(character.obj.speed, MAX_SPEED)
+				};
+
+				document.title = "Mercs Universe - [" + character.obj.name + "]";
+
+				var profileContent = document.getElementById('content');
+				
+				var h = document.createElement("DIV");
+				h.id = "characterName";
+				h.className = "pageHeader characters";
+				h.appendChild(document.createTextNode(character.obj.name));
+				profileContent.appendChild(h);
+				
+				var imgBox = document.createElement("DIV");
+				imgBox.id = "character_img";
+				imgBox.className = character.obj.alignment.toLowerCase();
+				imgBox.style.backgroundImage = string.format("url('{0}')", character.obj.image);	
+				profileContent.appendChild(imgBox);
+
+				profileContent.appendChild(HTMLRatingChart());
+
+				var p = document.createElement("P");
+				p.innerHTML = string.format("<strong>REAL NAME:</strong> {0}<br />"
+					+ "<strong>STATUS:</strong> Active&nbsp;&nbsp;<strong>ALIGNMENT:</strong> {1}<br />"					
+					+ "<strong>GENDER:</strong> {2}<br />"
+					+ "<strong>EYES:</strong> {3}&nbsp;&nbsp;<strong>HAIR:</strong> {4}<br />"
+					+ "<strong>FIRST APPEARANCE:</strong> <em>MERCS: Triple Threat</em>",
+					(character.obj.realName == "" ? "Unrevealed" : character.obj.realName),
+					character.obj.alignment,
+					(character.gender == "F" ? "Female" : (character.gender == "M" ? "Male" : character.gender)),
+					character.eye,
+					character.hair
+				);
+				profileContent.appendChild(p);
+
+				if(character.obj.quote != "")
+				{
+					var q = document.createElement("Q");
+					q.innerHTML = character.obj.quote;
+					profileContent.appendChild(q);
+				}
+
+				p = document.createElement("P");
+				p.innerHTML = string.format("<strong>BACKSTORY:</strong> {0}", character.obj.backstory);
+				profileContent.appendChild(p);
+
+				s = document.createElement("STRONG");
+				s.innerHTML = "SKILLS:";
+				
+				ul = document.createElement("UL");
+				for(var i = 0; i < character.obj.skills.length; i++)
+				{
+					li = document.createElement("LI");
+					li.innerHTML = character.obj.skills[i];
+					ul.appendChild(li);
+				}
+
+				p = document.createElement("P");
+				p.appendChild(s);			
+				p.appendChild(ul);
+				profileContent.appendChild(p);
+
+				btnBack = document.createElement("BUTTON");
+				btnBack.setAttribute("type", "button");
+				btnBack.innerHTML = "Back to Index";
+				btnBack.onclick = function() { document.location.href = "index.html"; };
+				profileContent.appendChild(btnBack);
+			};
+
+			function HTMLRatingChart()
+			{
+				var table = document.createElement('TABLE');
+				table.id = "rateChart";
+				table.style.width = "350px"
+				table.cellPadding = 0;
+				table.cellSpacing = 3;
+
+				var tr = table.insertRow(-1);
+				tr.className = "tableHead";
+				
+				var th = document.createElement('TH');
+				th.style.width = "235px";
+				th.innerHTML = "power ratings";
+				tr.appendChild(th);
+
+				for(var i = 1; i <= SCALE_MAX; i++)
+				{
+					th = document.createElement('TH');
+					th.style.width = "50px";
+					th.innerHTML = i;
+					tr.appendChild(th);
+				}
+
+				var td = null;
+				for(var value in character.powerRatings)
+				{
+					tr = table.insertRow(-1);
+
+					td = tr.insertCell(-1);
+					td.className = "power_rating " + character.obj.alignment.toLowerCase();
+					td.innerHTML = "&nbsp;" + value;
+					
+					for(var i = 1; i <= SCALE_MAX; i++)
+					{
+						td = tr.insertCell(-1);
+						td.className = (i <= character.powerRatings[value] ? "power_rating " + character.obj.alignment.toLowerCase() : "not_set");
+					}
+				}
+				return table;
+			}
+
+			function getRating(attr, maxValue)
+			{
+				return (!attr ? 0 : Math.floor(attr.base / maxValue * SCALE_MAX));
+			}
+
+			function getMaxValues()
+			{
+				var maxHealth = 0, maxAttack = 0, maxDefence = 0, maxSpeed = 0;
+				for(var i = 0; i < characters.length; i++)
+				{
+					if(characters[i].obj.health && (maxHealth == 0 || characters[i].obj.health.base > maxHealth)) maxHealth = characters[i].obj.health.base;
+					if(characters[i].obj.attack && (maxAttack == 0 || characters[i].obj.attack.base > maxAttack)) maxAttack = characters[i].obj.attack.base;
+					if(characters[i].obj.defence && (maxDefence == 0 || characters[i].obj.defence.base > maxDefence)) maxDefence = characters[i].obj.defence.base;
+					if(characters[i].obj.speed && (maxSpeed == 0 || characters[i].obj.speed.base > maxSpeed)) maxSpeed = characters[i].obj.speed.base;
+				}
+				alert(string.format("maxHealth = {0}; maxAttack = {1}; maxDefence = {2}; maxSpeed = {3};", maxHealth, maxAttack, maxDefence, maxSpeed));
+			}
+		</script>
+	</head>
+	<body>		
+		<div id="content" style="width:900px"></div>
+	</body>
+</html>
