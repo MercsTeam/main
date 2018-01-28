@@ -61,7 +61,17 @@ function Skill(n)
 	this.isSelected = function() { return this.selected; };    
     this.isActive = function() { return this.active; };
 
-	this.toLog = function() { return "<strong>" + this.name + "</strong><br />" + this.description; };
+	this.toLog = function() { return string.format("<strong>{0}</strong><br />{1}", this.name, this.description); };
+
+	this.toString = function()
+	{
+		output = string.format("<strong>{0}</strong>: <em>({1})</em> {2}", 
+			this.name,
+			(this.type == SkillType.Offensive ? "Offensive" : (this.type == SkillType.Defensive ? "Defensive" : "Reusable")),
+			this.description			
+		);
+		return output;
+	}
 
 	this.doAction = function(self, target)
 	{

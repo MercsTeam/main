@@ -41,7 +41,9 @@ function Character()
     
     this.name = "";
     this.image = "";
-    this.type = CharacterType.NotSet;   
+    this.type = CharacterType.NotSet;
+	this.alignment = "";
+	this.quote = "";
 	
 	this.defeatImage = "";
 	this.defaultHealth = 0;

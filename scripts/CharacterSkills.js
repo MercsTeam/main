@@ -96,7 +96,7 @@ function Headshot()
     this.attackValue = 100;
     this.accuracy = 0.4;
     this.description = "High damage single-target attack, with a high chance (60%) of missing.";
-    this.imageURL = "characters/SniperGirlComicStills/SG-Headshot.jpg";
+	this.imageURL = "characters/SniperGirlComicStills/SG-Headshot.jpg";
 }
 Headshot.prototype = new Skill("Headshot");
 
@@ -285,6 +285,8 @@ function StormStrike()
 	this.attackValue = 50;
 	this.selfSpeedMod = 1.25;
 	this.accuracy = 0.25;
+
+	this.description = "Attacks with a lightning imbued rapier, this attack has a chance to increase the user's speed.";
 }
 StormStrike.prototype = new Skill("Storm Strike");
 
@@ -292,6 +294,7 @@ function SingleShot()
 {
 	this.type = SkillType.Offensive;
 	this.attackValue = 40;
+	this.description = "Fires a bullet at a single target that deals double damage to targets below 25% health.  When this skill results in the death of an enemy, the speed and attack are increased.";
 
 	this.doAction = function(self, target)
 	{
@@ -315,6 +318,7 @@ function Parry()
 	this.type = SkillType.Defensive;
 	this.blocksDamage = true;
 	this.accuracy = 0.25;
+	this.description = "Takes a defensive posture to parry any incoming attacks. Incoming attacks are ineffective, and has a 25% chance to reflect 25% of the damage back at the attacker.";
 
 	this.doAction = function(self, target)
 	{
@@ -339,6 +343,8 @@ function Maelstrom()
 	this.accuracy = 0.25;
 	this.allySpeedMod = 1.25;
 	this.multiTarget = true;
+	this.description = "Summons a powerful storm that lasts for 3 turns. While maelstrom is active, pirate's damage is increased, the attacks of all allied mercs have a chance to increase the speed stat, "
+		+ "and at the end of each turn the maelstrom is active, the enemy merc with the highest percentage of health is struck by lightning and dealt damage";
 	
 	this.doAction = function(self, target)
 	{
