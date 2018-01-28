@@ -1,5 +1,5 @@
 //var availableCharacters = [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Alien, Caveman, CowboyGuy, HiveDrone, SpaceGirl, Pirate, Witch ];
-var availableCharacters = [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy ];
+var availableCharacters = [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, Nemesis ];
 
 var textureBaseURL = "https://raw.githubusercontent.com/MercsTeam/threejs-testing/master/textures/";
 

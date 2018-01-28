@@ -205,7 +205,7 @@ function Character()
 		var state = this.state[sprite];
 		
 		//var texture  = new THREE.TextureLoader().load(textureBaseURL + state.img);
-		var texture  = new THREE.TextureLoader().load("images/sprites/" + state.img);
+		var texture  = new THREE.TextureLoader().load(string.format("images/sprites/{0}?v=20180128", state.img));
 		if(state.wrap) texture.wrapS = THREE.RepeatWrapping;
 		
 		var material = new THREE.MeshLambertMaterial( { map : texture, transparent : true } );

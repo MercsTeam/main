@@ -8,6 +8,12 @@ function Nemesis()
 
     this.skills = [ new SwordChop(), new SweepingStrike(), new DefensiveStance(), new Focus(), new Retreat() ];
 
+	this.state = 
+    {
+		IDLE_FRONT : { img : "nemesis_idle_front.png", wrap : false, animate : null },
+		IDLE_BACK  : { img : "nemesis_idle_back.png", wrap : true, animate : null }
+    };
+
 	this.health = { base : 100, modifier : 1.0  };
 	this.defaultHealth = 100;
     
