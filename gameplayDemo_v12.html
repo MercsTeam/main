@@ -36,6 +36,15 @@
 
 			const CHARACTERS_PER_TEAM = 3;
 
+			document.onkeydown = function(e)
+			{
+				var keycode = (window.event ? window.event.keyCode : e.which);
+				if(keycode == 67) 
+				{
+					showCredits();
+				}
+			};
+
 			window.onload = function()
 			{
 				music.start("mainTheme");
@@ -56,6 +65,10 @@
 				gameLog.flush();
 
 				tmrIntro = setTimeout("skipIntro()", 25000);
+
+				var btnSelect = document.querySelectorAll(".player button");
+				btnSelect[0].disabled = true;
+				btnSelect[1].disabled = true;
 
 				var charSelect = document.querySelector("#characterSelect");
 				for(var i = 0; i < availableCharacters.length; i++)
@@ -82,7 +95,7 @@
 							else
 							{
 								this.classList.toggle(cName);
-							}
+							}							
 						}
 						else
 						{
@@ -90,6 +103,8 @@
 							p.removeCharacter(availableCharacters[this.dataset.cindex]);
 							p.selectedCount--;
 						}
+
+						btnSelect[(player1.isActive() ? 0 : 1)].disabled = (p.selectedCount != 3);
 					};
 
 					img = document.createElement("IMG");
@@ -141,7 +156,7 @@
 
 			function selectCommit(btn)
 			{
-			btn.classList.toggle("selected");
+				btn.classList.toggle("selected");
 				uiSound.start("clickOn");
 
 				if(player1.isActive())
@@ -296,7 +311,7 @@
 				var overlay = document.getElementById("skillOverlay" + pos);
 				overlay.classList.toggle("inactive");
 
-				overlay.querySelector(".skillDesc").innerHTML = character.skills[index].toLog();
+				overlay.querySelector(".skillDesc").innerHTML = character.skills[index].getDescription();
 
 				var btns = overlay.querySelectorAll("button");
 				btns[0].innerHTML = (sType == SkillType.Offensive ? "Enemy 1" : (pos == 1 ? "Self" : "Ally 1"));
@@ -362,26 +377,17 @@
 			function commit()
 			{
 				uiSound.start("clickOn");
+				resetDialog1();
 
 				if(player1.isActive())
 				{
-					player1.getCharacterByPosition(1).setLastAttack();
-					player1.getCharacterByPosition(2).setLastAttack();
-
 					player1.active = false;
 					player2.active = true;
-
-					resetDialog1();
 					populateDialog1();
 				}
 				else
 				{
-					player2.getCharacterByPosition(1).setLastAttack();
-					player2.getCharacterByPosition(2).setLastAttack();
-
-					resetDialog1();
 					toggleDialog1();
-
 					startRound();
 				}
 			}
@@ -470,9 +476,12 @@
 					p = all[i].player;
 					o = (p == player1 ? player2 : player1);
 
+					target = null;
+
 					if(all[i].retreat)
 					{
 						s.doAction(p, all[i].position);
+						all[i].setLastAttack(target);
 					}
 					else
 					{
@@ -480,24 +489,27 @@
 						{
 							if(s.type == SkillType.Offensive)
 							{
-								s.doAction(all[i], [ o.getCharacterByPosition(1), o.getCharacterByPosition(2) ]);
+								target = [ o.getCharacterByPosition(1), o.getCharacterByPosition(2) ];
 							}
 							else
 							{
-								s.doAction(all[i], [ all[i], all[i].getAlly() ]);
+								target = [ all[i], all[i].getAlly() ];
 							}
 						}
 						else
 						{
 							if(s.type == SkillType.Offensive)
 							{
-								s.doAction(all[i], [ o.getCharacterByPosition(all[i].target) ]);
+								target = [ o.getCharacterByPosition(all[i].target) ];
 							}
 							else
 							{
-								s.doAction(all[i], [ (all[i].target == all[i].position ? all[i] : all[i].getAlly()) ]);
+								target = [ (all[i].target == all[i].position ? all[i] : all[i].getAlly()) ];
 							}
 						}
+
+						s.doAction(all[i], target);
+						all[i].setLastAttack(target);
 
 						skillImgArr.push({
 							player : p,
@@ -532,7 +544,7 @@
 
 					v.className = (skillImgArr[index].player == player1 ? "p1-skillImg" : "p2-skillImg");
 					v.style.visibility = "visible";
-					v.style.backgroundImage = string.format("url('{0}')", skillImgArr[index].url);
+					v.style.backgroundImage = string.format("url('{0}?v=20180128')", skillImgArr[index].url);
 
 					v.querySelector("span").innerHTML = skillImgArr[index].label;
 
@@ -831,8 +843,8 @@
             
             <div id="characterSelect" class="inactive">
                 <div class="innerDiv">
-                    <div class="player active">Player 1 Select <button class="smBtn" onclick="selectCommit(this)">Commit</button></div>
-                    <div class="player"><button class="smBtn" onclick="selectCommit(this)">Commit</button> Player 2 Select</div>
+                    <div class="player active">Player 1: Pick 3 <button class="smBtn" onclick="selectCommit(this)" disabled="disabled">Commit</button></div>
+                    <div class="player"><button class="smBtn" onclick="selectCommit(this)" disabled="disabled">Commit</button> Player 2: Pick 3</div>
                 </div>
             </div>
             
