@@ -162,23 +162,23 @@ a.audio-off { background-image:url('../images/muted.png');background-repeat:no-r
 {
 	visibility:hidden;
 	position:absolute;
-	top:10%;left:10%;
+	top:10%;
 
 	background-color:rgba(0,0,0,0.7);
 	padding:3%;	
 	
-	height:calc(80% - 100px);
-	width:calc(80% - 100px);
+	height:calc(27% - 50px);
+	width:calc(30% - 50px);
 	
 	background-size:100%;
 	background-repeat:no-repeat;
 }
-#imgViewer span { font-size:xx-large;font-weight:bold;display:inline-block;width:100%; }
+#imgViewer span { font-size:large;font-weight:bold;display:inline-block;width:100%; }
 
-.p1-skillImg { border:solid 4px #33CCFF; }
+.p1-skillImg { border:solid 4px #33CCFF;left:2%; }
 .p1-skillImg span { text-align:left;color:#33CCFF; }
 
-.p2-skillImg { border:solid 4px #999966 }
+.p2-skillImg { border:solid 4px #999966;right:2%; }
 .p2-skillImg span { text-align:right;color:#999966 }
 
 #credits
