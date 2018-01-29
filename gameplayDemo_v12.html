@@ -245,11 +245,6 @@
 
 								if(this.innerHTML == "Retreat")
 								{
-									var s = (pos == 1 ? ".active2" : ".active1") + " button:last-child";
-
-									var btn = document.querySelector(s);
-									btn.disabled = !character.retreat || !p.getCharacterByPosition(3).active;
-
 									character.retreat = !character.retreat;
 									if(!character.retreat)
 									{
@@ -257,7 +252,7 @@
 									}
 									else
 									{
-										showReady(character, index, pos, -1);
+										showSkill(character, index, pos, -1);
 									}
 								}
 								else
@@ -265,11 +260,11 @@
 									skill = character.skills[index];
 									if(skill.multiTarget)
 									{										
-										showReady(character, index, pos, -1);
+										showSkill(character, index, pos, -1);
 									}
 									else if(skill.type != SkillType.Offensive)
 									{
-										showReady(character, index, pos, (skill.affectAlly ? character.getAlly().position : pos));
+										showSkill(character, index, pos, (skill.affectAlly ? character.getAlly().position : pos));
 									}
 									else
 									{
@@ -304,7 +299,7 @@
 				document.querySelector("#btnCommit").disabled = true;
 			}
 
-			function showSkill(character, index, pos)
+			function showSkill(character, index, pos, target)
 			{
 				var sType = character.skills[index].type;
 
@@ -313,30 +308,48 @@
 
 				overlay.querySelector(".skillDesc").innerHTML = character.skills[index].getDescription();
 
+				var s = (pos == 1 ? ".active2" : ".active1") + " button:last-child";
+				var btnAlly = document.querySelector(s);				
+
 				var btns = overlay.querySelectorAll("button");
-				btns[0].innerHTML = (sType == SkillType.Offensive ? "Enemy 1" : (pos == 1 ? "Self" : "Ally 1"));
-				btns[0].onclick = function() { showReady(character, index, pos, 1); };
-
-				btns[1].innerHTML = (sType == SkillType.Offensive ? "Enemy 2" : (pos == 2 ? "Self" : "Ally 2"));
-				btns[1].onclick = function() { showReady(character, index, pos, 2); };
-
-				if(sType == SkillType.Offensive)
+				if(target)
 				{
-					var opp = (character.player == player1 ? player2 : player1);
-					if(!opp.getCharacterByPosition(1).active) btns[0].disabled = true;
-					if(!opp.getCharacterByPosition(2).active) btns[1].disabled = true;
+					btns[0].innerHTML = "Continue";
+					btns[0].onclick = function() { showReady(character, index, pos, target); };
+					btns[0].disabled = false;
+
+					btns[1].style.display = "none";
+
+					if(character.retreat) btnAlly.disabled = true;
 				}
 				else
 				{
-					var a = character.getAlly();
-					if(a.position == 1 && !a.active) btns[0].disabled = true;
-					if(a.position == 2 && !a.active) btns[1].disabled = true;
+					btns[0].innerHTML = (sType == SkillType.Offensive ? "Enemy 1" : (pos == 1 ? "Self" : "Ally 1"));
+					btns[0].onclick = function() { showReady(character, index, pos, 1); };
+
+					btns[1].style.display = "";
+					btns[1].innerHTML = (sType == SkillType.Offensive ? "Enemy 2" : (pos == 2 ? "Self" : "Ally 2"));
+					btns[1].onclick = function() { showReady(character, index, pos, 2); };
+
+					if(sType == SkillType.Offensive)
+					{
+						var opp = (character.player == player1 ? player2 : player1);
+						if(!opp.getCharacterByPosition(1).active) btns[0].disabled = true;
+						if(!opp.getCharacterByPosition(2).active) btns[1].disabled = true;
+					}
+					else
+					{
+						var a = character.getAlly();
+						if(a.position == 1 && !a.active) btns[0].disabled = true;
+						if(a.position == 2 && !a.active) btns[1].disabled = true;
+					}
 				}
 
 				btns[2].onclick = function() 
 				{ 
 					uiSound.start("clickOff");
 					overlay.classList.toggle("inactive"); 
+					btnAlly.disabled = (character.player.activeCharacterCount < CHARACTERS_PER_TEAM);
 				};
 			}
 
@@ -529,7 +542,7 @@
 					player1.characters[i].update();
 					player2.characters[i].update();
 
-					alert(string.format("Player1[{0}] health = {1}\nPlayer2[{0}] health = {2}", i, player1.characters[i].health.base, player2.characters[i].health.base));
+					//alert(string.format("Player1[{0}] health = {1}\nPlayer2[{0}] health = {2}", i, player1.characters[i].health.base, player2.characters[i].health.base));
 				}
 
 				setTimeout("showImages(0)", 2500);
