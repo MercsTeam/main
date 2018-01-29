@@ -7,7 +7,9 @@ function getTypeBonus(t1, t2)
 	{
 		return TypeBonus.None;
 	}
-	else if((t1 == CharacterType.Physical && t2 == CharacterType.Finesse) || (t1 == CharacterType.Finesse && t2 == CharacterType.Magic))
+	else if((t1 == CharacterType.Physical && t2 == CharacterType.Finesse) 
+		|| (t1 == CharacterType.Finesse && t2 == CharacterType.Magic) 
+		|| (t1 == CharacterType.Magic && t2 == CharacterType.Physical))
 	{
 		return TypeBonus.Effective;
 	}
@@ -119,12 +121,10 @@ function Character()
 			{
 				if(attr[i].duration > 0) 
 				{
-					//alert(attr[i] + " decrements.");
 					attr[i].duration--;
 				}
 				if(attr[i].duration == 0) 
 				{
-					//alert(attr[i] + " resets.");
 					attr[i].modifier = 1.0;
 					attr[i].duration = -1;
 				}
@@ -158,27 +158,12 @@ function Character()
 		return this.attackHistory[this.attackHistory.length - 1]; 
 	};
 
-    this.setLastAttack = function()
+    this.setLastAttack = function(target)
     {
-	    var str = "";
-		var skill = this.getSelectedSkill();
-
-		if(skill)
-		{
-			if(skill.name == "Retreat")
-			{
-				str = "RETREATS.";
-			}
-			else
-			{
-				str += "uses " + skill.name.toUpperCase() 
-					+ (skill.type == SkillType.Offensive ? " against ENEMY MERC " + this.target 
-					: " on " + (this.target == this.position ? "SELF" : "ALLY " + this.target)) + ".";
-			}
-		}
-
 		if(!this.attackHistory) this.attackHistory = [];
-	    this.attackHistory.push({ "skill" : skill, "text" : str }); 
+
+		var skill = this.getSelectedSkill();		
+	    this.attackHistory.push({ "skill" : skill, "target" : target, "duration" : skill.duration }); 
     };
 
 	/*	

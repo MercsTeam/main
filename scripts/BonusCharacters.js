@@ -25,6 +25,7 @@ function Nemesis()
 
 	this.quote = "";
     this.backstory = "";
+	this.defeatImage = "characters/BSGComicStills/FRONT-Defeat.jpg";
 }
 Nemesis.prototype = new Character();
 

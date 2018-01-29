@@ -107,7 +107,7 @@ function RicochetShot()
     this.multiTarget = true;
     this.accuracy = 0.2;
 	this.bleedProb = 1.0;
-    this.description = "Medium damage to both frontline targets. Very high chance (80%) of missing. Critical hit results in Penetrating Shot that causes bleeding.";
+    this.description = "Medium damage to both frontline targets. Very high chance (80%) of missing. Critical hit results in Penetrating Shot that causes bleeding.";	
 }
 RicochetShot.prototype = new Skill("Ricochet Shot");
 
@@ -116,6 +116,7 @@ function TakeAim()
     this.type = SkillType.Reusable;
     this.selfAccuracyMod = 1.5;
     this.description = "Increases accuracy for next turn (reduces chance of missing by 50%)";
+	this.imageURL = "characters/SniperGirlComicStills/SG-TakeAim.jpg";
 }
 TakeAim.prototype = new Skill("Take Aim");
 

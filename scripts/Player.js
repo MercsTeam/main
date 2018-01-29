@@ -29,7 +29,7 @@ function Player(a)
 		{
 			if(this.characters[i] instanceof c) 
 			{
-				this.characters.slice(i, 0);
+				this.characters.splice(i, 1);
 				break;
 			}
 		}

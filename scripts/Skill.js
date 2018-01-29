@@ -61,7 +61,10 @@ function Skill(n)
 	this.isSelected = function() { return this.selected; };    
     this.isActive = function() { return this.active; };
 
-	this.toLog = function() { return string.format("<strong>{0}</strong><br />{1}", this.name, this.description); };
+	this.getDescription = function() 
+	{ 
+		return string.format("<strong>{0}</strong><br />{1}", this.name, this.description); 
+	};
 
 	this.toString = function()
 	{
@@ -94,10 +97,10 @@ function Skill(n)
 					if(this.selfImmunity) target[i].immune = true;
 					if(this.blocksDamage) target[i].blocksDamage = true;
 					
-					gameLog.write(string.format("PLAYER{0}: {1} {2} {3} {4}", 
+					gameLog.write(string.format("PLAYER{0}: {1} uses {2} on SELF. {3} {4}", 
 						(self.player == player1 ? "1" : "2"),
 						self.name, 
-						self.getLastAttack().text,
+						this.name.toUpperCase(),
 						(this.selfHealthAdd != 0 ? this.selfHealthAdd + " RESTORE." : ""),
 						(this.blocksDamage ? " BLOCK DAMAGE ON." : "")
 					));
@@ -150,10 +153,11 @@ function Skill(n)
 						damage = target[i].calculateDamage(self, getTypeBonus(self.type, target[i].type));
 						target[i].health.base = Math.max(0, target[i].health.base - damage);	
 
-						gameLog.write(string.format("PLAYER{0}: {1} {2} {3} DAMAGE.", 
+						gameLog.write(string.format("PLAYER{0}: {1} uses {2} against ENEMY {3}. {4} DAMAGE.", 
 							(self.player == player1 ? "1" : "2"),
 							self.name, 
-							self.getLastAttack().text,
+							this.name.toUpperCase(),
+							target[i].position,
 							damage
 						));
 					}
@@ -168,10 +172,11 @@ function Skill(n)
 
 						if(this.allyImmunity) target[i].immune = true;
 						
-						gameLog.write(string.format("PLAYER{0}: {1} {2} {3}", 
+						gameLog.write(string.format("PLAYER{0}: {1} uses {2} on ALLY {3}. {4}", 
 							(self.player == player1 ? "1" : "2"),
 							self.name, 
-							self.getLastAttack().text,
+							this.name.toUpperCase(),
+							target[i].position,
 							(this.allyHealthAdd != 0 ? string.format("ALLY {0} RESTORE", this.allyHealthAdd) : "")
 						));
 					}
