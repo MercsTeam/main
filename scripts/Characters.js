@@ -1,5 +1,5 @@
 //var availableCharacters = [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Alien, Caveman, CowboyGuy, HiveDrone, SpaceGirl, Pirate, Witch ];
-var availableCharacters = [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, Nemesis ];
+var availableCharacters = [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, Alien, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, Nemesis ];
 
 var textureBaseURL = "https://raw.githubusercontent.com/MercsTeam/threejs-testing/master/textures/";
 
@@ -174,6 +174,14 @@ function Alien()
 	this.type = CharacterType.Magic;
 	this.alignment = "Neutral";
 
+	this.skills = [ new RayGun(), new Abduction(), new ForceShield(), new Telekinesis(), new Retreat() ];
+
+	this.state = 
+    {
+		IDLE_FRONT : { img : "alien_idle_front.png", wrap : false, animate : null },
+		IDLE_BACK  : { img : "alien_idle_back.png", wrap : true, animate : null }
+    };
+
 	this.health = { base : 200, modifier : 1.0, duration : -1 };
 	this.defaultHealth = 200;
 
@@ -182,8 +190,6 @@ function Alien()
     this.speed = { base : 80, modifier : 1.0, duration : -1 };
 
 	this.accuracy = { modifier : 1.0, duration : -1 };
-
-	this.skills = [ new Skill("Ray Gun"), new Skill("Abduction"), new Skill("Force Shield"), new Skill("Telekinesis"), new Retreat() ];
 
 	this.quote = "Blublbublubblubblub.";
     this.backstory = "Xiklak may be one of the only remaining life-forms native to the ammonia oceans of Neptune. He is also a crack-shot with a laser rifle. That's about the only two things people know about this hired gun.";

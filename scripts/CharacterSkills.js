@@ -97,6 +97,21 @@ function Headshot()
     this.accuracy = 0.4;
     this.description = "High damage single-target attack, with a high chance (60%) of missing.";
 	this.imageURL = "characters/SniperGirlComicStills/SG-Headshot.jpg";
+
+	this.doAction = function(self, target)
+	{
+		var c = self.checkActiveHistory(Camouflage);
+		if(c) c.duration = 0;
+		
+		var r = Math.random();
+		if(r <= (this.accuracy * self.accuracy.modifier))
+		{
+			var damage = target[0].calculateDamage(self, getTypeBonus(self.type, target[0].type));
+			target[0].health.base = Math.max(0, target[0].health.base - damage);	
+
+			this.logAction(self, target[0], damage);
+		}
+	};
 }
 Headshot.prototype = new Skill("Headshot");
 
@@ -108,6 +123,29 @@ function RicochetShot()
     this.accuracy = 0.2;
 	this.bleedProb = 1.0;
     this.description = "Medium damage to both frontline targets. Very high chance (80%) of missing. Critical hit results in Penetrating Shot that causes bleeding.";	
+
+	this.doAction = function(self, target)
+	{
+		var c = self.checkActiveHistory(Camouflage);
+		if(c) c.duration = 0;
+		
+		var r = Math.random();
+		if(r <= (this.accuracy * self.accuracy.modifier))
+		{
+			var damage = 0;
+			
+			for(var i = 0; i < target.length; i++)
+			{
+				damage = target[i].calculateDamage(self, getTypeBonus(self.type, target[i].type));
+				target[i].health.base = Math.max(0, target[i].health.base - damage);	
+
+				target[i].bleeding = true;
+				target[i].health.modifier = 0.85;
+
+				this.logAction(self, target[i], damage);
+			}
+		}
+	};
 }
 RicochetShot.prototype = new Skill("Ricochet Shot");
 
@@ -129,7 +167,20 @@ function Camouflage()
 
 	this.doAction = function(self, target)
 	{
-		//to do
+		var opp = (self.player == player1 ? player2 : player1);
+		var oppMerc;
+
+		for(var i = 1; i <= 2; i++)
+		{
+			oppMerc = opp.getCharacterByPosition(i);
+
+			if(oppMerc.target == self.position)
+			{
+				oppMerc.accuracy.modifier = 0.5;
+				oppMerc.accuracy.duration = 1;
+			}
+		}
+		this.logAction(self, target[0]);
 	}
 }
 Camouflage.prototype = new Skill("Camouflage");
@@ -190,7 +241,7 @@ CloudBarrier.prototype = new Skill("Cloud Barrier");
 
 function HighWinds()
 {
-    this.type = SkillType.Reusable;
+    this.type = SkillType.Offensive;
     this.allySpeedMod = 1.5;
     this.oppSpeedMod = 0.5;
     this.duration = 4;
@@ -200,13 +251,16 @@ function HighWinds()
 
 	this.doAction = function(self, target)
 	{
-		self.getAlly().speed.modifier = this.allySpeedMod;
-		self.getAlly().speed.duration = this.duration;
+		var ally = self.getAlly();
+		ally.speed.modifier = this.allySpeedMod;
+		ally.speed.duration = this.duration;
+		this.logAction(self, ally);
 
 		for(var i = 0; i < target.length; i++) 
 		{
 			target[i].speed.modifier = this.oppSpeedMod;
-			target[i].speed.duration = this.duration;
+			target[i].speed.duration = this.duration;			
+			this.logAction(self, target[i], 0);
 		}
 	};
 }
@@ -240,6 +294,25 @@ function ElectronicBarrier()
     this.multiTarget = true;
     this.oppAttackMod = 0.8;
     this.description = "Deploy a large energy barrier. Reduces the effectiveness of incoming attacks for both active mercs.";
+
+	this.doAction = function(self, target)
+	{
+		var opp = (self.player == player1 ? player2 : player1);
+		var oppMerc;
+
+		for(var i = 1; i <= 2; i++)
+		{
+			oppMerc = opp.getCharacterByPosition(i);
+
+			if(oppMerc.target == self.position)
+			{
+				oppMerc.accuracy.modifier = 0.5;
+				oppMerc.accuracy.duration = 1;
+				this.logAction(self, oppMerc, 0);
+			}
+		}
+		this.logAction(self, target[0]);
+	}
 }
 ElectronicBarrier.prototype = new Skill("Electronic Barrier");
 
@@ -257,26 +330,33 @@ function NanobotRepairs()
 
 		self.defence.modifier = 1.1;
 		self.defence.duration = 2;
+
+		this.logAction(self, target[0]);
 	}
 }
 NanobotRepairs.prototype = new Skill("Nanobot Repairs");
 
 function PassiveEffect()
 {
-    this.type = SkillType.Offensive;
+    this.type = SkillType.Defensive;
     this.selfAttackMod = 1.5;
     this.selfSpeedMod = 1.5;
+	this.duration = Number.MAX_VALUE;
     this.description = "Emergency Systems Engage: When below 20% HP, Attack and Speed is greatly increased (+50%). Effect ends if HP rises above 20%.";
-    
-    this.setActive = function(hp)
-    {
-        active = (hp < 20 ? true : false);
-    };
 
 	this.doAction = function(self, target)
 	{
-		//to do
-	}
+		if(self.getHealthPct() < 0.2)
+		{
+			self.attack.modifier = this.selfAttackMod;
+			self.attack.duration = 1;
+
+			self.speed.modifier = this.selfSpeedMod;
+			self.speed.duration = 1;
+
+			this.logAction(self, target[0]);
+		}
+	};
 }
 PassiveEffect.prototype = new Skill("Passive Effect");
 
@@ -299,16 +379,19 @@ function SingleShot()
 
 	this.doAction = function(self, target)
 	{
-		if(target.getHealthPct() < 0.25)
-		{
-			this.attackValue *= 2;
-		}
+		this.attackValue = (target[0].getHealthPct() < 0.25 ? 80 : 40);
 
-		target.health.base = Math.max(0, target.calculateDamage(self, getTypeBonus(self.type, target.type)));
-		if(target.health.base == 0)
+		var damage = target[0].calculateDamage(self, getTypeBonus(self.type, target[0].type));
+		target[0].health.base = Math.max(0, target[0].health.base - damage);	
+
+		this.logAction(self, target[0], damage);		
+		
+		if(target[0].health.base == 0)
 		{
 			self.attack.modifier = 1.25;
 			self.speed.modified = 1.25;
+
+			this.logAction(self, self);
 		}
 	}	
 }
@@ -324,13 +407,17 @@ function Parry()
 	this.doAction = function(self, target)
 	{
 		self.blocksDamage = this.blocksDamage;
+		this.logAction(self, self);
 
 		var r = Math.random();
-		var targetAttack = target.getLastAttack();
+		var targetAttack = target[0].getLastAttack();
 
-		if(r <= this.accuracy && targetAttack.type == SkillType.Offensive)
+		if(r <= (this.accuracy * self.accuracy.modifier) && targetAttack.type == SkillType.Offensive)
 		{
-			target.health.base -= (targetAttack.attackValue * 0.25);
+			var damage = (targetAttack.attackValue * 0.25);
+			target[0].health.base = Math.max(0, target[0].health.base - damage);	
+
+			this.logAction(self, target[0], damage);
 		}
 	};
 }
@@ -339,7 +426,8 @@ Parry.prototype = new Skill("Parry");
 
 function Maelstrom()
 {
-	this.type = SkillType.Reusable;
+	this.type = SkillType.Offensive;
+	this.activeValue = 25;
 	this.duration = 3;
 	this.accuracy = 0.25;
 	this.allySpeedMod = 1.25;
@@ -352,20 +440,108 @@ function Maelstrom()
 		self.health.modifer = 0.75;		
 
 		var r = Math.random();
-		if(r <= this.accuracy)
+		if(r <= (this.accuracy * self.accuracy.modifier))
 		{
 			ally = self.getAlly()
 			ally.speed.modifier = this.allySpeedMod;
 			ally.health.duration = this.duration;
+			this.logAction(self, ally);
 		}
 
-		var h = target[0];
+		var highest = target[0];
 		for(var i = 0; i < target.length; i++)
 		{
-			if(target[i].health.base > h.health.base) h = target[i];
+			if(target[i].health.base > highest.health.base) highest = target[i];
 		}
-		h.health.base -= 25;
+
+		var damage = highest.calculateDamage(self, getTypeBonus(self.type, highest.type));
+		highest.health.base = Math.max(0, highest.health.base - damage);	
+
+		this.logAction(self, highest, damage);
 	};
 }
 Maelstrom.prototype = new Skill("Maelstrom");
 
+function RayGun()
+{
+	this.type = SkillType.Offensive;
+	this.attackValue = 40;
+	this.stunProb = 0.1;
+	this.duration = "A low-damage, single target attack with a small (10%) chance of causing stun.";
+}
+RayGun.prototype = new Skill("Ray Gun");
+
+function Abduction()
+{
+	var counter = 0;
+	var pos = 0;
+
+	this.type = SkillType.Offensive;
+	this.duration = 3;
+	this.description = "User is unable to move for 3 turns and cannot be swapped out. If user is not KO'd by the end of the 3rd turn, "
+		+ "whichever enemy is in the targeted space is abducted and instantly KO'd, regardless of status effects.";
+
+	this.doAction = function(self, target)
+	{
+		if(counter == 0)
+		{
+			self.canMove = false;
+			pos = target[0].position;
+
+			this.logAction(self, self);
+		}
+		counter++;
+
+		if(counter == this.duration)
+		{
+			if(self.health.base > 0)
+			{
+				var opp = (self.player == player1 ? player2 : player1);
+				var oppMerc = opp.getCharacterByPosition(pos);
+
+				var damage = oppMerc.health.base;
+				oppMerc.health.base = 0;
+
+				this.logAction(self, oppMerc, damage);
+			}
+
+			self.canMove = true;
+			counter = 0;
+		}
+	};
+}
+Abduction.prototype = new Skill("Abduction");
+
+function ForceShield()
+{
+	this.type = SkillType.Defensive;
+	this.selfDefenceMod = 1.25;
+	this.duration = 5;
+	this.description = "Increases defense by 25% for 5 turns.";
+}
+ForceShield.prototype = new Skill("Force Shield");
+
+function Telekinesis()
+{
+	this.type = SkillType.Offensive;
+	this.multiTarget = true;
+
+	this.description = "Forces enemy to swap their mercs if all three enemies are alive; if this attack hits first, the merc swapped to inactive loses their turn. "
+		+ "If at least one enemy merc is KO'd, this attack does nothing.";
+
+	this.doAction = function(self, target)
+	{
+		var opp = target[0].player;
+
+		//if all characters still active
+		if(opp.activeCharacterCount == CHARACTERS_PER_TEAM)
+		{
+			//swap out healthiest character
+			var oppMerc = (target[0].health.base > target[1].health.base ? target[0] : target[1]);
+			oppMerc.skills[4].doAction(opp, oppMerc.position);
+
+			this.logAction(self, oppMerc, 0);
+		}
+	};
+}
+Telekinesis.prototype = new Skill("Telekinesis");

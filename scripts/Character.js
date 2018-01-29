@@ -151,6 +151,22 @@ function Character()
 		}
 		return null;
     };
+
+	this.checkActiveHistory = function(skill)
+	{
+		if(!this.attackHistory) return null;
+
+		var active = null;
+		for(var i = 0; i < this.attackHistory.length; i++)
+		{
+			if(this.attackHistory[i].skill instanceof skill && this.attackHistory[i].duration > 0)
+			{
+				active = this.attackHistory[i];
+				break;
+			}
+		}
+		return active;
+	};
     
     this.getLastAttack = function() 
 	{ 
@@ -180,7 +196,7 @@ function Character()
 		if(this.blocksDamage) return 0;
 
 		var damage = ((attacker.attack.base * attacker.attack.modifier) + attacker.getSelectedSkill().attackValue) * bonus - (this.defence.base * this.defence.modifier);
-		alert(string.format("(({0} * {1}) + {2}) * {3} - ({4} * {5}) = {6}", attacker.attack.base, attacker.attack.modifier, attacker.getSelectedSkill().attackValue, bonus, this.defence.base, this.defence.modifier, damage));
+		//alert(string.format("(({0} * {1}) + {2}) * {3} - ({4} * {5}) = {6}", attacker.attack.base, attacker.attack.modifier, attacker.getSelectedSkill().attackValue, bonus, this.defence.base, this.defence.modifier, damage));
 
 		return damage;
 	};
@@ -227,20 +243,20 @@ function Character()
 
 	this.createHealthBar = function(coords)
 	{
-		var geometry = new THREE.PlaneGeometry( 3, 0.5, 32 );
+		var geometry = new THREE.PlaneGeometry( 4, 0.5, 32 );
 		var material = new THREE.MeshBasicMaterial( {color: 0x00CC33, side: THREE.DoubleSide} );
 		
 		this.healthbar = new THREE.Mesh( geometry, material );
-		this.healthbar.position.x = coords.x;
-		this.healthbar.position.y = coords.y + 3.5;
+		this.healthbar.position.x = coords.x + 0.5;
+		this.healthbar.position.y = coords.y + 4;
 		this.healthbar.position.z = coords.z;
-		this.healthbar.rotation.y = Math.PI * 1.6;
+		this.healthbar.rotation.y = Math.PI * 1.5;
 		return this.healthbar;
 	};
 
 	this.updateHealthBar = function()
 	{
-		var width = Math.max(0.001, this.getHealthPct() * 3);
+		var width = Math.max(0.001, this.getHealthPct() * 4);
 		var barColor = (width < 1 ? 0xFF2424 : 0x00CC33);
 		
 		this.healthbar.geometry = new THREE.PlaneGeometry( width, 0.5, 32 );
@@ -253,8 +269,8 @@ function Character()
 		this.obj.position.y = coords.y;
 		this.obj.position.z = coords.z;
 		
-		this.healthbar.position.x = coords.x;
-		this.healthbar.position.y = coords.y + 3.5;
+		this.healthbar.position.x = coords.x + 0.5;
+		this.healthbar.position.y = coords.y + 4;
 		this.healthbar.position.z = coords.z;
 		
 		if(this.marker)
