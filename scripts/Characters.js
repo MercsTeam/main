@@ -202,9 +202,25 @@ function Caveman()
 	this.realName = "Krorlaag";
 	this.image = "caveman.png";
 	this.colour = 0x59D8EF;
+	this.type = CharacterType.Physical;
 	this.alignment = "Evil";
 
 	this.skills = [ new Club(), new PoisonSpear(), new PrimalRage(), new FireDance(), new Retreat() ];
+
+	this.state = 
+    {
+		IDLE_FRONT : { img : "caveman_idle_front.png", wrap : false, animate : null },
+		IDLE_BACK  : { img : "caveman_idle_back.png", wrap : true, animate : null }
+    };
+
+	this.health = { base : 250, modifier : 1.0  };
+	this.defaultHealth = 250;
+    
+	this.defence = { base : 25, modifier : 1.0, duration : -1 };
+    this.attack = { base : 60, modifier : 1.0, duration : -1 };
+    this.speed = { base : 80, modifier : 1.0, duration : -1 };
+	
+	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "Krorlaag like shiny... Krorlaag smashes!";
     this.backstory = "";
@@ -217,44 +233,30 @@ function CowboyGuy()
 	this.realName = "Augustus \"Lucky\" Townsend";
 	this.image = "cowboy.png";
 	this.colour = 0x800DBC;
+	this.type = CharacterType.Finesse;
 	this.alignment = "Good";
 
 	this.skills = [ new Draw(), new SixShooter(), new LiquidCourage(), new Lasso(), new Retreat() ];
+
+	this.state = 
+    {
+		IDLE_FRONT : { img : "cowboy_idle_front.png", wrap : false, animate : null },
+		IDLE_BACK  : { img : "cowboy_idle_back.png", wrap : true, animate : null }
+    };
+
+	this.health = { base : 150, modifier : 1.0  };
+	this.defaultHealth = 150;
+    
+	this.defence = { base : 25, modifier : 1.0, duration : -1 };
+    this.attack = { base : 50, modifier : 1.0, duration : -1 };
+    this.speed = { base : 130, modifier : 1.0, duration : -1 };
+	
+	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "Look what the cat dragged in.";
     this.backstory = "Quick-witted gunslinger with unusually good luck";
 }
 CowboyGuy.prototype = new Character();
-
-function HiveDrone()
-{
-	this.name = "HIVE DRONE";
-	this.realName = "Oryctolagus";
-	this.image = "drone.png";
-	this.colour = 0xBD4038;
-	this.alignment = "Neutral";
-
-	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
-
-	this.quote = "Klikliklikliklikliklik!";
-    this.backstory = "Mindless worker";
-}
-HiveDrone.prototype = new Character();
-
-function SpaceGirl()
-{
-	this.name = "SPACE GIRL";
-	this.realName = "";
-	this.image = "spacegirl.png";
-	this.colour = 0x440383;
-	this.alignment = "Good";
-
-	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
-
-	this.quote = "";
-    this.backstory = "An astronaut from the Canadian Space Program, very smart, space-age technology";
-}
-SpaceGirl.prototype = new Character();
 
 function Pirate()
 {
@@ -285,6 +287,36 @@ function Pirate()
     this.backstory = "Zeus but a pirate. Long flowing white hair and beard. Wields a rapier with a flintlock pistol built into the hilt. Surrounded by electrical energy.";
 }
 Pirate.prototype = new Character();
+
+function HiveDrone()
+{
+	this.name = "HIVE DRONE";
+	this.realName = "Oryctolagus";
+	this.image = "drone.png";
+	this.colour = 0xBD4038;
+	this.alignment = "Neutral";
+
+	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
+
+	this.quote = "Klikliklikliklikliklik!";
+    this.backstory = "Mindless worker";
+}
+HiveDrone.prototype = new Character();
+
+function SpaceGirl()
+{
+	this.name = "SPACE GIRL";
+	this.realName = "";
+	this.image = "spacegirl.png";
+	this.colour = 0x440383;
+	this.alignment = "Good";
+
+	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
+
+	this.quote = "";
+    this.backstory = "An astronaut from the Canadian Space Program, very smart, space-age technology";
+}
+SpaceGirl.prototype = new Character();
 
 function Witch()
 {
