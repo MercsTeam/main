@@ -226,7 +226,7 @@ function PoolMana()
     this.description = "Increases attack power significantly (+50%) for next turn.";
 	this.cooldown = 1;
 	
-	this.doAction(self, target)
+	this.doAction = function(self, target)
 	{
 		self.attack.modifier = this.selfAttackMod;
 		self.attack.duration = 1;
