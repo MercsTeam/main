@@ -219,7 +219,7 @@ function CowboyGuy()
 	this.colour = 0x800DBC;
 	this.alignment = "Good";
 
-	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
+	this.skills = [ new Skill("Draw"), new Skill("Six-Shooter"), new Skill("Liquid Courage"), new Skill("Lasso"), new Retreat() ];
 
 	this.quote = "Look what the cat dragged in.";
     this.backstory = "Quick-witted gunslinger with unusually good luck";
