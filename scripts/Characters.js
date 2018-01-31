@@ -107,7 +107,7 @@ function Djinn()
 	this.type = CharacterType.Magic;
 	this.alignment = "Evil";
 
-    this.skills = [ new LightningStrike(), new CloudBarrier(), new HighWinds(), new Wish(), new Retreat() ];
+    this.skills = [ new LightningStrike(), new Confidence(), new SinisterDeal(), new Wish(), new Retreat() ];
 
 	this.state = 
     {
@@ -219,7 +219,7 @@ function CowboyGuy()
 	this.colour = 0x800DBC;
 	this.alignment = "Good";
 
-	this.skills = [ new Skill("Draw"), new Skill("Six-Shooter"), new Skill("Liquid Courage"), new Skill("Lasso"), new Retreat() ];
+	this.skills = [ new Draw(), new SixShooter(), new LiquidCourage(), new Lasso(), new Retreat() ];
 
 	this.quote = "Look what the cat dragged in.";
     this.backstory = "Quick-witted gunslinger with unusually good luck";
