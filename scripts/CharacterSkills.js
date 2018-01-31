@@ -302,6 +302,7 @@ function Wish()
     this.allyHealthAdd = 25;
 	this.affectAlly = true;
     this.description = "Grants an ally increased attack, defence, speed, (+25%) immunity, and minor healing (+25 HP).";
+	this.cooldown = 3;
 }
 Wish.prototype = new Skill("Wish");
 
@@ -320,6 +321,7 @@ function ElectronicBarrier()
     this.multiTarget = true;
     this.oppAttackMod = 0.8;
     this.description = "Deploy a large energy barrier. Reduces the effectiveness of incoming attacks for both active mercs.";
+	this.cooldown = 1;
 
 	this.doAction = function(self, target)
 	{
@@ -349,6 +351,7 @@ function NanobotRepairs()
     this.selfDefenseMod = 1.1;
     this.duration = 2;
     this.description = "Repairs damage to his armour, and adapts it to the situation. This skill regenerates a moderate amount of HP (+50 HP) over two turns, and increases defence (+10%) with each use.";
+	this.cooldown = 2;
 
 	this.doAction = function(self, target)
 	{
@@ -369,6 +372,7 @@ function PassiveEffect()
     this.selfSpeedMod = 1.5;
 	this.duration = Number.MAX_VALUE;
     this.description = "Emergency Systems Engage: When below 20% HP, Attack and Speed is greatly increased (+50%). Effect ends if HP rises above 20%.";
+	this.cooldown = 1;
 
 	this.doAction = function(self, target)
 	{
@@ -386,6 +390,26 @@ function PassiveEffect()
 }
 PassiveEffect.prototype = new Skill("Passive Effect");
 
+function EnhancedCombatSystem()
+{
+	this.type = SkillType.Defensive;
+	this.selfSpeedMod = 3;
+	this.selfAttackMod = 3;
+	this.description = "50% total health loss to gain 200% increase for attack and speed.";
+	this.cooldown = 2;
+	
+	this.doAction = function(self, target)
+	{
+		self.health.modifier = 0.5;
+		self.health.duration = 1;
+		
+		self.speed.modifier = this.selfSpeedMod;
+		self.attack.modifier = this.selfAttackMod;
+		
+		this.logAction(self, target[0]);
+	};
+};
+
 function StormStrike()
 {
 	this.type = SkillType.Offensive;
@@ -402,6 +426,7 @@ function SingleShot()
 	this.type = SkillType.Offensive;
 	this.attackValue = 40;
 	this.description = "Fires a bullet at a single target that deals double damage to targets below 25% health.  When this skill results in the death of an enemy, the speed and attack are increased.";
+	this.cooldown = 1;
 
 	this.doAction = function(self, target)
 	{
@@ -430,6 +455,7 @@ function Parry()
 	this.blocksDamage = true;
 	this.accuracy = 0.25;
 	this.description = "Takes a defensive posture to parry any incoming attacks. Incoming attacks are ineffective, and has a 25% chance to reflect 25% of the damage back at the attacker.";
+	this.cooldown = 1;
 
 	this.doAction = function(self, target)
 	{
@@ -461,6 +487,7 @@ function Maelstrom()
 	this.multiTarget = true;
 	this.description = "Summons a powerful storm that lasts for 3 turns. While maelstrom is active, pirate's damage is increased, the attacks of all allied mercs have a chance to increase the speed stat, "
 		+ "and at the end of each turn the maelstrom is active, the enemy merc with the highest percentage of health is struck by lightning and dealt damage";
+	this.cooldown = 6;
 	
 	this.doAction = function(self, target)
 	{
@@ -490,6 +517,18 @@ function Maelstrom()
 }
 Maelstrom.prototype = new Skill("Maelstrom");
 
+function ReleaseKraken()
+{
+	this.type = SkillType.Offensive;
+	this.attackValue = 65;
+	this.oppSpeedMod = 0.75;
+	this.multiTarget = true;
+	this.description = "Summons the Kraken from the depths, smashing enemy active mercs with its large tentacles "
+		+ "dealing damage and reducing their speed by 25%.";
+	this.cooldown = 4;
+}
+ReleaseKraken.prototype = new Skill("Release the Kraken");
+
 function RayGun()
 {
 	this.type = SkillType.Offensive;
@@ -508,6 +547,7 @@ function Abduction()
 	this.duration = 3;
 	this.description = "User is unable to move for 3 turns and cannot be swapped out. If user is not KO'd by the end of the 3rd turn, "
 		+ "whichever enemy is in the targeted space is abducted and instantly KO'd, regardless of status effects.";
+	this.cooldown = 6;
 
 	this.doAction = function(self, target)
 	{
@@ -546,6 +586,7 @@ function ForceShield()
 	this.selfDefenceMod = 1.25;
 	this.effectDuration = 5;
 	this.description = "Increases defense by 25% for 5 turns.";
+	this.cooldown = 5;
 
 	this.doAction = function(self, target)
 	{
@@ -583,7 +624,7 @@ function Draw()
 	this.type = SkillType.Offensive;
 	this.attackValue = 40;
 	this.cooldown = 1;
-	this.description = "If attack hits before the target has attacks, double damage dealt."
+	this.description = "If attack hits before the target has attacks, double damage dealt.";
 	
 	this.doAction = function(self, target)
 	{
@@ -652,3 +693,76 @@ function Lasso()
 	};	
 }
 Lasso.prototype = new Skill("Lasso");
+
+function Club()
+{
+	this.type = SkillType.Offensive;
+	this.attackValue = 60;
+	this.stunProb = 0.1;
+	this.description = "A medium-high damage, single-target attack. Very low chance of causing stun.";
+	this.cooldown = 1;
+}
+Club.prototype = new Skill("Club");
+
+function PoisonSpear()
+{
+	this.type = SkillType.Offensive;
+	this.attackValue = 25;
+	this.poisonProb = 0.4;
+	this.description = "A low-damage, single-target attack with a medium chance of causing Poison.";
+}
+PoisonSpear.prototype = new Skill("Poison-Tipped Spear");
+
+function PrimalRage()
+{
+	this.type = SkillType.Defensive;
+	this.selfAttackMod = 1.25;
+	this.selfDefenceMod = 1.25;
+	this.effectDuration = 3;
+	this.description = "Boosts attack and defense by 25% for three turns.";
+	this.cooldown = 3;
+	
+	this.doAction = function(self, target)
+	{
+		self.attack.modifier = this.selfAttackMod;
+		self.attack.duration = this.effectDuration;
+		
+		self.defence.modifier = this.selfDefenceMod;
+		self.defence.duration = this.effectDuration;
+		
+		this.logAction(self, target[0]);
+	}
+}
+PrimalRage.prototype = new Skill("Primal Rage");
+
+function FireDance()
+{
+	this.type = SkillType.Offensive;
+	this.fireProb = 0.9;
+	this.description = "Inflict Burn on self. Dramatically increases odds of inflicting status effects. Cannot be "
+		+ "used if user already has burn.";
+	
+	this.doAction = function(self, target)
+	{
+		if(!self.burned)
+		{
+			self.burned = true;	
+			self.health.modifier = 0.95;
+			self.defence.modifier = 0.75;
+			
+			this.logAction(self, self);
+			
+			var r = Math.random();
+			if(r <= this.fireProb)
+			{
+				target[0].burned = true;	
+				target[0].health.modifier = 0.95;
+				target[0].defence.modifier = 0.75;
+				
+				this.logAction(self, target[0], 0);
+			}
+		}
+	};
+}
+FireDance.prototype = new Skill("Fire Dance");
+
