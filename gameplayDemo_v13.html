@@ -428,11 +428,12 @@
 					if(p1.active) // && p1.canMove)
 					{
 						s1 = p1.getSelectedSkill();
+						last1 = p1.getLastAttack();
 						if(p1.retreat)
 						{
 							retreaters.push(p1);
 						}
-						else if(s1 || p1.getLastAttack().duration > 0)
+						else if(s1 || (lastAttack && lastAttack.duration > 0))
 						{
 							if(s1.type == SkillType.Offensive)
 							{
@@ -455,11 +456,12 @@
 					if(p2.active) // && p2.canMove)
 					{
 						s2 = p2.getSelectedSkill();
+						last2 = p2.getLastAttack();
 						if(p2.retreat)
 						{
 							retreaters.push(p2);
 						}
-						else if(s2 || p2.getLastAttack().duration > 0)
+						else if(s2 || (lastAttack && lastAttack.duration > 0))
 						{
 							if(p2.canMove && s2.type == SkillType.Offensive)
 							{
