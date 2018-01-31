@@ -5,65 +5,65 @@ function Skill(n)
 	this.selected = false;
 	this.active = true;
 	this.imageURL = "";
-    
-    	this.name = n;
-    	this.description = "Description of Skill.";
-    	this.type = SkillType.NotSet;
-	
+
+	this.name = n;
+	this.description = "Description of Skill.";
+	this.type = SkillType.NotSet;
+
 	//when cooldownRem = 0, skill can be reused
 	this.cooldown = 0;
 	this.cooldownRem = 0; 
-    
+
 	//can this skill affect multiple enemies
-    	this.multiTarget = false;
+	this.multiTarget = false;
 
 	//can this skill aid your ally
 	this.affectAlly = false;
-    
-	this.blocksDamage = false;	   	
-    
-    this.attackValue = 0;
-    this.accuracy = 1.0;
-    
-    //% mod self stats
-    this.selfAttackMod = 1.0;
-    this.selfDefenceMod = 1.0;
-    this.selfSpeedMod = 1.0;
-    this.selfAccuracyMod = 1.0;
-    
-    //% mod ally stats
-    this.allyAttackMod = 1.0;
-    this.allyDefenceMod = 1.0;
-    this.allySpeedMod = 1.0;
-    this.allyAccuracyMod = 1.0;
-    
-    //% mod opponent stats
-    this.oppAttackMod = 1.0;
-    this.oppDefenceMod = 1.0;
-    this.oppSpeedMod = 1.0;
-    this.oppAccuracyMod = 1.0;
-    
-	this.stunProb = 0.0;
 
-    this.dazeProb = 0.0;
+	this.selfDamage = false;
+	this.blocksDamage = false;	   	
+
+	this.attackValue = 0;
+	this.accuracy = 1.0;
+
+	//% mod self stats
+	this.selfAttackMod = 1.0;
+	this.selfDefenceMod = 1.0;
+	this.selfSpeedMod = 1.0;
+	this.selfAccuracyMod = 1.0;
+
+	//% mod ally stats
+	this.allyAttackMod = 1.0;
+	this.allyDefenceMod = 1.0;
+	this.allySpeedMod = 1.0;
+	this.allyAccuracyMod = 1.0;
+
+	//% mod opponent stats
+	this.oppAttackMod = 1.0;
+	this.oppDefenceMod = 1.0;
+	this.oppSpeedMod = 1.0;
+	this.oppAccuracyMod = 1.0;
+
+	this.stunProb = 0.0;
+	this.interruptProb = 0.0;
 	this.poisonProb = 0.0;
 	this.bleedProb = 0.0;
 	this.burnProb = 0.0;
-    
-    this.randomDebuffProb = 0.0;
-    
-    this.selfHealthAdd = 0;
-    this.selfImmunity = false;
-    
-    this.allyHealthAdd = 0;
-    this.allyImmunity = false;
-    
-    //effective number of rounds
-    this.duration = 0;
-    this.effectDuration = 0;
 
-    this.isSelected = function() { return this.selected; };    
-    this.isActive = function() { return this.active; };
+	this.randomDebuffProb = 0.0;
+
+	this.selfHealthAdd = 0;
+	this.selfImmunity = false;
+
+	this.allyHealthAdd = 0;
+	this.allyImmunity = false;
+
+	//effective number of rounds
+	this.duration = 0;
+	this.effectDuration = 0;
+
+	this.isSelected = function() { return this.selected; };    
+	this.isActive = function() { return this.active; };
 
 	this.getDescription = function() 
 	{ 
@@ -145,8 +145,6 @@ function Skill(n)
 				{
 					if(this.type == SkillType.Offensive)
 					{
-						//alert("Offensive!!");
-
 						if(this.oppAttackMod != 1.0) target[i].attack.modifier = this.oppAttackMod;
 						if(this.oppDefenceMod != 1.0) target[i].defence.modifier = this.oppDefenceMod;
 						if(this.oppSpeedMod != 1.0) target[i].speed.modifier = this.oppSpeedMod;
@@ -155,8 +153,14 @@ function Skill(n)
 						if(!target[i].checkActiveEffect())
 						{
 							if(r <= this.stunProb) target[i].stunned = true;
-							if(r <= this.dazeProb) target[i].dazed = true;
+							
+							if(r <= this.interruptProb) 
+							{
+								target[i].interrupt = true;
 
+								target[i].accuracy.modifier = 0.75;
+								target[i].accuracy.duration = 1;
+							}
 							if(r <= this.poisonProb)
 							{
 								target[i].poisoned = true;							

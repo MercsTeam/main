@@ -11,6 +11,8 @@ function Retreat()
 
 		if(c3.active)
 		{
+			c3.retreat = false;
+
 			gameLog.write(string.format("PLAYER{0}: {1} retreats!", 
 				(player == player1 ? 1 : 2), 
 				player.getCharacterByPosition(pos).name
@@ -407,6 +409,7 @@ PassiveEffect.prototype = new Skill("Passive Effect");
 function EnhancedCombatSystem()
 {
 	this.type = SkillType.Defensive;
+	this.selfDamage = true;
 	//this.selfSpeedMod = 3;
 	this.selfAttackMod = 3;
 	this.description = "50% total health loss to gain 200% increase for attack and speed.";
@@ -422,7 +425,8 @@ function EnhancedCombatSystem()
 		
 		this.logAction(self, target[0]);
 	};
-};
+}
+EnhancedCombatSystem.prototype = new Skill("Enhanced Combat System");
 
 function StormStrike()
 {
@@ -490,11 +494,11 @@ function Parry()
 }
 Parry.prototype = new Skill("Parry");
 
-
 function Maelstrom()
 {
 	this.type = SkillType.Offensive;
-	this.activeValue = 25;
+	this.selfDamage = true;
+	this.attackValue = 25;
 	this.duration = 3;
 	this.accuracy = 0.25;
 	this.allySpeedMod = 1.25;
@@ -576,6 +580,7 @@ function Abduction()
 
 		if(counter == this.duration)
 		{
+			alert("Abduction elapsed!");
 			if(self.health.base > 0)
 			{
 				var opp = (self.player == player1 ? player2 : player1);
@@ -604,8 +609,8 @@ function ForceShield()
 
 	this.doAction = function(self, target)
 	{
-		self.health.modifier = 1.25;
-		self.health.duration = this.effectDuration;
+		self.defence.modifier = this.selfDefenceMod;
+		self.defence.duration = this.effectDuration;
 
 		this.logAction(self, target[0]);
 	}
@@ -731,6 +736,7 @@ function FireDance()
 {
 	this.type = SkillType.Offensive;
 	this.fireProb = 0.9;
+	this.selfDamage = true;
 	this.description = "Inflict Burn on self. Dramatically increases odds of inflicting status effects. Cannot be "
 		+ "used if user already has burn.";
 	

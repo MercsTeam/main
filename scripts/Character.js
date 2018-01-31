@@ -24,11 +24,11 @@ function Character()
 	this.player = null;
 	this.active = true;
 	this.canMove = true;
-
-	this.stunned = false;
+	
 	this.blocksDamage = false;
 
-    this.dazed = false;
+	this.stunned = false;
+    this.interrupt = false;
     this.poisoned = false;
     this.bleeding = false;
 	this.burned = false;	
@@ -95,6 +95,8 @@ function Character()
 
 		if(this.position == 3)
 		{
+			if(!this.attackHistory) this.attackHistory = [];
+
 			for(var i = 0; i < this.attackHistory.length; i++)
 			{
 				this.attackHistory[i].duration = 0;
@@ -103,15 +105,13 @@ function Character()
 			for(var i = 0; i < attr.length; i++) 
 			{
 				attr[i].modifier = 1.0;
+				attr[i].duration = -1;
 			}
 
-			if(!this.poisoned) 
-			{
-				this.health.modifier = 1.0;
-			}
+			if(!this.poisoned) this.health.modifier = 1.0;
 
 			this.stunned = false;
-			this.dazed = false;
+			this.interrupt = false;
 			this.bleeding = false;
 			this.burned = false;	
 			this.immune = false;
@@ -120,7 +120,7 @@ function Character()
 		{
 			this.health.base *= (this.immune && this.health.modifier < 1.0 ? 1.0 : this.health.modifier);
 
-			if(this.stunned || this.dazed) this.canMove = false;
+			if(this.stunned) this.canMove = false;
 
 			for(var i = 0; i < attr.length; i++)
 			{
@@ -152,14 +152,14 @@ function Character()
     {
 		for(var k = 0; k < this.skills.length; k++)
 		{
-			if(this.skills[k].isSelected()) return this.skills[k];
+			if(this.skills[k].selected) return this.skills[k];
 		}
 		return null;
     };
 
 	this.checkActiveEffect = function()
 	{
-		return this.stunned || this.dazed || this.bleeding || this.burned || this.poisoned;
+		return this.stunned || this.interrupt || this.bleeding || this.burned || this.poisoned;
 	};
 
 	this.checkActiveHistory = function(skill)
@@ -186,9 +186,10 @@ function Character()
 
     this.setLastAttack = function(target)
     {
-		if(!this.attackHistory) this.attackHistory = [];
+		var skill = this.getSelectedSkill();
 
-		var skill = this.getSelectedSkill();		
+		if(!this.attackHistory) this.attackHistory = [];
+				
 	    this.attackHistory.push({ "skill" : skill, "target" : target, "duration" : skill.duration }); 
     };
 
