@@ -100,6 +100,9 @@
 					"Speed"		: getRating(character.obj.speed, MAX_SPEED)
 				};
 
+				var characterType = "";
+				for(var t in CharacterType) if(character.obj.type == CharacterType[t]) characterType = t;
+
 				document.title = "Mercs Universe - [" + character.obj.name + "]";
 
 				var profileContent = document.getElementById('content');
@@ -113,18 +116,20 @@
 				var imgBox = document.createElement("DIV");
 				imgBox.id = "character_img";
 				imgBox.className = character.obj.alignment.toLowerCase();
-				imgBox.style.backgroundImage = string.format("url('{0}?v=20180129')", character.obj.image);	
+				imgBox.style.backgroundImage = string.format("url('{0}?v=20180127')", character.obj.image);	
 				profileContent.appendChild(imgBox);
 
 				profileContent.appendChild(HTMLRatingChart());
 
 				var p = document.createElement("P");
 				p.innerHTML = string.format("<strong>REAL NAME:</strong> {0}<br />"
-					+ "<strong>STATUS:</strong> Active&nbsp;&nbsp;<strong>ALIGNMENT:</strong> {1}<br />"					
-					+ "<strong>GENDER:</strong> {2}<br />"
-					+ "<strong>EYES:</strong> {3}&nbsp;&nbsp;<strong>HAIR:</strong> {4}<br />"
+					+ "<strong>STATUS:</strong> Active<br />"
+					+ "<strong>TYPE:</strong> {1}&nbsp;&nbsp;<strong>ALIGNMENT:</strong> {2}<br />"					
+					+ "<strong>GENDER:</strong> {3}<br />"
+					+ "<strong>EYES:</strong> {4}&nbsp;&nbsp;<strong>HAIR:</strong> {5}<br />"
 					+ "<strong>FIRST APPEARANCE:</strong> <em>MERCS: Triple Threat</em>",
 					(character.obj.realName == "" ? "Unrevealed" : character.obj.realName),
+					characterType,
 					character.obj.alignment,
 					(character.gender == "F" ? "Female" : (character.gender == "M" ? "Male" : character.gender)),
 					character.eye,
