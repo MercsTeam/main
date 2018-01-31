@@ -521,8 +521,17 @@
 							}
 						}
 
-						s.doAction(all[i], target);
+						//s.doAction(all[i], target);
 						all[i].setLastAttack(target);
+
+						for(var j = 0; j < all[i].attackHistory.length; j++)
+						{
+							if(all[i].attackHistory[j].duration > 0)
+							{
+								all[i].attackHistory[j].skill.doAction(all[i], all[i].attackHistory[j].target);
+								all[i].attackHistory[j].duration--;
+							}
+						}
 
 						skillImgArr.push({
 							player : p,
