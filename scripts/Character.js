@@ -95,6 +95,11 @@ function Character()
 
 		if(this.position == 3)
 		{
+			for(var i = 0; i < this.attackHistory.length; i++)
+			{
+				this.attackHistory[i].duration = 0;
+			}
+
 			for(var i = 0; i < attr.length; i++) 
 			{
 				attr[i].modifier = 1.0;
@@ -151,6 +156,11 @@ function Character()
 		}
 		return null;
     };
+
+	this.checkActiveEffect = function()
+	{
+		return this.stunned || this.dazed || this.bleeding || this.burned || this.poisoned;
+	};
 
 	this.checkActiveHistory = function(skill)
 	{

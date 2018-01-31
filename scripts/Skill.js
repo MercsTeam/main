@@ -57,6 +57,7 @@ function Skill(n)
     
     //effective number of rounds
     this.duration = 0;
+	this.effectDuration = 0;
 
 	this.isSelected = function() { return this.selected; };    
     this.isActive = function() { return this.active; };
@@ -148,24 +149,27 @@ function Skill(n)
 						if(this.oppSpeedMod != 1.0) target[i].speed.modifier = this.oppSpeedMod;
 						if(this.oppAccuracyMod != 1.0) target[i].accuracy.modifier = this.oppAccuracyMod;
 
-						if(r <= this.stunProb) target[i].stunned = true;
-						if(r <= this.dazeProb) target[i].dazed = true;
+						if(!target[i].checkActiveEffect())
+						{
+							if(r <= this.stunProb) target[i].stunned = true;
+							if(r <= this.dazeProb) target[i].dazed = true;
 
-						if(r <= this.poisonProb)
-						{
-							target[i].poisoned = true;							
-							target[i].health.modifier = 0.9;
-						}
-						if(r <= this.bleedProb) 
-						{
-							target[i].bleeding = true;
-							target[i].health.modifier = 0.85;
-						}
-						if(r <= this.burnProb)
-						{
-							target[i].burned = true;
-							target[i].health.modifier = 0.95;
-							target[i].defence.modifier = 0.75;
+							if(r <= this.poisonProb)
+							{
+								target[i].poisoned = true;							
+								target[i].health.modifier = 0.9;
+							}
+							if(r <= this.bleedProb) 
+							{
+								target[i].bleeding = true;
+								target[i].health.modifier = 0.85;
+							}
+							if(r <= this.burnProb)
+							{
+								target[i].burned = true;
+								target[i].health.modifier = 0.95;
+								target[i].defence.modifier = 0.75;
+							}
 						}
 						
 						if(r <= this.randomDebuffProb)

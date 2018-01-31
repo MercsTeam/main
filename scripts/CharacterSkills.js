@@ -244,7 +244,7 @@ function HighWinds()
     this.type = SkillType.Offensive;
     this.allySpeedMod = 1.5;
     this.oppSpeedMod = 0.5;
-    this.duration = 4;
+    this.effectDuration = 4;
 	this.multiTarget = true;
 	this.affectAlly = true;
     this.description = "Summons high winds across the battlefield, increasing the speed of allies(+50%) and reducing the speed of enemies (-50%). Lasts 3-5 rounds.";
@@ -253,13 +253,13 @@ function HighWinds()
 	{
 		var ally = self.getAlly();
 		ally.speed.modifier = this.allySpeedMod;
-		ally.speed.duration = this.duration;
+		ally.speed.duration = this.effectDuration;
 		this.logAction(self, ally);
 
 		for(var i = 0; i < target.length; i++) 
 		{
 			target[i].speed.modifier = this.oppSpeedMod;
-			target[i].speed.duration = this.duration;			
+			target[i].speed.duration = this.effectDuration;			
 			this.logAction(self, target[i], 0);
 		}
 	};
@@ -326,10 +326,10 @@ function NanobotRepairs()
 
 	this.doAction = function(self, target)
 	{
-		self.health.base += 50;
+		self.health.base += 25;
 
-		self.defence.modifier = 1.1;
-		self.defence.duration = 2;
+		self.defence.modifier += 0.1;
+		self.defence.duration = this.duration;
 
 		this.logAction(self, target[0]);
 	}
@@ -437,14 +437,15 @@ function Maelstrom()
 	
 	this.doAction = function(self, target)
 	{
-		self.health.modifer = 0.75;		
+		self.health.modifer = 0.75;
+		self.health.duration = 1;
 
 		var r = Math.random();
 		if(r <= (this.accuracy * self.accuracy.modifier))
 		{
 			ally = self.getAlly()
 			ally.speed.modifier = this.allySpeedMod;
-			ally.health.duration = this.duration;
+			ally.health.duration = 1;
 			this.logAction(self, ally);
 		}
 
@@ -467,7 +468,7 @@ function RayGun()
 	this.type = SkillType.Offensive;
 	this.attackValue = 40;
 	this.stunProb = 0.1;
-	this.duration = "A low-damage, single target attack with a small (10%) chance of causing stun.";
+	this.description = "A low-damage, single target attack with a small (10%) chance of causing stun.";
 }
 RayGun.prototype = new Skill("Ray Gun");
 
@@ -516,15 +517,22 @@ function ForceShield()
 {
 	this.type = SkillType.Defensive;
 	this.selfDefenceMod = 1.25;
-	this.duration = 5;
+	this.effectDuration = 5;
 	this.description = "Increases defense by 25% for 5 turns.";
+
+	this.doAction = function(self, target)
+	{
+		self.health.modifier = 1.25;
+		self.health.duration = this.effectDuration;
+
+		this.logAction(self, target[0]);
+	}
 }
 ForceShield.prototype = new Skill("Force Shield");
 
 function Telekinesis()
 {
 	this.type = SkillType.Offensive;
-	this.multiTarget = true;
 
 	this.description = "Forces enemy to swap their mercs if all three enemies are alive; if this attack hits first, the merc swapped to inactive loses their turn. "
 		+ "If at least one enemy merc is KO'd, this attack does nothing.";
@@ -536,11 +544,8 @@ function Telekinesis()
 		//if all characters still active
 		if(opp.activeCharacterCount == CHARACTERS_PER_TEAM)
 		{
-			//swap out healthiest character
-			var oppMerc = (target[0].health.base > target[1].health.base ? target[0] : target[1]);
-			oppMerc.skills[4].doAction(opp, oppMerc.position);
-
-			this.logAction(self, oppMerc, 0);
+			oppMerc.skills[4].doAction(opp, target[0].position);
+			this.logAction(self, target[0], 0);
 		}
 	};
 }
