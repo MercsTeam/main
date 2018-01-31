@@ -433,7 +433,7 @@
 						{
 							retreaters.push(p1);
 						}
-						else if(s1 || (lastAttack && lastAttack.duration > 0))
+						else if(s1 || (last1 && last1.duration > 0))
 						{
 							if(s1.type == SkillType.Offensive)
 							{
@@ -461,7 +461,7 @@
 						{
 							retreaters.push(p2);
 						}
-						else if(s2 || (lastAttack && lastAttack.duration > 0))
+						else if(s2 || (last2 && last2.duration > 0))
 						{
 							if(p2.canMove && s2.type == SkillType.Offensive)
 							{
