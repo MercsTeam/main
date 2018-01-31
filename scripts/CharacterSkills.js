@@ -68,6 +68,7 @@ function SweepingStrike()
     this.attackValue = 50;
     this.description = "AoE attack hitting both active enemy mercs.";
     this.multiTarget = true;
+	this.cooldown = 1;
 	this.imageURL = "characters/BSGComicStills/FRONT-Sweeping_Strike.jpg";
 }
 SweepingStrike.prototype = new Skill("Sweeping Strike");
@@ -77,6 +78,7 @@ function DefensiveStance()
     this.type = SkillType.Defensive;
     this.description = "Blocks incoming damage for the round.";
     this.blocksDamage = true;
+	this.cooldown = 1;
 	this.imageURL = "characters/BSGComicStills/FRONT-Defensive_Stance.jpg";
 }
 DefensiveStance.prototype = new Skill("Defensive Stance");
@@ -86,6 +88,7 @@ function Focus()
     this.type = SkillType.Reusable;
     this.selfAttackMod = 1.5;
     this.description = "Strengthens the attack stat (+50%) until Artur Hobbe is swapped to an inactive state, or dies.";
+	this.cooldown = 1;
 	this.imageURL = "characters/BSGComicStills/FRONT-Focus.jpg";
 }
 Focus.prototype = new Skill("Focus");
@@ -123,7 +126,8 @@ function RicochetShot()
     this.accuracy = 0.2;
 	this.bleedProb = 1.0;
     this.description = "Medium damage to both frontline targets. Very high chance (80%) of missing. Critical hit results in Penetrating Shot that causes bleeding.";	
-
+	this.cooldown = 2;
+	
 	this.doAction = function(self, target)
 	{
 		var c = self.checkActiveHistory(Camouflage);
@@ -164,7 +168,8 @@ function Camouflage()
     this.oppAccuracyMod = 0.5;
     this.duration = 3;
     this.description = "Become harder to hit (50% chance attacks will miss) for next three turns. Effect is lost when Headshot or Ricochet Shot is used.";
-
+	this.cooldown = 1;
+	
 	this.doAction = function(self, target)
 	{
 		var opp = (self.player == player1 ? player2 : player1);
@@ -210,6 +215,7 @@ function DivineShield()
     this.blocksDamage = true;
     this.repeatable = false;
     this.description = "Prevents next attack from damaging work. Cannot be used twice in a row by same merc.";
+	this.cooldown = 1;
 }
 DivineShield.prototype = new Skill("Divine Shield");
 
@@ -218,6 +224,13 @@ function PoolMana()
     this.type = SkillType.Reusable;
     this.selfAttackMod = 1.5;
     this.description = "Increases attack power significantly (+50%) for next turn.";
+	this.cooldown = 1;
+	
+	this.doAction(self, target)
+	{
+		self.attack.modifier = this.selfAttackMod;
+		self.attack.duration = 1;
+	};
 }
 PoolMana.prototype = new Skill("Pool Mana");
 
@@ -225,7 +238,7 @@ function LightningStrike()
 {
     this.type = SkillType.Offensive;
     this.attackValue = 25;
-    this.stunProb = 0.8;
+    this.stunProb = 0.15; //or interrupt?
     this.description = "Calls down a single bolt of lightning, deals low damage but has a chance to stun.";
 }
 LightningStrike.prototype = new Skill("Lightning Strike");
@@ -239,7 +252,20 @@ function CloudBarrier()
 }
 CloudBarrier.prototype = new Skill("Cloud Barrier");
 
-function HighWinds()
+function Confidence()
+{
+	this.type = SkillType.Defensive;
+	this.duration = 2;
+	this.blocksDamage = true;
+	this.selfImmunity = true;
+	this.description = "creates a physical embodiment of his own confidence to act as a barrier, blocking incoming "
+		+ "attacks and grants immunity for 2 turns.";
+	this.cooldown = 1;
+}
+Confidence.prototype = new Skill("Confidence");
+
+//formerly known as HighWinds
+function SinisterDeal()
 {
     this.type = SkillType.Offensive;
     this.allySpeedMod = 1.5;
@@ -264,7 +290,7 @@ function HighWinds()
 		}
 	};
 }
-HighWinds.prototype = new Skill("High Winds");
+SinisterDeal.prototype = new Skill("Sinister Deal);
 
 function Wish()
 {
@@ -379,7 +405,8 @@ function SingleShot()
 
 	this.doAction = function(self, target)
 	{
-		this.attackValue = (target[0].getHealthPct() < 0.25 ? 80 : 40);
+		var multiplier = (target[0].getHealthPct() < 0.25 ? 2 : 1)
+		this.attackValue *= multiplier;
 
 		var damage = target[0].calculateDamage(self, getTypeBonus(self.type, target[0].type));
 		target[0].health.base = Math.max(0, target[0].health.base - damage);	
@@ -550,3 +577,78 @@ function Telekinesis()
 	};
 }
 Telekinesis.prototype = new Skill("Telekinesis");
+
+function Draw()
+{
+	this.type = SkillType.Offensive;
+	this.attackValue = 40;
+	this.cooldown = 1;
+	this.description = "If attack hits before the target has attacks, double damage dealt."
+	
+	this.doAction = function(self, target)
+	{
+		var sSpeed = (self.speed.base * self.speed.modifier);
+		var tSpeed = (target[0].speed.base * target[0].speed.modifier);
+		var r = Math.random();
+		
+		var multiplier = (sSpeed > tSpeed || (sSpeed == tSpeed && r > 0.5) ? 2 : 1);
+		this.attackValue *= multiplier;
+		
+		var damage = target[0].calculateDamage(self, getTypeBonus(self.type, target[0].type));
+		target[0].health.base = Math.max(0, target[0].health.base - damage);	
+
+		this.logAction(self, target[0], damage);
+	}
+}
+Draw.prototype = new Skill("Draw");
+
+function SixShooter()
+{
+	this.type = SkillType.Offensive;
+	this.attackValue = 30;
+	this.multiTarget = true;
+	this.description = "Deals low damage to both frontline targets.";
+}
+SixShooter.prototype = new Skill("Six-Shooter");
+
+function LiquidCourage()
+{
+	this.type = SkillType.Defensive;
+	this.cooldown = 3;
+	this.effectDuration = 3;
+	this.selfSpeedMod = 0.5;
+	this.selfDefenceMod = 2;
+	
+	this.description = "Liquid Courage: Speed is reduced by 50%, and defense is boosted 100% for 3 turns.";
+	
+	this.doAction = function(self, target)
+	{
+		self.speed.modifier = this.selfSpeedMod;
+		self.speed.duration = this.effectDuration;
+		
+		self.defence.modifier = this.selfDefenceMod;
+		self.defence.duration = this.effectDuration;
+	};	
+}
+LiquidCourage.prototype = new Skill("Liquid Courage");
+
+function Lasso()
+{
+	this.type = SkillType.Offensive;
+	this.description = "Forces enemy to swap their mercs if all three enemy mercs are alive; if this attack hits first, "
+		+ "the merc swapped to inactive loses their turn. If at least one enemy merc is KO'd, this attack does "
+		+ "nothing.";
+	
+	this.doAction = function(self, target)
+	{
+		var opp = target[0].player;
+
+		//if all characters still active
+		if(opp.activeCharacterCount == CHARACTERS_PER_TEAM)
+		{
+			oppMerc.skills[4].doAction(opp, target[0].position);
+			this.logAction(self, target[0], 0);
+		}
+	};	
+}
+Lasso.prototype = new Skill("Lasso");
