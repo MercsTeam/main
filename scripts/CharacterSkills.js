@@ -290,7 +290,7 @@ function SinisterDeal()
 		}
 	};
 }
-SinisterDeal.prototype = new Skill("Sinister Deal);
+SinisterDeal.prototype = new Skill("Sinister Deal");
 
 function Wish()
 {
