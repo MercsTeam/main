@@ -1,5 +1,5 @@
 //var availableCharacters = [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Alien, Caveman, CowboyGuy, HiveDrone, SpaceGirl, Pirate, Witch ];
-var availableCharacters = [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, Alien, BigSwordGuy, BigSwordGuy, BigSwordGuy, BigSwordGuy, Nemesis ];
+var availableCharacters = [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, Alien, Caveman, CowboyGuy, BigSwordGuy, BigSwordGuy, Nemesis ];
 
 var textureBaseURL = "https://raw.githubusercontent.com/MercsTeam/threejs-testing/master/textures/";
 
@@ -140,7 +140,7 @@ function Cyborg()
 	this.type = CharacterType.Finesse;
 	this.alignment = "Evil";
 
-    this.skills = [ new IntegratedBattleSystem(), new ElectronicBarrier(), new NanobotRepairs(), new PassiveEffect(), new Retreat() ];
+    this.skills = [ new IntegratedBattleSystem(), new ElectronicBarrier(), new NanobotRepairs(), new EnhancedCombatSystem(), new Retreat() ];
 
 	this.state = 
     {
@@ -204,7 +204,7 @@ function Caveman()
 	this.colour = 0x59D8EF;
 	this.alignment = "Evil";
 
-	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
+	this.skills = [ new Club(), new PoisonSpear(), new PrimalRage(), new FireDance(), new Retreat() ];
 
 	this.quote = "Krorlaag like shiny... Krorlaag smashes!";
     this.backstory = "";
