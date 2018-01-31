@@ -650,7 +650,7 @@
 						var scene = new THREE.Scene();
 
 						var camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 1000);
-						camera.position.set(-25,8,10);
+						camera.position.set(-25,8,0);
 						camera.lookAt(new THREE.Vector3(0,-5,0));
 
 						var rotate = 1;
@@ -683,7 +683,7 @@
 						backgroundScene.add(backgroundMesh);
 
 						// Create the floor.
-						var geometryFloor = new THREE.BoxGeometry(50, 1, 20);
+						var geometryFloor = new THREE.BoxGeometry(50, 1, 30);
 						var textureFloor = new THREE.TextureLoader().load(floors[r]);
 						var materialFloor = new THREE.MeshLambertMaterial( { map : textureFloor } );
 
@@ -765,7 +765,7 @@
 							{
 								camera.position.z -= 0.02;
 								camera.lookAt(new THREE.Vector3(0,-5,0));
-								if (camera.position.z <= 6) 
+								if (camera.position.z <= -2) 
 								{
 									rotate = 0;
 								}
@@ -774,7 +774,7 @@
 							{
 								camera.position.z += 0.02;
 								camera.lookAt(new THREE.Vector3(0,-5,0));
-								if (camera.position.z >= 10) 
+								if (camera.position.z >= 2) 
 								{
 									rotate = 1;
 								}
