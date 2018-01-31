@@ -279,7 +279,7 @@
 								}
 							};
 							
-							if(!p.characters[i].active || !p.characters[i].canMove) btns[j].disabled = true;
+							if(!p.characters[i].active || (!p.characters[i].canMove && j < btns.length - 1)) btns[j].disabled = true;
 						}
 					}
 				}
@@ -425,14 +425,14 @@
 				for(var i = 0; i < CHARACTERS_PER_TEAM; i++)
 				{
 					p1 = player1.characters[i];
-					if(p1.active && p1.canMove)
+					if(p1.active) // && p1.canMove)
 					{
 						s1 = p1.getSelectedSkill();
 						if(p1.retreat)
 						{
 							retreaters.push(p1);
 						}
-						else if(s1)
+						else if(p1.position != 3)
 						{
 							if(s1.type == SkillType.Offensive)
 							{
@@ -443,26 +443,25 @@
 								defenders.push(p1);
 							}
 						}
-					}
-					else if(!p1.canMove)
-					{
-						p1.canMove = true;
-						
-						p1.dazed = false;
-						p1.stunned = false;
+
+						if(p1.stunned) //else if(!p1.canMove)
+						{
+							p1.canMove = true;
+							p1.stunned = false;
+						}
 					}
 					
 					p2 = player2.characters[i];
-					if(p2.active && p2.canMove)
+					if(p2.active) // && p2.canMove)
 					{
 						s2 = p2.getSelectedSkill();
 						if(p2.retreat)
 						{
 							retreaters.push(p2);
 						}
-						else if(s2)
+						else if(p2.position != 3)
 						{
-							if(s2.type == SkillType.Offensive)
+							if(p2.canMove && s2.type == SkillType.Offensive)
 							{
 								attackers.push(p2);
 							}
@@ -471,14 +470,13 @@
 								defenders.push(p2);
 							}
 						}
-					}
-					else if(!p2.canMove)
-					{
-						p2.canMove = true;
-						
-						p2.dazed = false;
-						p2.stunned = false;
-					}
+
+						if(p2.stunned)
+						{
+							p2.canMove = true;
+							p2.stunned = false;
+						}
+					}						
 				}
 				
 				//randomize attackers
@@ -504,54 +502,60 @@
 					}
 					else
 					{
-						if(s.multiTarget)
+						if(all[i].canMove)
 						{
-							if(s.type == SkillType.Offensive)
+							if(s)
 							{
-								target = [ o.getCharacterByPosition(1), o.getCharacterByPosition(2) ];
-							}
-							else
-							{
-								target = [ all[i], all[i].getAlly() ];
+								if(s.multiTarget)
+								{
+									if(s.type == SkillType.Offensive)
+									{
+										target = [ o.getCharacterByPosition(1), o.getCharacterByPosition(2) ];
+									}
+									else
+									{
+										target = [ all[i], all[i].getAlly() ];
+									}
+								}
+								else
+								{
+									if(s.type == SkillType.Offensive)
+									{
+										target = [ o.getCharacterByPosition(all[i].target) ];
+									}
+									else
+									{
+										target = [ (all[i].target == all[i].position ? all[i] : all[i].getAlly()) ];
+									}
+								}						
+
+								all[i].setLastAttack(target);
+								
+								//set remaining turns until skill can be reused
+								s.cooldownRem = s.cooldown;
+
+								skillImgArr.push({
+									player : p,
+									label : string.format("Player {0}.{1} - {2}<br />{3} ({4})",
+									(p == player1 ? 1 : 2),
+									all[i].position,
+									all[i].name,
+									s.name,
+									(s.type == SkillType.Offensive ? "ATTACK" : "DEFEND")),
+									url : s.imageURL
+								});
 							}
 						}
-						else
-						{
-							if(s.type == SkillType.Offensive)
-							{
-								target = [ o.getCharacterByPosition(all[i].target) ];
-							}
-							else
-							{
-								target = [ (all[i].target == all[i].position ? all[i] : all[i].getAlly()) ];
-							}
-						}
 						
-						//s.doAction(all[i], target);
-						all[i].setLastAttack(target);
-						
-						//set remaining turns until skill can be reused
-						s.cooldownRem = s.cooldown;
-						
+						//excute outstanding actions, from oldest to newest
 						for(var j = 0; j < all[i].attackHistory.length; j++)
 						{
-							if(all[i].attackHistory[j].duration > 0)
+							if(all[i].attackHistory[j].duration > 0 || j == all[i].attackHistory.length - 1)
 							{
 								all[i].attackHistory[j].skill.doAction(all[i], all[i].attackHistory[j].target);
-								all[i].attackHistory[j].duration--;
+								if(all[i].attackHistory[j].duration != 0) all[i].attackHistory[j].duration--;
 							}
 						}
-						
-						skillImgArr.push({
-							player : p,
-							label : string.format("Player {0}.{1} - {2}<br />{3} ({4})",
-							(p == player1 ? 1 : 2),
-							all[i].position,
-							all[i].name,
-							s.name,
-							(s.type == SkillType.Offensive ? "ATTACK" : "DEFEND")),
-							url : s.imageURL
-						});
 					}
 				}
 				
@@ -643,7 +647,6 @@
             <script src="https://mercsteam.github.io/threejs-testing/Detector.js"></script>
             
             <script>
-                //var FLOOR_URL = //"https://raw.githubusercontent.com/MercsTeam/threejs-testing/master/textures/floor/steelfloor.jpg";
                 var m1, m2;
                 
                 var scenes = 
