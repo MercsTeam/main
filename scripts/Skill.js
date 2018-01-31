@@ -6,18 +6,21 @@ function Skill(n)
 	this.active = true;
 	this.imageURL = "";
     
-    this.name = n;
-    this.description = "Description of Skill.";
-    this.type = SkillType.NotSet;
+    	this.name = n;
+    	this.description = "Description of Skill.";
+    	this.type = SkillType.NotSet;
+	
+	//when cooldownRem = 0, skill can be reused
+	this.cooldown = 0;
+	this.cooldownRem = 0; 
     
 	//can this skill affect multiple enemies
-    this.multiTarget = false;
+    	this.multiTarget = false;
 
 	//can this skill aid your ally
 	this.affectAlly = false;
     
-	this.blocksDamage = false;
-    this.repeatable = true;
+	this.blocksDamage = false;	   	
     
     this.attackValue = 0;
     this.accuracy = 1.0;
@@ -57,9 +60,9 @@ function Skill(n)
     
     //effective number of rounds
     this.duration = 0;
-	this.effectDuration = 0;
+    this.effectDuration = 0;
 
-	this.isSelected = function() { return this.selected; };    
+    this.isSelected = function() { return this.selected; };    
     this.isActive = function() { return this.active; };
 
 	this.getDescription = function() 
