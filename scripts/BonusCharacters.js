@@ -32,8 +32,9 @@ Nemesis.prototype = new Character();
 function SamuraiGirl()
 {
     this.name = "SAMURAI GIRL";
-	this.realName = "";
+	this.realName = "Tatsu Sasaki";
 	this.image = "samuraigirl.png";
+	this.type = CharacterType.Finesse;
 	this.alignment = "Good";
 
     this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
@@ -55,8 +56,9 @@ SamuraiGirl.prototype = new Character();
 function DinoGirl()
 {
     this.name = "DINOGIRL";
-	this.realName = "";
+	this.realName = "Qastra";
 	this.image = "dinogirl.png";
+	this.type = CharacterType.Finesse;
 	this.alignment = "Good";
 
     this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
@@ -78,8 +80,9 @@ DinoGirl.prototype = new Character();
 function Clown()
 {
 	this.name = "CLOWN";
-	this.realName = "";
+	this.realName = "Mr. Giggles";
 	this.image = "clown.png";
+	this.type = CharacterType.Physical;
 	this.alignment = "Evil";
 
 	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];

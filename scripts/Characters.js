@@ -261,9 +261,10 @@ CowboyGuy.prototype = new Character();
 function Pirate()
 {
 	this.name = "PIRATE";
-	this.realName = "";
+	this.realName = "Salvatore the Accursed";
 	this.image = "pirate.png";
 	this.colour = 0x75F927;
+	this.type = CharacterType.Finesse;
 	this.alignment = "Evil";
 
 	this.skills = [ new StormStrike(), new SingleShot(), new Parry(), new Maelstrom(), new Retreat() ];
@@ -294,6 +295,7 @@ function HiveDrone()
 	this.realName = "Oryctolagus";
 	this.image = "drone.png";
 	this.colour = 0xBD4038;
+	this.type = CharacterType.Physical;
 	this.alignment = "Neutral";
 
 	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
@@ -306,9 +308,10 @@ HiveDrone.prototype = new Character();
 function SpaceGirl()
 {
 	this.name = "SPACE GIRL";
-	this.realName = "";
+	this.realName = "Flight Engineer Valerie Zemanová";
 	this.image = "spacegirl.png";
 	this.colour = 0x440383;
+	this.type = CharacterType.Finesse;
 	this.alignment = "Good";
 
 	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
@@ -321,9 +324,10 @@ SpaceGirl.prototype = new Character();
 function Witch()
 {
 	this.name = "WITCH";
-	this.realName = "";
+	this.realName = "Azalea Wraith";
 	this.image = "witch.png";
 	this.colour = 0xE7CBBA;
+	this.type = CharacterType.Magic;
 	this.alignment = "Evil";
 
 	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
