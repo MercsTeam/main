@@ -53,6 +53,19 @@ function Retreat()
 }
 Retreat.prototype = new Skill("Retreat");
 
+function forceRetreat(self, target)
+{
+	var opp = target.player;
+	var retreat = target.skills[target.skill.length - 1];
+
+	//if all characters still active
+	if(opp.activeCharacterCount == CHARACTERS_PER_TEAM)
+	{
+		retreat.doAction(opp, target.position);
+		this.logAction(self, target, 0);
+	}
+}
+
 function SwordChop()
 {
     this.type = SkillType.Offensive;
@@ -125,7 +138,8 @@ function RicochetShot()
     this.multiTarget = true;
     this.accuracy = 0.2;
 	this.bleedProb = 1.0;
-    this.description = "Medium damage to both frontline targets. Very high chance (80%) of missing. Critical hit results in Penetrating Shot that causes bleeding.";	
+    this.description = "Medium damage to both frontline targets. Very high chance (80%) of missing. Critical hit results in Penetrating Shot that causes bleeding.";
+	this.imageURL = "characters/SniperGirlComicStills/SG-Ricochet.jpg";
 	this.cooldown = 2;
 	
 	this.doAction = function(self, target)
@@ -393,7 +407,7 @@ PassiveEffect.prototype = new Skill("Passive Effect");
 function EnhancedCombatSystem()
 {
 	this.type = SkillType.Defensive;
-	this.selfSpeedMod = 3;
+	//this.selfSpeedMod = 3;
 	this.selfAttackMod = 3;
 	this.description = "50% total health loss to gain 200% increase for attack and speed.";
 	this.cooldown = 2;
@@ -403,7 +417,7 @@ function EnhancedCombatSystem()
 		self.health.modifier = 0.5;
 		self.health.duration = 1;
 		
-		self.speed.modifier = this.selfSpeedMod;
+		//self.speed.modifier = this.selfSpeedMod;
 		self.attack.modifier = this.selfAttackMod;
 		
 		this.logAction(self, target[0]);
@@ -601,21 +615,10 @@ ForceShield.prototype = new Skill("Force Shield");
 function Telekinesis()
 {
 	this.type = SkillType.Offensive;
-
 	this.description = "Forces enemy to swap their mercs if all three enemies are alive; if this attack hits first, the merc swapped to inactive loses their turn. "
 		+ "If at least one enemy merc is KO'd, this attack does nothing.";
 
-	this.doAction = function(self, target)
-	{
-		var opp = target[0].player;
-
-		//if all characters still active
-		if(opp.activeCharacterCount == CHARACTERS_PER_TEAM)
-		{
-			oppMerc.skills[4].doAction(opp, target[0].position);
-			this.logAction(self, target[0], 0);
-		}
-	};
+	this.doAction = function(self, target) { forceRetreat(self, target[0]);	};	
 }
 Telekinesis.prototype = new Skill("Telekinesis");
 
@@ -678,19 +681,8 @@ function Lasso()
 	this.type = SkillType.Offensive;
 	this.description = "Forces enemy to swap their mercs if all three enemy mercs are alive; if this attack hits first, "
 		+ "the merc swapped to inactive loses their turn. If at least one enemy merc is KO'd, this attack does "
-		+ "nothing.";
-	
-	this.doAction = function(self, target)
-	{
-		var opp = target[0].player;
-
-		//if all characters still active
-		if(opp.activeCharacterCount == CHARACTERS_PER_TEAM)
-		{
-			oppMerc.skills[4].doAction(opp, target[0].position);
-			this.logAction(self, target[0], 0);
-		}
-	};	
+		+ "nothing.";	
+	this.doAction = function(self, target) { forceRetreat(self, target[0]);	};	
 }
 Lasso.prototype = new Skill("Lasso");
 
