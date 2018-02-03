@@ -62,7 +62,7 @@ Retreat.prototype = new Skill("Retreat");
 function forceRetreat(self, target)
 {
 	var opp = target.player;
-	var retreat = target.skills[target.skill.length - 1];
+	var retreat = target.skills[target.skills.length - 1];
 
 	//if all characters still active
 	if(opp.activeCharacterCount == Game.CHARACTERS_PER_TEAM)
