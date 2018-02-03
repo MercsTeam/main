@@ -460,7 +460,7 @@ document.onkeydown = function(e)
 	var keycode = (window.event ? window.event.keyCode : e.which);
 	if(keycode == 67)
 	{
-		Game.showCredits();
+		showCredits();
 	}
 };
 
