@@ -59,7 +59,7 @@ function Skill(n)
 	this.allyImmunity = false;
 
 	//effective number of rounds
-	this.duration = 0;
+	this.duration = 1;
 	this.effectDuration = 0;
 
 	this.isSelected = function() { return this.selected; };    

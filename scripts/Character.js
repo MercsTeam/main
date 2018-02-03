@@ -139,9 +139,12 @@ function Character()
 			if(this.health.base == 0) 
 			{
 				this.active = false;
+
 				this.skills[4].doAction(this.player, this.position);
 
 				Game.skillImgArr.push({ player : this.player, label : string.format("Player {0}.{1} - {2}<br />DEFEATED", (this.player == Game.player1 ? 1 : 2), this.position, this.name), url : this.defeatImage });
+
+				this.updateGameObject(null, "Dead");
 
 				this.player.activeCharacterCount--;
 			}
@@ -274,21 +277,32 @@ function Character()
 		this.healthbar.material = new THREE.MeshBasicMaterial( {color: barColor, side: THREE.DoubleSide} );
 	};
 	
-	this.updateGameObject = function(coords)
+	this.updateGameObject = function(coords, sprite)
 	{
-		this.obj.position.x = coords.x;
-		this.obj.position.y = coords.y;
-		this.obj.position.z = coords.z;
-		
-		this.healthbar.position.x = coords.x + 0.5;
-		this.healthbar.position.y = coords.y + 4;
-		this.healthbar.position.z = coords.z;
-		
-		if(this.marker)
+		if(sprite)
 		{
-			this.marker.setX(coords.x);
-			this.marker.setY(coords.y - 4.4);
-			this.marker.setZ(coords.z);
+			var spriteImg = (sprite == "Dead" ? Game.DeadSprite : this.state[sprite].img);
+			var texture  = new THREE.TextureLoader().load(string.format("images/sprites/{0}?v=20180128", spriteImg));
+
+			this.obj.material = new THREE.MeshLambertMaterial( { map : texture, transparent : true } );
+		}
+
+		if(coords)
+		{
+			this.obj.position.x = coords.x;
+			this.obj.position.y = coords.y;
+			this.obj.position.z = coords.z;
+			
+			this.healthbar.position.x = coords.x + 0.5;
+			this.healthbar.position.y = coords.y + 4;
+			this.healthbar.position.z = coords.z;
+			
+			if(this.marker)
+			{
+				this.marker.setX(coords.x);
+				this.marker.setY(coords.y - 4.4);
+				this.marker.setZ(coords.z);
+			}
 		}
 	};
 

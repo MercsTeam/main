@@ -21,6 +21,8 @@ function Retreat()
 			if(pos == 1)
 			{
 				c1.position = 3;
+				c1.canMove = false;
+
 				c2.position = 1;
 				c3.position = 2;
 
@@ -33,8 +35,10 @@ function Retreat()
 			else
 			{
 				c1.position = 2;
-				c2.position = 3;
 				c3.position = 1;
+
+				c2.position = 3;
+				c2.canMove = false;
 
 				if(c1.burned)
 				{

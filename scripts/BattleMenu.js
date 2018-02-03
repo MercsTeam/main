@@ -175,7 +175,7 @@ var BattleMenu =
 		}
 		
 		this.Timeout.stop();
-		btnCommit.disabled = true;
+		this.btnCommit.disabled = true;
 	},	
 	showSkill : function(character, index, pos, target)
 	{

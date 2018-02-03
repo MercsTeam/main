@@ -15,6 +15,7 @@ var Game =
 	audioLnk : document.querySelector("nav a:nth-child(2)"),
 	arena : document.querySelector("#gamePlay"),
 	skillImgArr : null,
+	DeadSprite : "tombstone.png",
 	m1 : null, 
 	m2 : null,
 	BattleLog :
@@ -74,7 +75,6 @@ var Game =
 	},
 	startRound : function()
 	{
-		//Game.BattleLog.flush();
 		this.BattleLog.write(string.format("ROUND {0} - FIGHT!!\n========================", this.round));
 		
 		var retreaters = [];
@@ -213,7 +213,7 @@ var Game =
 				//excute outstanding actions, from oldest to newest
 				for(var j = 0; j < all[i].attackHistory.length; j++)
 				{
-					if(all[i].attackHistory[j].duration > 0 || j == all[i].attackHistory.length - 1)
+					if(all[i].attackHistory[j].duration > 0)
 					{
 						all[i].attackHistory[j].skill.doAction(all[i], all[i].attackHistory[j].target);
 						if(all[i].attackHistory[j].duration != 0) all[i].attackHistory[j].duration--;
@@ -297,6 +297,7 @@ var Game =
 		else
 		{
 		}
+		Game.over = true;
 	},                
 	loadArena : function()
 	{
