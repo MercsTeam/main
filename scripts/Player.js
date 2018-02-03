@@ -1,4 +1,4 @@
-function Player(a)
+function Player(a, cnt)
 {
 	this.score = 0;
 	this.winner = false;
@@ -9,7 +9,7 @@ function Player(a)
 	this.characters = null;	
 	this.characterCoords = null;
 
-	this.activeCharacterCount = CHARACTERS_PER_TEAM;
+	this.activeCharacterCount = cnt;
 
 	this.isWinner = function() { return this.winner; };
 	this.isActive = function() { return this.active; };

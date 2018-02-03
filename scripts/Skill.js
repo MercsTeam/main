@@ -88,7 +88,7 @@ function Skill(n)
 		if(target == self)
 		{
 			output = string.format("PLAYER{0}: {1} uses {2} on SELF. {3} {4}", 
-				(self.player == player1 ? "1" : "2"),
+				(self.player == Game.player1 ? "1" : "2"),
 				self.name, 
 				this.name.toUpperCase(),
 				(this.selfHealthAdd != 0 ? this.selfHealthAdd + " RESTORE." : ""),
@@ -98,7 +98,7 @@ function Skill(n)
 		else if(target == ally)
 		{
 			output = string.format("PLAYER{0}: {1} uses {2} on ALLY {3}. {4}", 
-				(self.player == player1 ? "1" : "2"),
+				(self.player == Game.player1 ? "1" : "2"),
 				self.name, 
 				this.name.toUpperCase(),
 				target.name,
@@ -108,14 +108,14 @@ function Skill(n)
 		else
 		{
 			output = string.format("PLAYER{0}: {1} uses {2} against ENEMY {3}. {4} DAMAGE.", 
-				(self.player == player1 ? "1" : "2"),
+				(self.player == Game.player1 ? "1" : "2"),
 				self.name, 
 				this.name.toUpperCase(),
 				target.name,
 				damage
 			);
 		}		
-		gameLog.write(output);
+		Game.BattleLog.write(output);
 	}
 
 	this.doAction = function(self, target)

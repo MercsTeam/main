@@ -141,7 +141,7 @@ function Character()
 				this.active = false;
 				this.skills[4].doAction(this.player, this.position);
 
-				skillImgArr.push({ player : this.player, label : string.format("Player {0}.{1} - {2}<br />DEFEATED", (this.player == player1 ? 1 : 2), this.position, this.name), url : this.defeatImage });
+				Game.skillImgArr.push({ player : this.player, label : string.format("Player {0}.{1} - {2}<br />DEFEATED", (this.player == Game.player1 ? 1 : 2), this.position, this.name), url : this.defeatImage });
 
 				this.player.activeCharacterCount--;
 			}

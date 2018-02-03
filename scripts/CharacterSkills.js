@@ -13,8 +13,8 @@ function Retreat()
 		{
 			c3.retreat = false;
 
-			gameLog.write(string.format("PLAYER{0}: {1} retreats!", 
-				(player == player1 ? 1 : 2), 
+			Game.BattleLog.write(string.format("PLAYER{0}: {1} retreats!", 
+				(player == Game.player1 ? 1 : 2), 
 				player.getCharacterByPosition(pos).name
 			));
 			
@@ -61,7 +61,7 @@ function forceRetreat(self, target)
 	var retreat = target.skills[target.skill.length - 1];
 
 	//if all characters still active
-	if(opp.activeCharacterCount == CHARACTERS_PER_TEAM)
+	if(opp.activeCharacterCount == Game.CHARACTERS_PER_TEAM)
 	{
 		retreat.doAction(opp, target.position);
 		this.logAction(self, target, 0);
@@ -188,7 +188,7 @@ function Camouflage()
 	
 	this.doAction = function(self, target)
 	{
-		var opp = (self.player == player1 ? player2 : player1);
+		var opp = (self.player == Game.player1 ? Game.player2 : Game.player1);
 		var oppMerc;
 
 		for(var i = 1; i <= 2; i++)
@@ -341,7 +341,7 @@ function ElectronicBarrier()
 
 	this.doAction = function(self, target)
 	{
-		var opp = (self.player == player1 ? player2 : player1);
+		var opp = (self.player == Game.player1 ? Game.player2 : Game.player1);
 		var oppMerc;
 
 		for(var i = 1; i <= 2; i++)
@@ -583,7 +583,7 @@ function Abduction()
 			alert("Abduction elapsed!");
 			if(self.health.base > 0)
 			{
-				var opp = (self.player == player1 ? player2 : player1);
+				var opp = (self.player == Game.player1 ? Game.player2 : Game.player1);
 				var oppMerc = opp.getCharacterByPosition(pos);
 
 				var damage = oppMerc.health.base;
