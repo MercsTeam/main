@@ -136,7 +136,12 @@ function Skill(n)
 					
 					target[i].health.base += this.selfHealthAdd;
 
-					if(this.selfImmunity) target[i].immune = true;
+					if(this.selfImmunity) 
+					{
+						target[i].setEffectIndicator(Game.StatusEffects.Immune, 0);
+						target[i].immune = true;
+					}
+
 					if(this.blocksDamage) target[i].blocksDamage = true;
 					
 					this.logAction(self, target[i]);
@@ -156,6 +161,7 @@ function Skill(n)
 							
 							if(r <= this.interruptProb) 
 							{
+								target[i].setEffectIndicator(Game.StatusEffects.Interrupt, 0);
 								target[i].interrupt = true;
 
 								target[i].accuracy.modifier = 0.75;
@@ -163,16 +169,19 @@ function Skill(n)
 							}
 							if(r <= this.poisonProb)
 							{
+								target[i].setEffectIndicator(Game.StatusEffects.Poisoned, 0);
 								target[i].poisoned = true;							
 								target[i].health.modifier = 0.9;
 							}
 							if(r <= this.bleedProb) 
 							{
+								target[i].setEffectIndicator(Game.StatusEffects.Bleeding, 0);
 								target[i].bleeding = true;
 								target[i].health.modifier = 0.85;
 							}
 							if(r <= this.burnProb)
 							{
+								target[i].setEffectIndicator(Game.StatusEffects.Burned, 0);
 								target[i].burned = true;
 								target[i].health.modifier = 0.95;
 								target[i].defence.modifier = 0.75;
@@ -187,7 +196,7 @@ function Skill(n)
 								target[i].defence.modifier = 0.75;
 							else if(r <= 0.6)
 								target[i].speed.modifier = 0.75;
-							else if(r <= 0.6)
+							else if(r <= 0.8)
 								target[i].accuracy.modifier = 0.75;
 							else
 								target[i].stunned = true;
@@ -207,7 +216,11 @@ function Skill(n)
 
 						target[i].health.base += this.allyHealthAdd;
 
-						if(this.allyImmunity) target[i].immune = true;
+						if(this.allyImmunity) 
+						{
+							target[i].immune = true;
+							target[i].setEffectIndicator(Game.StatusEffects.Immune, 0);
+						}
 						
 						this.logAction(self, target[i]);
 					}

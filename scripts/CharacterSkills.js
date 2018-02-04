@@ -24,7 +24,10 @@ function Retreat()
 				c1.canMove = false;
 
 				c2.position = 1;
+				c2.canMove = true;
+				
 				c3.position = 2;
+				c3.canMove = true;
 
 				if(c2.burned)
 				{
@@ -35,7 +38,10 @@ function Retreat()
 			else
 			{
 				c1.position = 2;
+				c1.canMove = true;
+
 				c3.position = 1;
+				c3.canMove = true;
 
 				c2.position = 3;
 				c2.canMove = false;
@@ -142,7 +148,7 @@ function RicochetShot()
     this.type = SkillType.Offensive;
     this.attackValue = 50;
     this.multiTarget = true;
-    this.accuracy = 0.2;
+    this.accuracy = 0.9; //0.2;
 	this.bleedProb = 1.0;
     this.description = "Medium damage to both frontline targets. Very high chance (80%) of missing. Critical hit results in Penetrating Shot that causes bleeding.";
 	this.imageURL = "characters/SniperGirlComicStills/SG-Ricochet.jpg";
@@ -163,6 +169,7 @@ function RicochetShot()
 				damage = target[i].calculateDamage(self, getTypeBonus(self.type, target[i].type));
 				target[i].health.base = Math.max(0, target[i].health.base - damage);	
 
+				target[i].setEffectIndicator(Game.StatusEffects.Bleeding, 0);
 				target[i].bleeding = true;
 				target[i].health.modifier = 0.85;
 
@@ -177,8 +184,16 @@ function TakeAim()
 {
     this.type = SkillType.Reusable;
     this.selfAccuracyMod = 1.5;
+	this.effectDuration = 2;
     this.description = "Increases accuracy for next turn (reduces chance of missing by 50%)";
 	this.imageURL = "characters/SniperGirlComicStills/SG-TakeAim.jpg";
+
+	this.doAction = function(self, target)
+	{
+		self.attack.modifier = this.selfAccuracryMod;
+		self.attack.duration = this.effectDuration;
+		this.logAction(self, target[0]);
+	};
 }
 TakeAim.prototype = new Skill("Take Aim");
 
@@ -202,7 +217,7 @@ function Camouflage()
 			if(oppMerc.target == self.position)
 			{
 				oppMerc.accuracy.modifier = 0.5;
-				oppMerc.accuracy.duration = 1;
+				oppMerc.accuracy.duration = 2;
 			}
 		}
 		this.logAction(self, target[0]);
@@ -233,7 +248,6 @@ function DivineShield()
 {
     this.type = SkillType.Defensive;
     this.blocksDamage = true;
-    this.repeatable = false;
     this.description = "Prevents next attack from damaging work. Cannot be used twice in a row by same merc.";
 	this.cooldown = 1;
 }
@@ -243,13 +257,14 @@ function PoolMana()
 {
     this.type = SkillType.Reusable;
     this.selfAttackMod = 1.5;
+	this.effectDuration = 2;
     this.description = "Increases attack power significantly (+50%) for next turn.";
 	this.cooldown = 1;
 	
 	this.doAction = function(self, target)
 	{
 		self.attack.modifier = this.selfAttackMod;
-		self.attack.duration = 1;
+		self.attack.duration = this.effectDuration;
 	};
 }
 PoolMana.prototype = new Skill("Pool Mana");
@@ -290,7 +305,7 @@ function SinisterDeal()
     this.type = SkillType.Offensive;
     this.allySpeedMod = 1.5;
     this.oppSpeedMod = 0.5;
-    this.effectDuration = 4;
+    this.effectDuration = 5;
 	this.multiTarget = true;
 	this.affectAlly = true;
     this.description = "Summons high winds across the battlefield, increasing the speed of allies(+50%) and reducing the speed of enemies (-50%). Lasts 3-5 rounds.";
@@ -584,7 +599,7 @@ function Abduction()
 
 		if(counter == this.duration)
 		{
-			alert("Abduction elapsed!");
+			//alert("Abduction elapsed!");
 			if(self.health.base > 0)
 			{
 				var opp = self.player.getOpponent();
@@ -748,6 +763,7 @@ function FireDance()
 	{
 		if(!self.burned)
 		{
+			self.setEffectIndicator(Game.StatusEffects.Burned, 0);
 			self.burned = true;	
 			self.health.modifier = 0.95;
 			self.defence.modifier = 0.75;
@@ -757,6 +773,7 @@ function FireDance()
 			var r = Math.random();
 			if(r <= this.fireProb)
 			{
+				target[0].setEffectIndicator(Game.StatusEffects.Burned, 0);
 				target[0].burned = true;	
 				target[0].health.modifier = 0.95;
 				target[0].defence.modifier = 0.75;

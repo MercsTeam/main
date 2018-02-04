@@ -56,6 +56,7 @@ function Character()
     this.state = null;
     this.healthbar = null;
     this.marker = null;
+	this.effects = null;
     
     this.skills = null;
     this.backstory = "";
@@ -91,7 +92,9 @@ function Character()
 
 		this.blocksDamage = false;
 
-		var attr = [ this.defence, this.attack, this.speed, this.accuracy ];
+		var attr = null;
+		var attributes = [ "Health", "Defence", "Attack", "Speed", "Accuracy" ];
+		var effects = [ "poisoned", "stunned", "interrupt", "bleeding", "burned", "immune" ];
 
 		if(this.position == 3)
 		{
@@ -102,19 +105,25 @@ function Character()
 				this.attackHistory[i].duration = 0;
 			}
 
-			for(var i = 0; i < attr.length; i++) 
+			if(!this.poisoned) 
 			{
-				attr[i].modifier = 1.0;
-				attr[i].duration = -1;
+				this.health.modifier = 1.0;
+				this.setEffectIndicator(Game.NoEffect, 0);
 			}
 
-			if(!this.poisoned) this.health.modifier = 1.0;
+			for(var i = 1; i < attributes.length; i++) 
+			{
+				attr = this[attributes[i].toLowerCase()];
+				attr.modifier = 1.0;
+				attr.duration = -1;
 
-			this.stunned = false;
-			this.interrupt = false;
-			this.bleeding = false;
-			this.burned = false;	
-			this.immune = false;
+				this.setEffectIndicator(Game.NoEffect, i);
+			}
+
+			for(var i = 1; i < effects.length; i++)
+			{
+				this[effects[i]] = false;
+			}
 		}
 		else
 		{
@@ -122,16 +131,46 @@ function Character()
 
 			if(this.stunned) this.canMove = false;
 
-			for(var i = 0; i < attr.length; i++)
+			for(var i = 1; i < attributes.length; i++)
 			{
-				if(attr[i].duration > 0) 
+				attr = attributes[i].toLowerCase();
+
+				//decrement effect duration
+				if(this[attr].duration > 0) 
 				{
-					attr[i].duration--;
+					this[attr].duration--;
 				}
-				if(attr[i].duration == 0) 
+
+				//reset if duration is 0
+				if(this[attr].duration == 0) 
 				{
-					attr[i].modifier = 1.0;
-					attr[i].duration = -1;
+					this[attr].modifier = 1.0;
+					this[attr].duration = -1;
+				}
+
+				//modifier has effect, show indicator
+				if(this[attr].modifier != 1.0)
+				{
+					if(this[attr].modifier.between(0, 0.74))
+					{
+						this.setEffectIndicator(Game.Effects[attributes[i]].Down2x, i);
+					}
+					else if(this[attr].modifier.between(0.75, 0.99))
+					{
+						this.setEffectIndicator(Game.Effects[attributes[i]].Down, i);
+					}
+					else if(this[attr].modifier.between(1.01, 1.25))
+					{
+						this.setEffectIndicator(Game.Effects[attributes[i]].Up, i);
+					}
+					else
+					{
+						this.setEffectIndicator(Game.Effects[attributes[i]].Up2x, i);
+					}
+				}
+				else
+				{
+					this.setEffectIndicator(Game.NoEffect, i);
 				}
 			}
 			this.updateHealthBar();
@@ -140,14 +179,24 @@ function Character()
 			{
 				var opp = this.player.getOpponent();
 
+				//proceed if opponent has active characters
 				if(opp.activeCharacterCount != 0)
 				{
 					this.active = false;
 
+					//move out of active position
 					this.skills[4].doAction(this.player, this.position);
 
+					//clear effect indicators
+					for(var i = 0; i < this.effects.length; i++)
+					{
+						this.setEffectIndicator(Game.NoEffect, i);
+					}
+
+					//show defeated image
 					Game.skillImgArr.push({ player : this.player, label : string.format("Player {0}.{1} - {2}<br />DEFEATED", (this.player == Game.player1 ? 1 : 2), this.position, this.name), url : this.defeatImage });
 
+					//switch sprite to tombstone
 					this.updateGameObject(null, "Dead");
 
 					this.player.activeCharacterCount--;
@@ -224,7 +273,6 @@ function Character()
 	{
 		var state = this.state[sprite];
 		
-		//var texture  = new THREE.TextureLoader().load(textureBaseURL + state.img);
 		var texture  = new THREE.TextureLoader().load(string.format("images/sprites/{0}?v=20180128", state.img));
 		if(state.wrap) texture.wrapS = THREE.RepeatWrapping;
 		
@@ -248,8 +296,16 @@ function Character()
 			);
 		}
 		
-		scene.add(this.obj);		
+		scene.add(this.obj);
 		scene.add(this.createHealthBar(coords));
+
+		var eff;
+		this.effects = [];
+		for(var i = 0; i < 5; i++)
+		{
+			this.effects[i] = this.createEffectIndicator(coords, (i - 1));
+			scene.add(this.effects[i]);
+		}		
 		
 		this.marker = marker;
 		if(marker)
@@ -262,8 +318,8 @@ function Character()
 
 	this.createHealthBar = function(coords)
 	{
-		var geometry = new THREE.PlaneGeometry( 4, 0.5, 32 );
-		var material = new THREE.MeshBasicMaterial( {color: 0x00CC33, side: THREE.DoubleSide} );
+		var geometry = new THREE.PlaneGeometry( 4, 0.5 );
+		var material = new THREE.MeshBasicMaterial( {color: 0x00CC33, side: THREE.DoubleSide } );
 		
 		this.healthbar = new THREE.Mesh( geometry, material );
 		this.healthbar.position.x = coords.x + 0.5;
@@ -278,8 +334,30 @@ function Character()
 		var width = Math.max(0.001, this.getHealthPct() * 4);
 		var barColor = (width < 1 ? 0xFF2424 : 0x00CC33);
 		
-		this.healthbar.geometry = new THREE.PlaneGeometry( width, 0.5, 32 );
-		this.healthbar.material = new THREE.MeshBasicMaterial( {color: barColor, side: THREE.DoubleSide} );
+		this.healthbar.geometry = new THREE.PlaneGeometry( width, 0.5 );
+		this.healthbar.material = new THREE.MeshBasicMaterial( {color: barColor, side: THREE.DoubleSide } );
+	};
+
+	//create blank indicator
+	this.createEffectIndicator = function(coords, offsetZ)
+	{
+		var geometry = new THREE.PlaneGeometry(1, 1);
+		var texture  = new THREE.TextureLoader().load(string.format("images/effects/{0}?v=20180204", Game.NoEffect));
+		var material = new THREE.MeshLambertMaterial( { map : texture, transparent : true } );
+
+		var effect = new THREE.Mesh( geometry, material );
+		effect.position.x = coords.x + 0.5;
+		effect.position.y = coords.y + 4.75;
+		effect.position.z = coords.z - 1 + offsetZ;
+		effect.rotation.y = Math.PI * 1.5;
+
+		return effect;
+	};
+
+	this.setEffectIndicator = function(spriteImg, index)
+	{
+		var texture  = new THREE.TextureLoader().load(string.format("images/effects/{0}?v=20180204", spriteImg));
+		this.effects[index].material = new THREE.MeshLambertMaterial( { map : texture, transparent : true } );
 	};
 	
 	this.updateGameObject = function(coords, sprite)
@@ -287,7 +365,7 @@ function Character()
 		if(sprite)
 		{
 			var spriteImg = (sprite == "Dead" ? Game.DeadSprite : this.state[sprite].img);
-			var texture  = new THREE.TextureLoader().load(string.format("images/sprites/{0}?v=20180203", spriteImg));
+			var texture  = new THREE.TextureLoader().load(string.format("images/sprites/{0}?v=20180204", spriteImg));
 
 			this.obj.material = new THREE.MeshLambertMaterial( { map : texture, transparent : true } );
 		}
@@ -301,6 +379,13 @@ function Character()
 			this.healthbar.position.x = coords.x + 0.5;
 			this.healthbar.position.y = coords.y + 4;
 			this.healthbar.position.z = coords.z;
+
+			for(var i = 0; i < this.effects.length; i++)
+			{
+				this.effects[i].position.x = coords.x + 0.5;
+				this.effects[i].position.y = coords.y + 4.75;
+				this.effects[i].position.z = coords.z - 1 + (i - 1);
+			}
 			
 			if(this.marker)
 			{

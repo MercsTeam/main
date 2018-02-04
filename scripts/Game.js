@@ -17,6 +17,23 @@ var Game =
 	arena : document.querySelector("#gamePlay"),
 	skillImgArr : null,
 	DeadSprite : "tombstone.png",
+	NoEffect : "blank.png",
+	Effects :
+	{
+		Defence		: { Up2x : "defenceUp2x.png", Down2x : "defenceDown2x.png", Up : "defenceUp.png", Down : "defenceDown.png" },
+		Attack		: { Up2x : "attackUp2x.png", Down2x : "attackDown2x.png", Up : "attackUp.png", Down : "attackDown.png" },
+		Speed		: { Up2x : "speedUp2x.png", Down2x : "speedDown2x.png", Up : "speedUp.png", Down : "speedDown.png" },
+		Accuracy	: { Up2x : "accuracyUp2x.png", Down2x : "accuracyDown2x.png", Up : "accuracyUp.png", Down : "accuracyDown.png" }
+	},
+	StatusEffects :
+	{
+		Bleeding	: "BleedSymbol.png",
+		Burned		: "BurnSymbol.png",		
+		Immunity	: "ImmunitySymbol.png",
+		Interrupt	: "InterruptSymbol.png",
+		Poisoned	: "PoisonSymbol.png",
+		Stunned		: "StunSymbol.png"
+	},
 	m1 : null, 
 	m2 : null,
 	BattleLog :
@@ -87,7 +104,7 @@ var Game =
 		for(var i = 0; i < Game.CHARACTERS_PER_TEAM; i++)
 		{
 			p1 = this.player1.characters[i];
-			if(p1.active) // && p1.canMove)
+			if(p1.active)
 			{
 				s1 = p1.getSelectedSkill();
 				last1 = p1.getLastAttack();
@@ -97,7 +114,7 @@ var Game =
 				}
 				else if(s1 || (last1 && last1.duration > 0))
 				{
-					if(s1.type == SkillType.Offensive)
+					if(s1 && s1.type == SkillType.Offensive)
 					{
 						attackers.push(p1);
 					}
@@ -107,7 +124,7 @@ var Game =
 					}
 				}
 
-				if(p1.stunned) //else if(!p1.canMove)
+				if(p1.stunned)
 				{
 					p1.canMove = true;
 					p1.stunned = false;
@@ -115,7 +132,7 @@ var Game =
 			}
 			
 			p2 = this.player2.characters[i];
-			if(p2.active) // && p2.canMove)
+			if(p2.active)
 			{
 				s2 = p2.getSelectedSkill();
 				last2 = p2.getLastAttack();
@@ -125,7 +142,7 @@ var Game =
 				}
 				else if(s2 || (last2 && last2.duration > 0))
 				{
-					if(p2.canMove && s2.type == SkillType.Offensive)
+					if(s2 && s2.type == SkillType.Offensive)
 					{
 						attackers.push(p2);
 					}
