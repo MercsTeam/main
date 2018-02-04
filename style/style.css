@@ -80,8 +80,9 @@ canvas { height:100%;width:100%;background:#33CC33 }
 	position:absolute;bottom:10%;
 	left:0;width:100%;
 	text-align:center;
-	font-size:60pt;
+	font-size:40pt;
 	color:#ffffff;
+	font-family:'Press Start 2P';
 	text-transform:uppercase;
 	text-decoration:blink;
 	animation-name: tostart;
@@ -287,3 +288,24 @@ dd { margin:0;padding:0 }
 }
 
 .dialogButtons button:nth-child(2) {display:none}
+
+#lgMsg
+{	
+	visibility:hidden;
+	position:absolute;
+	z-index:1000;
+	height:100%;width:100%;
+	background-color:rgba(0,0,0,0.7);
+}
+#lgMsg span
+{
+	display:block;
+	font-family:'Press Start 2P';
+	font-size:80pt;
+	color:#ff0000;
+	position:fixed;
+	top:40%;
+	width:1920px;
+	text-align:center;
+	text-shadow: 2px 2px #000000;
+}
