@@ -35,6 +35,11 @@ function Player(a, cnt)
 		}
 	};
 
+	this.getOpponent = function()
+	{
+		return (this == Game.player1 ? Game.player2 : Game.player1);
+	}
+
 	this.commit = function()
 	{		
 		for(var i = 0; i < this.characters.length; i++) this.characters[i].position = i + 1;

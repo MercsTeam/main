@@ -69,7 +69,8 @@ var BattleMenu =
 		this.Timeout.start();
 		
 		var p = (Game.player1.isActive() ? Game.player1 : Game.player2);
-		var btns, skill;
+		var btns;
+		var retreatIndex = 4;
 		
 		for(var i = 0; i < p.characters.length; i++)
 		{
@@ -88,7 +89,10 @@ var BattleMenu =
 				}
 				
 				//if less than 3 characters, disable retreat
-				if(p.activeCharacterCount < Game.CHARACTERS_PER_TEAM) btns[4].disabled = true;
+				if(p.activeCharacterCount < Game.CHARACTERS_PER_TEAM) 
+				{
+					btns[retreatIndex].disabled = true;
+				}
 				
 				for(var j = 0; j < btns.length; j++)
 				{
@@ -100,6 +104,10 @@ var BattleMenu =
 					{
 						btns[j].disabled = true;
 						p.characters[i].skills[j].cooldownRem--;
+					}
+					else
+					{
+						btns[j].disabled = (!p.characters[i].active || (!p.characters[i].canMove && j < retreatIndex) || (p.activeCharacterCount < Game.CHARACTERS_PER_TEAM && j == retreatIndex));
 					}
 					
 					btns[j].onclick = function()
@@ -138,7 +146,7 @@ var BattleMenu =
 						}
 						else
 						{
-							skill = character.skills[index];
+							var skill = character.skills[index];
 							if(skill.multiTarget)
 							{
 								BattleMenu.showSkill(character, index, pos, -1);
@@ -152,9 +160,7 @@ var BattleMenu =
 								BattleMenu.showSkill(character, index, pos);
 							}
 						}
-					};
-					
-					if(!p.characters[i].active || (!p.characters[i].canMove && j < btns.length - 1)) btns[j].disabled = true;
+					};					
 				}
 			}
 		}
@@ -207,15 +213,15 @@ var BattleMenu =
 			
 			if(sType == SkillType.Offensive)
 			{
-				var opp = (character.player == Game.player1 ? Game.player2 : Game.player1);
-				if(!opp.getCharacterByPosition(1).active) btns[0].disabled = true;
-				if(!opp.getCharacterByPosition(2).active) btns[1].disabled = true;
+				var opp = character.player.getOpponent();
+				btns[0].disabled = (!opp.getCharacterByPosition(1).active);
+				btns[1].disabled = (!opp.getCharacterByPosition(2).active);
 			}
 			else
 			{
 				var a = character.getAlly();
-				if(a.position == 1 && !a.active) btns[0].disabled = true;
-				if(a.position == 2 && !a.active) btns[1].disabled = true;
+				btns[0].disabled = (a.position == 1 && !a.active);
+				btns[1].disabled = (a.position == 2 && !a.active);
 			}
 		}
 		

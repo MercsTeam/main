@@ -68,7 +68,7 @@ function forceRetreat(self, target)
 	if(opp.activeCharacterCount == Game.CHARACTERS_PER_TEAM)
 	{
 		retreat.doAction(opp, target.position);
-		this.logAction(self, target, 0);
+		retreat.logAction(self, target, 0);
 	}
 }
 
@@ -192,7 +192,7 @@ function Camouflage()
 	
 	this.doAction = function(self, target)
 	{
-		var opp = (self.player == Game.player1 ? Game.player2 : Game.player1);
+		var opp = self.player.getOpponent();
 		var oppMerc;
 
 		for(var i = 1; i <= 2; i++)
@@ -345,7 +345,7 @@ function ElectronicBarrier()
 
 	this.doAction = function(self, target)
 	{
-		var opp = (self.player == Game.player1 ? Game.player2 : Game.player1);
+		var opp = self.player.getOpponent();
 		var oppMerc;
 
 		for(var i = 1; i <= 2; i++)
@@ -587,7 +587,7 @@ function Abduction()
 			alert("Abduction elapsed!");
 			if(self.health.base > 0)
 			{
-				var opp = (self.player == Game.player1 ? Game.player2 : Game.player1);
+				var opp = self.player.getOpponent();
 				var oppMerc = opp.getCharacterByPosition(pos);
 
 				var damage = oppMerc.health.base;

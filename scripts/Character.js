@@ -138,15 +138,20 @@ function Character()
 
 			if(this.health.base == 0) 
 			{
-				this.active = false;
+				var opp = this.player.getOpponent();
 
-				this.skills[4].doAction(this.player, this.position);
+				if(opp.activeCharacterCount != 0)
+				{
+					this.active = false;
 
-				Game.skillImgArr.push({ player : this.player, label : string.format("Player {0}.{1} - {2}<br />DEFEATED", (this.player == Game.player1 ? 1 : 2), this.position, this.name), url : this.defeatImage });
+					this.skills[4].doAction(this.player, this.position);
 
-				this.updateGameObject(null, "Dead");
+					Game.skillImgArr.push({ player : this.player, label : string.format("Player {0}.{1} - {2}<br />DEFEATED", (this.player == Game.player1 ? 1 : 2), this.position, this.name), url : this.defeatImage });
 
-				this.player.activeCharacterCount--;
+					this.updateGameObject(null, "Dead");
+
+					this.player.activeCharacterCount--;
+				}
 			}
 		}
 	}
@@ -282,7 +287,7 @@ function Character()
 		if(sprite)
 		{
 			var spriteImg = (sprite == "Dead" ? Game.DeadSprite : this.state[sprite].img);
-			var texture  = new THREE.TextureLoader().load(string.format("images/sprites/{0}?v=20180128", spriteImg));
+			var texture  = new THREE.TextureLoader().load(string.format("images/sprites/{0}?v=20180203", spriteImg));
 
 			this.obj.material = new THREE.MeshLambertMaterial( { map : texture, transparent : true } );
 		}

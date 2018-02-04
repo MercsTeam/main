@@ -9,6 +9,7 @@ var Game =
     uiSound : null,
 	"alert" : null,
 	"confirm" : null,
+	message : document.querySelector("#lgMsg"),
 	intro : document.querySelector("#sagaSell"),
 	tmrIntro : null,
 	title : document.querySelector("#titleScreen"),
@@ -254,18 +255,23 @@ var Game =
 			this.endRound();
 		}
 	},	
+	showMessage : function(text)
+	{
+		this.message.style.visibility = "visible";
+		this.message.innerHTML = text;
+	},
 	endRound : function()
 	{
 		this.uiSound.start("endRound");
 		if(this.player1.activeCharacterCount == 0)
 		{
-			Game.alert.show("Player 2 Wins!");
+			Game.showMessage("<span>Player 2 Wins!</span>");
 			Game.BattleLog.write("PLAYER 2 WINS!");
 			Game.over = true;
 		}
 		else if(this.player2.activeCharacterCount == 0)
 		{
-			Game.alert.show("Player 1 Wins!");
+			Game.showMessage("<span>Player 1 Wins!</span>");
 			Game.BattleLog.write("PLAYER 1 WINS!");
 			Game.over = true;
 		}
