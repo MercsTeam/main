@@ -599,11 +599,11 @@ function Abduction()
 
 	this.doAction = function(self, target)
 	{
-		if(counter == 0)
-		{
-			self.canMove = false;
-			pos = target[0].position;
+		self.canMove = false;
 
+		if(counter == 0)
+		{			
+			pos = target[0].position;
 			this.logAction(self, self);
 		}
 		counter++;

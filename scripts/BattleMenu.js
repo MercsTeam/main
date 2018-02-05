@@ -75,6 +75,7 @@ var BattleMenu =
 		for(var i = 0; i < p.characters.length; i++)
 		{
 			p.characters[i].retreat = false;
+
 			if(p.characters[i].position == 1 || p.characters[i].position == 2)
 			{
 				if(p.characters[i].position == 1)

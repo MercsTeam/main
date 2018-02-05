@@ -157,7 +157,11 @@ function Skill(n)
 
 						if(!target[i].checkActiveEffect())
 						{
-							if(r <= this.stunProb) target[i].stunned = true;
+							if(r <= this.stunProb) 
+							{
+								target[i].setEffectIndicator(Game.StatusEffects.Stunned, 0);
+								target[i].stunned = true;
+							}
 							
 							if(r <= this.interruptProb) 
 							{

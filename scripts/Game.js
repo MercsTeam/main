@@ -128,6 +128,7 @@ var Game =
 				{
 					p1.canMove = true;
 					p1.stunned = false;
+					p1.setEffectIndicator(Game.NoEffect, 0);
 				}
 			}
 			
@@ -156,6 +157,7 @@ var Game =
 				{
 					p2.canMove = true;
 					p2.stunned = false;
+					p2.setEffectIndicator(Game.NoEffect, 0);
 				}
 			}						
 		}
