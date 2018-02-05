@@ -32,6 +32,8 @@ function BigSwordGuy()
 
 	this.quote = "You're not cut out for this life...";
     this.backstory = "A simple man with simple origins. A peaceful farmer forced to take up the sword to defend his family and livelihood. Big sword guy quickly found out he was a better swordsman than farmer, and began working as a sword for hire.";
+	
+	this.damageImage = "characters/BSGComicStills/BSG-Damaged.jpg";
 	this.defeatImage = "characters/BSGComicStills/FRONT-Defeat.jpg";
 }
 BigSwordGuy.prototype = new Character();

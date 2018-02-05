@@ -48,6 +48,8 @@ function Character()
 	this.quote = "";
 	
 	this.defeatImage = "";
+	this.damageImage = "";
+
 	this.defaultHealth = 0;
 
     this.colour = 0x000000;
