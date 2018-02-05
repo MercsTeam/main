@@ -466,6 +466,7 @@ function StormStrike()
 	this.accuracy = 0.25;
 
 	this.description = "Attacks with a lightning imbued rapier, this attack has a chance to increase the user's speed.";
+	this.imageURL = "characters/PirateComicStills/Pirate_StormStrike.png";
 }
 StormStrike.prototype = new Skill("Storm Strike");
 
@@ -474,6 +475,7 @@ function SingleShot()
 	this.type = SkillType.Offensive;
 	this.attackValue = 40;
 	this.description = "Fires a bullet at a single target that deals double damage to targets below 25% health.  When this skill results in the death of an enemy, the speed and attack are increased.";
+	this.imageURL = "characters/PirateComicStills/Pirate_SingleShot.png";
 	this.cooldown = 1;
 
 	this.doAction = function(self, target)
