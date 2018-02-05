@@ -209,6 +209,8 @@ function Camouflage()
 	
 	this.doAction = function(self, target)
 	{
+		if(counter == 0) counter = this.duration;
+
 		var opp = self.player.getOpponent();
 		var oppMerc;
 
@@ -220,7 +222,7 @@ function Camouflage()
 			{
 				oppMerc.accuracy.modifier = this.oppAccuracyMod;				
 				oppMerc.accuracy.duration = counter;
-
+ 
 				this.logAction(self, oppMerc, 0);
 			}
 			else
