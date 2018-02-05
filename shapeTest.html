@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html lang="en-CA">
+	<head>
+		<title> New Document </title>
+		<style>
+			#imgViewer { position:absolute;top:100px;left:100px; }
+			.innerContainer 
+			{
+				overflow: hidden;
+				position: relative;
+				width: 40em; height: 27em;
+				transform: scaleX(-1);
+			}
+			.img-box, .img-box img { width: 100%; height: 100%; }
+			.img-box 
+			{
+				overflow: hidden;
+				position: absolute;  
+				/* arctan(27 / 40) = 34.01935deg 
+				* need to skew by 90deg - 34.01935deg = 55.98065deg
+				*/
+				transform: skewX(-55.98deg);
+			}
+			.img-box:first-child 
+			{
+				left:0;
+				transform-origin: 50% 50%;
+			}
+			.img-box img 
+			{
+				transform: skewX(55.98deg);
+				transform-origin: inherit;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="imgViewer">			
+			<div class="innerContainer">				
+				<div class="img-box">
+					<img src="characters/BSGComicStills/FRONT-Defensive_Stance.jpg" />
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
