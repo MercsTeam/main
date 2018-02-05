@@ -190,8 +190,8 @@ function TakeAim()
 
 	this.doAction = function(self, target)
 	{
-		self.attack.modifier = this.selfAccuracryMod;
-		self.attack.duration = this.effectDuration;
+		self.accuracy.modifier = this.selfAccuracyMod;
+		self.accuracy.duration = this.effectDuration;
 		this.logAction(self, target[0]);
 	};
 }
@@ -205,6 +205,8 @@ function Camouflage()
     this.description = "Become harder to hit (50% chance attacks will miss) for next three turns. Effect is lost when Headshot or Ricochet Shot is used.";
 	this.cooldown = 1;
 	
+	var counter = this.duration;
+	
 	this.doAction = function(self, target)
 	{
 		var opp = self.player.getOpponent();
@@ -216,11 +218,18 @@ function Camouflage()
 
 			if(oppMerc.target == self.position)
 			{
-				oppMerc.accuracy.modifier = 0.5;
-				oppMerc.accuracy.duration = 2;
+				oppMerc.accuracy.modifier = this.oppAccuracyMod;				
+				oppMerc.accuracy.duration = counter;
+
+				this.logAction(self, oppMerc, 0);
 			}
-		}
-		this.logAction(self, target[0]);
+			else
+			{
+				oppMerc.accuracy.modifier = 1.0;				
+				oppMerc.accuracy.duration = -1;
+			}
+		}	
+		counter--;
 	}
 }
 Camouflage.prototype = new Skill("Camouflage");
