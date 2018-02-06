@@ -135,7 +135,7 @@ function Headshot()
 		var r = Math.random();
 		if(r <= (this.accuracy * self.accuracy.modifier))
 		{
-			var damage = target[0].calculateDamage(self, getTypeBonus(self.type, target[0].type));
+			var damage = target[0].calculateDamage(self, Game.getTypeBonus(self.type, target[0].type));
 			target[0].health.base = Math.max(0, target[0].health.base - damage);	
 
 			this.logAction(self, target[0], damage);
@@ -167,7 +167,7 @@ function RicochetShot()
 			
 			for(var i = 0; i < target.length; i++)
 			{
-				damage = target[i].calculateDamage(self, getTypeBonus(self.type, target[i].type));
+				damage = target[i].calculateDamage(self, Game.getTypeBonus(self.type, target[i].type));
 				target[i].health.base = Math.max(0, target[i].health.base - damage);	
 
 				target[i].setEffectIndicator(Game.StatusEffects.Bleeding, 0);
@@ -484,7 +484,7 @@ function SingleShot()
 		var multiplier = (target[0].getHealthPct() < 0.25 ? 2 : 1)
 		this.attackValue *= multiplier;
 
-		var damage = target[0].calculateDamage(self, getTypeBonus(self.type, target[0].type));
+		var damage = target[0].calculateDamage(self, Game.getTypeBonus(self.type, target[0].type));
 		target[0].health.base = Math.max(0, target[0].health.base - damage);	
 
 		this.logAction(self, target[0], damage);		
@@ -560,7 +560,7 @@ function Maelstrom()
 			if(target[i].health.base > highest.health.base) highest = target[i];
 		}
 
-		var damage = highest.calculateDamage(self, getTypeBonus(self.type, highest.type));
+		var damage = highest.calculateDamage(self, Game.getTypeBonus(self.type, highest.type));
 		highest.health.base = Math.max(0, highest.health.base - damage);	
 
 		this.logAction(self, highest, damage);
@@ -676,7 +676,7 @@ function Draw()
 		var multiplier = (sSpeed > tSpeed || (sSpeed == tSpeed && r > 0.5) ? 2 : 1);
 		this.attackValue *= multiplier;
 		
-		var damage = target[0].calculateDamage(self, getTypeBonus(self.type, target[0].type));
+		var damage = target[0].calculateDamage(self, Game.getTypeBonus(self.type, target[0].type));
 		target[0].health.base = Math.max(0, target[0].health.base - damage);	
 
 		this.logAction(self, target[0], damage);

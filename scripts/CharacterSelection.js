@@ -41,9 +41,9 @@ var CharacterSelection =
 		this.btnSelect[0].disabled = true;
 		this.btnSelect[1].disabled = true;
 
-		for(var i = 0; i < availableCharacters.length; i++)
+		for(var i = 0; i < Game.availableCharacters.length; i++)
 		{
-			c = new availableCharacters[i]();
+			c = new Game.availableCharacters[i]();
 			
 			f = document.createElement("FIGURE");
 			f.dataset.cindex = i;
@@ -59,7 +59,7 @@ var CharacterSelection =
 					if(p.selectedCount < 3)
 					{
 						Game.uiSound.start("clickOn");
-						p.addCharacter(availableCharacters[this.dataset.cindex]);
+						p.addCharacter(Game.availableCharacters[this.dataset.cindex]);
 						p.selectedCount++;
 					}
 					else
@@ -70,7 +70,7 @@ var CharacterSelection =
 				else
 				{
 					Game.uiSound.start("clickOff");
-					p.removeCharacter(availableCharacters[this.dataset.cindex]);
+					p.removeCharacter(Game.availableCharacters[this.dataset.cindex]);
 					p.selectedCount--;
 				}
 				

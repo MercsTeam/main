@@ -15,6 +15,7 @@ var Game =
 	title : document.querySelector("#titleScreen"),
 	audioLnk : document.querySelector("nav a:nth-child(2)"),
 	arena : document.querySelector("#gamePlay"),
+	availableCharacters : [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, Alien, Caveman, CowboyGuy, BigSwordGuy, BigSwordGuy, Nemesis ], //HiveDrone, SpaceGirl, Witch
 	skillImgArr : null,
 	DeadSprite : "tombstone.png",
 	NoEffect : "blank.png",
@@ -34,6 +35,7 @@ var Game =
 		Poisoned	: "PoisonSymbol.png",
 		Stunned		: "StunSymbol.png"
 	},
+	TypeBonus : { Ineffective : 0.75, None : 1.0, Effective : 1.25 },
 	m1 : null, 
 	m2 : null,
 	BattleLog :
@@ -261,7 +263,7 @@ var Game =
 			var slide = this.skillImgArr[index];
 			if(slide.sound)
 			{
-				this.uiSound.start(slide.sound);	
+				this.uiSound.start(slide.sound);
 			}
 			else
 			{
@@ -321,6 +323,23 @@ var Game =
 				Game.confirm.hide();
 				Game.over = true;
 			});
+		}
+	},
+	getTypeBonus : function(t1, t2)
+	{
+		if(t1 == t2)
+		{
+			return this.TypeBonus.None;
+		}
+		else if((t1 == CharacterType.Physical && t2 == CharacterType.Finesse) 
+			|| (t1 == CharacterType.Finesse && t2 == CharacterType.Magic) 
+			|| (t1 == CharacterType.Magic && t2 == CharacterType.Physical))
+		{
+			return this.TypeBonus.Effective;
+		}
+		else
+		{		
+			return this.TypeBonus.Ineffective;	
 		}
 	},
 	surrender : function()

@@ -1,23 +1,4 @@
 var CharacterType = { NotSet : -1, Physical : 1, Finesse : 2, Magic : 3 };
-var TypeBonus = { Ineffective : 0.75, None : 1.0, Effective : 1.25 };
-
-function getTypeBonus(t1, t2)
-{
-	if(t1 == t2)
-	{
-		return TypeBonus.None;
-	}
-	else if((t1 == CharacterType.Physical && t2 == CharacterType.Finesse) 
-		|| (t1 == CharacterType.Finesse && t2 == CharacterType.Magic) 
-		|| (t1 == CharacterType.Magic && t2 == CharacterType.Physical))
-	{
-		return TypeBonus.Effective;
-	}
-	else
-	{		
-		return TypeBonus.Ineffective;	
-	}
-}
 
 function Character()
 {

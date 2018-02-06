@@ -5,7 +5,7 @@ function Skill(n)
 	this.selected = false;
 	this.active = true;
 	this.imageURL = "";
-	this.soundID = "skill";
+	this.soundID = "";
 
 	this.name = n;
 	this.description = "Description of Skill.";
@@ -213,7 +213,7 @@ function Skill(n)
 								target[i].stunned = true;
 						}
 						
-						damage = target[i].calculateDamage(self, getTypeBonus(self.type, target[i].type));
+						damage = target[i].calculateDamage(self, Game.getTypeBonus(self.type, target[i].type));
 						target[i].health.base = Math.max(0, target[i].health.base - damage);	
 
 						this.logAction(self, target[i], damage);

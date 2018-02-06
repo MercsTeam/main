@@ -1,8 +1,3 @@
-//var availableCharacters = [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Alien, Caveman, CowboyGuy, HiveDrone, SpaceGirl, Pirate, Witch ];
-var availableCharacters = [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, Alien, Caveman, CowboyGuy, BigSwordGuy, BigSwordGuy, Nemesis ];
-
-var textureBaseURL = "https://raw.githubusercontent.com/MercsTeam/threejs-testing/master/textures/";
-
 function BigSwordGuy()
 {
     this.name = "BIG SWORD GUY";
@@ -302,6 +297,12 @@ function HiveDrone()
 
 	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
 
+	this.state = 
+    {
+		IDLE_FRONT : { img : "drone_idle_front.png", wrap : false, animate : null },
+		IDLE_BACK  : { img : "drone_idle_back.png", wrap : true, animate : null }
+    };
+
 	this.quote = "Klikliklikliklikliklik!";
     this.backstory = "Mindless worker";
 }
@@ -318,6 +319,12 @@ function SpaceGirl()
 
 	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
 
+	this.state = 
+    {
+		IDLE_FRONT : { img : "spacegirl_idle_front.png", wrap : false, animate : null },
+		IDLE_BACK  : { img : "spacegirl_idle_back.png", wrap : true, animate : null }
+    };
+
 	this.quote = "";
     this.backstory = "An astronaut from the Canadian Space Program, very smart, space-age technology";
 }
@@ -333,6 +340,12 @@ function Witch()
 	this.alignment = "Evil";
 
 	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
+
+	this.state = 
+    {
+		IDLE_FRONT : { img : "witch_idle_front.png", wrap : false, animate : null },
+		IDLE_BACK  : { img : "witch_idle_back.png", wrap : true, animate : null }
+    };
 
 	this.quote = "";
     this.backstory = "Purple and gold robed, wise, old";
