@@ -4,7 +4,8 @@ var SoundLibrary =
 	clickOn : "330048__paulmorek__beep-04-positive.mp3",
 	clickOff : "330049__paulmorek__beep-04-negative.mp3",
 	skill : "330063__paulmorek__swish-02-2015-06-21.mp3",
-	endRound : "346425__soneproject__ecofuture3.mp3"
+	endRound : "346425__soneproject__ecofuture3.mp3",
+	swordChop : "MERCS_swordchop.mp3"
 };
 
 var soundPath = "https://raw.githubusercontent.com/MercsTeam/main/master/Mercs_sound_library";
