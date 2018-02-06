@@ -5,6 +5,7 @@ function Skill(n)
 	this.selected = false;
 	this.active = true;
 	this.imageURL = "";
+	this.soundID = "skill";
 
 	this.name = n;
 	this.description = "Description of Skill.";
