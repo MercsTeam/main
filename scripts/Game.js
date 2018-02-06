@@ -225,7 +225,8 @@ var Game =
 							all[i].name,
 							s.name,
 							(s.type == SkillType.Offensive ? "ATTACK" : "DEFEND")),
-							url : s.imageURL
+							url : s.imageURL,
+							sound : s.soundID
 						});
 					}
 				}
@@ -257,13 +258,21 @@ var Game =
 		var v = document.querySelector("#imgViewer");
 		if(index <= this.skillImgArr.length - 1)
 		{
-			this.uiSound.start("skill");
+			var slide = this.skillImgArr[index];
+			if(slide.sound)
+			{
+				this.uiSound.start(slide.sound);	
+			}
+			else
+			{
+				this.uiSound.start("skill");
+			}
 			
-			v.className = (this.skillImgArr[index].player == this.player1 ? "p1-skillImg" : "p2-skillImg");
+			v.className = (slide.player == this.player1 ? "p1-skillImg" : "p2-skillImg");
 			v.style.visibility = "visible";
-			v.style.backgroundImage = string.format("url('{0}?v=20180128')", this.skillImgArr[index].url);
+			v.style.backgroundImage = string.format("url('{0}?v=20180128')", slide.url);
 			
-			v.querySelector("span").innerHTML = this.skillImgArr[index].label;
+			v.querySelector("span").innerHTML = slide.label;
 			
 			index++;
 			setTimeout("Game.showImages(" + index + ")", 2500);
