@@ -84,6 +84,7 @@ function SwordChop()
     this.attackValue = 70;
     this.description = "Single target attack that deals damage.";
 	this.imageURL = "characters/BSGComicStills/FRONT-Sword_Chop.jpg";
+	this.soundID = "swordChop";
 }
 SwordChop.prototype = new Skill("Sword Chop");
 
