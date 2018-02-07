@@ -71,6 +71,7 @@ var BattleMenu =
 		var p = (Game.player1.isActive() ? Game.player1 : Game.player2);
 		var btns;
 		var retreatIndex = 4;
+		var immobileCnt = 0;
 		
 		for(var i = 0; i < p.characters.length; i++)
 		{
@@ -78,6 +79,8 @@ var BattleMenu =
 
 			if(p.characters[i].position == 1 || p.characters[i].position == 2)
 			{
+				if(!p.characters[i].active || !p.characters[i].canMove) immobileCount++;
+				
 				if(p.characters[i].position == 1)
 				{
 					btns = this.active1.btns;
@@ -165,6 +168,8 @@ var BattleMenu =
 				}
 			}
 		}
+
+		if(immobileCount == 2) this.btnCommit.disabled = false;
 	},
 	reset : function()
 	{
