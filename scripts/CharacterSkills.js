@@ -799,3 +799,102 @@ function FireDance()
 }
 FireDance.prototype = new Skill("Fire Dance");
 
+function Sting()
+{
+	this.attackValue = 75;
+	this.type = SkillType.Offensive;
+	this.cooldown = 2;
+	this.poisonProb = 0.4;
+	this.description ="A high-damage, single-target attack with a medium chance of causing Poison.";
+}
+Sting.prototype = new Skill("Sting");
+
+function Bite()
+{
+	this.attackValue = 25;
+	this.type = SkillType.Offensive;
+	this.poisonProb = 0.8;
+	this.description = "A low-damage, single-target attack with a high chance of causing Poison.";
+}
+Bite.prototype = new Skill("Bite");
+
+function Exoskeleton()
+{
+	this.type = SkillType.Defensive;
+	this.selfDefenceMod = 1.5;
+	this.effectDuration = 2;
+	this.description = "Boosts Defense by 50% for 2 turns.";
+}
+Exoskeleton.prototype = new Skill("Exoskeleton");
+
+function HiveMindHijack()
+{
+	this.type = SkillType.Offensive;
+	this.cooldown = 1;
+	this.description = "If poisoned, target will be forced to attack their ally with a medium-damage (50) attack. "
+		+ "If target does not have an ally, target will attack themselves with a low-damage (25) attack.";
+	this.doAction = function(self, target)
+	{
+		if(target[0].poisoned)
+		{
+			var ally = target[0].getAlly();
+			if(ally.active)
+			{
+			}
+			else
+			{
+			}
+		}
+	};
+}
+HiveMindHijack.prototype = new Skill("Hivemind Hijack");
+
+function DeathRay()
+{
+	//(1) Skill 1: Death Ray (70): A high-damage, single-target attack with a low chance of causing Burn.
+}
+DeathRay.prototype = new Skill("Death Ray");
+
+function BlastOff()
+{
+	//(1) Skill 2: Blast Off! (50): (Space Girl launches a small rocket ship with the engines facing the enemy) Does medium damage to both targets, with a low chance of causing burn. User cannot move or be attacked next turn (All attacks directed at her during this phase miss, as she’s in space). Space Girl returns to battle on the turn after, automatically using the skill Re-Entry (50) (Space Girl crashes her small rocket into the enemy like a missile, abandoning ship with a parachute at the last second), which also deals medium damage to both targets and has a low chance of causing Burn. NOTE: Player cannot rotate after using Blast-Off! until Re-Entry occurs.
+}
+function BlastOff.prototype = new Skill("Blast Off!");
+
+function Jetpack()
+{
+	//(0) Skill 3 (D): Jet Pack: Increases Speed by 50% for 3 turns
+}
+Jetpack.prototype = new Skill("Jetpack");
+
+function GravityGun()
+{
+	//(0) Skill 4: Gravity Gun: Lowers target’s speed by 50% for 3 turns
+}
+GravityGun.prototype = new Skill("Gravity Gun");
+
+function Hex()
+{
+	//(0) Skill 1: Hex (80): A high-damage, single-target attack.
+}
+Hex.prototype = new Skill("Hex");
+
+function Curse()
+{
+	//(0) Skill 2: Curse (50): A medium damage, single-target attack with a medium chance of causing a random status effect (Burn, Stun, or Poison)
+}
+Curse.prototype = new Skill("Curse");
+
+function Blessing()
+{
+	//(0) Skill 3: Blessing (D): Increase Defense of self and ally by 25% for 3 turns.
+}
+Blessing.prototype = new Skill("Blessing");
+
+function PoisonApple()
+{
+	//(0) Skill 4: Poison Apple: Has a 50-50 chance of either causing poison, or healing 50 HP.
+}
+PoisonApple.prototype = new Skill("Poison Apple");
+
+
