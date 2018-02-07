@@ -71,7 +71,7 @@ var BattleMenu =
 		var p = (Game.player1.isActive() ? Game.player1 : Game.player2);
 		var btns;
 		var retreatIndex = 4;
-		var immobileCnt = 0;
+		var immobileCount = 0;
 		
 		for(var i = 0; i < p.characters.length; i++)
 		{
