@@ -859,7 +859,7 @@ function BlastOff()
 {
 	//(1) Skill 2: Blast Off! (50): (Space Girl launches a small rocket ship with the engines facing the enemy) Does medium damage to both targets, with a low chance of causing burn. User cannot move or be attacked next turn (All attacks directed at her during this phase miss, as she’s in space). Space Girl returns to battle on the turn after, automatically using the skill Re-Entry (50) (Space Girl crashes her small rocket into the enemy like a missile, abandoning ship with a parachute at the last second), which also deals medium damage to both targets and has a low chance of causing Burn. NOTE: Player cannot rotate after using Blast-Off! until Re-Entry occurs.
 }
-function BlastOff.prototype = new Skill("Blast Off!");
+BlastOff.prototype = new Skill("Blast Off!");
 
 function Jetpack()
 {
