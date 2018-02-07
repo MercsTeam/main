@@ -152,7 +152,25 @@ button.selected:before { content:'\2713 ';color:gold; }
 
 textarea { font-size:12pt;padding:2px;height:auto;background-color:#000000;color:yellow;font-family:monospace; }
 
+#battleLog div
+{
+	display:block;
+
+	font-family:Monospace;
+	font-size:10pt;
+	
+	white-space:pre-line;
+	padding:2px;margin:2px;
+	width:98%;height:15em;
+	overflow-y:auto;
+	
+	background-color:#000000;
+	color:yellow;
+}
+
 .minimize { position:absolute;height:5% !important;overflow:hidden; }
+.minimize div { display:none; }
+
 #dialog2.minimize { width:auto !important;padding:0.5%;z-index:0 }
 #dialog3.minimize { width:5% !important;padding:0; }
 
