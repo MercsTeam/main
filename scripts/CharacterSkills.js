@@ -149,7 +149,7 @@ function RicochetShot()
     this.type = SkillType.Offensive;
     this.attackValue = 50;
     this.multiTarget = true;
-    this.accuracy = 0.9; //0.2;
+    this.accuracy = 0.2;
 	this.bleedProb = 1.0;
     this.description = "Medium damage to both frontline targets. Very high chance (80%) of missing. Critical hit results in Penetrating Shot that causes bleeding.";
 	this.imageURL = "characters/SniperGirlComicStills/SG-Ricochet.jpg";
@@ -241,7 +241,7 @@ function Fireball()
 {
     this.type = SkillType.Offensive;
     this.attackValue = 50;
-    this.burnProb = 0.33;
+    this.burnProb = Game.Probability.Low;
     this.description = "Medium damage single-target attack. Low chance of causing burn.";
 }
 Fireball.prototype = new Skill("Fireball");
@@ -251,7 +251,7 @@ function LightningStorm()
     this.type = SkillType.Offensive;
     this.attackValue = 30;
     this.multiTarget = true;
-    this.stunProb = 0.33;
+    this.stunProb = Game.Probability.Low;
     this.description = "Low damage to both frontline targets. Low chance of causing Stun.";
 }
 LightningStorm.prototype = new Skill("Lightning Storm");
@@ -285,8 +285,8 @@ function LightningStrike()
 {
     this.type = SkillType.Offensive;
     this.attackValue = 25;
-    this.stunProb = 0.15; //or interrupt?
-    this.description = "Calls down a single bolt of lightning, deals low damage but has a chance to stun.";
+    this.interruptProb = 0.15;
+    this.description = "Calls down a single bolt of lightning, deals low damage but has a chance to interrupt the target.";
 }
 LightningStrike.prototype = new Skill("Lightning Strike");
 
@@ -443,7 +443,7 @@ function EnhancedCombatSystem()
 	this.selfDamage = true;
 	//this.selfSpeedMod = 3;
 	this.selfAttackMod = 3;
-	this.description = "50% total health loss to gain 200% increase for attack and speed.";
+	this.description = "50% total health loss to gain 200% increase for attack.";
 	this.cooldown = 2;
 	
 	this.doAction = function(self, target)
@@ -728,7 +728,7 @@ function Club()
 {
 	this.type = SkillType.Offensive;
 	this.attackValue = 60;
-	this.stunProb = 0.1;
+	this.stunProb = Game.Probability.VeryLow;
 	this.description = "A medium-high damage, single-target attack. Very low chance of causing stun.";
 	this.cooldown = 1;
 }
@@ -738,7 +738,7 @@ function PoisonSpear()
 {
 	this.type = SkillType.Offensive;
 	this.attackValue = 25;
-	this.poisonProb = 0.4;
+	this.poisonProb = Game.Probability.Medium;
 	this.description = "A low-damage, single-target attack with a medium chance of causing Poison.";
 }
 PoisonSpear.prototype = new Skill("Poison-Tipped Spear");
@@ -768,7 +768,7 @@ PrimalRage.prototype = new Skill("Primal Rage");
 function FireDance()
 {
 	this.type = SkillType.Offensive;
-	this.fireProb = 0.9;
+	this.burnProb = Game.Probability.VeryHigh;
 	this.selfDamage = true;
 	this.description = "Inflict Burn on self. Dramatically increases odds of inflicting status effects. Cannot be "
 		+ "used if user already has burn.";
@@ -785,7 +785,7 @@ function FireDance()
 			this.logAction(self, self);
 			
 			var r = Math.random();
-			if(r <= this.fireProb)
+			if(r <= this.burnProb)
 			{
 				target[0].setEffectIndicator(Game.StatusEffects.Burned, 0);
 				target[0].burned = true;	
@@ -804,7 +804,7 @@ function Sting()
 	this.attackValue = 75;
 	this.type = SkillType.Offensive;
 	this.cooldown = 2;
-	this.poisonProb = 0.4;
+	this.poisonProb = Game.Probability.Medium;
 	this.description ="A high-damage, single-target attack with a medium chance of causing Poison.";
 }
 Sting.prototype = new Skill("Sting");
@@ -813,7 +813,7 @@ function Bite()
 {
 	this.attackValue = 25;
 	this.type = SkillType.Offensive;
-	this.poisonProb = 0.8;
+	this.poisonProb = Game.Probability.High;
 	this.description = "A low-damage, single-target attack with a high chance of causing Poison.";
 }
 Bite.prototype = new Skill("Bite");
@@ -838,11 +838,23 @@ function HiveMindHijack()
 		if(target[0].poisoned)
 		{
 			var ally = target[0].getAlly();
+			var damage = 0;
+
 			if(ally.active)
 			{
+				var bonus = Game.getTypeBonus(target[0].type, ally.type);
+
+				damage = ((target[0].attack.base * target[0].attack.modifier) + 50) * bonus - (ally.defence.base * ally.defence.modifier);
+				ally.health.base = Math.max(0, ally.health.base - damage);	
+
+				this.logAction(target[0], ally, damage);
 			}
 			else
 			{
+				damage = ((target[0].attack.base * target[0].attack.modifier) + 25) * TypeBonus.None - (target[0].defence.base * target[0].defence.modifier);
+				target[0].health.base = Math.max(0, target[0].health.base - damage);	
+
+				this.logAction(target[0], target[0], damage);
 			}
 		}
 	};
@@ -851,50 +863,158 @@ HiveMindHijack.prototype = new Skill("Hivemind Hijack");
 
 function DeathRay()
 {
-	//(1) Skill 1: Death Ray (70): A high-damage, single-target attack with a low chance of causing Burn.
+	this.attackValue = 70;
+	this.type = SkillType.Offensive;
+	this.cooldown = 1;
+	this.burnProb = Game.Probability.Low;
+	this.description = "A high-damage, single-target attack with a low chance of causing Burn.";
 }
 DeathRay.prototype = new Skill("Death Ray");
 
 function BlastOff()
 {
-	//(1) Skill 2: Blast Off! (50): (Space Girl launches a small rocket ship with the engines facing the enemy) Does medium damage to both targets, with a low chance of causing burn. User cannot move or be attacked next turn (All attacks directed at her during this phase miss, as she’s in space). Space Girl returns to battle on the turn after, automatically using the skill Re-Entry (50) (Space Girl crashes her small rocket into the enemy like a missile, abandoning ship with a parachute at the last second), which also deals medium damage to both targets and has a low chance of causing Burn. NOTE: Player cannot rotate after using Blast-Off! until Re-Entry occurs.
+	this.attackValue = 50;
+	this.type = SkillType.Offensive;
+	this.multiTarget = true;	
+	this.burnProb = Game.Probability.Low;
+	this.blocksDamage = true;
+	this.duration = 3;
+	this.desription = "Does medium damage to both targets, with a low chance of causing burn. User cannot move or be attacked next turn. User returns to battle on the turn after, "
+		+ "dealing medium damage to both targets and has a low chance of causing burn. NOTE: Player cannot rotate between blast off and re-entry.";
+
+	var counter = 0;
+
+	this.doAction = function(self, target)
+	{
+		var r = Math.random();
+		var damage = 0;
+
+		counter++;
+
+		self.canMove = (counter == 3);
+		self.blocksDamage = (counter == 1);
+
+		if(counter == 1 || counter == 3)
+		{
+			for(var i = 0; i < target.length; i++)
+			{
+				damage = target[i].calculateDamage(self, Game.getTypeBonus(self.type, target[i].type));
+				target[i].health.base = Math.max(0, target[i].health.base - damage);
+				
+				if(r <= this.burnProb)
+				{
+					target[i].setEffectIndicator(Game.StatusEffects.Burned, 0);
+					target[i].burned = true;	
+					target[i].health.modifier = 0.95;
+					target[i].defence.modifier = 0.75;
+				}
+
+				this.logAction(self, target[i], damage);
+			}
+		}
+	};
 }
 BlastOff.prototype = new Skill("Blast Off!");
 
 function Jetpack()
 {
-	//(0) Skill 3 (D): Jet Pack: Increases Speed by 50% for 3 turns
+	this.type = SkillType.Defensive;
+	this.selfSpeedMod = 1.5;
+	this.effectDuration = 3;
+	this.description = "Increases Speed by 50% for 3 turns.";
+
+	this.doAction = function(self, target)
+	{
+		self.speed.modifier = this.selfSpeedMod;
+		self.speed.duration = this.effectDuration;
+
+		this.logAction(self, target[0]);
+	};
 }
 Jetpack.prototype = new Skill("Jetpack");
 
 function GravityGun()
 {
-	//(0) Skill 4: Gravity Gun: Lowers target’s speed by 50% for 3 turns
+	this.type = SkillType.Offensive;
+	this.oppSpeedMod = 0.5;
+	this.effectDuration = 3;
+	this.description = "Lowers target speed by 50% for 3 turns.";
+
+	this.doAction = function(self, target)
+	{
+		target[0].speed.modifier = this.oppSpeedMod;
+		target[0].speed.duration = this.effectDuration;
+
+		this.logAction(self, target[0], 0);
+	};
 }
 GravityGun.prototype = new Skill("Gravity Gun");
 
 function Hex()
 {
-	//(0) Skill 1: Hex (80): A high-damage, single-target attack.
+	this.attackValue = 80;
+	this.type = SkillType.Offensive;
+	this.description = "A high-damage, single-target attack.";
 }
 Hex.prototype = new Skill("Hex");
 
 function Curse()
 {
-	//(0) Skill 2: Curse (50): A medium damage, single-target attack with a medium chance of causing a random status effect (Burn, Stun, or Poison)
+	this.attackValue = 50;
+	this.type = SkillType.Offensive;
+	this.randomDebuffProb = Game.Probability.Medium;
+	this.description = "A medium damage, single-target attack with a medium chance of causing a random status effect (Burn, Stun, or Poison)";
 }
 Curse.prototype = new Skill("Curse");
 
 function Blessing()
 {
-	//(0) Skill 3: Blessing (D): Increase Defense of self and ally by 25% for 3 turns.
+	this.type = SkillType.Defensive;
+	this.selfDefenceMod = 1.25;
+	this.allyDefenceMod = 1.25;
+	this.effectDuration = 3;
+	this.multiTarget = true;
+	this.description = "Increase Defense of self and ally by 25% for 3 turns.";
+
+	this.doAction = function(self, target)
+	{
+		target[0].defence.modifier = this.selfDefenceMod;
+		target[0].defence.duration = this.effectDuration;
+		this.logAction(self, target[0]);
+
+		target[1].defence.modifier = this.allyDefenceMod;
+		target[1].defence.duration = this.effectDuration;
+		this.logAction(self, target[1]);
+	};
+
 }
 Blessing.prototype = new Skill("Blessing");
 
 function PoisonApple()
 {
-	//(0) Skill 4: Poison Apple: Has a 50-50 chance of either causing poison, or healing 50 HP.
+	this.attackValue = -50;
+	this.type = SkillType.Offensive;
+	this.poisonProb = 0.5;
+	this.description = "Has a 50-50 chance of either causing poison, or healing 50 HP.";
+
+	this.doAction = function(self, target)
+	{
+		var r = Math.random();
+
+		if(r <= this.poisonProb)
+		{
+			target[0].setEffectIndicator(Game.StatusEffects.Poisoned, 0);
+			target[0].poisoned = true;	
+			target[0].health.modifier = 0.9;
+			
+			this.logAction(self, target[0], 0);
+		}
+		else
+		{
+			target[0].health.base = Math.max(0, target[0].health.base - this.attackValue);	
+
+			this.logAction(self, target[0], this.attackValue);
+		}
+	};
 }
 PoisonApple.prototype = new Skill("Poison Apple");
-
-

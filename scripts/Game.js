@@ -15,7 +15,7 @@ var Game =
 	title : document.querySelector("#titleScreen"),
 	audioLnk : document.querySelector("nav a:nth-child(2)"),
 	arena : document.querySelector("#gamePlay"),
-	availableCharacters : [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, Alien, Caveman, CowboyGuy, BigSwordGuy, BigSwordGuy, Nemesis ], //HiveDrone, SpaceGirl, Witch
+	availableCharacters : [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, Alien, Caveman, CowboyGuy, HiveDrone, SpaceGirl, Witch ], //Clown, DinoGirl, SamuraiGirl, Nemesis
 	skillImgArr : null,
 	DeadSprite : "tombstone.png",
 	NoEffect : "blank.png",
@@ -36,13 +36,22 @@ var Game =
 		Stunned		: "StunSymbol.png"
 	},
 	TypeBonus : { Ineffective : 0.75, None : 1.0, Effective : 1.25 },
+	Probability : { VeryLow : 0.1, Low : 0.2, Medium : 0.3, High : 0.4, VeryHigh : 0.5 },
 	m1 : null, 
 	m2 : null,
 	BattleLog :
 	{
-		console : document.querySelector("textarea"),
-		write : function(text) { this.console.value = text + "\n" + this.console.value; },
-		flush : function() { this.console.value = ""; }
+		//console : document.querySelector("textarea"),
+		//write : function(text) { this.console.value = text + "\n" + this.console.value; },
+		//flush : function() { this.console.value = ""; }
+		console : document.querySelector("#battleLog div"),
+		lineFeed : function() { this.console.scrollTop = this.console.scrollHeight; },
+		write : function(text) 
+		{ 
+			this.console.appendChild(document.createTextNode(text + "\n")); 
+			this.lineFeed();	
+		},
+        flush : function() { this.console.innerHTML = ""; }
 	},
     scenes : 
 	[ 
@@ -96,7 +105,7 @@ var Game =
 	},
 	startRound : function()
 	{
-		this.BattleLog.write(string.format("ROUND {0} - FIGHT!!\n========================", this.round));
+		this.BattleLog.write(string.format("\nROUND {0} - FIGHT!!\n========================", this.round));
 		
 		var retreaters = [];
 		var defenders = [];
