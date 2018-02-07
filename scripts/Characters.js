@@ -295,7 +295,7 @@ function HiveDrone()
 	this.type = CharacterType.Physical;
 	this.alignment = "Neutral";
 
-	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
+	this.skills = [ new Sting(), new Bite(), new Exoskeleton(), new HiveMindHijack(), new Retreat() ];
 
 	this.state = 
     {
@@ -317,7 +317,7 @@ function SpaceGirl()
 	this.type = CharacterType.Finesse;
 	this.alignment = "Good";
 
-	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
+	this.skills = [ new DeathRay(), new BlastOff(), new Jetpack(), new GravityGun(), new Retreat() ];
 
 	this.state = 
     {
@@ -339,7 +339,7 @@ function Witch()
 	this.type = CharacterType.Magic;
 	this.alignment = "Evil";
 
-	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
+	this.skills = [ new Hex(), new Curse(), new Blessing(), new PoisonApple(), new Retreat() ];
 
 	this.state = 
     {
