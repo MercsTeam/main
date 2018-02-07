@@ -243,16 +243,7 @@ var Game =
 					}
 				}
 			}
-		}
-		
-		for(var i = 0; i < Game.CHARACTERS_PER_TEAM; i++)
-		{
-			this.player1.characters[i].update();
-			this.player2.characters[i].update();
-			
-			//alert(string.format("this.player1[{0}] health = {1}\nPlayer2[{0}] health = {2}", i, this.player1.characters[i].health.base, this.player2.characters[i].health.base));
-		}
-		
+		}		
 		setTimeout("Game.showImages(0)", 2500);
 	},
 	showImages : function(index)
@@ -282,7 +273,15 @@ var Game =
 		else
 		{
 			v.style.visibility = "hidden";
-			this.endRound();
+
+			for(var i = 0; i < Game.CHARACTERS_PER_TEAM; i++)
+			{
+				this.player1.characters[i].update();
+				this.player2.characters[i].update();
+				
+				//alert(string.format("this.player1[{0}] health = {1}\nPlayer2[{0}] health = {2}", i, this.player1.characters[i].health.base, this.player2.characters[i].health.base));
+			}
+			setTimeout("Game.endRound()", 1000);
 		}
 	},	
 	showMessage : function(text)
@@ -291,7 +290,7 @@ var Game =
 		this.message.innerHTML = text;
 	},
 	endRound : function()
-	{
+	{				
 		this.uiSound.start("endRound");
 		if(this.player1.activeCharacterCount == 0)
 		{
@@ -475,7 +474,7 @@ var Game =
 				if (rotate == 1)
 				{
 				   camera.position.z -= 0.02;
-				   camera.lookAt(new THREE.Vector3(0,-5,0));
+				   camera.lookAt(new THREE.Vector3(0, -5, 0));
 				   if (camera.position.z <= -2) //<= 6)
 				   {
 					   rotate = 0;
@@ -484,8 +483,8 @@ var Game =
 				else
 				{
 				   camera.position.z += 0.02;
-				   camera.lookAt(new THREE.Vector3(0,-5,0));
-				   if (camera.position.z >= 2) //>= 2
+				   camera.lookAt(new THREE.Vector3(0, -5,  0));
+				   if (camera.position.z >= 2) //>= 10)
 				   {
 					   rotate = 1;
 				   }
