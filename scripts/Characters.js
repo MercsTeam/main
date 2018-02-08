@@ -303,6 +303,15 @@ function HiveDrone()
 		IDLE_BACK  : { img : "drone_idle_back.png", wrap : true, animate : null }
     };
 
+	this.health = { base : 250, modifier : 1.0  };
+	this.defaultHealth = 250;
+    
+	this.defence = { base : 75, modifier : 1.0, duration : -1 };
+    this.attack = { base : 25, modifier : 1.0, duration : -1 };
+    this.speed = { base : 50, modifier : 1.0, duration : -1 };
+	
+	this.accuracy = { modifier : 1.0, duration : -1 };
+
 	this.quote = "Klikliklikliklikliklik!";
     this.backstory = "Mindless worker";
 }
@@ -325,6 +334,15 @@ function SpaceGirl()
 		IDLE_BACK  : { img : "spacegirl_idle_back.png", wrap : true, animate : null }
     };
 
+	this.health = { base : 200, modifier : 1.0  };
+	this.defaultHealth = 200;
+    
+	this.defence = { base : 50, modifier : 1.0, duration : -1 };
+    this.attack = { base : 40, modifier : 1.0, duration : -1 };
+    this.speed = { base : 90, modifier : 1.0, duration : -1 };
+	
+	this.accuracy = { modifier : 1.0, duration : -1 };
+
 	this.quote = "";
     this.backstory = "An astronaut from the Canadian Space Program, very smart, space-age technology";
 }
@@ -346,6 +364,15 @@ function Witch()
 		IDLE_FRONT : { img : "witch_idle_front.png", wrap : false, animate : null },
 		IDLE_BACK  : { img : "witch_idle_back.png", wrap : true, animate : null }
     };
+
+	this.health = { base : 250, modifier : 1.0  };
+	this.defaultHealth = 250;
+    
+	this.defence = { base : 40, modifier : 1.0, duration : -1 };
+    this.attack = { base : 40, modifier : 1.0, duration : -1 };
+    this.speed = { base : 100, modifier : 1.0, duration : -1 };
+	
+	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "";
     this.backstory = "Purple and gold robed, wise, old";
