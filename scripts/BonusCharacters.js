@@ -39,16 +39,14 @@ function SamuraiGirl()
 	this.type = CharacterType.Finesse;
 	this.alignment = "Good";
 
-    this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
+	//https://www.livestrong.com/article/349257-japanese-samurai-sword-techniques/
+    this.skills = [ new Skill("Yoko Giri/Side Cut"), new Skill("Kesi Giri/Slash"), new Skill("Overhead Cut"), new Skill("Nukitsuke/Intimidation Stance"), new Retreat() ];
 
-	this.health = { base : 170, modifier : 1.0  };
-	this.defaultHealth = 170;
-    
-	this.defence = { base : 35, modifier : 1.0, duration : -1 };
-    this.attack = { base : 65, modifier : 1.0, duration : -1 };
-    this.speed = { base : 130, modifier : 1.0, duration : -1 };
-	
-	this.accuracy = { modifier : 1.0, duration : -1 };
+	this.state = 
+    {
+		IDLE_FRONT : { img : "samuraigirl_idle_front.png", wrap : false, animate : null },
+		IDLE_BACK  : { img : "samuraigirl_idle_back.png", wrap : true, animate : null }
+    };
 
 	this.quote = "";
     this.backstory = "";
@@ -63,16 +61,13 @@ function DinoGirl()
 	this.type = CharacterType.Finesse;
 	this.alignment = "Good";
 
-    this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
+    this.skills = [ new Skill("Tail Whip"), new Skill("Snarl"), new Skill("Heat Vision"), new Skill("Ripping Claws"), new Retreat() ];
 
-	this.health = { base : 230, modifier : 1.0  };
-	this.defaultHealth = 230;
-    
-	this.defence = { base : 60, modifier : 1.0, duration : -1 };
-    this.attack = { base : 40, modifier : 1.0, duration : -1 };
-    this.speed = { base : 65, modifier : 1.0, duration : -1 };
-	
-	this.accuracy = { modifier : 1.0, duration : -1 };
+	this.state = 
+    {
+		IDLE_FRONT : { img : "dinogirl_idle_front.png", wrap : false, animate : null },
+		IDLE_BACK  : { img : "dinogirl_idle_back.png", wrap : true, animate : null }
+    };
 
 	this.quote = "";
     this.backstory = "";
@@ -87,7 +82,13 @@ function Clown()
 	this.type = CharacterType.Physical;
 	this.alignment = "Evil";
 
-	this.skills = [ new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Skill("Skill"), new Retreat() ];
+	this.skills = [ new Skill("Seltzer Bottle"), new Skill("Exploding Pie"), new Skill("Balloon Animal"), new Skill("Honk"), new Retreat() ];
+
+	this.state = 
+    {
+		IDLE_FRONT : { img : "clown_idle_front.png", wrap : false, animate : null },
+		IDLE_BACK  : { img : "clown_idle_back.png", wrap : true, animate : null }
+    };
 
 	this.quote = "";
     this.backstory = "";
