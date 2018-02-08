@@ -241,7 +241,7 @@ function Fireball()
 {
     this.type = SkillType.Offensive;
     this.attackValue = 50;
-    this.burnProb = Game.Probability.Low;
+    this.burnProb = Probability.Low;
     this.description = "Medium damage single-target attack. Low chance of causing burn.";
 }
 Fireball.prototype = new Skill("Fireball");
@@ -251,7 +251,7 @@ function LightningStorm()
     this.type = SkillType.Offensive;
     this.attackValue = 30;
     this.multiTarget = true;
-    this.stunProb = Game.Probability.Low;
+    this.stunProb = Probability.Low;
     this.description = "Low damage to both frontline targets. Low chance of causing Stun.";
 }
 LightningStorm.prototype = new Skill("Lightning Storm");
@@ -728,7 +728,7 @@ function Club()
 {
 	this.type = SkillType.Offensive;
 	this.attackValue = 60;
-	this.stunProb = Game.Probability.VeryLow;
+	this.stunProb = Probability.VeryLow;
 	this.description = "A medium-high damage, single-target attack. Very low chance of causing stun.";
 	this.cooldown = 1;
 }
@@ -738,7 +738,7 @@ function PoisonSpear()
 {
 	this.type = SkillType.Offensive;
 	this.attackValue = 25;
-	this.poisonProb = Game.Probability.Medium;
+	this.poisonProb = Probability.Medium;
 	this.description = "A low-damage, single-target attack with a medium chance of causing Poison.";
 }
 PoisonSpear.prototype = new Skill("Poison-Tipped Spear");
@@ -768,7 +768,7 @@ PrimalRage.prototype = new Skill("Primal Rage");
 function FireDance()
 {
 	this.type = SkillType.Offensive;
-	this.burnProb = Game.Probability.VeryHigh;
+	this.burnProb = Probability.VeryHigh;
 	this.selfDamage = true;
 	this.description = "Inflict Burn on self. Dramatically increases odds of inflicting status effects. Cannot be "
 		+ "used if user already has burn.";
@@ -804,7 +804,7 @@ function Sting()
 	this.attackValue = 75;
 	this.type = SkillType.Offensive;
 	this.cooldown = 2;
-	this.poisonProb = Game.Probability.Medium;
+	this.poisonProb = Probability.Medium;
 	this.description ="A high-damage, single-target attack with a medium chance of causing Poison.";
 }
 Sting.prototype = new Skill("Sting");
@@ -813,7 +813,7 @@ function Bite()
 {
 	this.attackValue = 25;
 	this.type = SkillType.Offensive;
-	this.poisonProb = Game.Probability.High;
+	this.poisonProb = Probability.High;
 	this.description = "A low-damage, single-target attack with a high chance of causing Poison.";
 }
 Bite.prototype = new Skill("Bite");
@@ -866,7 +866,7 @@ function DeathRay()
 	this.attackValue = 70;
 	this.type = SkillType.Offensive;
 	this.cooldown = 1;
-	this.burnProb = Game.Probability.Low;
+	this.burnProb = Probability.Low;
 	this.description = "A high-damage, single-target attack with a low chance of causing Burn.";
 }
 DeathRay.prototype = new Skill("Death Ray");
@@ -876,7 +876,7 @@ function BlastOff()
 	this.attackValue = 50;
 	this.type = SkillType.Offensive;
 	this.multiTarget = true;	
-	this.burnProb = Game.Probability.Low;
+	this.burnProb = Probability.Low;
 	this.blocksDamage = true;
 	this.duration = 3;
 	this.desription = "Does medium damage to both targets, with a low chance of causing burn. User cannot move or be attacked next turn. User returns to battle on the turn after, "
@@ -962,7 +962,7 @@ function Curse()
 {
 	this.attackValue = 50;
 	this.type = SkillType.Offensive;
-	this.randomDebuffProb = Game.Probability.Medium;
+	this.randomDebuffProb = Probability.Medium;
 	this.description = "A medium damage, single-target attack with a medium chance of causing a random status effect (Burn, Stun, or Poison)";
 }
 Curse.prototype = new Skill("Curse");

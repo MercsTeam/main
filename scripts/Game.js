@@ -35,8 +35,7 @@ var Game =
 		Poisoned	: "PoisonSymbol.png",
 		Stunned		: "StunSymbol.png"
 	},
-	TypeBonus : { Ineffective : 0.75, None : 1.0, Effective : 1.25 },
-	Probability : { VeryLow : 0.1, Low : 0.2, Medium : 0.3, High : 0.4, VeryHigh : 0.5 },
+	TypeBonus : { Ineffective : 0.75, None : 1.0, Effective : 1.25 },	
 	m1 : null, 
 	m2 : null,
 	BattleLog :

@@ -1,4 +1,5 @@
 var SkillType = { NotSet : -1, Reusable : 1, Defensive : 2, Offensive : 3 };
+var Probability = { VeryLow : 0.1, Low : 0.2, Medium : 0.3, High : 0.4, VeryHigh : 0.5 };
 
 function Skill(n)
 {
