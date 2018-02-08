@@ -63,8 +63,8 @@
 			const SCALE_MAX = 10;	
 
 			const MAX_HEALTH = 250;
-			const MAX_ATTACK = 65;
-			const MAX_DEFENCE = 60;
+			const MAX_ATTACK = 66;
+			const MAX_DEFENCE = 75;
 			const MAX_SPEED = 135;
 
 			var id = Request.QueryString["id"];	
@@ -116,7 +116,7 @@
 				var imgBox = document.createElement("DIV");
 				imgBox.id = "character_img";
 				imgBox.className = character.obj.alignment.toLowerCase();
-				imgBox.style.backgroundImage = string.format("url('{0}?v=20180205')", character.obj.image);	
+				imgBox.style.backgroundImage = string.format("url('{0}?v=20180127')", character.obj.image);	
 				profileContent.appendChild(imgBox);
 
 				profileContent.appendChild(HTMLRatingChart());
@@ -230,7 +230,7 @@
 				}
 				alert(string.format("maxHealth = {0}; maxAttack = {1}; maxDefence = {2}; maxSpeed = {3};", maxHealth, maxAttack, maxDefence, maxSpeed));
 			}
-		</script>
+ 		</script>
 	</head>
 	<body>		
 		<div id="content" style="width:900px"></div>
