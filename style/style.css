@@ -141,6 +141,12 @@ figure.selected_player1 figcaption:before, figure.selected_player2 figcaption:be
 .characterReady { background-size:100%;background-repeat:no-repeat;filter: grayscale(80%); }
 .characterAction { margin:20px;font-size:3em;font-weight:bold;text-align:center;line-height:1.6em; }
 
+img.inactive-img
+{
+	opacity:0.5;
+	background-size:100%;background-repeat:no-repeat;
+}
+
 button { border:none;border-radius:8%;background-color:#000000;color:#ffffff; }
 .dialog button { display:block;height:1.8em;width:auto;font-size:2.5em;margin:0.1em;padding:5%;line-height:0.4em;margin:3% auto; }
 button[disabled] { background-color:grey }
