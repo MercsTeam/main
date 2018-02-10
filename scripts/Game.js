@@ -15,7 +15,7 @@ var Game =
 	title : document.querySelector("#titleScreen"),
 	audioLnk : document.querySelector("nav a:nth-child(2)"),
 	arena : document.querySelector("#gamePlay"),
-	availableCharacters : [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, Alien, Caveman, CowboyGuy, HiveDrone, SpaceGirl, Witch ], //Clown, DinoGirl, SamuraiGirl, Nemesis
+	availableCharacters : [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, Alien, Caveman, CowboyGuy, HiveDrone, SpaceGirl, Witch ], //, Clown, DinoGirl, SamuraiGirl, Nemesis ],
 	skillImgArr : null,
 	DeadSprite : "tombstone.png",
 	NoEffect : "blank.png",
@@ -40,9 +40,6 @@ var Game =
 	m2 : null,
 	BattleLog :
 	{
-		//console : document.querySelector("textarea"),
-		//write : function(text) { this.console.value = text + "\n" + this.console.value; },
-		//flush : function() { this.console.value = ""; }
 		console : document.querySelector("#battleLog div"),
 		lineFeed : function() { this.console.scrollTop = this.console.scrollHeight; },
 		write : function(text) 
@@ -57,7 +54,7 @@ var Game =
 		{ background : "mars.jpg", floor : "mars.jpg", sound : "" },
 		{ background : "Spacecity.png", floor : "spacecity.jpg", sound : "" },
 		{ background : "Underwater.png", floor : "underwater.jpg", sound : "" },
-		{ background : "Forest.png", floor : "ForestFloor.jpg", sound : "" }
+		{ background : "Forest.png", floor : "log.jpg", sound : "" }
 	],
 	toggleSound : function()
 	{

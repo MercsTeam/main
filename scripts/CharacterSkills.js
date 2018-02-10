@@ -2,6 +2,7 @@ function Retreat()
 {
 	this.type = SkillType.Reusable;
 	this.description = "Causes character to rotate into inactive position.";
+	this.duration = 0;
 
 	this.doAction = function(player, pos)
 	{
@@ -835,27 +836,41 @@ function HiveMindHijack()
 		+ "If target does not have an ally, target will attack themselves with a low-damage (25) attack.";
 	this.doAction = function(self, target)
 	{
+		this.logAction(self, target[0], 0);
+
 		if(target[0].poisoned)
 		{
 			var ally = target[0].getAlly();
 			var damage = 0;
+			var bonus = Game.TypeBonus.None;
+			var output = "";
 
 			if(ally.active)
 			{
-				var bonus = Game.getTypeBonus(target[0].type, ally.type);
+				bonus = Game.getTypeBonus(target[0].type, ally.type);
 
 				damage = ((target[0].attack.base * target[0].attack.modifier) + 50) * bonus - (ally.defence.base * ally.defence.modifier);
 				ally.health.base = Math.max(0, ally.health.base - damage);	
 
-				this.logAction(target[0], ally, damage);
+				output = string.format("PLAYER{0}: HIVEMIND-HIJACKED {1} attacks ALLY {2}. {3} DAMAGE.", 
+					(target[0].player == Game.player1 ? "1" : "2"),
+					target[0].name, 
+					ally.name,
+					damage
+				);
 			}
 			else
 			{
-				damage = ((target[0].attack.base * target[0].attack.modifier) + 25) * TypeBonus.None - (target[0].defence.base * target[0].defence.modifier);
-				target[0].health.base = Math.max(0, target[0].health.base - damage);	
+				damage = ((target[0].attack.base * target[0].attack.modifier) + 25) * bonus - (target[0].defence.base * target[0].defence.modifier);
+				target[0].health.base = Math.max(0, target[0].health.base - damage);
 
-				this.logAction(target[0], target[0], damage);
+				output = string.format("PLAYER{0}: HIVEMIND-HIJACKED {1} attacks SELF. {2} DAMAGE.", 
+					(target[0].player == Game.player1 ? "1" : "2"),
+					target[0].name, 
+					damage
+				);
 			}
+			Game.BattleLog.write(output);
 		}
 	};
 }

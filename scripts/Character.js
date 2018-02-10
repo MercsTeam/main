@@ -339,43 +339,57 @@ function Character()
 
 	this.setEffectIndicator = function(spriteImg, index)
 	{
-		var texture  = new THREE.TextureLoader().load(string.format("images/effects/{0}?v=20180204", spriteImg));
-		this.effects[index].material = new THREE.MeshLambertMaterial( { map : texture, transparent : true } );
+		try
+		{
+			var texture  = new THREE.TextureLoader().load(string.format("images/effects/{0}?v=20180204", spriteImg));
+			this.effects[index].material = new THREE.MeshLambertMaterial( { map : texture, transparent : true } );
+		}
+		catch(exception)
+		{
+			Game.BattleLog.write("Character.setEffectIndicator: " + exception.message);
+		}
 	};
 	
 	this.updateGameObject = function(coords, sprite)
 	{
-		if(sprite)
+		try
 		{
-			var spriteImg = (sprite == "Dead" ? Game.DeadSprite : this.state[sprite].img);
-			var texture  = new THREE.TextureLoader().load(string.format("images/sprites/{0}?v=20180204", spriteImg));
+			if(sprite)
+			{
+				var spriteImg = (sprite == "Dead" ? Game.DeadSprite : this.state[sprite].img);
+				var texture  = new THREE.TextureLoader().load(string.format("images/sprites/{0}?v=20180204", spriteImg));
 
-			this.obj.material = new THREE.MeshLambertMaterial( { map : texture, transparent : true } );
+				this.obj.material = new THREE.MeshLambertMaterial( { map : texture, transparent : true } );
+			}
+
+			if(coords)
+			{
+				this.obj.position.x = coords.x;
+				this.obj.position.y = coords.y;
+				this.obj.position.z = coords.z;
+				
+				this.healthbar.position.x = coords.x + 0.5;
+				this.healthbar.position.y = coords.y + 4;
+				this.healthbar.position.z = coords.z;
+
+				for(var i = 0; i < this.effects.length; i++)
+				{
+					this.effects[i].position.x = coords.x + 0.5;
+					this.effects[i].position.y = coords.y + 4.75;
+					this.effects[i].position.z = coords.z - 1 + (i - 1);
+				}
+				
+				if(this.marker)
+				{
+					this.marker.setX(coords.x);
+					this.marker.setY(coords.y - 4.4);
+					this.marker.setZ(coords.z);
+				}
+			}
 		}
-
-		if(coords)
+		catch(exception)
 		{
-			this.obj.position.x = coords.x;
-			this.obj.position.y = coords.y;
-			this.obj.position.z = coords.z;
-			
-			this.healthbar.position.x = coords.x + 0.5;
-			this.healthbar.position.y = coords.y + 4;
-			this.healthbar.position.z = coords.z;
-
-			for(var i = 0; i < this.effects.length; i++)
-			{
-				this.effects[i].position.x = coords.x + 0.5;
-				this.effects[i].position.y = coords.y + 4.75;
-				this.effects[i].position.z = coords.z - 1 + (i - 1);
-			}
-			
-			if(this.marker)
-			{
-				this.marker.setX(coords.x);
-				this.marker.setY(coords.y - 4.4);
-				this.marker.setZ(coords.z);
-			}
+			Game.BattleLog.write("Character.updateGameObject: " + exception.message);
 		}
 	};
 

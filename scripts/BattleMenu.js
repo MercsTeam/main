@@ -84,12 +84,12 @@ var BattleMenu =
 				if(p.characters[i].position == 1)
 				{
 					btns = this.active1.btns;
-					this.active1.img.src = "characters/headshots/" + p.characters[i].image;
+					this.active1.img.src = "characters/headshots/" + (p.characters[i].active ? p.characters[i].image : "inactive.png");
 				}
 				else
 				{
 					btns = this.active2.btns;
-					this.active2.img.src = "characters/headshots/" + p.characters[i].image;
+					this.active2.img.src = "characters/headshots/" + (p.characters[i].active ? p.characters[i].image : "inactive.png");
 				}
 				
 				//if less than 3 characters, disable retreat
