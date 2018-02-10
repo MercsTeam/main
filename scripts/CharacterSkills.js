@@ -206,6 +206,7 @@ function Camouflage()
     this.duration = 3;
     this.description = "Become harder to hit (50% chance attacks will miss) for next three turns. Effect is lost when Headshot or Ricochet Shot is used.";
 	this.cooldown = 1;
+	this.imageURL = "characters/SniperGirlComicStills/SG-Camouflage.jpg";
 	
 	var counter = this.duration;
 	
