@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
 <html lang="en-CA">
     <head>
-        <base href="https://mercsteam.github.io/main/" />
+        <!--base href="https://mercsteam.github.io/main/" /-->
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-        <title> New Document </title>
+        <title> Mercs Skill Test </title>
         
         <script src="scripts/util.js"></script>
         
@@ -16,286 +16,299 @@
         <script src="scripts/Characters.js"></script>
         
         <script>
-            var self, ally, enemy1, enemy2;
+			var self, ally1, enemy1, enemy2;
 
-        var characters = [
-      Alien,
-      BigSwordGuy,
-      Caveman,
-      CowboyGuy,
-      Cyborg,
-      Djinn,
-      HiveDrone,
-      Mage,
-      Pirate,
-      SpaceGirl,
-      SniperGirl,
-      Witch,
-      Clown,
-      DinoGirl,
-      Nemesis,
-      SamuraiGirl
-      ];
-      
-      var Game =
-      {
-          player1 : new Player(true, 3),
-          player2 : new Player(false, 3),
-          skillImgArr : null,
-          TypeBonus : { Ineffective : 0.75, None : 1.0, Effective : 1.25 },
-          init : function()
-          {
-              Game.player1.characters = [ null, null, characters[1] ];
-              Game.player2.characters = [ null, null, characters[1] ];
-              
-              Game.BattleLog.console = document.querySelector("#battleLog");
-              Game.BattleLog.flush();
-              Game.BattleLog.write("--start--");
-          },
-          getTypeBonus : function(t1, t2)
-          {
-              if(t1 == t2)
-              {
-                  return this.TypeBonus.None;
-              }
-              else if((t1 == CharacterType.Physical && t2 == CharacterType.Finesse)
-                  || (t1 == CharacterType.Finesse && t2 == CharacterType.Magic)
-                  || (t1 == CharacterType.Magic && t2 == CharacterType.Physical))
-              {
-                  return this.TypeBonus.Effective;
-              }
-              else
-              {
-                  return this.TypeBonus.Ineffective;
-              }
-          },
-          BattleLog :
-          {
-              console : null,
-              write : function(text) { this.console.appendChild(document.createTextNode(text + "\n")); },
-              flush : function() { this.console.innerHTML = ""; }
-          }
-      };
-        window.onload = Game.init;
-      
-      function selectCharacter(which, index)
-      {
-          var c = new characters[index - 1]();
-          
-          var s = document.createElement("SELECT");
-          s.onchange = Function("selectSkill(" + which + ", this.selectedIndex)");
-          s.appendChild(new Option("", ""));
-          for(var i = 0; i < c.skills.length; i++)
-          {
-              s.appendChild(new Option(c.skills[i].name, i));
-          }
-          
-          if(which == "self")
-          {
-              self = c;
-              self.position = 1;
-              
-              Game.player1.characters[0] = self;
-              self.player = Game.player1;
-          }
-          else if(which == "ally")
-          {
-              ally = c;
-              ally.position = 2;
-              
-              Game.player1.characters[1] = ally;
-              ally.player = Game.player1;
-          }
-          else if(which == "enemy1")
-          {
-              enemy1 = c;
-              enemy1.position = 1;
-              
-              Game.player2.characters[0] = enemy1;
-              enemy1.player = Game.player2;
-          }
-          else
-          {
-              enemy2 = c;
-              enemy2.position = 2;
-              
-              Game.player2.characters[1] = enemy2;
-              enemy2.player = Game.player2;
-          }
-          
-          var sd = document.getElementById(which + '_skill');
-          sd.innerHTML = "";
-          sd.appendChild(s);
-          
-          updateFields(c);
-      }
-        
-        function updateFields(c)
-        {
-            var which = (c == self ? "self" : (c == ally ? "ally" : (c == enemy1 ? "enemy1" : "enemy2")));
-            
-            var attr = [ "health", "attack", "defence", "speed", "accuracy" ];
-            var fields = { base : "base", mod : "modifier", dur : "duration" };
-            var effects = [ "dazed", "interrupt", "poisoned", "bleeding", "burned", "immunity" ];
-            
-            for(var i = 0; i < attr.length; i++)
-            {
-                for(var f in fields)
-                {
-                    ctrl = document.querySelector("#" + which + "_" + attr[i] + "_" + f);
-                    if(ctrl) ctrl.value = c[attr[i]][fields[f]];
-                }
-            }
-            
-            for(var i = 0; i < effects.length; i++)
-            {
-                ctrl = document.querySelector("#" + which + "_" + effects[i]);
-                if(ctrl) ctrl.checked = c[effects[i]];
-            }
-        }
-        
-        function updateCharacter(c)
-        {
-            var which = (c == self ? "self" : (c == ally ? "ally" : (c == enemy1 ? "enemy1" : "enemy2")));
-            
-            var attr = [ "health", "attack", "defence", "speed", "accuracy" ];
-            var fields = { base : "base", mod : "modifier", dur : "duration" };
-            var effects = [ "dazed", "interrupt", "poisoned", "bleeding", "burned", "immunity" ];
-            
-            for(var i = 0; i < attr.length; i++)
-            {
-                for(var f in fields)
-                {
-                    ctrl = document.querySelector("#" + which + "_" + attr[i] + "_" + f);
-                    if(ctrl) c[attr[i]][fields[f]] = ctrl.value;
-                }
-            }
-            
-            for(var i = 0; i < effects.length; i++)
-            {
-                ctrl = document.querySelector("#" + which + "_" + effects[i]);
-                if(ctrl) c[effects[i]] = ctrl.checked;
-            }
-        }
-        
-        function selectSkill(c, index)
-        {
-            var s = c.skills[index - 1];
-            
-            var which = (c == self ? "self" : (c == ally ? "ally" : (c == enemy1 ? "enemy1" : "enemy2")));
-            
-            var td = document.getElementById(which + '_target');
-            td.innerHTML = "";
-            
-            var rb, lbl;
-            
-            if(s.multiTarget)
-            {
-                rb = document.createElement('INPUT');
-                rb.name = "rb_" + which + "_target";
-                rb.type = "radio";
-                rb.value = -1;
-                rb.checked = true;
-                
-                lbl = document.createElement('LABEL');
-                lbl.innerHTML = "Both";
-                
-                td.appendChild(rb);
-                td.appendChild(lbl);
-            }
-            else if(s.affectsAlly)
-            {
-                rb = document.createElement('INPUT');
-                rb.name = "rb_" + which + "_target";
-                rb.type = "radio";
-                rb.value = (c.position == 1 ? 2 : 1);
-                rb.checked = true;
-                
-                lbl = document.createElement('LABEL');
-                lbl.innerHTML = "Ally";
-                
-                td.appendChild(rb);
-                td.appendChild(lbl);
-            }
-            else if(s.type == SkillType.Offensive)
-            {
-                rb = document.createElement('INPUT');
-                rb.name = "rb_" + which + "_target";
-                rb.type = "radio";
-                rb.value = 1;
-                
-                lbl = document.createElement('LABEL');
-                lbl.innerHTML = "Enemy 1";
-                
-                td.appendChild(rb);
-                td.appendChild(lbl);
-                
-                rb = document.createElement('INPUT');
-                rb.name = "rb_" + which + "_target";
-                rb.type = "radio";
-                rb.value = 2;
-                
-                lbl = document.createElement('LABEL');
-                lbl.innerHTML = "Enemy 2";
-                
-                td.appendChild(rb);
-                td.appendChild(lbl);
-            }
-            else
-            {
-                rb = document.createElement('INPUT');
-                rb.name = "rb_" + which + "_target";
-                rb.type = "radio";
-                rb.value = c.position;
-                rb.checked = true;
-                
-                lbl = document.createElement('LABEL');
-                lbl.innerHTML = "Self";
-                
-                td.appendChild(rb);
-                td.appendChild(lbl);
-            }
-        }
-        
-        function doAction(c)
-        {
-            Game.skillImgArr = [];
-            
-            var which = (c == self ? "self" : (c == ally ? "ally" : (c == enemy1 ? "enemy1" : "enemy2")));
-            
-            var sIndex = document.querySelector("#" + which + "_skill select").selectedIndex - 1;
-            var s = c.skills[sIndex];
-            s.selected = true;
-            
-            var opp = c.player.getOpponent();
-            var target = null;
-            
-            if(s.multiTarget)
-            {
-                target = [ opp.getCharacterByPosition(1), opp.getCharacterByPosition(2) ];
-            }
-            else if(s.affectsAlly)
-            {
-                target = [ c.getAlly() ];
-            }
-            else if(s.type == SkillType.Offensive)
-            {
-                var ctrl = document.getElementsByName("rb_" + which + "_target");
-                if(ctrl) target = [ opp.getCharacterByPosition(ctrl[0].checked ? 1 : 2) ];
-            }
-            else
-            {
-                target = [ c ];
-            }
-            
-            s.doAction(c, target);
-            
-            updateFields(c);
-            if(c != target[0])
-            {
-                for(var i = 0; i < target.length; i++) updateFields(target[i]);
-            }
-        }
+			var characters = [
+				Alien,
+				BigSwordGuy,
+				Caveman,
+				CowboyGuy,
+				Cyborg,
+				Djinn,
+				HiveDrone,
+				Mage,
+				Pirate,
+				SpaceGirl,
+				SniperGirl,
+				Witch,
+				Clown,
+				DinoGirl,
+				Nemesis,
+				SamuraiGirl
+			];
+		  
+			var Game =
+			{
+				player1 : new Player(true, 3),
+				player2 : new Player(false, 3),
+				DeadSprite : "",
+				NoEffect : "",
+				Effects :
+				{
+					Defence		: { Up2x : "", Down2x : "", Up : "", Down : "" },
+					Attack		: { Up2x : "", Down2x : "", Up : "", Down : "" },
+					Speed		: { Up2x : "", Down2x : "", Up : "", Down : "" },
+					Accuracy	: { Up2x : "", Down2x : "", Up : "", Down : "" }
+				},
+				StatusEffects :	{ Bleeding : "", Burned : "", Immunity : "", Interrupt : "", Poisoned : "", Stunned : "" },
+				skillImgArr : null,
+				TypeBonus : { Ineffective : 0.75, None : 1.0, Effective : 1.25 },
+				init : function()
+				{
+					Game.player1.characters = [ null, null, characters[1] ];
+					Game.player2.characters = [ null, null, characters[1] ];
+
+					Game.player1.characters[2].position = 3;
+					Game.player2.characters[2].position = 3;
+
+					Game.BattleLog.console = document.querySelector("#battleLog");
+					Game.BattleLog.flush();
+					Game.BattleLog.write("--start--");
+				},
+				getTypeBonus : function(t1, t2)
+				{
+					if(t1 == t2)
+					{
+						return this.TypeBonus.None;
+					}
+					else if((t1 == CharacterType.Physical && t2 == CharacterType.Finesse)
+						|| (t1 == CharacterType.Finesse && t2 == CharacterType.Magic)
+						|| (t1 == CharacterType.Magic && t2 == CharacterType.Physical))
+					{
+						return this.TypeBonus.Effective;
+					}
+					else
+					{
+						return this.TypeBonus.Ineffective;
+					}
+				},
+				BattleLog :
+				{
+					console : null,
+					write : function(text) { this.console.appendChild(document.createTextNode(text + "\n")); },
+					flush : function() { this.console.innerHTML = ""; }
+				}
+			};
+			window.onload = Game.init;
+
+			function selectCharacter(which, index)
+			{
+				var c = new characters[index - 1]();
+
+				var s = document.createElement("SELECT");
+				s.onchange = Function("selectSkill(" + which + ", this.selectedIndex)");
+				s.appendChild(new Option("", ""));
+				for(var i = 0; i < c.skills.length; i++)
+				{
+					s.appendChild(new Option(c.skills[i].name, i));
+				}
+
+				if(which == "self")
+				{
+					self = c;
+					self.position = 1;
+
+					Game.player1.characters[0] = self;
+					self.player = Game.player1;
+				}
+				else if(which == "ally1")
+				{
+					ally1 = c;
+					ally1.position = 2;
+
+					Game.player1.characters[1] = ally1;
+					ally1.player = Game.player1;
+				}
+				else if(which == "enemy1")
+				{
+					enemy1 = c;
+					enemy1.position = 1;
+
+					Game.player2.characters[0] = enemy1;
+					enemy1.player = Game.player2;
+				}
+				else
+				{
+					enemy2 = c;
+					enemy2.position = 2;
+
+					Game.player2.characters[1] = enemy2;
+					enemy2.player = Game.player2;
+				}
+
+				var sd = document.getElementById(which + '_skill');
+				sd.innerHTML = "";
+				sd.appendChild(s);
+
+				updateFields(c);
+			}
+
+			function updateFields(c)
+			{
+				var which = (c == self ? "self" : (c == ally1 ? "ally1" : (c == enemy1 ? "enemy1" : "enemy2")));
+				
+				var attr = [ "health", "attack", "defence", "speed", "accuracy" ];
+				var fields = { base : "base", mod : "modifier", dur : "duration" };
+				var effects = [ "dazed", "interrupt", "poisoned", "bleeding", "burned", "immunity", "active", "canMove", "blocksDamage" ];
+				
+				for(var i = 0; i < attr.length; i++)
+				{
+					for(var f in fields)
+					{
+						ctrl = document.querySelector("#" + which + "_" + attr[i] + "_" + f);
+						if(ctrl) ctrl.value = c[attr[i]][fields[f]];
+					}
+				}
+				
+				for(var i = 0; i < effects.length; i++)
+				{
+					ctrl = document.querySelector("#" + which + "_" + effects[i]);
+					if(ctrl) ctrl.checked = c[effects[i]];
+				}
+			}
+
+			function updateCharacter(c)
+			{
+				var which = (c == self ? "self" : (c == ally1 ? "ally1" : (c == enemy1 ? "enemy1" : "enemy2")));
+				
+				var attr = [ "health", "attack", "defence", "speed", "accuracy" ];
+				var fields = { base : "base", mod : "modifier", dur : "duration" };
+				var effects = [ "dazed", "interrupt", "poisoned", "bleeding", "burned", "immunity", "active", "canMove", "blocksDamage" ];
+				
+				for(var i = 0; i < attr.length; i++)
+				{
+					for(var f in fields)
+					{
+						ctrl = document.querySelector("#" + which + "_" + attr[i] + "_" + f);
+						if(ctrl) c[attr[i]][fields[f]] = ctrl.value;
+					}
+				}
+				
+				for(var i = 0; i < effects.length; i++)
+				{
+					ctrl = document.querySelector("#" + which + "_" + effects[i]);
+					if(ctrl) c[effects[i]] = ctrl.checked;
+				}
+			}
+
+			function selectSkill(c, index)
+			{
+				var s = c.skills[index - 1];
+				
+				var which = (c == self ? "self" : (c == ally1 ? "ally1" : (c == enemy1 ? "enemy1" : "enemy2")));
+				
+				var td = document.getElementById(which + '_target');
+				td.innerHTML = "";
+				
+				var rb, lbl;
+				
+				if(s.multiTarget)
+				{
+					rb = document.createElement('INPUT');
+					rb.name = "rb_" + which + "_target";
+					rb.type = "radio";
+					rb.value = -1;
+					rb.checked = true;
+					
+					lbl = document.createElement('LABEL');
+					lbl.innerHTML = "Both";
+					
+					td.appendChild(rb);
+					td.appendChild(lbl);
+				}
+				else if(s.affectsAlly)
+				{
+					rb = document.createElement('INPUT');
+					rb.name = "rb_" + which + "_target";
+					rb.type = "radio";
+					rb.value = (c.position == 1 ? 2 : 1);
+					rb.checked = true;
+					
+					lbl = document.createElement('LABEL');
+					lbl.innerHTML = "Ally";
+					
+					td.appendChild(rb);
+					td.appendChild(lbl);
+				}
+				else if(s.type == SkillType.Offensive)
+				{
+					rb = document.createElement('INPUT');
+					rb.name = "rb_" + which + "_target";
+					rb.type = "radio";
+					rb.value = 1;
+					
+					lbl = document.createElement('LABEL');
+					lbl.innerHTML = "Enemy 1";
+					
+					td.appendChild(rb);
+					td.appendChild(lbl);
+					
+					rb = document.createElement('INPUT');
+					rb.name = "rb_" + which + "_target";
+					rb.type = "radio";
+					rb.value = 2;
+					
+					lbl = document.createElement('LABEL');
+					lbl.innerHTML = "Enemy 2";
+					
+					td.appendChild(rb);
+					td.appendChild(lbl);
+				}
+				else
+				{
+					rb = document.createElement('INPUT');
+					rb.name = "rb_" + which + "_target";
+					rb.type = "radio";
+					rb.value = c.position;
+					rb.checked = true;
+					
+					lbl = document.createElement('LABEL');
+					lbl.innerHTML = "Self";
+					
+					td.appendChild(rb);
+					td.appendChild(lbl);
+				}
+			}
+
+			function doAction(c)
+			{
+				Game.skillImgArr = [];
+				
+				var which = (c == self ? "self" : (c == ally1 ? "ally1" : (c == enemy1 ? "enemy1" : "enemy2")));
+				
+				var sIndex = document.querySelector("#" + which + "_skill select").selectedIndex - 1;
+				var s = c.skills[sIndex];
+				s.selected = true;
+				
+				var opp = c.player.getOpponent();
+				var target = null;
+				
+				if(s.multiTarget)
+				{
+					target = [ opp.getCharacterByPosition(1), opp.getCharacterByPosition(2) ];
+				}
+				else if(s.affectsAlly)
+				{
+					target = [ c.getAlly() ];
+				}
+				else if(s.type == SkillType.Offensive)
+				{
+					var ctrl = document.getElementsByName("rb_" + which + "_target");
+					if(ctrl) target = [ opp.getCharacterByPosition(ctrl[0].checked ? 1 : 2) ];
+				}
+				else
+				{
+					target = [ c ];
+				}
+				
+				s.doAction(c, target);
+				
+				updateFields(c);
+				if(c != target[0])
+				{
+					for(var i = 0; i < target.length; i++) updateFields(target[i]);
+				}
+			}
         </script>
         
         <style>
@@ -304,7 +317,7 @@
             legend { font-size:large;font-weight:bold }
             label { display:inline-block;width:100px;font-weight:bold; }
             [type=number] { width:50px }
-            .spacer { display:inline-block;width:162px }
+            .spacer { display:inline-block;width:160px }
             #battleLog
             {
                 font-family:Monospace;
@@ -312,7 +325,7 @@
                 
                 white-space:pre;
                 padding:5px;
-                width:100%;height:100px;
+                width:100%;height:200px;
                 overflow-y:scroll;
                 
                 background-color:#000000;
@@ -390,6 +403,10 @@
                 <input type="checkbox" id="self_burned" /><label>Burn</label>
                 <input type="checkbox" id="self_immunity" /><label>Immunity</label>
             </div>
+
+			<input type="checkbox" id="self_active" /><label>Active</label>
+            <input type="checkbox" id="self_canMove" /><label>Can Move</label>
+            <input type="checkbox" id="self_blocksDamage" /><label style="width:200px">Blocks Damage</label>
         </fieldset></form>
         
         <form><fieldset>
@@ -461,13 +478,17 @@
                 <input type="checkbox" id="enemy1_burned" /><label>Burn</label>
                 <input type="checkbox" id="enemy1_immunity" /><label>Immunity</label>
             </div>
+
+			<input type="checkbox" id="enemy1_active" /><label>Active</label>
+            <input type="checkbox" id="enemy1_canMove" /><label>Can Move</label>
+            <input type="checkbox" id="enemy1_blocksDamage" /><label style="width:200px">Blocks Damage</label>
         </fieldset></form>
         
         <form><fieldset>
             <legend>Ally</legend>
             
             <label>Character:</label>
-            <select id="ally_character" onchange="selectCharacter('ally', this.selectedIndex)">
+            <select id="ally1_character" onchange="selectCharacter('ally1', this.selectedIndex)">
                 <option value=""></option>
                 <option value="0">Alien</option>
                 <option value="1">Big Sword Guy</option>
@@ -484,54 +505,58 @@
             </select><br />
             
             <label>Skill</label>
-            <div id="ally_skill" style="display:inline-block"></div><br />
+            <div id="ally1_skill" style="display:inline-block"></div><br />
             
             <label>Target</label>
-            <div id="ally_target" style="display:inline-block"></div><br />
+            <div id="ally1_target" style="display:inline-block"></div><br />
             
-            <button type="button" onclick="doAction(ally)">Do Action</button>
-            <button type="button" onclick="updateCharacter(ally)">Update</button>
+            <button type="button" onclick="doAction(ally1)">Do Action</button>
+            <button type="button" onclick="updateCharacter(ally1)">Update</button>
             <button type="reset">Reset</button>
             <br />
             
             <label>Health</label>
-            <label>Base:</label> <input type="number" id="ally_health_base" value="0.0" />
-            <label>Modifier:</label> <input type="number" id="ally_health_mod" value="1.0" step="0.05" />
+            <label>Base:</label> <input type="number" id="ally1_health_base" value="0.0" />
+            <label>Modifier:</label> <input type="number" id="ally1_health_mod" value="1.0" step="0.05" />
             <br />
             
             <label>Attack</label>
-            <label>Base:</label> <input type="number" id="ally_attack_base" value="0.0" />
-            <label>Modifier:</label> <input type="number" id="ally_attack_mod" value="1.0" step="0.05" />
-            <label>Duration:</label> <input type="number" id="ally_attack_dur" value="" />
+            <label>Base:</label> <input type="number" id="ally1_attack_base" value="0.0" />
+            <label>Modifier:</label> <input type="number" id="ally1_attack_mod" value="1.0" step="0.05" />
+            <label>Duration:</label> <input type="number" id="ally1_attack_dur" value="" />
             <br />
             
             <label>Defence</label>
-            <label>Base:</label> <input type="number" id="ally_defence_base" value="0.0" />
-            <label>Modifier:</label> <input type="number" id="ally_defence_mod" value="1.0" step="0.05" />
-            <label>Duration:</label> <input type="number" id="ally_defence_dur" value="" />
+            <label>Base:</label> <input type="number" id="ally1_defence_base" value="0.0" />
+            <label>Modifier:</label> <input type="number" id="ally1_defence_mod" value="1.0" step="0.05" />
+            <label>Duration:</label> <input type="number" id="ally1_defence_dur" value="" />
             <br />
             
             <label>Speed</label>
-            <label>Base:</label> <input type="number" id="ally_speed_base" value="0.0" />
-            <label>Modifier:</label> <input type="number" id="ally_speed_mod" value="1.0" step="0.05" />
-            <label>Duration:</label> <input type="number" id="ally_speed_dur" value="" />
+            <label>Base:</label> <input type="number" id="ally1_speed_base" value="0.0" />
+            <label>Modifier:</label> <input type="number" id="ally1_speed_mod" value="1.0" step="0.05" />
+            <label>Duration:</label> <input type="number" id="ally1_speed_dur" value="" />
             <br />
             
             <label>Accuracy</label>
             <span class="spacer"></span>
-            <label>Modifier:</label> <input type="number" id="ally_accuracy_mod" value="1.0" step="0.05" />
-            <label>Duration:</label> <input type="number" id="ally_accuracy_dur" value="" />
+            <label>Modifier:</label> <input type="number" id="ally1_accuracy_mod" value="1.0" step="0.05" />
+            <label>Duration:</label> <input type="number" id="ally1_accuracy_dur" value="" />
             <br />
             
             <label>Effects</label>
             <div>
-                <input type="checkbox" id="ally_dazed" /><label>Dazed</label>
-                <input type="checkbox" id="ally_interrupt" /><label>Interrupt</label>
-                <input type="checkbox" id="ally_poisoned" /><label>Poison</label>
-                <input type="checkbox" id="ally_bleeding" /><label>Bleed</label>
-                <input type="checkbox" id="ally_burned" /><label>Burn</label>
-                <input type="checkbox" id="ally_immunity" /><label>Immunity</label>
+                <input type="checkbox" id="ally1_dazed" /><label>Dazed</label>
+                <input type="checkbox" id="ally1_interrupt" /><label>Interrupt</label>
+                <input type="checkbox" id="ally1_poisoned" /><label>Poison</label>
+                <input type="checkbox" id="ally1_bleeding" /><label>Bleed</label>
+                <input type="checkbox" id="ally1_burned" /><label>Burn</label>
+                <input type="checkbox" id="ally1_immunity" /><label>Immunity</label>
             </div>
+
+			<input type="checkbox" id="ally1_active" /><label>Active</label>
+            <input type="checkbox" id="ally1_canMove" /><label>Can Move</label>
+            <input type="checkbox" id="ally1_blocksDamage" /><label style="width:200px">Blocks Damage</label>
         </fieldset></form>
         
         <form><fieldset>
@@ -603,6 +628,10 @@
                 <input type="checkbox" id="enemy2_burned" /><label>Burn</label>
                 <input type="checkbox" id="enemy2_immunity" /><label>Immunity</label>
             </div>
+
+			<input type="checkbox" id="enemy2_active" /><label>Active</label>
+            <input type="checkbox" id="enemy2_canMove" /><label>Can Move</label>
+            <input type="checkbox" id="enemy2_blocksDamage" /><label style="width:200px">Blocks Damage</label>
         </fieldset></form>
         <div id="battleLog"></div>
     </body>
