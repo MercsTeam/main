@@ -119,8 +119,10 @@ function Skill(n)
 			
 			if(damage > 0)
 			{
+				var slide = Game.skillImgArr[Game.skillImgArr.length - 1];
+
 				//show damaged image
-				Game.skillImgArr.push({ player : target.player, label : string.format("Player {0}.{1} - {2}<br />{3} DAMAGE", (target.player == Game.player1 ? 1 : 2), target.position, target.name, damage), url : target.damageImage });
+				slide.reaction.push({ player : target.player, label : string.format("Player {0}.{1} - {2}<br />{3} DAMAGE", (target.player == Game.player1 ? 1 : 2), target.position, target.name, damage), url : target.damageImage });
 			}
 		}		
 		Game.BattleLog.write(output);

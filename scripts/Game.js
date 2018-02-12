@@ -235,7 +235,8 @@ var Game =
 							s.name,
 							(s.type == SkillType.Offensive ? "ATTACK" : "DEFEND")),
 							url : s.imageURL,
-							sound : s.soundID
+							sound : s.soundID,
+							reaction : []
 						});
 					}
 				}
@@ -256,9 +257,11 @@ var Game =
 	showImages : function(index)
 	{
 		var v = document.querySelector("#imgViewer");
+		var rv = document.querySelectorAll(".reactView");
+
 		if(index <= this.skillImgArr.length - 1)
 		{
-			var slide = this.skillImgArr[index];
+			var slide = this.skillImgArr[index];			
 			if(slide.sound)
 			{
 				this.uiSound.start(slide.sound);
@@ -273,6 +276,22 @@ var Game =
 			v.style.backgroundImage = string.format("url('{0}?v=20180128')", slide.url);
 			
 			v.querySelector("span").innerHTML = slide.label;
+
+			if(slide.reaction.length != 0)
+			{				
+				for(var i = 0; i < slide.reaction.length; i++)
+				{
+					rv[i].className = string.format("reactView p{0}c{1}-reactImg", (slide.reaction[i].player == this.player1 ? 1 : 2), (i+1));
+					rv[i].style.visibility = "visible";
+					rv[i].style.backgroundImage = string.format("url('{0}?v=20180212')", slide.reaction[i].url);
+					
+					rv[i].querySelector("span").innerHTML = slide.reaction[i].label;
+				}
+			}
+			else
+			{
+				for(var i = 0; i < rv.length; i++) rv[i].style.visibility = "hidden";
+			}
 			
 			index++;
 			setTimeout("Game.showImages(" + index + ")", 2500);
@@ -280,6 +299,7 @@ var Game =
 		else
 		{
 			v.style.visibility = "hidden";
+			for(var i = 0; i < rv.length; i++) rv[i].style.visibility = "hidden";
 
 			for(var i = 0; i < Game.CHARACTERS_PER_TEAM; i++)
 			{
