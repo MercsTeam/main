@@ -203,7 +203,7 @@ a { display:block;font-size:28pt;margin:0;padding:0;background:red;text-decorati
 nav a { padding:4% 2%;margin:2% 0; }
 a.audio-off { background-image:url('../images/muted.png');background-repeat:no-repeat;background-position:center right; }
 
-#imgViewer
+#imgViewer, .reactView
 {
 	visibility:hidden;
 	position:absolute;
@@ -219,13 +219,15 @@ a.audio-off { background-image:url('../images/muted.png');background-repeat:no-r
 	background-repeat:no-repeat;
 }
 
-#imgViewer span { font-size:large;font-weight:bold;display:inline-block;width:100%; }
+#imgViewer span, .reactView span { font-size:large;font-weight:bold;display:inline-block;width:100%; }
 
-.p1-skillImg { border:solid 4px #33CCFF;left:2%; }
-.p1-skillImg span { text-align:left;color:#33CCFF; }
+.p1-skillImg, .p1c1-reactImg, .p1c2-reactImg  { border:solid 4px #33CCFF;left:2%; }
+.p1-skillImg span, .p1c1-reactImg span, .p1c2-reactImg span { text-align:left;color:#33CCFF; }
 
-.p2-skillImg { border:solid 4px #999966;right:2%;transform: scaleX(-1); }
-.p2-skillImg span { text-align:right;color:#999966;transform: scaleX(-1); }
+.p2-skillImg, .p2c1-reactImg, .p2c2-reactImg { border:solid 4px #999966;right:2%;transform: scaleX(-1); }
+.p2-skillImg span, .p2c1-reactImg span, .p2c2-reactImg span { text-align:right;color:#999966;transform: scaleX(-1); }
+
+.p1c2-reactImg, .p2c2-reactImg  { top:45%; }
 
 #credits
 {
