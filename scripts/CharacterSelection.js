@@ -1,5 +1,11 @@
+const SCALE_MAX = 10;
+
 var CharacterSelection =
 {
+	MAX_HEALTH : 250,
+	MAX_ATTACK : 66,
+	MAX_DEFENCE : 75,
+	MAX_SPEED : 135,
 	container : document.querySelector("#characterSelect"),	
 	btnSelect : document.querySelectorAll(".player button"),
 	commit : function(btn)
@@ -84,11 +90,69 @@ var CharacterSelection =
 			
 			fcap = document.createElement("FIGCAPTION");
 			fcap.innerHTML = c.name;
+
+			rdiv = document.createElement("DIV");
+			rdiv.className = "rating-container";
+			rdiv.appendChild(HTMLRatingChart(
+			{
+				"HEALTH"	: getRating(c.health, this.MAX_HEALTH),
+				"ATTACK"	: getRating(c.attack, this.MAX_ATTACK),
+				"DEFEND"	: getRating(c.defence, this.MAX_DEFENCE),
+				"SPEED"		: getRating(c.speed, this.MAX_SPEED)
+			}));
 			
 			f.appendChild(img);
 			f.appendChild(fcap);
+			f.appendChild(rdiv);
 			
 			this.container.appendChild(f);
 		}
 	}
 };
+
+function getRating(attr, maxValue)
+{
+	return (!attr ? 0 : Math.floor(attr.base / maxValue * SCALE_MAX));
+}
+
+function HTMLRatingChart(powerRatings)
+{
+	var table = document.createElement('TABLE');
+	table.id = "rateChart";
+	table.style.width = "100%"
+	table.cellPadding = 0;
+	table.cellSpacing = 3;
+
+	var tr = table.insertRow(-1);
+	tr.className = "tableHead";
+	
+	var th = document.createElement('TH');
+	th.style.width = "50%";
+	th.innerHTML = "power ratings";
+	tr.appendChild(th);
+
+	for(var i = 1; i <= SCALE_MAX; i++)
+	{
+		th = document.createElement('TH');
+		th.style.width = "5%";
+		th.innerHTML = i;
+		tr.appendChild(th);
+	}
+
+	var td = null;
+	for(var value in powerRatings)
+	{
+		tr = table.insertRow(-1);
+
+		td = tr.insertCell(-1);
+		td.className = "power_rating";
+		td.innerHTML = "&nbsp;" + value;
+		
+		for(var i = 1; i <= SCALE_MAX; i++)
+		{
+			td = tr.insertCell(-1);
+			td.className = (i <= powerRatings[value] ? "power_rating" : "not_set");
+		}
+	}
+	return table;
+}
