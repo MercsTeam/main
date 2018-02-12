@@ -30,11 +30,11 @@ var CharacterSelection =
 	},
 	toggle : function()
 	{
-		this.container.classList.toggle("inactive");
+		this.container.classList.toggle("hide2");
 	},
 	isVisible : function()
 	{
-		return this.container.classList.contains("inactive");
+		return this.container.classList.contains("hide2");
 	},
 	load : function()
 	{

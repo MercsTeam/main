@@ -32,7 +32,7 @@ var BattleMenu =
 	{
 		if(CharacterSelection.isVisible() && !Game.over)
 		{
-			this.container.classList.toggle("hidden");
+			this.container.classList.toggle("hide1");
 		}
 	},	
 	Timeout :
