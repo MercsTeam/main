@@ -301,13 +301,13 @@ var Game =
 		this.uiSound.start("endRound");
 		if(this.player1.activeCharacterCount == 0)
 		{
-			Game.showMessage("<span>Player 2 Wins!</span>");
+			Game.showMessage("<span>Player 2 Wins!</span><br /><a href=\"javascript:document.location.reload()\">Play Again?</a>");
 			Game.BattleLog.write("PLAYER 2 WINS!");
 			Game.over = true;
 		}
 		else if(this.player2.activeCharacterCount == 0)
 		{
-			Game.showMessage("<span>Player 1 Wins!</span>");
+			Game.showMessage("<span>Player 1 Wins!</span><br /><a href=\"javascript:document.location.reload()\">Play Again?</a>");
 			Game.BattleLog.write("PLAYER 1 WINS!");
 			Game.over = true;
 		}
