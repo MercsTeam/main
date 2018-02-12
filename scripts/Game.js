@@ -54,7 +54,8 @@ var Game =
 		{ background : "mars.jpg", floor : "mars.jpg", sound : "" },
 		{ background : "Spacecity.png", floor : "spacecity.jpg", sound : "" },
 		{ background : "Underwater.png", floor : "underwater.jpg", sound : "" },
-		{ background : "Forest.png", floor : "log.jpg", sound : "" }
+		{ background : "Forest.png", floor : "log.jpg", sound : "" },
+		{ background : "Castle_dk.jpg", floor : "drawbridge.jpg", sound : "" }
 	],
 	toggleSound : function()
 	{

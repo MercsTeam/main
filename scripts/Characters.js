@@ -61,6 +61,8 @@ function SniperGirl()
 
 	this.quote = "Bullseye!";
     this.backstory = "A military sniper war veteran that turned to freelance mercenary work after the war ended.";
+
+	this.damageImage = "characters/SniperGirlComicStills/SG-Damage.jpg";
 }
 SniperGirl.prototype = new Character();
 
@@ -264,7 +266,7 @@ function Pirate()
 	this.type = CharacterType.Finesse;
 	this.alignment = "Evil";
 
-	this.skills = [ new StormStrike(), new SingleShot(), new Parry(), new Maelstrom(), new Retreat() ];
+	this.skills = [ new StormStrike(), new SingleShot(), new Parry(), new ReleaseKraken(), new Retreat() ];
 
 	this.state = 
     {

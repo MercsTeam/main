@@ -509,6 +509,7 @@ function Parry()
 	this.accuracy = 0.25;
 	this.description = "Takes a defensive posture to parry any incoming attacks. Incoming attacks are ineffective, and has a 25% chance to reflect 25% of the damage back at the attacker.";
 	this.cooldown = 1;
+	this.imageURL = "characters/PirateComicStills/Pirate_Parry.png";
 
 	this.doAction = function(self, target)
 	{
@@ -541,6 +542,7 @@ function Maelstrom()
 	this.description = "Summons a powerful storm that lasts for 3 turns. While maelstrom is active, pirate's damage is increased, the attacks of all allied mercs have a chance to increase the speed stat, "
 		+ "and at the end of each turn the maelstrom is active, the enemy merc with the highest percentage of health is struck by lightning and dealt damage";
 	this.cooldown = 6;
+	this.imageURL = "characters/PirateComicStills/Pirate_Maelstrom.png";
 	
 	this.doAction = function(self, target)
 	{
