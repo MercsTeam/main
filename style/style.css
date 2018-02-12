@@ -353,6 +353,7 @@ dd { margin:0;padding:0 }
 	text-align:center;
 	text-shadow: 2px 2px #000000;
 }
+#lgMsg a { display:inline;background:none;position:relative;font-family:'Press Start 2P';color:#ff0000; }
 
 figure { position:relative; }
 figure .rating-container { display:none;position:absolute;bottom:-300px;left:0;height:300px;width:100%;z-index:1000; }
