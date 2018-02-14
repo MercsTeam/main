@@ -4,7 +4,7 @@ var _credits =
 	"Production"	: [ "Jonathan Brenders" ],
 	"Design"		: [ "Thomas Burke", "John Mattys" ],
 	"Art"			: [ "Jaeden Laffey", "Kevin Pendergast", "Donna Phelps" ],
-	"Additional Character Visualization" : [ "Nick Gustafson" ],
+	"Additional Character Visualization" : [ "Thomas Burke", "Nick Gustafson" ],
 	"Sound"			: [ "Aidan Crawley" ],
 	"Technical"		: [ "Ryan Amalfitano", "Nick Gustafson" ]
 };	
