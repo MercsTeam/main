@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+  <head>
+    <title>Credits</title>
+    <script src="scripts/credits.js></script>
+  </head>
+  <body>
+    <h1>Credits</h1>
+    <section>
+      <script>
+   
+        var dl = document.createElement("DL");
+        var dt, dd;
+        for(var d in _credits)
+        {
+          dt = document.createElement("DT");
+          dt.innerHTML = d;
+          dl.appendChild(dt);
+
+          for(var i = 0; i < _credits[d].length; i++)
+          {
+            dd = document.createElement("DD");
+            dd.innerHTML = _credits[d][i];
+            dl.appendChild(dd);
+          }
+        }
+        document.querySelector("section").appendChild(dl);
+      </script>
+    </section>
+  </body>
+</html> 
