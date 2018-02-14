@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+  <head>
+    <title>Sound Library</title>
+    <script src="scripts/SoundPlayer.js></script>
+    <script>
+      var soundPath = "https://raw.githubusercontent.com/MercsTeam/main/master/Mercs_sound_library";
+      
+      function playSound(file)
+      {
+        var audio = document.querySelector("audio");
+        audio.src = soundPath + "/" + file;
+        audio.play();        
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Sound Library</h1>
+    <section>
+      <script>
+        var ul = document.createElement("UL");
+        for(var cue in SoundLibary)
+        {          
+          btn = document.createElement("BUTTON");
+          btn.onclick = "playSound('" + SoundLibary[cue] + "')";
+          btn.innerHTML = "Play Sound";
+          
+          li = document.createElement("LI");
+          li.appendChild(btn);
+          li.appendChild(document.createTextNode(cue));
+          ul.appendChild(li);
+        }
+        document.querySelector("section").appendChild(ul);
+      </script>
+      <audio controls="controls" src="" type="audio/mpeg"></audio>
+    </section>
+  </body>
+</html> 
