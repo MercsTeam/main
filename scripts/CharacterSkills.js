@@ -1037,3 +1037,178 @@ function PoisonApple()
 	};
 }
 PoisonApple.prototype = new Skill("Poison Apple");
+
+function SeltzerBottle() 
+{
+	this.type = SkillType.Offensive;
+	//(0) Skill 1: Seltzer Bottle (10) - Sprays water at the enemy. Has a 1% chance of dealing 100 extra damage by hitting the opponent in the eye.
+}
+SeltzerBottle.prototype = new Skill("Seltzer Bottle");
+
+function ExplodingPie()
+{
+	this.type = SkillType.Offensive;
+	this.attackValue = 50;
+	this.multiTarget = true;
+	this.selfDamage = true;
+	this.description = "An attack that damages both enemies, and costs the user 50 HP.";
+	
+	this.doAction = function(self, target)
+	{
+		self.health.base = Math.max(0, self.health.base - this.attackValue);
+		
+		var damage = 0;
+		for(var i = 0; i < target.length; i++)
+		{
+			damage = target[i].calculateDamage(self, Game.getTypeBonus(self.type, target[i].type));
+			target[i].health.base = Math.max(0, target[i].health.base - damage);
+			this.logAction(self, target[i], damage);
+		}
+	};
+}
+ExplodingPie.prototype = new Skill("Exploding Pie");
+
+function BalloonAnimal()
+{
+	this.type = SkillType.Defensive;
+	this.description = "Raises Attack and Defense by 0%";
+}
+BalloonAnimal.prototype = new Skill("Balloon Animal");
+
+function Honk()
+{
+	this.type = SkillType.Reusable;
+	this.description = "Makes a funny noise.";
+}
+Honk.prototype = new Skill("Honk");
+
+function TailWhip()
+{
+	this.type = SkillType.Offensive;
+	this.attackValue = 100;
+	this.cooldown = 1;
+	this.accuracy = 0.5;
+	this.description = "A powerful bludgeoning attack with a 50% chance of missing";
+}
+TailWhip.prototype = new Skill("Tail Whip");
+
+function Snarl()
+{
+	this.type = SkillType.Defensive;
+	this.selfAttackMod = 1.5;
+	this.selfDefenceMod = 1.5;
+	this.effectDuration = 3;
+	this.description = "Raises Attack and Defense by 50% for three turns.";
+	
+	this.doAction = function(self, target)
+	{
+		self.attack.modifier = this.selfAttackMod;
+		self.attack.duration = this.effectDuration + 1;
+		
+		self.defence.modifier = this.selfDefenceMod;
+		self.defence.duration = this.effectDuration;
+		
+		this.logAction(self, target[0]);
+	};
+}
+Snarl.prototype = new Skill("Snarl");
+
+function HeatVision()
+{
+	this.type = SkillType.Defensive;
+	this.effectDuration = 2;
+	this.description = "Eliminates chance of missing next turn.";
+	
+	this.doAction = function(self, target)
+	{
+		self.accuracy.modifier = 10;
+		self.accuracy.duration = this.effectDuration;		
+		this.logAction(self, target[0]);
+	};
+}
+HeatVision.prototype = new Skill("Heat Vision");
+
+function RippingClaws()
+{
+	this.type = SkillType.Offensive;
+	this.attackValue = 75;
+	this.accuracy = 0.5;
+	this.cooldown = 1;
+	this.description = "A devastating attack with a high chance of causing Bleed, and has a 50% chance of missing";
+}
+RippingClaws.prototype = new Skill("Ripping Claws");
+
+function YokoGiri()
+{
+	this.type = SkillType.Offensive;
+	this.attackValue = 30;
+	this.multiTarget = true;
+	this.bleedProb = Probability.High;
+	this.description = "A sweeping slash attack that deals damage to both enemies and has a high chance "
+		+ "of causing Bleed.";
+	
+	this.doAction = function(self, target)
+	{
+		var r = Math.random();
+		var probMod = (self.checkActiveHistory(Nukitsuke) ? 2 : 1);		
+		var damage = 0;
+		
+		for(var i = 0; i < target.length; i++)
+		{
+			if(r <= (this.burnProb * probMod))
+			{
+				target[i].setEffectIndicator(Game.StatusEffects.Bleeding, 0);
+				target[i].bleeding = true;
+				target[i].health.modifier = 0.85;
+			}
+			
+			damage = target[i].calculateDamage(self, Game.getTypeBonus(self.type, target[i].type));
+			target[i].health.base = Math.max(0, target[i].health.base - damage);
+			this.logAction(self, target[i], damage);
+		}
+	};
+}
+YokoGiri.prototype = new Skill("Yoko Giri");
+
+function KesiGiri()
+{
+	this.type = SkillType.Offensive;
+	this.attackValue = 60;
+	this.bleedProb = Probability.Medium;
+	this.description = "A single-target slash attack with a medium chance of causing Bleed.";
+	
+	this.doAction = function(self, target)
+	{
+		var r = Math.random();
+		var probMod = (self.checkActiveHistory(Nukitsuke) ? 2 : 1);		
+	
+		if(r <= (this.bleedProb * probMod))
+		{
+			target[0].setEffectIndicator(Game.StatusEffects.Bleeding, 0);
+			target[0].bleeding = true;
+			target[0].health.modifier = 0.85;
+		}
+
+		var damage = target[0].calculateDamage(self, Game.getTypeBonus(self.type, target[0].type));
+		target[i].health.base = Math.max(0, target[0].health.base - damage);
+		this.logAction(self, target[0], damage);
+	};
+}
+KesiGiri.prototype = new Skill("Kesi Giri");
+
+function OverheadCut()
+{
+	this.type = SkillType.Offensive;
+	this.attackValue = 90;
+	this.cooldown = 2;
+	this.description = "A powerful slashing attack";
+}
+OverheadCut.prototype = new Skill("Overhead Cut");
+
+function Nukitsuke()
+{
+	this.type = SkillType.Defensive;
+	this.selfDefenceMod = 1.5;
+	this.description = "Intimidation Stance - Increases defense by 50% and increases likelihood of causing Bleed.";
+}
+Nukitsuke.prototype = new Skill("Nukitsuke");
