@@ -5,7 +5,7 @@
   <li><a href="https://mercsteam.github.io/main/gameplayDemo_v16.html">Current Demo Version</a></li>
   <li><a href="https://mercsteam.github.io/main/skillTest.html">Skill Test</a></li>
   <li><a href="https://mercsteam.github.io/main/characters">Character Info</a></li>
-  <li><a href="https://mercsteam.github.io/main/characters/wallpaper.png">Wallpaper</a></li>
+  <li><a href="https://mercsteam.github.io/main/images/wallpaper.png">Wallpaper</a></li>
   
   <li><a href="https://mercsteam.github.io/main/credits.html">Credits</a></li>
   <li><a href="https://mercsteam.github.io/main/sounds.html">Sound Libary</a></li>
