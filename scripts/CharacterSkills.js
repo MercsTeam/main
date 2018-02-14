@@ -991,6 +991,7 @@ function Blessing()
 	this.selfDefenceMod = 1.25;
 	this.allyDefenceMod = 1.25;
 	this.effectDuration = 3;
+	this.affectsAlly = true;
 	this.multiTarget = true;
 	this.description = "Increase Defense of self and ally by 25% for 3 turns.";
 
