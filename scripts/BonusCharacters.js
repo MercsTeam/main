@@ -39,7 +39,6 @@ function SamuraiGirl()
 	this.type = CharacterType.Finesse;
 	this.alignment = "Good";
 
-	//https://www.livestrong.com/article/349257-japanese-samurai-sword-techniques/
     this.skills = [ new Skill("Yoko Giri/Side Cut"), new Skill("Kesi Giri/Slash"), new Skill("Overhead Cut"), new Skill("Nukitsuke/Intimidation Stance"), new Retreat() ];
 
 	this.state = 
@@ -47,6 +46,15 @@ function SamuraiGirl()
 		IDLE_FRONT : { img : "samuraigirl_idle_front.png", wrap : false, animate : null },
 		IDLE_BACK  : { img : "samuraigirl_idle_back.png", wrap : true, animate : null }
     };
+	
+	this.health = { base : 150, modifier : 1.0 };
+	this.baseHealth = 150;
+	
+	this.defence = { base : 30, modifier : 1.0, duration : -1 };
+	this.attack = { base : 60, modifier : 1.0, duration : -1 };
+	this.speed = { base : 175, modifier : 1.0, duration : -1 };
+	
+	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "";
     this.backstory = "";
@@ -68,6 +76,15 @@ function DinoGirl()
 		IDLE_FRONT : { img : "dinogirl_idle_front.png", wrap : false, animate : null },
 		IDLE_BACK  : { img : "dinogirl_idle_back.png", wrap : true, animate : null }
     };
+	
+	this.health = { base : 250, modifier : 1.0 };
+	this.baseHealth = 250;
+	
+	this.defence = { base : 50, modifier : 1.0, duration : -1 };
+	this.attack = { base : 50, modifier : 1.0, duration : -1 };
+	this.speed = { base : 50, modifier : 1.0, duration : -1 };
+	
+	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "";
     this.backstory = "";
@@ -89,6 +106,16 @@ function Clown()
 		IDLE_FRONT : { img : "clown_idle_front.png", wrap : false, animate : null },
 		IDLE_BACK  : { img : "clown_idle_back.png", wrap : true, animate : null }
     };
+	
+	this.health = { base : 200, modifier : 1.0 };
+	this.baseHealth = 200;
+	
+	this.defence = { base : 10, modifier : 1.0, duration : -1 };
+	this.attack = { base : 10, modifier : 1.0, duration : -1 };
+	this.speed = { base : 150, modifier : 1.0, duration : -1 };
+	
+	this.accuracy = { modifier : 1.0, duration : -1 };
+
 
 	this.quote = "";
     this.backstory = "";
