@@ -101,10 +101,10 @@
 				for(var i = 0; i < ddls.length; i++)
 				{
 					target = document.querySelector(string.format("#{0}_character", ddls[i]));
-					target.addOption("-", "");
+					target.appendChild(new Option("-", ""));
 					for(var j = 0; j < characters.length; j++)
 					{
-						target.addOption((new characters[j]).name, j);	
+						target.appendChild(new Option((new characters[j]).name, j));	
 					}
 				}
 				Game.init();
