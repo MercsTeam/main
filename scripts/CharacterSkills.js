@@ -97,6 +97,7 @@ function SweepingStrike()
     this.multiTarget = true;
 	this.cooldown = 1;
 	this.imageURL = "characters/BSGComicStills/FRONT-Sweeping_Strike.jpg";
+	this.soundID = "sweepStrike";
 }
 SweepingStrike.prototype = new Skill("Sweeping Strike");
 
