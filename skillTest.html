@@ -55,8 +55,8 @@
 				TypeBonus : { Ineffective : 0.75, None : 1.0, Effective : 1.25 },
 				init : function()
 				{
-					Game.player1.characters = [ null, null, characters[1] ];
-					Game.player2.characters = [ null, null, characters[1] ];
+					Game.player1.characters = [ null, null, new characters[1] ];
+					Game.player2.characters = [ null, null, new characters[1] ];
 
 					Game.player1.characters[2].position = 3;
 					Game.player2.characters[2].position = 3;
@@ -113,33 +113,33 @@
 				{
 					self = c;
 					self.position = 1;
-
-					Game.player1.characters[0] = self;
 					self.player = Game.player1;
+
+					Game.player1.characters[0] = c;					
 				}
 				else if(which == "ally1")
 				{
 					ally1 = c;
 					ally1.position = 2;
-
-					Game.player1.characters[1] = ally1;
 					ally1.player = Game.player1;
+
+					Game.player1.characters[1] = c;					
 				}
 				else if(which == "enemy1")
 				{
 					enemy1 = c;
 					enemy1.position = 1;
-
-					Game.player2.characters[0] = enemy1;
 					enemy1.player = Game.player2;
+
+					Game.player2.characters[0] = c;					
 				}
 				else
 				{
 					enemy2 = c;
 					enemy2.position = 2;
-
-					Game.player2.characters[1] = enemy2;
 					enemy2.player = Game.player2;
+
+					Game.player2.characters[1] = c;					
 				}
 
 				var sd = document.getElementById(which + '_skill');
@@ -303,11 +303,18 @@
 				s.selected = true;
 				
 				var opp = c.player.getOpponent();
-				var target = null;
+				var target = null, output = [];
 				
 				if(s.multiTarget)
 				{
-					target = [ opp.getCharacterByPosition(1), opp.getCharacterByPosition(2) ];
+					if(s.affectsAlly)
+					{
+						target = [ c, c.getAlly() ];
+					}
+					else
+					{
+						target = [ opp.getCharacterByPosition(1), opp.getCharacterByPosition(2) ];
+					}
 				}
 				else if(s.affectsAlly)
 				{
@@ -323,7 +330,6 @@
 					target = [ c ];
 				}
 				
-				//s.doAction(c, target);
 				c.setLastAttack(target);
 
 				//excute outstanding actions, from oldest to newest
@@ -331,21 +337,51 @@
 				{
 					if(c.attackHistory[j].duration > 0)
 					{
-						c.attackHistory[j].skill.doAction(c, c.attackHistory[j].target);
-						if(c.attackHistory[j].duration != 0) c.attackHistory[j].duration--;
+						try
+						{
+							c.attackHistory[j].skill.doAction(c, c.attackHistory[j].target);
+							if(c.attackHistory[j].duration != 0) c.attackHistory[j].duration--;
+						}
+						catch(exception)
+						{
+							Game.BattleLog.write(exception.message);
+						}						
 					}
-				}				
+					output.push(string.format("{0} [{1}]", c.attackHistory[j].skill.name, c.attackHistory[j].duration));
+				}	
+				document.querySelector("#" + which + "_actionHistory").value = "--Attack History--\n" + output.join("\n");
 				
-				c.update();
-				updateFields(c);
+				try
+				{
+					c.update();
+					updateFields(c);
+				}
+				catch(exception)
+				{
+					Game.BattleLog.write(exception.message);
+				}
 
 				for(var i = 0; i < 3; i++)
 				{
-					Game.player1.characters[i].update();
-					updateFields(Game.player1.characters[i]);
+					try
+					{
+						Game.player1.characters[i].update();
+						updateFields(Game.player1.characters[i]);
+					}
+					catch(exception)
+					{
+						Game.BattleLog.write(exception.message);
+					}	
 
-					Game.player2.characters[i].update();
-					updateFields(Game.player2.characters[i]);
+					try
+					{
+						Game.player2.characters[i].update();
+						updateFields(Game.player2.characters[i]);
+					}
+					catch(exception)
+					{
+						Game.BattleLog.write(exception.message);
+					}	
 				}
 			}
         </script>
@@ -364,314 +400,341 @@
                 
                 white-space:pre;
                 padding:5px;
-                width:100%;height:200px;
+                width:90%;height:150px;
                 overflow-y:scroll;
                 
                 background-color:#000000;
                 color:lightgreen;
             }
+			textarea { background-color:#000000;color:lightgreen; }
+			.half-width { display:inline-block;margin:20px 0;padding:0;width:48%;vertical-align:top; }
         </style>
     </head>
     <body>
-        <form><fieldset>
-            <legend>Self</legend>
-            
-            <label>Character:</label>
-            <select id="self_character" onchange="selectCharacter('self', this.selectedIndex)">
-                <option value=""></option>
-                <option value="0">Alien</option>
-                <option value="1">Big Sword Guy</option>
-                <option value="2">Caveman</option>
-                <option value="3">Cowboy Guy</option>
-                <option value="4">Cyborg</option>
-                <option value="5">Djinn</option>
-                <option value="6">Hive Drone</option>
-                <option value="7">Mage</option>
-                <option value="8">Pirate</option>
-                <option value="9">Space Girl</option>
-                <option value="10">Sniper Girl</option>
-                <option value="11">Witch</option>
-            </select><br />
-            
-            <label>Skill</label>
-            <div id="self_skill" style="display:inline-block"></div><br />
-            
-            <label>Target</label>
-            <div id="self_target" style="display:inline-block"></div><br />
-            
-            <button type="button" onclick="doAction(self)" id="self_btnAction">Do Action</button>
-            <button type="button" onclick="updateCharacter(self)">Update</button>
-            <button type="reset">Reset</button>
-            <br />
-            
-            <label>Health</label>
-            <label for="self_health_base">Base:</label> <input type="number" id="self_health_base" value="0.0" />
-            <label for="self_health_mod">Modifier:</label> <input type="number" id="self_health_mod" value="1.0" step="0.05" />
-            <br />
-            
-            <label>Attack</label>
-            <label for="self_attack_base">Base:</label> <input type="number" id="self_attack_base" value="0.0" />
-            <label for="self_attack_mod">Modifier:</label> <input type="number" id="self_attack_mod" value="1.0" step="0.05" />
-            <label for="self_attack_dur">Duration:</label> <input type="number" id="self_attack_dur" value="" />
-            <br />
-            
-            <label>Defence</label>
-            <label for="self_defence_base">Base:</label> <input type="number" id="self_defence_base" value="0.0" />
-            <label for="self_defence_mod">Modifier:</label> <input type="number" id="self_defence_mod" value="1.0" step="0.05" />
-            <label for="self_defence_dur">Duration:</label> <input type="number" id="self_defence_dur" value="" />
-            <br />
-            
-            <label>Speed</label>
-            <label for="self_speed_base">Base:</label> <input type="number" id="self_speed_base" value="0.0" />
-            <label for="self_speed_mod">Modifier:</label> <input type="number" id="self_speed_mod" value="1.0" step="0.05" />
-            <label for="self_speed_dur">Duration:</label> <input type="number" id="self_speed_dur" value="" />
-            <br />
-            
-            <label>Accuracy</label>
-            <span class="spacer"></span>
-            <label for="self_accuracy_mod">Modifier:</label> <input type="number" id="self_accuracy_mod" value="1.0" step="0.05" />
-            <label for="self_accuracy_dur">Duration:</label> <input type="number" id="self_accuracy_dur" value="" />
-            <br />
-            
-            <label>Effects</label>
-            <div>
-                <input type="checkbox" id="self_dazed" /><label for="self_dazed">Dazed</label>
-                <input type="checkbox" id="self_interrupt" /><label for="self_interrupt">Interrupt</label>
-                <input type="checkbox" id="self_poisoned" /><label for="self_poisoned">Poison</label>
-                <input type="checkbox" id="self_bleeding" /><label for="self_bleeding">Bleed</label>
-                <input type="checkbox" id="self_burned" /><label for="self_burned">Burn</label>
-                <input type="checkbox" id="self_immunity" /><label for="self_immunity">Immunity</label>
-            </div>
+        <form>
+			<fieldset>
+				<legend>Self</legend>
+				
+				<div class="half-width">
+					<label>Character:</label>
+					<select id="self_character" onchange="selectCharacter('self', this.selectedIndex)">
+						<option value=""></option>
+						<option value="0">Alien</option>
+						<option value="1">Big Sword Guy</option>
+						<option value="2">Caveman</option>
+						<option value="3">Cowboy Guy</option>
+						<option value="4">Cyborg</option>
+						<option value="5">Djinn</option>
+						<option value="6">Hive Drone</option>
+						<option value="7">Mage</option>
+						<option value="8">Pirate</option>
+						<option value="9">Space Girl</option>
+						<option value="10">Sniper Girl</option>
+						<option value="11">Witch</option>
+					</select><br />
+					
+					<label>Skill</label>
+					<div id="self_skill" style="display:inline-block"></div><br />
+					
+					<label>Target</label>
+					<div id="self_target" style="display:inline-block"></div><br />
+					
+					<button type="button" onclick="doAction(self)" id="self_btnAction">Do Action</button>
+					<button type="button" onclick="updateCharacter(self)">Update</button>
+					<button type="reset">Reset</button>
+				</div>
+				<div class="half-width">
+					<textarea id="self_actionHistory" rows="5" cols="50"></textarea>
+				</div>
+				
+				<label>Health</label>
+				<label for="self_health_base">Base:</label> <input type="number" id="self_health_base" value="0.0" />
+				<label for="self_health_mod">Modifier:</label> <input type="number" id="self_health_mod" value="1.0" step="0.05" />
+				<br />
+				
+				<label>Attack</label>
+				<label for="self_attack_base">Base:</label> <input type="number" id="self_attack_base" value="0.0" />
+				<label for="self_attack_mod">Modifier:</label> <input type="number" id="self_attack_mod" value="1.0" step="0.05" />
+				<label for="self_attack_dur">Duration:</label> <input type="number" id="self_attack_dur" value="" />
+				<br />
+				
+				<label>Defence</label>
+				<label for="self_defence_base">Base:</label> <input type="number" id="self_defence_base" value="0.0" />
+				<label for="self_defence_mod">Modifier:</label> <input type="number" id="self_defence_mod" value="1.0" step="0.05" />
+				<label for="self_defence_dur">Duration:</label> <input type="number" id="self_defence_dur" value="" />
+				<br />
+				
+				<label>Speed</label>
+				<label for="self_speed_base">Base:</label> <input type="number" id="self_speed_base" value="0.0" />
+				<label for="self_speed_mod">Modifier:</label> <input type="number" id="self_speed_mod" value="1.0" step="0.05" />
+				<label for="self_speed_dur">Duration:</label> <input type="number" id="self_speed_dur" value="" />
+				<br />
+				
+				<label>Accuracy</label>
+				<span class="spacer"></span>
+				<label for="self_accuracy_mod">Modifier:</label> <input type="number" id="self_accuracy_mod" value="1.0" step="0.05" />
+				<label for="self_accuracy_dur">Duration:</label> <input type="number" id="self_accuracy_dur" value="" />
+				<br />
+				
+				<label>Effects</label>
+				<div>
+					<input type="checkbox" id="self_dazed" /><label for="self_dazed">Dazed</label>
+					<input type="checkbox" id="self_interrupt" /><label for="self_interrupt">Interrupt</label>
+					<input type="checkbox" id="self_poisoned" /><label for="self_poisoned">Poison</label>
+					<input type="checkbox" id="self_bleeding" /><label for="self_bleeding">Bleed</label>
+					<input type="checkbox" id="self_burned" /><label for="self_burned">Burn</label>
+					<input type="checkbox" id="self_immunity" /><label for="self_immunity">Immunity</label>
+				</div>
 
-			<input type="checkbox" id="self_active" /><label for="self_active">Active</label>
-            <input type="checkbox" id="self_canMove" /><label for="self_canMove">Can Move</label>
-            <input type="checkbox" id="self_blocksDamage" /><label style="width:200px">Blocks Damage</label>
-        </fieldset></form>
+				<input type="checkbox" id="self_active" /><label for="self_active">Active</label>
+				<input type="checkbox" id="self_canMove" /><label for="self_canMove">Can Move</label>
+				<input type="checkbox" id="self_blocksDamage" /><label style="width:200px">Blocks Damage</label>
+			</fieldset>
+		</form>
         
-        <form><fieldset>
-            <legend>Enemy1</legend>
-            
-            <label>Character:</label>
-            <select id="enemy1_character" onchange="selectCharacter('enemy1', this.selectedIndex)">
-                <option value=""></option>
-                <option value="0">Alien</option>
-                <option value="1">Big Sword Guy</option>
-                <option value="2">Caveman</option>
-                <option value="3">Cowboy Guy</option>
-                <option value="4">Cyborg</option>
-                <option value="5">Djinn</option>
-                <option value="6">Hive Drone</option>
-                <option value="7">Mage</option>
-                <option value="8">Pirate</option>
-                <option value="9">Space Girl</option>
-                <option value="10">Sniper Girl</option>
-                <option value="11">Witch</option>
-            </select><br />
-            
-            <label>Skill</label>
-            <div id="enemy1_skill" style="display:inline-block"></div><br />
-            
-            <label>Target</label>
-            <div id="enemy1_target" style="display:inline-block"></div><br />
-            
-            <button type="button" onclick="doAction(enemy1)" id="enemy1_btnAction">Do Action</button>
-            <button type="button" onclick="updateCharacter(enemy1)">Update</button>
-            <button type="reset">Reset</button>
-            <br />
-            
-            <label>Health</label>
-            <label for="enemy1_health_base">Base:</label> <input type="number" id="enemy1_health_base" value="0.0" />
-            <label for="enemy1_health_mod">Modifier:</label> <input type="number" id="enemy1_health_mod" value="1.0" step="0.05" />
-            <br />
-            
-            <label>Attack</label>
-            <label for="enemy1_attack_base">Base:</label> <input type="number" id="enemy1_attack_base" value="0.0" />
-            <label for="enemy1_attack_mod">Modifier:</label> <input type="number" id="enemy1_attack_mod" value="1.0" step="0.05" />
-            <label for="enemy1_attack_dur">Duration:</label> <input type="number" id="enemy1_attack_dur" value="" />
-            <br />
-            
-            <label>Defence</label>
-            <label for="enemy1_defence_base">Base:</label> <input type="number" id="enemy1_defence_base" value="0.0" />
-            <label for="enemy1_defence_mod">Modifier:</label> <input type="number" id="enemy1_defence_mod" value="1.0" step="0.05" />
-            <label for="enemy1_defence_dur">Duration:</label> <input type="number" id="enemy1_defence_dur" value="" />
-            <br />
-            
-            <label>Speed</label>
-            <label for="enemy1_speed_base">Base:</label> <input type="number" id="enemy1_speed_base" value="0.0" />
-            <label for="enemy1_speed_mod">Modifier:</label> <input type="number" id="enemy1_speed_mod" value="1.0" step="0.05" />
-            <label for="enemy1_speed_dur">Duration:</label> <input type="number" id="enemy1_speed_dur" value="" />
-            <br />
-            
-            <label>Accuracy</label>
-            <span class="spacer"></span>
-            <label for="enemy1_accuracy_mod">Modifier:</label> <input type="number" id="enemy1_accuracy_mod" value="1.0" step="0.05" />
-            <label for="enemy1_accuracy_dur">Duration:</label> <input type="number" id="enemy1_accuracy_dur" value="" />
-            <br />
-            
-            <label>Effects</label>
-            <div>
-                <input type="checkbox" id="enemy1_dazed" /><label for="enemy1_dazed">Dazed</label>
-                <input type="checkbox" id="enemy1_interrupt" /><label for="enemy1_interrupt">Interrupt</label>
-                <input type="checkbox" id="enemy1_poisoned" /><label for="enemy1_poisoned">Poison</label>
-                <input type="checkbox" id="enemy1_bleeding" /><label for="enemy1_bleeding">Bleed</label>
-                <input type="checkbox" id="enemy1_burned" /><label for="enemy1_burned">Burn</label>
-                <input type="checkbox" id="enemy1_immunity" /><label for="enemy1_immunity">Immunity</label>
-            </div>
+        <form>
+			<fieldset>
+				<legend>Enemy1</legend>
+				
+				<div class="half-width">
+					<label>Character:</label>
+					<select id="enemy1_character" onchange="selectCharacter('enemy1', this.selectedIndex)">
+						<option value=""></option>
+						<option value="0">Alien</option>
+						<option value="1">Big Sword Guy</option>
+						<option value="2">Caveman</option>
+						<option value="3">Cowboy Guy</option>
+						<option value="4">Cyborg</option>
+						<option value="5">Djinn</option>
+						<option value="6">Hive Drone</option>
+						<option value="7">Mage</option>
+						<option value="8">Pirate</option>
+						<option value="9">Space Girl</option>
+						<option value="10">Sniper Girl</option>
+						<option value="11">Witch</option>
+					</select><br />
+					
+					<label>Skill</label>
+					<div id="enemy1_skill" style="display:inline-block"></div><br />
+					
+					<label>Target</label>
+					<div id="enemy1_target" style="display:inline-block"></div><br />
+					
+					<button type="button" onclick="doAction(enemy1)" id="enemy1_btnAction">Do Action</button>
+					<button type="button" onclick="updateCharacter(enemy1)">Update</button>
+					<button type="reset">Reset</button>
+				</div>
+				<div class="half-width">
+					<textarea id="enemy1_actionHistory" rows="5" cols="50"></textarea>
+				</div>
+				
+				<label>Health</label>
+				<label for="enemy1_health_base">Base:</label> <input type="number" id="enemy1_health_base" value="0.0" />
+				<label for="enemy1_health_mod">Modifier:</label> <input type="number" id="enemy1_health_mod" value="1.0" step="0.05" />
+				<br />
+				
+				<label>Attack</label>
+				<label for="enemy1_attack_base">Base:</label> <input type="number" id="enemy1_attack_base" value="0.0" />
+				<label for="enemy1_attack_mod">Modifier:</label> <input type="number" id="enemy1_attack_mod" value="1.0" step="0.05" />
+				<label for="enemy1_attack_dur">Duration:</label> <input type="number" id="enemy1_attack_dur" value="" />
+				<br />
+				
+				<label>Defence</label>
+				<label for="enemy1_defence_base">Base:</label> <input type="number" id="enemy1_defence_base" value="0.0" />
+				<label for="enemy1_defence_mod">Modifier:</label> <input type="number" id="enemy1_defence_mod" value="1.0" step="0.05" />
+				<label for="enemy1_defence_dur">Duration:</label> <input type="number" id="enemy1_defence_dur" value="" />
+				<br />
+				
+				<label>Speed</label>
+				<label for="enemy1_speed_base">Base:</label> <input type="number" id="enemy1_speed_base" value="0.0" />
+				<label for="enemy1_speed_mod">Modifier:</label> <input type="number" id="enemy1_speed_mod" value="1.0" step="0.05" />
+				<label for="enemy1_speed_dur">Duration:</label> <input type="number" id="enemy1_speed_dur" value="" />
+				<br />
+				
+				<label>Accuracy</label>
+				<span class="spacer"></span>
+				<label for="enemy1_accuracy_mod">Modifier:</label> <input type="number" id="enemy1_accuracy_mod" value="1.0" step="0.05" />
+				<label for="enemy1_accuracy_dur">Duration:</label> <input type="number" id="enemy1_accuracy_dur" value="" />
+				<br />
+				
+				<label>Effects</label>
+				<div>
+					<input type="checkbox" id="enemy1_dazed" /><label for="enemy1_dazed">Dazed</label>
+					<input type="checkbox" id="enemy1_interrupt" /><label for="enemy1_interrupt">Interrupt</label>
+					<input type="checkbox" id="enemy1_poisoned" /><label for="enemy1_poisoned">Poison</label>
+					<input type="checkbox" id="enemy1_bleeding" /><label for="enemy1_bleeding">Bleed</label>
+					<input type="checkbox" id="enemy1_burned" /><label for="enemy1_burned">Burn</label>
+					<input type="checkbox" id="enemy1_immunity" /><label for="enemy1_immunity">Immunity</label>
+				</div>
 
-			<input type="checkbox" id="enemy1_active" /><label for="enemy1_active">Active</label>
-            <input type="checkbox" id="enemy1_canMove" /><label for="enemy1_canMove">Can Move</label>
-            <input type="checkbox" id="enemy1_blocksDamage" /><label style="width:200px">Blocks Damage</label>
-        </fieldset></form>
+				<input type="checkbox" id="enemy1_active" /><label for="enemy1_active">Active</label>
+				<input type="checkbox" id="enemy1_canMove" /><label for="enemy1_canMove">Can Move</label>
+				<input type="checkbox" id="enemy1_blocksDamage" /><label style="width:200px">Blocks Damage</label>
+			</fieldset>
+		</form>
         
-        <form><fieldset>
-            <legend>Ally</legend>
-            
-            <label>Character:</label>
-            <select id="ally1_character" onchange="selectCharacter('ally1', this.selectedIndex)">
-                <option value=""></option>
-                <option value="0">Alien</option>
-                <option value="1">Big Sword Guy</option>
-                <option value="2">Caveman</option>
-                <option value="3">Cowboy Guy</option>
-                <option value="4">Cyborg</option>
-                <option value="5">Djinn</option>
-                <option value="6">Hive Drone</option>
-                <option value="7">Mage</option>
-                <option value="8">Pirate</option>
-                <option value="9">Space Girl</option>
-                <option value="10">Sniper Girl</option>
-                <option value="11">Witch</option>
-            </select><br />
-            
-            <label>Skill</label>
-            <div id="ally1_skill" style="display:inline-block"></div><br />
-            
-            <label>Target</label>
-            <div id="ally1_target" style="display:inline-block"></div><br />
-            
-            <button type="button" onclick="doAction(ally1)" id="ally1_btnAction">Do Action</button>
-            <button type="button" onclick="updateCharacter(ally1)">Update</button>
-            <button type="reset">Reset</button>
-            <br />
-            
-            <label>Health</label>
-            <label for="ally1_health_base">Base:</label> <input type="number" id="ally1_health_base" value="0.0" />
-            <label for="ally1_health_mod">Modifier:</label> <input type="number" id="ally1_health_mod" value="1.0" step="0.05" />
-            <br />
-            
-            <label>Attack</label>
-            <label for="ally1_attack_base">Base:</label> <input type="number" id="ally1_attack_base" value="0.0" />
-            <label for="ally1_attack_mod">Modifier:</label> <input type="number" id="ally1_attack_mod" value="1.0" step="0.05" />
-            <label for="ally1_attack_dur">Duration:</label> <input type="number" id="ally1_attack_dur" value="" />
-            <br />
-            
-            <label>Defence</label>
-            <label for="ally1_defence_base">Base:</label> <input type="number" id="ally1_defence_base" value="0.0" />
-            <label for="ally1_defence_mod">Modifier:</label> <input type="number" id="ally1_defence_mod" value="1.0" step="0.05" />
-            <label for="ally1_defence_dur">Duration:</label> <input type="number" id="ally1_defence_dur" value="" />
-            <br />
-            
-            <label>Speed</label>
-            <label for="ally1_speed_base">Base:</label> <input type="number" id="ally1_speed_base" value="0.0" />
-            <label for="ally1_speed_mod">Modifier:</label> <input type="number" id="ally1_speed_mod" value="1.0" step="0.05" />
-            <label for="ally1_speed_dur">Duration:</label> <input type="number" id="ally1_speed_dur" value="" />
-            <br />
-            
-            <label>Accuracy</label>
-            <span class="spacer"></span>
-            <label for="ally1_accuracy_mod">Modifier:</label> <input type="number" id="ally1_accuracy_mod" value="1.0" step="0.05" />
-            <label for="ally1_accuracy_dur">Duration:</label> <input type="number" id="ally1_accuracy_dur" value="" />
-            <br />
-            
-            <label>Effects</label>
-            <div>
-                <input type="checkbox" id="ally1_dazed" /><label for="ally1_dazed">Dazed</label>
-                <input type="checkbox" id="ally1_interrupt" /><label for="ally1_interrupt">Interrupt</label>
-                <input type="checkbox" id="ally1_poisoned" /><label for="ally1_poisoned">Poison</label>
-                <input type="checkbox" id="ally1_bleeding" /><label for="ally1_bleeding">Bleed</label>
-                <input type="checkbox" id="ally1_burned" /><label for="ally1_burned">Burn</label>
-                <input type="checkbox" id="ally1_immunity" /><label for="ally1_immunity">Immunity</label>
-            </div>
+        <form>
+			<fieldset>
+				<legend>Ally</legend>
+				
+				<div class="half-width">
+					<label>Character:</label>
+					<select id="ally1_character" onchange="selectCharacter('ally1', this.selectedIndex)">
+						<option value=""></option>
+						<option value="0">Alien</option>
+						<option value="1">Big Sword Guy</option>
+						<option value="2">Caveman</option>
+						<option value="3">Cowboy Guy</option>
+						<option value="4">Cyborg</option>
+						<option value="5">Djinn</option>
+						<option value="6">Hive Drone</option>
+						<option value="7">Mage</option>
+						<option value="8">Pirate</option>
+						<option value="9">Space Girl</option>
+						<option value="10">Sniper Girl</option>
+						<option value="11">Witch</option>
+					</select><br />
+					
+					<label>Skill</label>
+					<div id="ally1_skill" style="display:inline-block"></div><br />
+					
+					<label>Target</label>
+					<div id="ally1_target" style="display:inline-block"></div><br />
+					
+					<button type="button" onclick="doAction(ally1)" id="ally1_btnAction">Do Action</button>
+					<button type="button" onclick="updateCharacter(ally1)">Update</button>
+					<button type="reset">Reset</button>
+				</div>
+				<div class="half-width">
+					<textarea id="ally1_actionHistory" rows="5" cols="50"></textarea>
+				</div>
+				
+				<label>Health</label>
+				<label for="ally1_health_base">Base:</label> <input type="number" id="ally1_health_base" value="0.0" />
+				<label for="ally1_health_mod">Modifier:</label> <input type="number" id="ally1_health_mod" value="1.0" step="0.05" />
+				<br />
+				
+				<label>Attack</label>
+				<label for="ally1_attack_base">Base:</label> <input type="number" id="ally1_attack_base" value="0.0" />
+				<label for="ally1_attack_mod">Modifier:</label> <input type="number" id="ally1_attack_mod" value="1.0" step="0.05" />
+				<label for="ally1_attack_dur">Duration:</label> <input type="number" id="ally1_attack_dur" value="" />
+				<br />
+				
+				<label>Defence</label>
+				<label for="ally1_defence_base">Base:</label> <input type="number" id="ally1_defence_base" value="0.0" />
+				<label for="ally1_defence_mod">Modifier:</label> <input type="number" id="ally1_defence_mod" value="1.0" step="0.05" />
+				<label for="ally1_defence_dur">Duration:</label> <input type="number" id="ally1_defence_dur" value="" />
+				<br />
+				
+				<label>Speed</label>
+				<label for="ally1_speed_base">Base:</label> <input type="number" id="ally1_speed_base" value="0.0" />
+				<label for="ally1_speed_mod">Modifier:</label> <input type="number" id="ally1_speed_mod" value="1.0" step="0.05" />
+				<label for="ally1_speed_dur">Duration:</label> <input type="number" id="ally1_speed_dur" value="" />
+				<br />
+				
+				<label>Accuracy</label>
+				<span class="spacer"></span>
+				<label for="ally1_accuracy_mod">Modifier:</label> <input type="number" id="ally1_accuracy_mod" value="1.0" step="0.05" />
+				<label for="ally1_accuracy_dur">Duration:</label> <input type="number" id="ally1_accuracy_dur" value="" />
+				<br />
+				
+				<label>Effects</label>
+				<div>
+					<input type="checkbox" id="ally1_dazed" /><label for="ally1_dazed">Dazed</label>
+					<input type="checkbox" id="ally1_interrupt" /><label for="ally1_interrupt">Interrupt</label>
+					<input type="checkbox" id="ally1_poisoned" /><label for="ally1_poisoned">Poison</label>
+					<input type="checkbox" id="ally1_bleeding" /><label for="ally1_bleeding">Bleed</label>
+					<input type="checkbox" id="ally1_burned" /><label for="ally1_burned">Burn</label>
+					<input type="checkbox" id="ally1_immunity" /><label for="ally1_immunity">Immunity</label>
+				</div>
 
-			<input type="checkbox" id="ally1_active" /><label for="ally1_active">Active</label>
-            <input type="checkbox" id="ally1_canMove" /><label for="ally1_canMove">Can Move</label>
-            <input type="checkbox" id="ally1_blocksDamage" /><label style="width:200px">Blocks Damage</label>
-        </fieldset></form>
+				<input type="checkbox" id="ally1_active" /><label for="ally1_active">Active</label>
+				<input type="checkbox" id="ally1_canMove" /><label for="ally1_canMove">Can Move</label>
+				<input type="checkbox" id="ally1_blocksDamage" /><label style="width:200px">Blocks Damage</label>
+			</fieldset>
+		</form>
         
-        <form><fieldset>
-            <legend>Enemy2</legend>
-            
-            <label>Character:</label>
-            <select id="enemy2_character" onchange="selectCharacter('enemy2', this.selectedIndex)">
-                <option value=""></option>
-                <option value="0">Alien</option>
-                <option value="1">Big Sword Guy</option>
-                <option value="2">Caveman</option>
-                <option value="3">Cowboy Guy</option>
-                <option value="4">Cyborg</option>
-                <option value="5">Djinn</option>
-                <option value="6">Hive Drone</option>
-                <option value="7">Mage</option>
-                <option value="8">Pirate</option>
-                <option value="9">Space Girl</option>
-                <option value="10">Sniper Girl</option>
-                <option value="11">Witch</option>
-            </select><br />
-            
-            <label>Skill</label>
-            <div id="enemy2_skill" style="display:inline-block"></div><br />
-            
-            <label>Target</label>
-            <div id="enemy2_target" style="display:inline-block"></div><br />
-            
-            <button type="button" onclick="doAction(enemy2)" id="enemy2_btnAction">Do Action</button>
-            <button type="button" onclick="updateCharacter(enemy2)">Update</button>
-            <button type="reset">Reset</button>
-            <br />
-            
-            <label>Health</label>
-            <label for="enemy2_health_base">Base:</label> <input type="number" id="enemy2_health_base" value="0.0" />
-            <label for="enemy2_health_mod">Modifier:</label> <input type="number" id="enemy2_health_mod" value="1.0" step="0.05" />
-            <br />
-            
-            <label>Attack</label>
-            <label for="enemy2_attack_base">Base:</label> <input type="number" id="enemy2_attack_base" value="0.0" />
-            <label for="enemy2_attack_mod">Modifier:</label> <input type="number" id="enemy2_attack_mod" value="1.0" step="0.05" />
-            <label for="enemy2_attack_dur">Duration:</label> <input type="number" id="enemy2_attack_dur" value="" />
-            <br />
-            
-            <label>Defence</label>
-            <label for="enemy2_defence_base">Base:</label> <input type="number" id="enemy2_defence_base" value="0.0" />
-            <label for="enemy2_defence_mod">Modifier:</label> <input type="number" id="enemy2_defence_mod" value="1.0" step="0.05" />
-            <label for="enemy2_defence_dur">Duration:</label> <input type="number" id="enemy2_defence_dur" value="" />
-            <br />
-            
-            <label>Speed</label>
-            <label for="enemy2_speed_base">Base:</label> <input type="number" id="enemy2_speed_base" value="0.0" />
-            <label for="enemy2_speed_mod">Modifier:</label> <input type="number" id="enemy2_speed_mod" value="1.0" step="0.05" />
-            <label for="enemy2_speed_dur">Duration:</label> <input type="number" id="enemy2_speed_dur" value="" />
-            <br />
-            
-            <label>Accuracy</label>
-            <span class="spacer"></span>
-            <label for="enemy2_accuracy_mod">Modifier:</label> <input type="number" id="enemy2_accuracy_mod" value="1.0" step="0.05" />
-            <label for="enemy2_accuracy_dur">Duration:</label> <input type="number" id="enemy2_accuracy_dur" value="" />
-            <br />
-            
-            <label>Effects</label>
-            <div>
-                <input type="checkbox" id="enemy2_dazed" /><label for="enemy2_dazed">Dazed</label>
-                <input type="checkbox" id="enemy2_interrupt" /><label for="enemy2_interrupt">Interrupt</label>
-                <input type="checkbox" id="enemy2_poisoned" /><label for="enemy2_poisoned">Poison</label>
-                <input type="checkbox" id="enemy2_bleeding" /><label for="enemy2_bleeding">Bleed</label>
-                <input type="checkbox" id="enemy2_burned" /><label for="enemy2_burned">Burn</label>
-                <input type="checkbox" id="enemy2_immunity" /><label for="enemy2_immunity">Immunity</label>
-            </div>
+        <form>
+			<fieldset>
+				<legend>Enemy2</legend>
+				
+				<div class="half-width">
+					<label>Character:</label>
+					<select id="enemy2_character" onchange="selectCharacter('enemy2', this.selectedIndex)">
+						<option value=""></option>
+						<option value="0">Alien</option>
+						<option value="1">Big Sword Guy</option>
+						<option value="2">Caveman</option>
+						<option value="3">Cowboy Guy</option>
+						<option value="4">Cyborg</option>
+						<option value="5">Djinn</option>
+						<option value="6">Hive Drone</option>
+						<option value="7">Mage</option>
+						<option value="8">Pirate</option>
+						<option value="9">Space Girl</option>
+						<option value="10">Sniper Girl</option>
+						<option value="11">Witch</option>
+					</select><br />
+					
+					<label>Skill</label>
+					<div id="enemy2_skill" style="display:inline-block"></div><br />
+					
+					<label>Target</label>
+					<div id="enemy2_target" style="display:inline-block"></div><br />
+					
+					<button type="button" onclick="doAction(enemy2)" id="enemy2_btnAction">Do Action</button>
+					<button type="button" onclick="updateCharacter(enemy2)">Update</button>
+					<button type="reset">Reset</button>
+				</div>
+				<div class="half-width">
+					<textarea id="enemy2_actionHistory" rows="5" cols="50"></textarea>
+				</div>
+				
+				<label>Health</label>
+				<label for="enemy2_health_base">Base:</label> <input type="number" id="enemy2_health_base" value="0.0" />
+				<label for="enemy2_health_mod">Modifier:</label> <input type="number" id="enemy2_health_mod" value="1.0" step="0.05" />
+				<br />
+				
+				<label>Attack</label>
+				<label for="enemy2_attack_base">Base:</label> <input type="number" id="enemy2_attack_base" value="0.0" />
+				<label for="enemy2_attack_mod">Modifier:</label> <input type="number" id="enemy2_attack_mod" value="1.0" step="0.05" />
+				<label for="enemy2_attack_dur">Duration:</label> <input type="number" id="enemy2_attack_dur" value="" />
+				<br />
+				
+				<label>Defence</label>
+				<label for="enemy2_defence_base">Base:</label> <input type="number" id="enemy2_defence_base" value="0.0" />
+				<label for="enemy2_defence_mod">Modifier:</label> <input type="number" id="enemy2_defence_mod" value="1.0" step="0.05" />
+				<label for="enemy2_defence_dur">Duration:</label> <input type="number" id="enemy2_defence_dur" value="" />
+				<br />
+				
+				<label>Speed</label>
+				<label for="enemy2_speed_base">Base:</label> <input type="number" id="enemy2_speed_base" value="0.0" />
+				<label for="enemy2_speed_mod">Modifier:</label> <input type="number" id="enemy2_speed_mod" value="1.0" step="0.05" />
+				<label for="enemy2_speed_dur">Duration:</label> <input type="number" id="enemy2_speed_dur" value="" />
+				<br />
+				
+				<label>Accuracy</label>
+				<span class="spacer"></span>
+				<label for="enemy2_accuracy_mod">Modifier:</label> <input type="number" id="enemy2_accuracy_mod" value="1.0" step="0.05" />
+				<label for="enemy2_accuracy_dur">Duration:</label> <input type="number" id="enemy2_accuracy_dur" value="" />
+				<br />
+				
+				<label>Effects</label>
+				<div>
+					<input type="checkbox" id="enemy2_dazed" /><label for="enemy2_dazed">Dazed</label>
+					<input type="checkbox" id="enemy2_interrupt" /><label for="enemy2_interrupt">Interrupt</label>
+					<input type="checkbox" id="enemy2_poisoned" /><label for="enemy2_poisoned">Poison</label>
+					<input type="checkbox" id="enemy2_bleeding" /><label for="enemy2_bleeding">Bleed</label>
+					<input type="checkbox" id="enemy2_burned" /><label for="enemy2_burned">Burn</label>
+					<input type="checkbox" id="enemy2_immunity" /><label for="enemy2_immunity">Immunity</label>
+				</div>
 
-			<input type="checkbox" id="enemy2_active" /><label for="enemy2_active">Active</label>
-            <input type="checkbox" id="enemy2_canMove" /><label for="enemy2_canMove">Can Move</label>
-            <input type="checkbox" id="enemy2_blocksDamage" /><label style="width:200px">Blocks Damage</label>
-        </fieldset></form>
+				<input type="checkbox" id="enemy2_active" /><label for="enemy2_active">Active</label>
+				<input type="checkbox" id="enemy2_canMove" /><label for="enemy2_canMove">Can Move</label>
+				<input type="checkbox" id="enemy2_blocksDamage" /><label style="width:200px">Blocks Damage</label>
+			</fieldset>
+		</form>
+
         <div id="battleLog"></div>
     </body>
 </html>
