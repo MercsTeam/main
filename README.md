@@ -14,3 +14,8 @@
   <li><a href="http://nickcomics.ca/Brock/Mercs/select.html">Initial Character Selection</a></li>
   <li><a href="http://nickcomics.ca/Brock/portfolio/images/Mercs_character_sheet.png">Character Sheet</a></li>
 </ul>
+
+<h3>Design Documents</h3>
+<ul>
+  <li><a href="https://brocku-my.sharepoint.com/:w:/g/personal/ng15fj_brocku_ca/EXDnR6oRFUBAhF3R3Pid5Y8B9NOfavRx-4bOl9xQuM-SFQ?e=Su7s4M">Technical</a></li>
+</ul>
