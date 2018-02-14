@@ -100,7 +100,7 @@
 				var target = null;
 				for(var i = 0; i < ddls.length; i++)
 				{
-					target = document.querySelector("#" ddls[i] + "_character");
+					target = document.querySelector(string.format("#{0}_character", ddls[i]));
 					target.addOption("-", "");
 					for(var j = 0; j < characters.length; j++)
 					{
