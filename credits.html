@@ -1,31 +1,44 @@
+
 <!DOCTYPE html>
 <html lang="en-CA">
-  <head>
-    <title>Credits</title>
-    <script src="scripts/Credits.js"></script>
-  </head>
-  <body>
-    <h1>Credits</h1>
-    <section>
-      <script>
-   
-        var dl = document.createElement("DL");
-        var dt, dd;
-        for(var d in _credits)
-        {
-          dt = document.createElement("DT");
-          dt.innerHTML = d;
-          dl.appendChild(dt);
-
-          for(var i = 0; i < _credits[d].length; i++)
-          {
-            dd = document.createElement("DD");
-            dd.innerHTML = _credits[d][i];
-            dl.appendChild(dd);
-          }
-        }
-        document.querySelector("section").appendChild(dl);
-      </script>
-    </section>
-  </body>
-</html> 
+    <head>
+        <base href="https://mercsteam.github.io/main/" />
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <title>Credits</title>
+        <script src="scripts/Credits.js"></script>
+        <style>
+            body { font-family:Arial;font-size:14pt }
+            dl
+            {
+                text-align:left;
+                margin:0;padding-bottom:50px;
+            }
+            dt { margin-top:20px;font-size:60%;font-weight:bold;text-transform:uppercase }
+            dd { margin:0;padding:0 }
+        </style>
+    </head>
+    <body>
+        <h1>Credits</h1>
+        <section>
+            <script>
+                
+                var dl = document.createElement("DL");
+                var dt, dd;
+                for(var d in _credits)
+                {
+                    dt = document.createElement("DT");
+                    dt.innerHTML = d;
+                    dl.appendChild(dt);
+                    
+                    for(var i = 0; i < _credits[d].length; i++)
+                    {
+                        dd = document.createElement("DD");
+                        dd.innerHTML = _credits[d][i];
+                        dl.appendChild(dd);
+                    }
+                }
+            document.querySelector("section").appendChild(dl);
+                </script>
+        </section>
+    </body>
+</html>
