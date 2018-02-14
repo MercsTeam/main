@@ -39,7 +39,7 @@ function SamuraiGirl()
 	this.type = CharacterType.Finesse;
 	this.alignment = "Good";
 
-    this.skills = [ new Skill("Yoko Giri/Side Cut"), new Skill("Kesi Giri/Slash"), new Skill("Overhead Cut"), new Skill("Nukitsuke/Intimidation Stance"), new Retreat() ];
+    this.skills = [ new YokoGiri(), new KesiGiri(), new OverheadCut(), new Nukitsuke(), new Retreat() ];
 
 	this.state = 
     {
@@ -69,7 +69,7 @@ function DinoGirl()
 	this.type = CharacterType.Finesse;
 	this.alignment = "Good";
 
-    this.skills = [ new Skill("Tail Whip"), new Skill("Snarl"), new Skill("Heat Vision"), new Skill("Ripping Claws"), new Retreat() ];
+    this.skills = [ new TailWhip(), new Snarl(), new HeatVision(), new RippingClaws(), new Retreat() ];
 
 	this.state = 
     {
@@ -99,7 +99,7 @@ function Clown()
 	this.type = CharacterType.Physical;
 	this.alignment = "Evil";
 
-	this.skills = [ new Skill("Seltzer Bottle"), new Skill("Exploding Pie"), new Skill("Balloon Animal"), new Skill("Honk"), new Retreat() ];
+	this.skills = [ new SeltzerBottle(), new ExplodingPie(), new BalloonAnimal(), new Honk(), new Retreat() ];
 
 	this.state = 
     {
