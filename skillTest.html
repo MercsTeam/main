@@ -94,7 +94,21 @@
 					flush : function() { this.console.innerHTML = ""; }
 				}
 			};
-			window.onload = Game.init;
+			window.onload = function()
+			{
+				var ddls = [ "self", "ally1", "enemy1", "enemy2" ];
+				var target = null;
+				for(var i = 0; i < ddls.length; i++)
+				{
+					target = document.querySelector("#" ddls[i] + "_character");
+					target.addOption("-", "");
+					for(var j = 0; j < characters.length; j++)
+					{
+						target.addOption((new characters[j]).name, j);	
+					}
+				}
+				Game.init();
+			}			
 
 			function selectCharacter(which, index)
 			{
@@ -418,19 +432,6 @@
 				<div class="half-width">
 					<label>Character:</label>
 					<select id="self_character" onchange="selectCharacter('self', this.selectedIndex)">
-						<option value=""></option>
-						<option value="0">Alien</option>
-						<option value="1">Big Sword Guy</option>
-						<option value="2">Caveman</option>
-						<option value="3">Cowboy Guy</option>
-						<option value="4">Cyborg</option>
-						<option value="5">Djinn</option>
-						<option value="6">Hive Drone</option>
-						<option value="7">Mage</option>
-						<option value="8">Pirate</option>
-						<option value="9">Space Girl</option>
-						<option value="10">Sniper Girl</option>
-						<option value="11">Witch</option>
 					</select><br />
 					
 					<label>Skill</label>
@@ -499,19 +500,6 @@
 				<div class="half-width">
 					<label>Character:</label>
 					<select id="enemy1_character" onchange="selectCharacter('enemy1', this.selectedIndex)">
-						<option value=""></option>
-						<option value="0">Alien</option>
-						<option value="1">Big Sword Guy</option>
-						<option value="2">Caveman</option>
-						<option value="3">Cowboy Guy</option>
-						<option value="4">Cyborg</option>
-						<option value="5">Djinn</option>
-						<option value="6">Hive Drone</option>
-						<option value="7">Mage</option>
-						<option value="8">Pirate</option>
-						<option value="9">Space Girl</option>
-						<option value="10">Sniper Girl</option>
-						<option value="11">Witch</option>
 					</select><br />
 					
 					<label>Skill</label>
@@ -580,19 +568,6 @@
 				<div class="half-width">
 					<label>Character:</label>
 					<select id="ally1_character" onchange="selectCharacter('ally1', this.selectedIndex)">
-						<option value=""></option>
-						<option value="0">Alien</option>
-						<option value="1">Big Sword Guy</option>
-						<option value="2">Caveman</option>
-						<option value="3">Cowboy Guy</option>
-						<option value="4">Cyborg</option>
-						<option value="5">Djinn</option>
-						<option value="6">Hive Drone</option>
-						<option value="7">Mage</option>
-						<option value="8">Pirate</option>
-						<option value="9">Space Girl</option>
-						<option value="10">Sniper Girl</option>
-						<option value="11">Witch</option>
 					</select><br />
 					
 					<label>Skill</label>
@@ -661,19 +636,6 @@
 				<div class="half-width">
 					<label>Character:</label>
 					<select id="enemy2_character" onchange="selectCharacter('enemy2', this.selectedIndex)">
-						<option value=""></option>
-						<option value="0">Alien</option>
-						<option value="1">Big Sword Guy</option>
-						<option value="2">Caveman</option>
-						<option value="3">Cowboy Guy</option>
-						<option value="4">Cyborg</option>
-						<option value="5">Djinn</option>
-						<option value="6">Hive Drone</option>
-						<option value="7">Mage</option>
-						<option value="8">Pirate</option>
-						<option value="9">Space Girl</option>
-						<option value="10">Sniper Girl</option>
-						<option value="11">Witch</option>
 					</select><br />
 					
 					<label>Skill</label>
