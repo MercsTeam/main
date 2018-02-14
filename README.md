@@ -1,8 +1,3 @@
-<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Press Start 2P" />
-<style type="text/css"> 
-			h1, h2 { font-family: 'Press Start 2P';background-color:#000000;color:#4CFF00; }
-</style>
-
 <h1>Mercs: Triple Threat</h1>
 <h2>Development</h2>
 
