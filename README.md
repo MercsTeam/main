@@ -22,5 +22,5 @@
   <li><a href="https://docs.google.com/document/d/1CA8FU2TIvxEK1XoCHBq3IW9w-wO3SA7ddr0NDaIMMTg/edit?usp=sharing">Production</a></li>
   <li><a href="https://docs.google.com/document/d/1tF19BGu9oIPCAh99GTFolxGxfE2bHpny7IWHoKkWcCo/edit?usp=sharing">Design</a></li>
   <li><a href="https://docs.google.com/document/d/1bltydvHk7uhde2vmXZ1zq3GDYAzAYOJDPocSlvFrgJs/edit">Art &amp; Sound</a></li>
-  <li><a href="https://brocku-my.sharepoint.com/:w:/g/personal/ng15fj_brocku_ca/EXDnR6oRFUBAhF3R3Pid5Y8B9NOfavRx-4bOl9xQuM-SFQ?e=Su7s4M">Technical</a></li>
+  <li><a href="https://brocku-my.sharepoint.com/:w:/g/personal/ng15fj_brocku_ca/EYuBQpYNVNVNpKODmdyaJEAB2sE4nUTJ0SrtbjFdMgtDNQ?e=bPiBxV">Technical</a></li>
 </ul>
