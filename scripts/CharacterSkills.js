@@ -1042,7 +1042,18 @@ PoisonApple.prototype = new Skill("Poison Apple");
 function SeltzerBottle() 
 {
 	this.type = SkillType.Offensive;
-	//(0) Skill 1: Seltzer Bottle (10) - Sprays water at the enemy. Has a 1% chance of dealing 100 extra damage by hitting the opponent in the eye.
+	this.attackValue = 10;
+	this.description = "Sprays water at the enemy. Has a 1% chance of dealing 100 extra damage by hitting the opponent in the eye.";
+
+	this.doAction = function(self, target)
+	{
+		this.attackValue = (Math.random() <= 0.01 ? 110 : 10);
+
+		var damage = target[0].calculateDamage(self, Game.getTypeBonus(self.type, target[0].type));
+		target[0].health.base = Math.max(0, target[0].health.base - damage);
+		
+		this.logAction(self, target[0], damage);
+	};
 }
 SeltzerBottle.prototype = new Skill("Seltzer Bottle");
 

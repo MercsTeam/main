@@ -66,7 +66,7 @@ function DinoGirl()
     this.name = "DINOGIRL";
 	this.realName = "Qastra";
 	this.image = "dinogirl.png";
-	this.type = CharacterType.Finesse;
+	this.type = CharacterType.Physical;
 	this.alignment = "Good";
 
     this.skills = [ new TailWhip(), new Snarl(), new HeatVision(), new RippingClaws(), new Retreat() ];
@@ -96,7 +96,7 @@ function Clown()
 	this.name = "CLOWN";
 	this.realName = "Mr. Giggles";
 	this.image = "clown.png";
-	this.type = CharacterType.Physical;
+	this.type = CharacterType.Magic;
 	this.alignment = "Evil";
 
 	this.skills = [ new SeltzerBottle(), new ExplodingPie(), new BalloonAnimal(), new Honk(), new Retreat() ];
