@@ -110,8 +110,6 @@ function Character()
 		}
 		else
 		{
-			this.health.base *= (this.immune && this.health.modifier < 1.0 ? 1.0 : this.health.modifier);
-
 			if(this.stunned) this.canMove = false;
 
 			for(var i = 1; i < attributes.length; i++)
@@ -155,38 +153,57 @@ function Character()
 				{
 					this.setEffectIndicator(Game.NoEffect, i);
 				}
-			}
-			this.updateHealthBar();
+			}			
+		}
+	};
 
-			if(this.health.base == 0) 
+	this.checkHealth = function()
+	{
+		if(!this.active || this.position == 3) return;
+
+		this.health.base *= (this.immune && this.health.modifier < 1.0 ? 1.0 : this.health.modifier);
+		this.updateHealthBar();
+
+		if(this.health.base == 0) 
+		{
+			var opp = this.player.getOpponent();
+
+			//proceed if opponent has active characters
+			if(opp.activeCharacterCount != 0)
 			{
-				var opp = this.player.getOpponent();
+				this.active = false;
 
-				//proceed if opponent has active characters
-				if(opp.activeCharacterCount != 0)
-				{
-					this.active = false;
+				//show defeated image
+				Game.skillImgArr.push({ 
+					player : this.player, 
+					character : this,
+					label : string.format("Player {0}.{1} - {2}<br />DEFEATED", (this.player == Game.player1 ? 1 : 2), this.position, this.name), 
+					url : this.defeatImage, 
+					sound : null, 
+					reaction : [] 
+				});
 
-					//move out of active position
-					this.skills[4].doAction(this.player, this.position);
-
-					//clear effect indicators
-					for(var i = 0; i < this.effects.length; i++)
-					{
-						this.setEffectIndicator(Game.NoEffect, i);
-					}
-
-					//show defeated image
-					Game.skillImgArr.push({ player : this.player, label : string.format("Player {0}.{1} - {2}<br />DEFEATED", (this.player == Game.player1 ? 1 : 2), this.position, this.name), url : this.defeatImage });
-
-					//switch sprite to tombstone
-					this.updateGameObject(null, "Dead");
-
-					this.player.activeCharacterCount--;
-				}
+				this.player.activeCharacterCount--;
 			}
 		}
-	}
+	};
+
+	this.setDeceased = function()
+	{
+		//rotate out of action position
+		this.skills[4].doAction(this.player, this.position);
+
+		//clear effect indicators
+		for(var i = 0; i < this.effects.length; i++)
+		{
+			this.setEffectIndicator(Game.NoEffect, i);
+		}
+
+		//switch sprite to tombstone
+		this.updateGameObject(null, "Dead");
+
+		this.updateHealthBar();
+	};
 	
     this.getSelectedSkill = function()
     {
@@ -314,11 +331,18 @@ function Character()
 
 	this.updateHealthBar = function()
 	{
-		var width = Math.max(0.001, this.getHealthPct() * 4);
-		var barColor = (width < 1 ? 0xFF2424 : 0x00CC33);
-		
-		this.healthbar.geometry = new THREE.PlaneGeometry( width, 0.5 );
-		this.healthbar.material = new THREE.MeshBasicMaterial( {color: barColor, side: THREE.DoubleSide } );
+		try
+		{
+			var width = Math.max(0.001, this.getHealthPct() * 4);
+			var barColor = (width < 1 ? 0xFF2424 : 0x00CC33);
+			
+			this.healthbar.geometry = new THREE.PlaneGeometry( width, 0.5 );
+			this.healthbar.material = new THREE.MeshBasicMaterial( {color: barColor, side: THREE.DoubleSide } );
+		}
+		catch(exception)
+		{
+			//Game.BattleLog.write("Character.updateHealthBar: " + exception.message);
+		}
 	};
 
 	//create blank indicator
@@ -346,7 +370,7 @@ function Character()
 		}
 		catch(exception)
 		{
-			Game.BattleLog.write("Character.setEffectIndicator: " + exception.message);
+			//Game.BattleLog.write("Character.setEffectIndicator: " + exception.message);
 		}
 	};
 	
@@ -389,7 +413,7 @@ function Character()
 		}
 		catch(exception)
 		{
-			Game.BattleLog.write("Character.updateGameObject: " + exception.message);
+			//Game.BattleLog.write("Character.updateGameObject: " + exception.message);
 		}
 	};
 

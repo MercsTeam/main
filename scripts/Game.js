@@ -55,7 +55,8 @@ var Game =
 		{ background : "Spacecity.png", floor : "spacecity.jpg", sound : "" },
 		{ background : "Underwater.png", floor : "underwater.jpg", sound : "" },
 		{ background : "Forest.png", floor : "log.jpg", sound : "" },
-		{ background : "Castle_dk.jpg", floor : "drawbridge.jpg", sound : "" }
+		{ background : "Castle_dk.jpg", floor : "drawbridge.jpg", sound : "" },
+		{ background : "galaxy.png", floor : "planetoid.jpg", sound : "" }
 	],
 	toggleSound : function()
 	{
@@ -228,6 +229,7 @@ var Game =
 
 						this.skillImgArr.push({
 							player : p,
+							character : all[i],
 							label : string.format("Player {0}.{1} - {2}<br />{3} ({4})",
 							(p == this.player1 ? 1 : 2),
 							all[i].position,
@@ -251,7 +253,14 @@ var Game =
 					}
 				}
 			}
-		}		
+		}
+		
+		for(var i = 0; i < Game.CHARACTERS_PER_TEAM; i++)
+		{
+			this.player1.characters[i].checkHealth();
+			this.player2.characters[i].checkHealth();
+		}
+
 		setTimeout("Game.showImages(0)", 2500);
 	},
 	showImages : function(index)
@@ -261,7 +270,8 @@ var Game =
 
 		if(index <= this.skillImgArr.length - 1)
 		{
-			var slide = this.skillImgArr[index];			
+			var slide = this.skillImgArr[index];
+					
 			if(slide.sound)
 			{
 				this.uiSound.start(slide.sound);
@@ -276,6 +286,11 @@ var Game =
 			v.style.backgroundImage = string.format("url('{0}?v=20180128')", slide.url);
 			
 			v.querySelector("span").innerHTML = slide.label;
+
+			if(slide.label.contains("DEFEATED"))
+			{
+				slide.character.setDeceased();
+			}
 
 			if(slide.reaction.length != 0)
 			{				

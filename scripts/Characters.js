@@ -254,6 +254,8 @@ function CowboyGuy()
 
 	this.quote = "Look what the cat dragged in.";
     this.backstory = "Quick-witted gunslinger with unusually good luck";
+
+	this.defeatImage = "characters/CowboyComicStills/cg_st_death2.png";
 }
 CowboyGuy.prototype = new Character();
 

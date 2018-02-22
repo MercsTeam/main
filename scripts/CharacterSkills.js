@@ -246,6 +246,7 @@ function Fireball()
     this.attackValue = 50;
     this.burnProb = Probability.Low;
     this.description = "Medium damage single-target attack. Low chance of causing burn.";
+	this.imageURL = "characters/MageComicStills/MageFireball.png";
 }
 Fireball.prototype = new Skill("Fireball");
 
@@ -256,6 +257,7 @@ function LightningStorm()
     this.multiTarget = true;
     this.stunProb = Probability.Low;
     this.description = "Low damage to both frontline targets. Low chance of causing Stun.";
+	this.imageURL = "characters/MageComicStills/MageLightningStorm.png";
 }
 LightningStorm.prototype = new Skill("Lightning Storm");
 
@@ -289,7 +291,7 @@ function LightningStrike()
     this.type = SkillType.Offensive;
     this.attackValue = 25;
     this.interruptProb = 0.15;
-    this.description = "Calls down a single bolt of lightning, deals low damage but has a chance to interrupt the target.";
+    this.description = "Calls down a single bolt of lightning, deals low damage but has a chance to interrupt the target.";	
 }
 LightningStrike.prototype = new Skill("Lightning Strike");
 
