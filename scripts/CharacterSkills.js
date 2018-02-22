@@ -267,6 +267,7 @@ function DivineShield()
     this.blocksDamage = true;
     this.description = "Prevents next attack from damaging work. Cannot be used twice in a row by same merc.";
 	this.cooldown = 1;
+	this.imageURL = "characters/MageComicStills/MageDivineShield.png";
 }
 DivineShield.prototype = new Skill("Divine Shield");
 
