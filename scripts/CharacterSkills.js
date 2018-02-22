@@ -711,9 +711,9 @@ function LiquidCourage()
 	this.cooldown = 3;
 	this.effectDuration = 3;
 	this.selfSpeedMod = 0.5;
-	this.selfDefenceMod = 2;
-	
+	this.selfDefenceMod = 2;	
 	this.description = "Liquid Courage: Speed is reduced by 50%, and defense is boosted 100% for 3 turns.";
+	this.imageURL = "characters/CowboyComicStills/cb_liquid_courage.png";
 	
 	this.doAction = function(self, target)
 	{
