@@ -549,6 +549,8 @@ function Maelstrom()
 	
 	this.doAction = function(self, target)
 	{
+		this.selected = true;
+
 		self.health.modifer = 0.75;
 		self.health.duration = 1;
 
@@ -625,6 +627,8 @@ function Abduction()
 			{
 				var opp = self.player.getOpponent();
 				var oppMerc = opp.getCharacterByPosition(pos);
+
+				oppMerc.updateGameObject(null, self.AbductionSprite);
 
 				var damage = oppMerc.health.base;
 				oppMerc.health.base = 0;
@@ -840,9 +844,10 @@ function HiveMindHijack()
 	this.cooldown = 1;
 	this.description = "If poisoned, target will be forced to attack their ally with a medium-damage (50) attack. "
 		+ "If target does not have an ally, target will attack themselves with a low-damage (25) attack.";
+
 	this.doAction = function(self, target)
 	{
-		this.logAction(self, target[0], 0);
+		var t = null;
 
 		if(target[0].poisoned)
 		{
@@ -853,6 +858,7 @@ function HiveMindHijack()
 
 			if(ally.active)
 			{
+				t = ally;
 				bonus = Game.getTypeBonus(target[0].type, ally.type);
 
 				damage = ((target[0].attack.base * target[0].attack.modifier) + 50) * bonus - (ally.defence.base * ally.defence.modifier);
@@ -867,6 +873,7 @@ function HiveMindHijack()
 			}
 			else
 			{
+				t = target[0];
 				damage = ((target[0].attack.base * target[0].attack.modifier) + 25) * bonus - (target[0].defence.base * target[0].defence.modifier);
 				target[0].health.base = Math.max(0, target[0].health.base - damage);
 
@@ -876,6 +883,8 @@ function HiveMindHijack()
 					damage
 				);
 			}
+			
+			this.logAction(self, t, damage);
 			Game.BattleLog.write(output);
 		}
 	};
@@ -900,23 +909,41 @@ function BlastOff()
 	this.burnProb = Probability.Low;
 	this.blocksDamage = true;
 	this.duration = 3;
-	this.desription = "Does medium damage to both targets, with a low chance of causing burn. User cannot move or be attacked next turn. User returns to battle on the turn after, "
+	this.description = "Does medium damage to both targets, with a low chance of causing burn. User cannot move or be attacked next turn. User returns to battle on the turn after, "
 		+ "dealing medium damage to both targets and has a low chance of causing burn. NOTE: Player cannot rotate between blast off and re-entry.";
 
 	var counter = 0;
+	var defaultState = null;
 
 	this.doAction = function(self, target)
 	{
+		this.selected = true;
+
 		var r = Math.random();
-		var damage = 0;
+		var damage = 0;		
 
-		counter++;
+		self.canMove = (counter == 2);
+		self.blocksDamage = true;
 
-		self.canMove = (counter == 3);
-		self.blocksDamage = (counter == 1);
-
-		if(counter == 1 || counter == 3)
+		if(counter == 0 || counter == 2)
 		{
+			if(counter == 0)
+			{
+				for(var i in self.state)
+				{
+					if(self.state[i].img == self.activeSprite) 
+					{
+						defaultState = self.state[i];
+						break;
+					}
+				}
+				self.updateGameObject(null, self.state.BLAST_OFF);
+			}
+			if(counter == 2)
+			{	
+				self.updateGameObject(null, defaultState);
+			}
+
 			for(var i = 0; i < target.length; i++)
 			{
 				damage = target[i].calculateDamage(self, Game.getTypeBonus(self.type, target[i].type));
@@ -933,6 +960,7 @@ function BlastOff()
 				this.logAction(self, target[i], damage);
 			}
 		}
+		counter++;
 	};
 }
 BlastOff.prototype = new Skill("Blast Off!");

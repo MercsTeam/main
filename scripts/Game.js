@@ -17,7 +17,7 @@ var Game =
 	arena : document.querySelector("#gamePlay"),
 	availableCharacters : [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, Alien, Caveman, CowboyGuy, HiveDrone, SpaceGirl, Witch ], //, Clown, DinoGirl, SamuraiGirl, Nemesis ],
 	skillImgArr : null,
-	DeadSprite : "tombstone.png",
+	DeadSprite : "tombstone.png",	
 	NoEffect : "blank.png",
 	Effects :
 	{

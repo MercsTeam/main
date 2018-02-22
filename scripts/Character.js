@@ -28,6 +28,7 @@ function Character()
 	this.alignment = "";
 	this.quote = "";
 	
+	this.activeSprite = null;
 	this.defeatImage = "";
 	this.damageImage = "";
 
@@ -200,7 +201,7 @@ function Character()
 		}
 
 		//switch sprite to tombstone
-		this.updateGameObject(null, "Dead");
+		this.updateGameObject(null, Game.DeadSprite);
 
 		this.updateHealthBar();
 	};
@@ -272,8 +273,9 @@ function Character()
 	this.createGameObject = function(scene, sprite, shape, coords, marker)
 	{
 		var state = this.state[sprite];
+		this.activeSprite = state.img;
 		
-		var texture  = new THREE.TextureLoader().load(string.format("images/sprites/{0}?v=20180128", state.img));
+		var texture  = new THREE.TextureLoader().load(string.format("images/sprites/{0}?v=20180128", this.activeSprite));
 		if(state.wrap) texture.wrapS = THREE.RepeatWrapping;
 		
 		var material = new THREE.MeshLambertMaterial( { map : texture, transparent : true } );
@@ -380,8 +382,8 @@ function Character()
 		{
 			if(sprite)
 			{
-				var spriteImg = (sprite == "Dead" ? Game.DeadSprite : this.state[sprite].img);
-				var texture  = new THREE.TextureLoader().load(string.format("images/sprites/{0}?v=20180204", spriteImg));
+				this.activeSprite = (typeof sprite === "string" ? sprite : sprite.img);
+				var texture  = new THREE.TextureLoader().load(string.format("images/sprites/{0}?v=20180204", this.activeSprite));
 
 				this.obj.material = new THREE.MeshLambertMaterial( { map : texture, transparent : true } );
 			}

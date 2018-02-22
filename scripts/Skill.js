@@ -163,6 +163,8 @@ function Skill(n)
 				{
 					if(this.type == SkillType.Offensive)
 					{
+						if(target[i].blocksDamage) break;
+
 						if(this.oppAttackMod != 1.0) target[i].attack.modifier = this.oppAttackMod;
 						if(this.oppDefenceMod != 1.0) target[i].defence.modifier = this.oppDefenceMod;
 						if(this.oppSpeedMod != 1.0) target[i].speed.modifier = this.oppSpeedMod;

@@ -192,6 +192,8 @@ function Alien()
 
 	this.quote = "Blublbublubblubblub.";
     this.backstory = "Xiklak may be one of the only remaining life-forms native to the ammonia oceans of Neptune. He is also a crack-shot with a laser rifle. That's about the only two things people know about this hired gun.";
+
+	this.AbductionSprite = "abduction.png";
 }
 Alien.prototype = new Character();
 
@@ -335,7 +337,8 @@ function SpaceGirl()
 	this.state = 
     {
 		IDLE_FRONT : { img : "spacegirl_idle_front.png", wrap : false, animate : null },
-		IDLE_BACK  : { img : "spacegirl_idle_back.png", wrap : true, animate : null }
+		IDLE_BACK  : { img : "spacegirl_idle_back.png", wrap : true, animate : null },
+		BLAST_OFF  : { img : "spacegirl_blastoff.png", wrap : false, animate : null }
     };
 
 	this.health = { base : 200, modifier : 1.0  };
