@@ -6,6 +6,7 @@
 <ul>
   <li><a href="https://mercsteam.github.io/main/gameplayDemo_v16.html">Current Demo Version</a></li>
   <li><a href="https://mercsteam.github.io/main/skillTest.html">Skill Test</a></li>
+  <li><a href="https://mercsteam.github.io/main/characterAssets.html">Character Assets</a></li>
   <li><a href="https://mercsteam.github.io/main/characters">Character Info</a></li>
   <li><a href="https://mercsteam.github.io/main/images/wallpaper.png">Wallpaper</a></li>
   
