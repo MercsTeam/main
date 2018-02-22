@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html lang="en-CA">
+    <head>
+        <!--base href="https://mercsteam.github.io/main/" /-->
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <title>Mercs - Character Assets</title>
+        
+        <script src="scripts/util.js"></script>
+        
+        <script src="scripts/Player.js"></script>
+        <script src="scripts/Skill.js"></script>
+        <script src="scripts/Character.js"></script>
+        <script src="scripts/CharacterSkills.js"></script>
+        
+        <script src="scripts/BonusCharacters.js"></script>
+        <script src="scripts/Characters.js"></script>
+
+		<script src="scripts/SoundPlayer.js"></script>
+        
+        <script>
+			var self, ally1, enemy1, enemy2;
+
+			var characters = [
+				new Alien(),
+				new BigSwordGuy(),
+				new Caveman(),
+				new Clown(),
+				new CowboyGuy(),
+				new Cyborg(),
+				new DinoGirl(),
+				new Djinn(),
+				new HiveDrone(),
+				new Mage(),
+				new Nemesis(),
+				new Pirate(),
+				new SamuraiGirl(),
+				new SpaceGirl(),
+				new SniperGirl(),
+				new Witch()
+			];
+
+			window.onload = function()
+			{
+				var c;
+				var o = document.querySelector("#output");
+
+				var props1 = [ "damageImage", "defeatImage"];
+				var props2 = [ "imageURL", "soundID" ];
+				var ul, li, ul2, li2, a, soundID;
+
+				for(var h = 0; h < characters.length; h++)
+				{
+					h2 = document.createElement("H2");
+					h2.innerHTML = characters[h].name;
+
+					ul = document.createElement("UL");
+
+					for(var i = 0; i < props1.length; i++)
+					{
+						li = document.createElement("LI");
+						li.className = (characters[h].hasOwnProperty(props1[i]) ? "complete" : "missing");
+						li.appendChild(document.createTextNode(props1[i]));
+						if(characters[h].hasOwnProperty(props1[i]))
+						{
+							a = document.createElement("A");
+							a.target = "_new";
+							a.href = characters[h][props1[i]];
+							a.innerHTML = "&#8618;";
+							li.appendChild(a);
+						}
+						ul.appendChild(li);
+					}
+					
+					for(var i = 0; i < characters[h].skills.length - 1; i++)
+					{	
+						ul2 = document.createElement("UL");
+						for(var j = 0; j < props2.length; j++)
+						{
+							li2 = document.createElement("LI");
+							li2.className = (characters[h].skills[i].hasOwnProperty(props2[j]) ? "complete" : "missing");
+							li2.appendChild(document.createTextNode(props2[j]));
+							if(characters[h].skills[i].hasOwnProperty(props2[j]))
+							{
+								a = document.createElement("A");
+								a.target = "_new";
+								if(props2[j] == "soundID")
+								{
+									soundID = characters[h].skills[i][props2[j]];
+									a.href = "Mercs_sound_library/" + SoundLibrary[soundID];
+								}
+								else
+								{
+									a.href = characters[h].skills[i][props2[j]];
+								}
+								a.innerHTML = "&#8618;";
+								li2.appendChild(a);
+							}
+							ul2.appendChild(li2);
+						}
+
+						li = document.createElement("LI");
+						li.appendChild(document.createTextNode(characters[h].skills[i].name));
+						li.appendChild(ul2);
+						ul.appendChild(li);
+					}
+
+					o.appendChild(h2);
+					o.appendChild(ul);
+				}
+
+				var completedAssets = document.querySelectorAll(".complete").length;
+				var missingAssets = document.querySelectorAll(".missing").length
+
+				var r = document.querySelector("#result");
+				r.innerHTML = string.format("<label>Completed:</label>&nbsp;"
+					+ "<progress value=\"{0}\" title=\"{0} of {1} Assets Complete\" max=\"{1}\"></progress>"
+					+ "<span>{2}%</span>",
+					completedAssets,
+					missingAssets,
+					Math.round(100.0 * completedAssets / (completedAssets + missingAssets), 2)
+				);
+			}
+        </script>
+        
+        <style>
+            body { font-family:Arial;font-size:15pt }
+			label { font-weight:bold }
+			ul { list-style-type:none;margin:0;padding:0; }
+
+			li.complete, li.missing { border-radius:5px;width:250px;padding:5px;margin:2px; }
+			li.complete { background-color:#06B025; }
+			li.missing { background-color:red;  }
+
+			a { display:inline-block;margin-left:5px }
+        </style>
+    </head>
+    <body>
+		<h1>Character Assets</h1>
+		<div id="result"></div>
+		<div id="output"></div>
+    </body>
+</html>
