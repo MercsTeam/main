@@ -137,7 +137,7 @@ figure.selected_player1 figcaption:before, figure.selected_player2 figcaption:be
 
 .abilities { padding:20px;text-align:center; }
 
-.skillDesc { font-size:1.5em;margin:10px 20px 5px 20px;padding:10px;height:22%;background-color:#ffffff;border-radius:10px; }
+.skillDesc { font-size:1.5em;margin:10px 20px 5px 20px;padding:10px;min-height:22%;background-color:#ffffff;border-radius:10px; }
 .skillDesc strong { text-transform:uppercase; }
 
 .characterReady { background-size:100%;background-repeat:no-repeat;filter: grayscale(80%); }
