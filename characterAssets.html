@@ -116,7 +116,7 @@
 					+ "<progress value=\"{0}\" title=\"{0} of {1} Assets Complete\" max=\"{1}\"></progress>"
 					+ "<span>{2}%</span>",
 					completedAssets,
-					missingAssets,
+					(completedAssets + missingAssets),
 					Math.round(100.0 * completedAssets / (completedAssets + missingAssets), 2)
 				);
 			}
