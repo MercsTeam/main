@@ -258,7 +258,7 @@ function CowboyGuy()
     this.backstory = "Quick-witted gunslinger with unusually good luck";
 
 	this.damageImage = "characters/CowboyComicStills/cowboy_damage.png";
-	this.defeatImage = "characters/CowboyComicStills/cg_st_death2.png";
+	this.defeatImage = "characters/CowboyComicStills/cb_death2.png";
 }
 CowboyGuy.prototype = new Character();
 
