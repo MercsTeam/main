@@ -4,63 +4,48 @@ function Retreat()
 	this.description = "Causes character to rotate into inactive position.";
 	this.duration = 0;
 
-	this.doAction = function(player, pos)
+	this.doAction = function(self)
 	{
-		var c1 = player.getCharacterByPosition(1);
-		var c2 = player.getCharacterByPosition(2);
-		var c3 = player.getCharacterByPosition(3);
+		var c3 = self.player.getCharacterByPosition(3);
 
 		if(c3.active)
 		{
-			c3.retreat = false;
+			var ally = self.getAlly();
+			var coords = self.player.characterCoords;				
 
-			Game.BattleLog.write(string.format("PLAYER{0}: {1} retreats!", 
-				(player == Game.player1 ? 1 : 2), 
-				player.getCharacterByPosition(pos).name
-			));
-			
-			if(pos == 1)
+			if(self.position == 1)
 			{
-				c1.position = 3;
-				c1.canMove = false;
-
-				c2.position = 1;
-				c2.canMove = true;
+				ally.position = 1;
+				ally.updateGameObject(coords.First);
 				
 				c3.position = 2;
-				c3.canMove = true;
-
-				if(c2.burned)
-				{
-					c2.health.modifier = 0.90;
-					c2.defence.modifier = 0.5;
-				}
+				c3.updateGameObject(coords.Second);
 			}
 			else
 			{
-				c1.position = 2;
-				c1.canMove = true;
+				ally.position = 2;
+				ally.updateGameObject(coords.Second);
 
 				c3.position = 1;
-				c3.canMove = true;
-
-				c2.position = 3;
-				c2.canMove = false;
-
-				if(c1.burned)
-				{
-					c1.health.modifier = 0.90;
-					c1.defence.modifier = 0.5;
-				}
+				c3.updateGameObject(coords.First);
 			}
+
+			ally.canMove = true;
 			
-			var p = 0, coords = null;
-			for(var i = 0; i < player.characters.length; i++)
+			c3.canMove = true;
+			c3.retreat = false;
+			
+			self.position = 3;
+			self.canMove = false;
+			self.updateGameObject(coords.Third);			
+
+			if(ally.burned)
 			{
-				p = player.characters[i].position;
-				coords = player.characterCoords[(p == 1 ? "First" : (p == 2 ? "Second" : "Third"))];
-				player.characters[i].updateGameObject(coords);	
-			}			
+				ally.health.modifier = 0.90;
+				ally.defence.modifier = 0.5;
+			}
+
+			Game.BattleLog.write(string.format("PLAYER{0}: {1} retreats!", (self.player == Game.player1 ? 1 : 2), self.name));
 		}
 	};
 }
@@ -74,7 +59,7 @@ function forceRetreat(self, target)
 	//if all characters still active
 	if(opp.activeCharacterCount == Game.CHARACTERS_PER_TEAM)
 	{
-		retreat.doAction(opp, target.position);
+		retreat.doAction(target);
 		retreat.logAction(self, target, 0);
 	}
 }
@@ -347,7 +332,7 @@ SinisterDeal.prototype = new Skill("Sinister Deal");
 
 function Wish()
 {
-    this.type = SkillType.Offensive;
+    this.type = SkillType.Defensive;
     this.allyAttackMod = 1.25;
     this.allyDefenseMod = 1.25;
     this.allySpeedMod = 1.25;

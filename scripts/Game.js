@@ -118,6 +118,7 @@ var Game =
 			{
 				s1 = p1.getSelectedSkill();
 				last1 = p1.getLastAttack();
+				
 				if(p1.retreat)
 				{
 					retreaters.push(p1);
@@ -147,6 +148,7 @@ var Game =
 			{
 				s2 = p2.getSelectedSkill();
 				last2 = p2.getLastAttack();
+				
 				if(p2.retreat)
 				{
 					retreaters.push(p2);
@@ -190,7 +192,7 @@ var Game =
 			
 			if(all[i].retreat)
 			{
-				s.doAction(p, all[i].position);
+				s.doAction(all[i]);
 				all[i].setLastAttack(target);
 			}
 			else
@@ -204,10 +206,13 @@ var Game =
 							if(s.type == SkillType.Offensive)
 							{
 								target = [ o.getCharacterByPosition(1), o.getCharacterByPosition(2) ];
+								if(!target[0].active) target.shift();
+								else if(!target[1].active) target.pop();
 							}
 							else
 							{
 								target = [ all[i], all[i].getAlly() ];
+								if(!target[1].active) target.pop();
 							}
 						}
 						else

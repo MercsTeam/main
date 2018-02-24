@@ -192,7 +192,7 @@ function Character()
 	this.setDeceased = function()
 	{
 		//rotate out of action position
-		this.skills[4].doAction(this.player, this.position);
+		this.skills[4].doAction(this);
 
 		//clear effect indicators
 		for(var i = 0; i < this.effects.length; i++)
