@@ -678,6 +678,7 @@ function Draw()
 	this.attackValue = 40;
 	this.cooldown = 1;
 	this.description = "If attack hits before the target has attacks, double damage dealt.";
+	this.imageURL = "characters/CowboyComicStills/cg_quickdraw.png";
 	
 	this.doAction = function(self, target)
 	{
@@ -702,6 +703,7 @@ function SixShooter()
 	this.attackValue = 30;
 	this.multiTarget = true;
 	this.description = "Deals low damage to both frontline targets.";
+	this.imageURL = "characters/CowboyComicStills/cb_six_shooter.png";
 }
 SixShooter.prototype = new Skill("Six-Shooter");
 
