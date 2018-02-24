@@ -60,7 +60,6 @@ function forceRetreat(self, target)
 	if(opp.activeCharacterCount == Game.CHARACTERS_PER_TEAM)
 	{
 		retreat.doAction(target);
-		retreat.logAction(self, target, 0);
 	}
 }
 
@@ -263,6 +262,7 @@ function PoolMana()
 	this.effectDuration = 2;
     this.description = "Increases attack power significantly (+50%) for next turn.";
 	this.cooldown = 1;
+	this.imageURL = "characters/MageComicStills/MagePoolMana.png";
 	
 	this.doAction = function(self, target)
 	{
@@ -653,7 +653,11 @@ function Telekinesis()
 	this.description = "Forces enemy to swap their mercs if all three enemies are alive; if this attack hits first, the merc swapped to inactive loses their turn. "
 		+ "If at least one enemy merc is KO'd, this attack does nothing.";
 
-	this.doAction = function(self, target) { forceRetreat(self, target[0]);	};	
+	this.doAction = function(self, target) 
+	{ 
+		forceRetreat(self, target[0]);	
+		this.logAction(self, target[0]);
+	};	
 }
 Telekinesis.prototype = new Skill("Telekinesis");
 
@@ -699,7 +703,7 @@ function LiquidCourage()
 	this.effectDuration = 3;
 	this.selfSpeedMod = 0.5;
 	this.selfDefenceMod = 2;	
-	this.description = "Liquid Courage: Speed is reduced by 50%, and defense is boosted 100% for 3 turns.";
+	this.description = "Speed is reduced by 50%, and defense is boosted 100% for 3 turns.";
 	this.imageURL = "characters/CowboyComicStills/cb_liquid_courage.png";
 	
 	this.doAction = function(self, target)
@@ -717,9 +721,13 @@ function Lasso()
 {
 	this.type = SkillType.Offensive;
 	this.description = "Forces enemy to swap their mercs if all three enemy mercs are alive; if this attack hits first, "
-		+ "the merc swapped to inactive loses their turn. If at least one enemy merc is KO'd, this attack does "
-		+ "nothing.";	
-	this.doAction = function(self, target) { forceRetreat(self, target[0]);	};	
+		+ "the merc swapped to inactive loses their turn. If at least one enemy merc is KO'd, this attack does nothing.";
+		
+	this.doAction = function(self, target) 
+	{ 
+		forceRetreat(self, target[0]);	
+		this.logAction(self, target[0]);
+	};	
 }
 Lasso.prototype = new Skill("Lasso");
 
