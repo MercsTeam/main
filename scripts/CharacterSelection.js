@@ -30,8 +30,10 @@ var CharacterSelection =
 			this.toggle();
 			Game.loadArena();
 			
-			BattleMenu.toggle();
-			BattleMenu.load();
+			window.setTimeout( function() {
+				BattleMenu.toggle();
+				BattleMenu.load();
+			}, 1500);
 		}
 	},
 	toggle : function()
