@@ -440,14 +440,17 @@ var Game =
 			backgroundScene.add(backgroundMesh);
 			
 			// Create the floor
-			var geometryFloor = new THREE.BoxGeometry(50, 1, 30); //50,1,20);
+			var geometryFloor = new THREE.CircleGeometry(30, 96); //BoxGeometry(50,1,20);
 			var textureFloor = new THREE.TextureLoader().load(string.format("images/floor/{0}", this.scenes[r].floor));
 			var materialFloor = new THREE.MeshLambertMaterial( { map : textureFloor } );
 			
 			var floor = new THREE.Mesh(geometryFloor, materialFloor);
-			floor.translateX(0);
-			floor.translateY(-3);
+			floor.translateX(-20);
+			floor.translateY(0);
 			floor.translateZ(0);
+			floor.rotateX(45);
+			floor.rotateY(0);
+			floor.rotateZ(0);
 			scene.add(floor);
 			
 			// Create a flat plane as the char base and UV map it.
