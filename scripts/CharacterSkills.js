@@ -722,6 +722,7 @@ function Lasso()
 	this.type = SkillType.Offensive;
 	this.description = "Forces enemy to swap their mercs if all three enemy mercs are alive; if this attack hits first, "
 		+ "the merc swapped to inactive loses their turn. If at least one enemy merc is KO'd, this attack does nothing.";
+	this.imageURL = "characters/CowboyComicStills/cb_lasso2.png";
 		
 	this.doAction = function(self, target) 
 	{ 
