@@ -39,6 +39,20 @@
 				new Witch()
 			];
 
+			var statusColours = [
+				"#FF4040",
+				"#E94A3D",
+				"#D0553B",
+				"#B66138",
+				"#9C6D36",
+				"#837833",
+				"#688430",
+				"#4F8F2D",
+				"#369A2A",
+				"#1DA527",
+				"#06B025"
+			];
+
 			window.onload = function()
 			{
 				var o = document.querySelector("#output");
@@ -46,10 +60,12 @@
 				var props1 = [ "damageImage", "defeatImage"];
 				var props2 = [ "imageURL", "soundID" ];
 
-				var h2, ul, li, ul2, li2, a, soundID;
+				var h2, img, ul, li, ul2, li2, a, soundID, compCount;
 
 				for(var h = 0; h < characters.length; h++)
 				{
+					compCount = 0;
+
 					img = document.createElement("IMG");
 					img.src = "characters/headshots/" + characters[h].image;
 
@@ -72,6 +88,8 @@
 							a.href = characters[h][props1[i]];
 							a.innerHTML = props1[i];
 							sp.appendChild(a);
+
+							compCount++;
 						}
 						else
 						{
@@ -107,6 +125,8 @@
 								}
 								a.innerHTML = props2[j];
 								sp.appendChild(a);
+
+								compCount++;
 							}
 							else
 							{
@@ -123,6 +143,9 @@
 						li.appendChild(ul2);
 						ul.appendChild(li);
 					}
+
+					img.style.backgroundColor = statusColours[compCount];
+					h2.style.color = statusColours[compCount];
 
 					o.appendChild(img);
 					o.appendChild(h2);
@@ -156,9 +179,9 @@
 
 			li span { font-weight:normal;border-radius:5px;width:250px;height:1.6em;padding:0.2em;margin:2px;display:inline-block; }
 			li.complete span { background-color:#06B025; }
-			li.missing span { background-color:red;  }
+			li.missing span { background-color:#FF4040;  }
 
-			li.missing:before { content:'\1F5F7 ';font-size:2em;color:red; }
+			li.missing:before { content:'\1F5F7 ';font-size:2em;color:#FF4040; }
 			li.complete:before { content:'\1F5F9 ';font-size:2em;color:#06B025; }
 
 			a { color:#000000;text-decoration:none; }
