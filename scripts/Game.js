@@ -440,15 +440,15 @@ var Game =
 			backgroundScene.add(backgroundMesh);
 			
 			// Create the floor
-			var geometryFloor = new THREE.CircleGeometry(30, 96); //BoxGeometry(50,1,20);
+			var geometryFloor = new THREE.CircleGeometry(50, 400); //BoxGeometry(50,1,20);
 			var textureFloor = new THREE.TextureLoader().load(string.format("images/floor/{0}", this.scenes[r].floor));
 			var materialFloor = new THREE.MeshLambertMaterial( { map : textureFloor } );
 			
 			var floor = new THREE.Mesh(geometryFloor, materialFloor);
-			floor.translateX(-20);
-			floor.translateY(0);
+			floor.translateX(-30);
+			floor.translateY(-3);
 			floor.translateZ(0);
-			floor.rotateX(45);
+			floor.rotateX(4.7);
 			floor.rotateY(0);
 			floor.rotateZ(0);
 			scene.add(floor);
