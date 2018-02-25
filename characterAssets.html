@@ -50,6 +50,9 @@
 
 				for(var h = 0; h < characters.length; h++)
 				{
+					img = document.createElement("IMG");
+					img.src = "characters/headshots/" + characters[h].image;
+
 					h2 = document.createElement("H2");
 					h2.innerHTML = characters[h].name;
 
@@ -60,9 +63,10 @@
 						sp = document.createElement("SPAN");
 
 						li = document.createElement("LI");
-						li.className = (characters[h].hasOwnProperty(props1[i]) ? "complete" : "missing");						
 						if(characters[h].hasOwnProperty(props1[i]))
 						{
+							li.className = "complete";
+
 							a = document.createElement("A");
 							a.target = "_new";
 							a.href = characters[h][props1[i]];
@@ -71,6 +75,7 @@
 						}
 						else
 						{
+							li.className = "missing";
 							sp.innerHTML = props1[i];							
 						}
 						li.appendChild(sp);
@@ -85,9 +90,10 @@
 							sp = document.createElement("SPAN");							
 
 							li2 = document.createElement("LI");
-							li2.className = (characters[h].skills[i].hasOwnProperty(props2[j]) ? "complete" : "missing");							
 							if(characters[h].skills[i].hasOwnProperty(props2[j]))
 							{
+								li2.className = "complete";
+
 								a = document.createElement("A");
 								a.target = "_new";
 								if(props2[j] == "soundID")
@@ -104,6 +110,7 @@
 							}
 							else
 							{
+								li2.className = "missing";
 								sp.innerHTML = props2[j];
 							}
 							li2.appendChild(sp);
@@ -117,6 +124,7 @@
 						ul.appendChild(li);
 					}
 
+					o.appendChild(img);
 					o.appendChild(h2);
 					o.appendChild(ul);
 				}
@@ -140,6 +148,9 @@
 			label { font-weight:bold }
 			ul { list-style-type:none;margin:0;padding:0; }
 
+			img { float:left;border:solid 4px #000000;border-radius:50%;width:50%;margin:1.5em;box-shadow:2px 2px 2px #000000; }
+			h2 { clear:both;}
+
 			li { line-height:2em;vertical-align:middle }
 			li.skill-name { font-weight:bold }
 
@@ -154,6 +165,7 @@
 			a:hover { text-decoration:underline; }
 			a:after { content:'\29C9 '; }
 
+			#result { height:50px }
 			#output { column-count:4;column-width:25%; }
         </style>
     </head>
