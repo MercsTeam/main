@@ -187,8 +187,17 @@ textarea { font-size:12pt;padding:2px;height:auto;background-color:#000000;color
 .minimize { position:absolute;height:5% !important;overflow:hidden; }
 .minimize div { display: none; }
 
-#dialog2.minimize { width:auto !important;padding:0.5%;z-index:0 }
+#dialog2.minimize2 { height: auto; }
 #dialog3.minimize2 { height: auto; }
+
+#dialog2 #battleLog {
+	height: 205px;
+	transform: scaleY(1);
+	transition: transform 0.5s,
+				height 1s;
+}
+
+#dialog2.minimize2 #battleLog { transform: scaleY(0); height: 0px; }
 
 #dialog3 #options {
     height: 210px;
