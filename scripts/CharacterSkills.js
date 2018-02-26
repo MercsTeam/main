@@ -572,6 +572,7 @@ function ReleaseKraken()
 	this.description = "Summons the Kraken from the depths, smashing enemy active mercs with its large tentacles "
 		+ "dealing damage and reducing their speed by 25%.";
 	this.cooldown = 4;
+	this.imageURL = "characters/PirateComicStills/Pirate_ReleaseTheKraken.png";
 }
 ReleaseKraken.prototype = new Skill("Release the Kraken");
 

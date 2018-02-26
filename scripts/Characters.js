@@ -291,6 +291,9 @@ function Pirate()
 
 	this.quote = "";
     this.backstory = "Zeus but a pirate. Long flowing white hair and beard. Wields a rapier with a flintlock pistol built into the hilt. Surrounded by electrical energy.";
+
+	this.damageImage = "characters/PirateComicStills/Pirate_Damage.png";
+	this.defeatImage = "characters/PirateComicStills/Pirate_Death.png";
 }
 Pirate.prototype = new Character();
 
