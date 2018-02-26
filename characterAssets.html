@@ -23,6 +23,8 @@
 
 			var self, ally1, enemy1, enemy2;
 
+			Character.prototype.assignedTo = "";
+
 			var characters = [
 				new Alien(),
 				new BigSwordGuy(),
@@ -42,6 +44,23 @@
 				new Witch()
 			];
 
+			characters[0].assignedTo = "Nick";
+			characters[1].assignedTo = "Kevin";
+			characters[2].assignedTo = "Donna";
+			characters[3].assignedTo = null;
+			characters[4].assignedTo = "Donna";
+			characters[5].assignedTo = "Nick";
+			characters[6].assignedTo = null;
+			characters[7].assignedTo = "Tom";
+			characters[8].assignedTo = null;
+			characters[9].assignedTo = "Jonathan";
+			characters[10].assignedTo = "Kevin";
+			characters[11].assignedTo = "Tom";
+			characters[12].assignedTo = null;
+			characters[13].assignedTo = null;
+			characters[14].assignedTo = "Kevin";
+			characters[15].assignedTo = "Kevin";
+
 			window.onload = function()
 			{
 				var o = document.querySelector("#output");
@@ -60,6 +79,9 @@
 
 					h2 = document.createElement("H2");
 					h2.innerHTML = characters[h].name;
+
+					h3 = document.createElement("H3");
+					h3.innerHTML = (characters[h].assignedTo || "Unassigned");
 
 					ul = document.createElement("UL");
 
@@ -139,6 +161,7 @@
 
 					o.appendChild(img);
 					o.appendChild(h2);
+					o.appendChild(h3);
 					o.appendChild(ul);
 				}
 
@@ -181,7 +204,8 @@
 			ul { list-style-type:none;margin:0;padding:0; }
 
 			img { float:left;border:solid 4px #000000;border-radius:50%;width:50%;margin:1.5em;box-shadow:2px 2px 2px #000000; }
-			h2 { clear:both;}
+			h2 { clear:both;margin:5px 0; }
+			h3 { margin:5px 0 }
 
 			li { line-height:2em;vertical-align:middle }
 			li.skill-name { font-weight:bold }
