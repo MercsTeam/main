@@ -18,6 +18,9 @@
 		<script src="scripts/SoundPlayer.js"></script>
         
         <script>
+			const COMP_COLOUR = "#06B025";
+			const MISS_COLOUR = "#FF4040";
+
 			var self, ally1, enemy1, enemy2;
 
 			var characters = [
@@ -37,20 +40,6 @@
 				new SpaceGirl(),
 				new SniperGirl(),
 				new Witch()
-			];
-
-			var statusColours = [
-				"#FF4040",
-				"#E94A3D",
-				"#D0553B",
-				"#B66138",
-				"#9C6D36",
-				"#837833",
-				"#688430",
-				"#4F8F2D",
-				"#369A2A",
-				"#1DA527",
-				"#06B025"
 			];
 
 			window.onload = function()
@@ -144,8 +133,9 @@
 						ul.appendChild(li);
 					}
 
-					img.style.backgroundColor = statusColours[compCount];
-					h2.style.color = statusColours[compCount];
+					colour = mixColours(COMP_COLOUR, MISS_COLOUR, compCount/10);
+					img.style.backgroundColor = colour;
+					h2.style.color = colour;
 
 					o.appendChild(img);
 					o.appendChild(h2);
@@ -163,6 +153,25 @@
 					(completedAssets + missingAssets),
 					Math.round(100.0 * completedAssets / (completedAssets + missingAssets), 2)
 				);
+			}
+
+			function mixColours(colour1, colour2, ratio)
+			{
+				var hex = function(x) 
+				{
+					x = x.toString(16);
+					return (x.length == 1) ? '0' + x : x;
+				};
+
+				var getRed = function(rgb) { return parseInt(rgb.substring(1,3), 16); };
+				var getGreen = function(rgb) { return parseInt(rgb.substring(3,5), 16); };
+				var getBlue = function(rgb) { return parseInt(rgb.substring(5,7), 16); };
+
+				var r = Math.ceil(getRed(colour1) * ratio + getRed(colour2) * (1 - ratio));
+				var g = Math.ceil(getGreen(colour1) * ratio + getGreen(colour2) * (1 - ratio));
+				var b = Math.ceil(getBlue(colour1) * ratio + getBlue(colour2) * (1 - ratio));
+
+				return string.format("#{0}{1}{2}", hex(r), hex(g), hex(b));
 			}
         </script>
         
