@@ -195,6 +195,9 @@ function Alien()
     this.backstory = "Xiklak may be one of the only remaining life-forms native to the ammonia oceans of Neptune. He is also a crack-shot with a laser rifle. That's about the only two things people know about this hired gun.";
 
 	this.AbductionSprite = "abduction.png";
+
+	this.damageImage = "characters/AlienComicStills/Alien_Damage_rough.png";
+	this.defeatImage = "characters/AlienComicStills/Alien_Defeat_rough.png";
 }
 Alien.prototype = new Character();
 

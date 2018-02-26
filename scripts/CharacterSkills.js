@@ -582,6 +582,7 @@ function RayGun()
 	this.attackValue = 40;
 	this.stunProb = 0.1;
 	this.description = "A low-damage, single target attack with a small (10%) chance of causing stun.";
+	this.imageURL = "characters/AlienComicStills/Alien_Raygun_rough.png";
 }
 RayGun.prototype = new Skill("Ray Gun");
 
@@ -595,6 +596,7 @@ function Abduction()
 	this.description = "User is unable to move for 3 turns and cannot be swapped out. If user is not KO'd by the end of the 3rd turn, "
 		+ "whichever enemy is in the targeted space is abducted and instantly KO'd, regardless of status effects.";
 	this.cooldown = 6;
+	this.imageURL = "characters/AlienComicStills/Alien_Abduction_rough.png";
 
 	this.doAction = function(self, target)
 	{
@@ -637,6 +639,7 @@ function ForceShield()
 	this.effectDuration = 5;
 	this.description = "Increases defense by 25% for 5 turns.";
 	this.cooldown = 5;
+	this.imageURL = "characters/AlienComicStills/Alien_ForceShield_rough.png";
 
 	this.doAction = function(self, target)
 	{
@@ -653,6 +656,7 @@ function Telekinesis()
 	this.type = SkillType.Offensive;
 	this.description = "Forces enemy to swap their mercs if all three enemies are alive; if this attack hits first, the merc swapped to inactive loses their turn. "
 		+ "If at least one enemy merc is KO'd, this attack does nothing.";
+	this.imageURL = "characters/AlienComicStills/Alien_Telekinesis_rough.png";
 
 	this.doAction = function(self, target) 
 	{ 
