@@ -63,6 +63,7 @@ function SniperGirl()
     this.backstory = "A military sniper war veteran that turned to freelance mercenary work after the war ended.";
 
 	this.damageImage = "characters/SniperGirlComicStills/SG-Damage.jpg";
+	this.defeatImage = "characters/SniperGirlComicStills/SG-Death.png";
 }
 SniperGirl.prototype = new Character();
 
