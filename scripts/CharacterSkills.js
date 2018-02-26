@@ -112,6 +112,7 @@ function Headshot()
     this.accuracy = 0.4;
     this.description = "High damage single-target attack, with a high chance (60%) of missing.";
 	this.imageURL = "characters/SniperGirlComicStills/SG-Headshot.jpg";
+	this.soundID  = "headShot";
 
 	this.doAction = function(self, target)
 	{
@@ -139,6 +140,7 @@ function RicochetShot()
 	this.bleedProb = 1.0;
     this.description = "Medium damage to both frontline targets. Very high chance (80%) of missing. Critical hit results in Penetrating Shot that causes bleeding.";
 	this.imageURL = "characters/SniperGirlComicStills/SG-Ricochet.jpg";
+	this.soundID = "ricochetShotHit";
 	this.cooldown = 2;
 	
 	this.doAction = function(self, target)
@@ -174,6 +176,7 @@ function TakeAim()
 	this.effectDuration = 2;
     this.description = "Increases accuracy for next turn (reduces chance of missing by 50%)";
 	this.imageURL = "characters/SniperGirlComicStills/SG-TakeAim.jpg";
+	this.soundID = "takeAim";
 
 	this.doAction = function(self, target)
 	{
