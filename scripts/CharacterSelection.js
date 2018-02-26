@@ -11,6 +11,8 @@ var CharacterSelection =
 	commit : function(btn)
 	{
 		btn.classList.toggle("selected");
+		btn.disabled = true;
+		
 		Game.uiSound.start("clickOn");
 		
 		if(Game.player1.isActive())
