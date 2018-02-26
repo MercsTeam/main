@@ -271,7 +271,9 @@ var Game =
 	showImages : function(index)
 	{
 		var v = document.querySelector("#imgViewer");
+		
 		var rv = document.querySelectorAll(".reactView");
+		for(var i = 0; i < rv.length; i++) rv[i].style.visibility = "hidden";
 
 		if(index <= this.skillImgArr.length - 1)
 		{
@@ -308,18 +310,13 @@ var Game =
 					rv[i].querySelector("span").innerHTML = slide.reaction[i].label;
 				}
 			}
-			else
-			{
-				for(var i = 0; i < rv.length; i++) rv[i].style.visibility = "hidden";
-			}
 			
 			index++;
 			setTimeout("Game.showImages(" + index + ")", 2500);
 		}
 		else
 		{
-			v.style.visibility = "hidden";
-			for(var i = 0; i < rv.length; i++) rv[i].style.visibility = "hidden";
+			v.style.visibility = "hidden";			
 
 			for(var i = 0; i < Game.CHARACTERS_PER_TEAM; i++)
 			{
