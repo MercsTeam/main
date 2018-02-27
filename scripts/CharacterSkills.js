@@ -1009,6 +1009,7 @@ function Hex()
 	this.attackValue = 80;
 	this.type = SkillType.Offensive;
 	this.description = "A high-damage, single-target attack.";
+	this.imageURL = "characters/WitchComicStills/Hex.png";
 }
 Hex.prototype = new Skill("Hex");
 
