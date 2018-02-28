@@ -198,7 +198,6 @@ var BattleMenu =
 		which.skillDesc.innerHTML = character.skills[index].getDescription();
 		
 		var btns = which.targetBtns;
-		var img1, img2;
 		if(target)
 		{
 			btns[0].innerHTML = "Continue";
@@ -211,8 +210,8 @@ var BattleMenu =
 		}
 		else
 		{
-			img1 = document.createElement("IMG"); 
-			img2 = document.createElement("IMG");
+			var img1 = document.createElement("IMG"); 
+			var img2 = document.createElement("IMG");
 			
 			//btns[0].innerHTML = (sType == SkillType.Offensive ? "Enemy 1" : (pos == 1 ? "Self" : "Ally 1"));
 			btns[0].appendChild(img1);
