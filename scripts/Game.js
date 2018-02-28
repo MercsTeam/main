@@ -15,7 +15,7 @@ var Game =
 	title : document.querySelector("#titleScreen"),
 	audioLnk : document.querySelector("nav a:nth-child(2)"),
 	arena : document.querySelector("#gamePlay"),
-	availableCharacters : [ Nemesis, SniperGirl, Mage, Djinn, Cyborg, Pirate, Alien, Caveman, CowboyGuy, HiveDrone, SpaceGirl, Witch ], //, Clown, DinoGirl, SamuraiGirl, Nemesis ],
+	availableCharacters : [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, Alien, Caveman, CowboyGuy, HiveDrone, SpaceGirl, Witch ], //, Clown, DinoGirl, SamuraiGirl, Nemesis ],
 	skillImgArr : null,
 	DeadSprite : "tombstone.png",	
 	NoEffect : "blank.png",

@@ -161,7 +161,7 @@ var BattleMenu =
 							}
 							else
 							{
-								BattleMenu.showSkill(character, index, pos);
+								BattleMenu.showSkill(character, index, pos, 0);
 							}
 						}
 					};					
@@ -196,48 +196,57 @@ var BattleMenu =
 		var which = (pos == 1 ? this.active1 : this.active2);
 		which.toggleSkill();		
 		which.skillDesc.innerHTML = character.skills[index].getDescription();
-		
-		var btns = which.targetBtns;
-		if(target)
+
+		var btns = which.targetBtns;		
+		if(target != 0)
 		{
 			btns[0].innerHTML = "Continue";
+			btns[0].className = "continue-btn";
+			btns[0].style.color = "#ffffff";
+			btns[0].style.backgroundImage = "";
+			btns[0].style.display = "block";
 			btns[0].onclick = function() { BattleMenu.showReady(character, index, pos, target); };
 			btns[0].disabled = false;
 			
+			btns[1].className = "hidden-btn";
 			btns[1].style.display = "none";
 			
 			if(character.retreat) which.btnAlly.disabled = true;
 		}
 		else
 		{
-			var img1 = btns[0].querySelector("IMG"); 
-			var img2 = btns[1].querySelector("IMG");
-			
-			//btns[0].innerHTML = (sType == SkillType.Offensive ? "Enemy 1" : (pos == 1 ? "Self" : "Ally 1"));
+			btns[0].className = "target-btn";
+			btns[0].innerHTML = "&oplus;";
+			btns[0].style.display = "inline-block";
 			btns[0].onclick = function() { BattleMenu.showReady(character, index, pos, 1); };
 			
-			btns[1].style.display = "";
-			//btns[1].innerHTML = (sType == SkillType.Offensive ? "Enemy 2" : (pos == 2 ? "Self" : "Ally 2"));
+			btns[1].className = "target-btn";
+			btns[1].innerHTML = "&oplus;";
+			btns[1].style.display = "inline-block";
 			btns[1].onclick = function() { BattleMenu.showReady(character, index, pos, 2); };
 			
 			if(sType == SkillType.Offensive)
 			{
-				var opp = character.player.getOpponent();
+				var opp = character.player.getOpponent();				
 				
-				img1.src = "characters/headshots/" + opp.getCharacterByPosition(1).image;
-				img2.src = "characters/headshots/" + opp.getCharacterByPosition(2).image;
-				
+				btns[0].style.color = "#ff0000";
+				btns[0].style.backgroundImage = string.format("url(\"characters/headshots/{0}\")", opp.getCharacterByPosition(1).image);
 				btns[0].disabled = (!opp.getCharacterByPosition(1).active);
+
+				btns[1].style.color = "#ff0000";
+				btns[1].style.backgroundImage = string.format("url(\"characters/headshots/{0}\")", opp.getCharacterByPosition(2).image);
 				btns[1].disabled = (!opp.getCharacterByPosition(2).active);
 			}
 			else
 			{
 				var ally = character.getAlly();
-				
-				img1.src = "characters/headshots/" + (pos == 1 ? character : ally).image;
-				img2.src = "characters/headshots/" + (pos == 2 ? character : ally).image;
-				
+
+				btns[0].style.color = "#00CC66";
+				btns[0].style.backgroundImage = string.format("url(\"characters/headshots/{0}\")", (pos == 1 ? character : ally).image);				
 				btns[0].disabled = (ally.position == 1 && !ally.active);
+
+				btns[1].style.color = "#00CC66";
+				btns[1].style.backgroundImage = string.format("url(\"characters/headshots/{0}\")", (pos == 2 ? character : ally).image);
 				btns[1].disabled = (ally.position == 2 && !ally.active);
 			}
 		}
