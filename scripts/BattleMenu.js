@@ -198,6 +198,7 @@ var BattleMenu =
 		which.skillDesc.innerHTML = character.skills[index].getDescription();
 		
 		var btns = which.targetBtns;
+		var img1, img2;
 		if(target)
 		{
 			btns[0].innerHTML = "Continue";
@@ -210,11 +211,21 @@ var BattleMenu =
 		}
 		else
 		{
-			btns[0].innerHTML = (sType == SkillType.Offensive ? "Enemy 1" : (pos == 1 ? "Self" : "Ally 1"));
+			img1 = document.createElement("IMG");
+			img1.src = string.format("characters/headshots/{0}", (sType == SkillType.Offensive ? character.player.getOpponent().getCharacterByPosition(1) 
+				: (pos == 1 ? character : character.getAlly()).image));
+						 
+			img2 = document.createElement("IMG");
+			img2.src = string.format("characters/headshots/{0}", (sType == SkillType.Offensive ? character.player.getOpponent().getCharacterByPosition(2) 
+				: (pos == 2 ? character : character.getAlly()).image));
+			
+			//btns[0].innerHTML = (sType == SkillType.Offensive ? "Enemy 1" : (pos == 1 ? "Self" : "Ally 1"));
+			btns[0].appendChild(img1);
 			btns[0].onclick = function() { BattleMenu.showReady(character, index, pos, 1); };
 			
 			btns[1].style.display = "";
-			btns[1].innerHTML = (sType == SkillType.Offensive ? "Enemy 2" : (pos == 2 ? "Self" : "Ally 2"));
+			//btns[1].innerHTML = (sType == SkillType.Offensive ? "Enemy 2" : (pos == 2 ? "Self" : "Ally 2"));
+			btns[1].appendChild(img2);
 			btns[1].onclick = function() { BattleMenu.showReady(character, index, pos, 2); };
 			
 			if(sType == SkillType.Offensive)
