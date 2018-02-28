@@ -67,7 +67,7 @@ function SwordChop()
 {
     this.type = SkillType.Offensive;
     this.attackValue = 70;
-    this.description = "Single target attack that deals damage.";
+    this.description = "A powerful blow to a lone target.";
 	this.imageURL = "characters/BSGComicStills/FRONT-Sword_Chop.jpg";
 	this.soundID = "swordChop";
 }
@@ -77,7 +77,7 @@ function SweepingStrike()
 {
     this.type = SkillType.Offensive;
     this.attackValue = 50;
-    this.description = "AoE attack hitting both active enemy mercs.";
+    this.description = "A broad strike at both opponents.";
     this.multiTarget = true;
 	this.cooldown = 1;
 	this.imageURL = "characters/BSGComicStills/FRONT-Sweeping_Strike.jpg";
@@ -88,7 +88,7 @@ SweepingStrike.prototype = new Skill("Sweeping Strike");
 function DefensiveStance()
 {
     this.type = SkillType.Defensive;
-    this.description = "Blocks incoming damage for the round.";
+    this.description = "Defends against attacks this round.";
     this.blocksDamage = true;
 	this.cooldown = 1;
 	this.imageURL = "characters/BSGComicStills/FRONT-Defensive_Stance.jpg";
@@ -99,7 +99,7 @@ function Focus()
 {
     this.type = SkillType.Reusable;
     this.selfAttackMod = 1.5;
-    this.description = "Strengthens the attack stat (+50%) until Artur Hobbe is swapped to an inactive state, or dies.";
+    this.description = "Increases attack power while in battle.";
 	this.cooldown = 1;
 	this.imageURL = "characters/BSGComicStills/FRONT-Focus.jpg";
 }
@@ -110,7 +110,7 @@ function Headshot()
     this.type = SkillType.Offensive;
     this.attackValue = 100;
     this.accuracy = 0.4;
-    this.description = "High damage single-target attack, with a high chance (60%) of missing.";
+    this.description = "A tricky shot that deals great damage, but only if it connects.";
 	this.imageURL = "characters/SniperGirlComicStills/SG-Headshot.jpg";
 	this.soundID  = "headShot";
 
@@ -138,7 +138,7 @@ function RicochetShot()
     this.multiTarget = true;
     this.accuracy = 0.2;
 	this.bleedProb = 1.0;
-    this.description = "Medium damage to both frontline targets. Very high chance (80%) of missing. Critical hit results in Penetrating Shot that causes bleeding.";
+    this.description = "An incredibly difficult shot that damages both targets, if it connects. May create a wound with a penetrating shot.";
 	this.imageURL = "characters/SniperGirlComicStills/SG-Ricochet.jpg";
 	this.soundID = "ricochetShotHit";
 	this.cooldown = 2;
@@ -174,7 +174,7 @@ function TakeAim()
     this.type = SkillType.Reusable;
     this.selfAccuracyMod = 1.5;
 	this.effectDuration = 2;
-    this.description = "Increases accuracy for next turn (reduces chance of missing by 50%)";
+    this.description = "Reduces chance of missing next turn.";
 	this.imageURL = "characters/SniperGirlComicStills/SG-TakeAim.jpg";
 	this.soundID = "takeAim";
 
@@ -192,7 +192,7 @@ function Camouflage()
     this.type = SkillType.Defensive;
     this.oppAccuracyMod = 0.5;
     this.duration = 3;
-    this.description = "Become harder to hit (50% chance attacks will miss) for next three turns. Effect is lost when Headshot or Ricochet Shot is used.";
+    this.description = "Become harder to hit until your next shot is fired.";
 	this.cooldown = 1;
 	this.imageURL = "characters/SniperGirlComicStills/SG-Camouflage.jpg";
 	
@@ -232,7 +232,7 @@ function Fireball()
     this.type = SkillType.Offensive;
     this.attackValue = 50;
     this.burnProb = Probability.Low;
-    this.description = "Medium damage single-target attack. Low chance of causing burn.";
+    this.description = "A fiery attack that may burn the enemy.";
 	this.imageURL = "characters/MageComicStills/MageFireball.png";
 }
 Fireball.prototype = new Skill("Fireball");
@@ -243,7 +243,7 @@ function LightningStorm()
     this.attackValue = 30;
     this.multiTarget = true;
     this.stunProb = Probability.Low;
-    this.description = "Low damage to both frontline targets. Low chance of causing Stun.";
+    this.description = "An electrical attack that strikes both enemies and may stun them.";
 	this.imageURL = "characters/MageComicStills/MageLightningStorm.png";
 }
 LightningStorm.prototype = new Skill("Lightning Storm");
@@ -252,7 +252,7 @@ function DivineShield()
 {
     this.type = SkillType.Defensive;
     this.blocksDamage = true;
-    this.description = "Prevents next attack from damaging work. Cannot be used twice in a row by same merc.";
+    this.description = "Protects from all damage this turn.";
 	this.cooldown = 1;
 	this.imageURL = "characters/MageComicStills/MageDivineShield.png";
 }
@@ -263,7 +263,7 @@ function PoolMana()
     this.type = SkillType.Reusable;
     this.selfAttackMod = 1.5;
 	this.effectDuration = 2;
-    this.description = "Increases attack power significantly (+50%) for next turn.";
+    this.description = "Increases attack power for next turn.";
 	this.cooldown = 1;
 	this.imageURL = "characters/MageComicStills/MagePoolMana.png";
 	
@@ -280,7 +280,7 @@ function LightningStrike()
     this.type = SkillType.Offensive;
     this.attackValue = 25;
     this.interruptProb = 0.15;
-    this.description = "Calls down a single bolt of lightning, deals low damage but has a chance to interrupt the target.";	
+    this.description = "An electrical blow that may prevent the target from attacking.";	
 }
 LightningStrike.prototype = new Skill("Lightning Strike");
 
@@ -289,7 +289,7 @@ function CloudBarrier()
     this.type = SkillType.Defensive;
     this.selfDefenseMod = 1.25;
     this.selfImmunity = true;
-    this.description = "Surrounds himself in protective clouds, increasing defence (+25%) and receives the immunity buff.";
+    this.description = "Creates a cloudy veil that increases defence and protects from status effects.";
 }
 CloudBarrier.prototype = new Skill("Cloud Barrier");
 
@@ -299,8 +299,7 @@ function Confidence()
 	this.duration = 2;
 	this.blocksDamage = true;
 	this.selfImmunity = true;
-	this.description = "creates a physical embodiment of his own confidence to act as a barrier, blocking incoming "
-		+ "attacks and grants immunity for 2 turns.";
+	this.description = "Manifests confidence to protect from all damage this turn, and temporarily blocks status effects";
 	this.cooldown = 1;
 }
 Confidence.prototype = new Skill("Confidence");
@@ -314,7 +313,7 @@ function SinisterDeal()
     this.effectDuration = 5;
 	this.multiTarget = true;
 	this.affectAlly = true;
-    this.description = "Summons high winds across the battlefield, increasing the speed of allies(+50%) and reducing the speed of enemies (-50%). Lasts 3-5 rounds.";
+    this.description = "Summons high winds across the battlefield, making allies faster and enemies slower.";
 
 	this.doAction = function(self, target)
 	{
@@ -342,7 +341,7 @@ function Wish()
     this.allyImmunity = true;
     this.allyHealthAdd = 25;
 	this.affectAlly = true;
-    this.description = "Grants an ally increased attack, defence, speed, (+25%) immunity, and minor healing (+25 HP).";
+    this.description = "Grants an ally increased attack, defence, speed, immunity from status effects, and minor healing.";
 	this.cooldown = 3;
 }
 Wish.prototype = new Skill("Wish");
@@ -352,7 +351,7 @@ function IntegratedBattleSystem()
     this.type = SkillType.Offensive;
     this.attackValue = 50;
     this.randomDebuffProb = 0.25;
-    this.description = "Deals medium damage and has a chance to apply a random debuff (-25%) to the target.";
+    this.description = "An attack that may randomly lower one of the enemy's stats.";
 }
 IntegratedBattleSystem.prototype = new Skill("Integrated Battle System");
 
@@ -361,7 +360,7 @@ function ElectronicBarrier()
     this.type = SkillType.Reusable;
     this.multiTarget = true;
     this.oppAttackMod = 0.8;
-    this.description = "Deploy a large energy barrier. Reduces the effectiveness of incoming attacks for both active mercs.";
+    this.description = "Deploy a large energy barrier that reduces damage from all incoming attacks against allies.";
 	this.cooldown = 1;
 
 	this.doAction = function(self, target)
@@ -391,7 +390,7 @@ function NanobotRepairs()
     this.selfHealthAdd = 50;
     this.selfDefenseMod = 1.1;
     this.duration = 2;
-    this.description = "Repairs damage to his armour, and adapts it to the situation. This skill regenerates a moderate amount of HP (+50 HP) over two turns, and increases defence (+10%) with each use.";
+    this.description = "Repairs damage to his armour and adapts it to the situation, temporarily regenerating HP and increasing defence.";
 	this.cooldown = 2;
 
 	this.doAction = function(self, target)
@@ -437,7 +436,7 @@ function EnhancedCombatSystem()
 	this.selfDamage = true;
 	//this.selfSpeedMod = 3;
 	this.selfAttackMod = 3;
-	this.description = "50% total health loss to gain 200% increase for attack.";
+	this.description = "Sacrifice half of health to dramatically increase attack power.";
 	this.cooldown = 2;
 	
 	this.doAction = function(self, target)
@@ -460,7 +459,7 @@ function StormStrike()
 	this.selfSpeedMod = 1.25;
 	this.accuracy = 0.25;
 
-	this.description = "Attacks with a lightning imbued rapier, this attack has a chance to increase the user's speed.";
+	this.description = "Attacks with a lightning imbued rapier, which may increase the user’s speed.";
 	this.imageURL = "characters/PirateComicStills/Pirate_StormStrike.png";
 }
 StormStrike.prototype = new Skill("Storm Strike");
@@ -469,7 +468,7 @@ function SingleShot()
 {
 	this.type = SkillType.Offensive;
 	this.attackValue = 40;
-	this.description = "Fires a bullet at a single target that deals double damage to targets below 25% health.  When this skill results in the death of an enemy, the speed and attack are increased.";
+	this.description = "An attack that deals extra damage to dying enemies. Finishing off an enemy this way increases speed and attack.";
 	this.imageURL = "characters/PirateComicStills/Pirate_SingleShot.png";
 	this.cooldown = 1;
 
@@ -499,7 +498,7 @@ function Parry()
 	this.type = SkillType.Defensive;
 	this.blocksDamage = true;
 	this.accuracy = 0.25;
-	this.description = "Takes a defensive posture to parry any incoming attacks. Incoming attacks are ineffective, and has a 25% chance to reflect 25% of the damage back at the attacker.";
+	this.description = "Takes a defensive posture to parry any incoming attacks, nullifying all damage with a chance of reflecting some back at the enemy.";
 	this.cooldown = 1;
 	this.imageURL = "characters/PirateComicStills/Pirate_Parry.png";
 
@@ -531,8 +530,7 @@ function Maelstrom()
 	this.accuracy = 0.25;
 	this.allySpeedMod = 1.25;
 	this.multiTarget = true;
-	this.description = "Summons a powerful storm that lasts for 3 turns. While maelstrom is active, pirate's damage is increased, the attacks of all allied mercs have a chance to increase the speed stat, "
-		+ "and at the end of each turn the maelstrom is active, the enemy merc with the highest percentage of health is struck by lightning and dealt damage";
+	this.description = "Summons a powerful storm that increases the user’s damage, may make allies faster, and will strike the healthiest enemy at the end of each turn.";
 	this.cooldown = 6;
 	this.imageURL = "characters/PirateComicStills/Pirate_Maelstrom.png";
 	
@@ -572,8 +570,7 @@ function ReleaseKraken()
 	this.attackValue = 65;
 	this.oppSpeedMod = 0.75;
 	this.multiTarget = true;
-	this.description = "Summons the Kraken from the depths, smashing enemy active mercs with its large tentacles "
-		+ "dealing damage and reducing their speed by 25%.";
+	this.description = "Summons the Kraken from the depths, smashing enemies with its tentacles and reducing their speed.";
 	this.cooldown = 4;
 	this.imageURL = "characters/PirateComicStills/Pirate_ReleaseTheKraken.png";
 }
@@ -584,7 +581,7 @@ function RayGun()
 	this.type = SkillType.Offensive;
 	this.attackValue = 40;
 	this.stunProb = 0.1;
-	this.description = "A low-damage, single target attack with a small (10%) chance of causing stun.";
+	this.description = "A single shot with a mysterious beam that may stun the enemy.";
 	this.imageURL = "characters/AlienComicStills/Alien_Raygun_rough.png";
 }
 RayGun.prototype = new Skill("Ray Gun");
@@ -596,8 +593,7 @@ function Abduction()
 
 	this.type = SkillType.Offensive;
 	this.duration = 3;
-	this.description = "User is unable to move for 3 turns and cannot be swapped out. If user is not KO'd by the end of the 3rd turn, "
-		+ "whichever enemy is in the targeted space is abducted and instantly KO'd, regardless of status effects.";
+	this.description = "Calls in a UFO to abduct the enemy for an instant KO, but leaves the user vulnerable for a few turns.";
 	this.cooldown = 6;
 	this.imageURL = "characters/AlienComicStills/Alien_Abduction_rough.png";
 
@@ -640,7 +636,7 @@ function ForceShield()
 	this.type = SkillType.Defensive;
 	this.selfDefenceMod = 1.25;
 	this.effectDuration = 5;
-	this.description = "Increases defense by 25% for 5 turns.";
+	this.description = "Creates a barrier that increases defence for a while.";
 	this.cooldown = 5;
 	this.imageURL = "characters/AlienComicStills/Alien_ForceShield_rough.png";
 
@@ -657,8 +653,7 @@ ForceShield.prototype = new Skill("Force Shield");
 function Telekinesis()
 {
 	this.type = SkillType.Offensive;
-	this.description = "Forces enemy to swap their mercs if all three enemies are alive; if this attack hits first, the merc swapped to inactive loses their turn. "
-		+ "If at least one enemy merc is KO'd, this attack does nothing.";
+	this.description = "Uses psychic-like powers to force an enemy into the inactive position, if possible.";
 	this.imageURL = "characters/AlienComicStills/Alien_Telekinesis_rough.png";
 
 	this.doAction = function(self, target) 
@@ -674,7 +669,7 @@ function Draw()
 	this.type = SkillType.Offensive;
 	this.attackValue = 40;
 	this.cooldown = 1;
-	this.description = "If attack hits before the target has attacks, double damage dealt.";
+	this.description = "A dramatic showdown that deals double damage if it connects before the enemy attacks.";
 	this.imageURL = "characters/CowboyComicStills/cg_quickdraw.png";
 	
 	this.doAction = function(self, target)
@@ -699,7 +694,7 @@ function SixShooter()
 	this.type = SkillType.Offensive;
 	this.attackValue = 30;
 	this.multiTarget = true;
-	this.description = "Deals low damage to both frontline targets.";
+	this.description = "Unloads an entire cylinder on both enemies.”";
 	this.imageURL = "characters/CowboyComicStills/cb_six_shooter.png";
 }
 SixShooter.prototype = new Skill("Six-Shooter");
@@ -711,7 +706,7 @@ function LiquidCourage()
 	this.effectDuration = 3;
 	this.selfSpeedMod = 0.5;
 	this.selfDefenceMod = 2;	
-	this.description = "Speed is reduced by 50%, and defense is boosted 100% for 3 turns.";
+	this.description = "Take a long, strong drink. Sacrifices speed to dramatically increase defence.";
 	this.imageURL = "characters/CowboyComicStills/cb_liquid_courage.png";
 	
 	this.doAction = function(self, target)
@@ -728,8 +723,7 @@ LiquidCourage.prototype = new Skill("Liquid Courage");
 function Lasso()
 {
 	this.type = SkillType.Offensive;
-	this.description = "Forces enemy to swap their mercs if all three enemy mercs are alive; if this attack hits first, "
-		+ "the merc swapped to inactive loses their turn. If at least one enemy merc is KO'd, this attack does nothing.";
+	this.description = "Hogties the enemy and whips them into the inactive position, if possible.";
 	this.imageURL = "characters/CowboyComicStills/cb_lasso2.png";
 		
 	this.doAction = function(self, target) 
@@ -745,7 +739,7 @@ function Club()
 	this.type = SkillType.Offensive;
 	this.attackValue = 60;
 	this.stunProb = Probability.VeryLow;
-	this.description = "A medium-high damage, single-target attack. Very low chance of causing stun.";
+	this.description = "A powerful blow to the head that may stun the enemy.";
 	this.cooldown = 1;
 }
 Club.prototype = new Skill("Club");
@@ -755,7 +749,7 @@ function PoisonSpear()
 	this.type = SkillType.Offensive;
 	this.attackValue = 25;
 	this.poisonProb = Probability.Medium;
-	this.description = "A low-damage, single-target attack with a medium chance of causing Poison.";
+	this.description = "A stab with a spear covered in toxic substances that may poison the enemy.";
 }
 PoisonSpear.prototype = new Skill("Poison-Tipped Spear");
 
@@ -765,7 +759,7 @@ function PrimalRage()
 	this.selfAttackMod = 1.25;
 	this.selfDefenceMod = 1.25;
 	this.effectDuration = 3;
-	this.description = "Boosts attack and defense by 25% for three turns.";
+	this.description = "Tap into heart of survival instincts to temporarily boost attack and defence.";
 	this.cooldown = 3;
 	
 	this.doAction = function(self, target)
@@ -786,8 +780,7 @@ function FireDance()
 	this.type = SkillType.Offensive;
 	this.burnProb = Probability.VeryHigh;
 	this.selfDamage = true;
-	this.description = "Inflict Burn on self. Dramatically increases odds of inflicting status effects. Cannot be "
-		+ "used if user already has burn.";
+	this.description = "A tribal dance that burns the user in order to grant better odds of inflicting status effects. Can't be used if already burned.";
 	
 	this.doAction = function(self, target)
 	{
@@ -821,7 +814,7 @@ function Sting()
 	this.type = SkillType.Offensive;
 	this.cooldown = 2;
 	this.poisonProb = Probability.Medium;
-	this.description ="A high-damage, single-target attack with a medium chance of causing Poison.";
+	this.description = "A stabbing attack with an anatomical weapon, with a chance of poisoning the enemy.";
 }
 Sting.prototype = new Skill("Sting");
 
@@ -830,7 +823,7 @@ function Bite()
 	this.attackValue = 25;
 	this.type = SkillType.Offensive;
 	this.poisonProb = Probability.High;
-	this.description = "A low-damage, single-target attack with a high chance of causing Poison.";
+	this.description = "A bite with venomous fangs that is very likely to poison the enemy.";
 }
 Bite.prototype = new Skill("Bite");
 
@@ -839,7 +832,7 @@ function Exoskeleton()
 	this.type = SkillType.Defensive;
 	this.selfDefenceMod = 1.5;
 	this.effectDuration = 2;
-	this.description = "Boosts Defense by 50% for 2 turns.";
+	this.description = "Hardens the outer shell to increase defence temporarily.";
 }
 Exoskeleton.prototype = new Skill("Exoskeleton");
 
@@ -847,8 +840,7 @@ function HiveMindHijack()
 {
 	this.type = SkillType.Offensive;
 	this.cooldown = 1;
-	this.description = "If poisoned, target will be forced to attack their ally with a medium-damage (50) attack. "
-		+ "If target does not have an ally, target will attack themselves with a low-damage (25) attack.";
+	this.description = "Manipulates a poisoned enemy into attacking either their ally or themselves if they are alone.";
 
 	this.doAction = function(self, target)
 	{
@@ -902,7 +894,7 @@ function DeathRay()
 	this.type = SkillType.Offensive;
 	this.cooldown = 1;
 	this.burnProb = Probability.Low;
-	this.description = "A high-damage, single-target attack with a low chance of causing Burn.";
+	this.description = "A powerful energy beam using advanced technology that may burn the enemy.";
 }
 DeathRay.prototype = new Skill("Death Ray");
 
@@ -914,8 +906,7 @@ function BlastOff()
 	this.burnProb = Probability.Low;
 	this.blocksDamage = true;
 	this.duration = 3;
-	this.description = "Does medium damage to both targets, with a low chance of causing burn. User cannot move or be attacked next turn. User returns to battle on the turn after, "
-		+ "dealing medium damage to both targets and has a low chance of causing burn. NOTE: Player cannot rotate between blast off and re-entry.";
+	this.description = "Leaves the battlefield temporarily in a rocket ship, damaging the enemy on both liftoff and re-entry.";
 
 	var counter = 0;
 	var defaultState = null;
@@ -975,7 +966,7 @@ function Jetpack()
 	this.type = SkillType.Defensive;
 	this.selfSpeedMod = 1.5;
 	this.effectDuration = 3;
-	this.description = "Increases Speed by 50% for 3 turns.";
+	this.description = "Uses the power of advanced thrust mechanics to increase the user's speed temporarily.";
 
 	this.doAction = function(self, target)
 	{
@@ -992,7 +983,7 @@ function GravityGun()
 	this.type = SkillType.Offensive;
 	this.oppSpeedMod = 0.5;
 	this.effectDuration = 3;
-	this.description = "Lowers target speed by 50% for 3 turns.";
+	this.description = "Bombards the enemy with gravitons to make them heavier, lowering their speed significantly.";
 
 	this.doAction = function(self, target)
 	{
@@ -1008,7 +999,7 @@ function Hex()
 {
 	this.attackValue = 80;
 	this.type = SkillType.Offensive;
-	this.description = "A high-damage, single-target attack.";
+	this.description = "An aggressive spell with nothing but pure malice behind it.";
 	this.imageURL = "characters/WitchComicStills/Hex.png";
 }
 Hex.prototype = new Skill("Hex");
@@ -1018,7 +1009,7 @@ function Curse()
 	this.attackValue = 50;
 	this.type = SkillType.Offensive;
 	this.randomDebuffProb = Probability.Medium;
-	this.description = "A medium damage, single-target attack with a medium chance of causing a random status effect (Burn, Stun, or Poison)";
+	this.description = "A bitter curse that wishes harm and affliction against the enemy.";
 }
 Curse.prototype = new Skill("Curse");
 
@@ -1030,7 +1021,7 @@ function Blessing()
 	this.effectDuration = 3;
 	this.affectsAlly = true;
 	this.multiTarget = true;
-	this.description = "Increase Defense of self and ally by 25% for 3 turns.";
+	this.description = "A benevolent spell that helps protect self and allies by increasing defence temporarily.";
 
 	this.doAction = function(self, target)
 	{
@@ -1051,7 +1042,7 @@ function PoisonApple()
 	this.attackValue = -50;
 	this.type = SkillType.Offensive;
 	this.poisonProb = 0.5;
-	this.description = "Has a 50-50 chance of either causing poison, or healing 50 HP.";
+	this.description = "Offers the enemy a cursed apple, which can either harm or heal them.";
 
 	this.doAction = function(self, target)
 	{
@@ -1079,7 +1070,7 @@ function SeltzerBottle()
 {
 	this.type = SkillType.Offensive;
 	this.attackValue = 10;
-	this.description = "Sprays water at the enemy. Has a 1% chance of dealing 100 extra damage by hitting the opponent in the eye.";
+	this.description = "Sprays water at the enemy. May do serious damage if it hits the opponent in the eye.";
 
 	this.doAction = function(self, target)
 	{
@@ -1099,7 +1090,7 @@ function ExplodingPie()
 	this.attackValue = 50;
 	this.multiTarget = true;
 	this.selfDamage = true;
-	this.description = "An attack that damages both enemies, and costs the user 50 HP.";
+	this.description = "A classic piece of cartoonish slapstick that damages both the user and the enemy.";
 	
 	this.doAction = function(self, target)
 	{
@@ -1119,14 +1110,14 @@ ExplodingPie.prototype = new Skill("Exploding Pie");
 function BalloonAnimal()
 {
 	this.type = SkillType.Defensive;
-	this.description = "Raises Attack and Defense by 0%";
+	this.description = "The user taps into the power of latex creatures to raise all stats by 0%.";
 }
 BalloonAnimal.prototype = new Skill("Balloon Animal");
 
 function Honk()
 {
 	this.type = SkillType.Reusable;
-	this.description = "Makes a funny noise.";
+	this.description = "Makes a funny noise. Honk! Honk!";
 }
 Honk.prototype = new Skill("Honk");
 
@@ -1136,7 +1127,7 @@ function TailWhip()
 	this.attackValue = 100;
 	this.cooldown = 1;
 	this.accuracy = 0.5;
-	this.description = "A powerful bludgeoning attack with a 50% chance of missing";
+	this.description = "A powerful bludgeoning attack with a significant chance of missing.";
 }
 TailWhip.prototype = new Skill("Tail Whip");
 
@@ -1146,7 +1137,7 @@ function Snarl()
 	this.selfAttackMod = 1.5;
 	this.selfDefenceMod = 1.5;
 	this.effectDuration = 3;
-	this.description = "Raises Attack and Defense by 50% for three turns.";
+	this.description = "Tap into primal aggression to temporarily raise attack and defence.";
 	
 	this.doAction = function(self, target)
 	{
@@ -1165,7 +1156,7 @@ function HeatVision()
 {
 	this.type = SkillType.Defensive;
 	this.effectDuration = 2;
-	this.description = "Eliminates chance of missing next turn.";
+	this.description = "Adjusts the user’s eyes to focus on their prey better, reducing likelihood of missing.";
 	
 	this.doAction = function(self, target)
 	{
@@ -1182,7 +1173,7 @@ function RippingClaws()
 	this.attackValue = 75;
 	this.accuracy = 0.5;
 	this.cooldown = 1;
-	this.description = "A devastating attack with a high chance of causing Bleed, and has a 50% chance of missing";
+	this.description = "A devastating attack with powerful claws which may cause bleeding, with a significant chance of missing.";
 }
 RippingClaws.prototype = new Skill("Ripping Claws");
 
@@ -1192,8 +1183,7 @@ function YokoGiri()
 	this.attackValue = 30;
 	this.multiTarget = true;
 	this.bleedProb = Probability.High;
-	this.description = "A sweeping slash attack that deals damage to both enemies and has a high chance "
-		+ "of causing Bleed.";
+	this.description = "A horizontal slash at both enemies with a significant chance of causing bleeding.";
 	
 	this.doAction = function(self, target)
 	{
@@ -1223,7 +1213,7 @@ function KesiGiri()
 	this.type = SkillType.Offensive;
 	this.attackValue = 60;
 	this.bleedProb = Probability.Medium;
-	this.description = "A single-target slash attack with a medium chance of causing Bleed.";
+	this.description = "A diagonal strike at a lone target with a significant chance of causing bleeding.";
 	
 	this.doAction = function(self, target)
 	{
@@ -1249,7 +1239,7 @@ function OverheadCut()
 	this.type = SkillType.Offensive;
 	this.attackValue = 90;
 	this.cooldown = 2;
-	this.description = "A powerful slashing attack";
+	this.description = "A powerful, two-handed vertical slashing attack.";
 }
 OverheadCut.prototype = new Skill("Overhead Cut");
 
@@ -1257,6 +1247,6 @@ function Nukitsuke()
 {
 	this.type = SkillType.Defensive;
 	this.selfDefenceMod = 1.5;
-	this.description = "Intimidation Stance - Increases defense by 50% and increases likelihood of causing Bleed.";
+	this.description = "Assume an intimidating position that increases attack and makes causing bleeding more likely.";
 }
 Nukitsuke.prototype = new Skill("Nukitsuke");
