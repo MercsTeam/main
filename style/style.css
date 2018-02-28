@@ -153,13 +153,18 @@ button { border:none;border-radius:8%;background-color:#000000;color:#ffffff; }
 .dialog button { display:block;height:1.8em;width:auto;font-size:2.5em;margin:0.1em;padding:5%;line-height:0.4em;margin:3% auto; }
 button[disabled] { background-color:grey }
 
-button:hover {
-    box-shadow: 0px 0px 0px 2px #FFF;
+.buttons { text-align:center; }
+.target-btn
+{
+	height:4em !important;width:4em !important;
+	display:inline-block !important;
+	background-position:center center;
+	background-repeat:no-repeat;
 }
 
-button:active {
-    box-shadow: 0px 0px 0px 2px #FFD700;
-}
+button:hover { box-shadow: 0px 0px 0px 2px #FFF; }
+
+button:active { box-shadow: 0px 0px 0px 2px #FFD700; }
 
 button.selected { color:gold; }
 button.selected:before { content:'\2713 ';color:gold; }
@@ -190,20 +195,22 @@ textarea { font-size:12pt;padding:2px;height:auto;background-color:#000000;color
 #dialog2.minimize2 { height: auto; }
 #dialog3.minimize2 { height: auto; }
 
-#dialog2 #battleLog {
+#dialog2 #battleLog 
+{
 	height: 205px;
 	transform: scaleY(1);
 	transition: transform 0.5s,
-				height 1s;
+	height 1s;
 }
 
 #dialog2.minimize2 #battleLog { transform: scaleY(0); height: 0px; }
 
-#dialog3 #options {
+#dialog3 #options 
+{
     height: 210px;
     transform: scaleY(1);
     transition: transform 0.5s,
-    			height 1s;
+    height 1s;
 }
 
 #dialog3.minimize2 #options { transform: scaleY(0); height: 0px; }
@@ -375,4 +382,4 @@ figure.selected_player1:hover .rating-container, figure.selected_player2:hover .
 
 .tableHead th { color:#ffffff;font-size:8pt;font-weight:bold;padding-left:5px; }		
 .power_rating { font-weight:bold;font-size:large;background-color:#CAEEE2 !important;color:#2B5715 }
-.not_set { background-color:#2B5715; }			
+.not_set { background-color:#2B5715; }	
