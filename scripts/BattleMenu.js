@@ -211,13 +211,8 @@ var BattleMenu =
 		}
 		else
 		{
-			img1 = document.createElement("IMG");
-			img1.src = string.format("characters/headshots/{0}", (sType == SkillType.Offensive ? character.player.getOpponent().getCharacterByPosition(1) 
-				: (pos == 1 ? character : character.getAlly()).image));
-						 
+			img1 = document.createElement("IMG"); 
 			img2 = document.createElement("IMG");
-			img2.src = string.format("characters/headshots/{0}", (sType == SkillType.Offensive ? character.player.getOpponent().getCharacterByPosition(2) 
-				: (pos == 2 ? character : character.getAlly()).image));
 			
 			//btns[0].innerHTML = (sType == SkillType.Offensive ? "Enemy 1" : (pos == 1 ? "Self" : "Ally 1"));
 			btns[0].appendChild(img1);
@@ -231,14 +226,22 @@ var BattleMenu =
 			if(sType == SkillType.Offensive)
 			{
 				var opp = character.player.getOpponent();
+				
+				img1.src = opp.getCharacterByPosition(1).image;
+				img2.src = opp.getCharacterByPosition(2).image;
+				
 				btns[0].disabled = (!opp.getCharacterByPosition(1).active);
 				btns[1].disabled = (!opp.getCharacterByPosition(2).active);
 			}
 			else
 			{
-				var a = character.getAlly();
-				btns[0].disabled = (a.position == 1 && !a.active);
-				btns[1].disabled = (a.position == 2 && !a.active);
+				var ally = character.getAlly();
+				
+				img1.src = (pos == 1 ? character : ally).image;
+				img2.src = (pos == 2 ? character : ally).image;
+				
+				btns[0].disabled = (ally.position == 1 && !ally.active);
+				btns[1].disabled = (ally.position == 2 && !ally.active);
 			}
 		}
 		
