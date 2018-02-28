@@ -7,6 +7,12 @@ function Nemesis()
 	this.alignment = "Evil";
 
     this.skills = [ new SwordChop(), new SweepingStrike(), new DefensiveStance(), new Focus(), new Retreat() ];
+	
+	//override BSG skill images
+	this.skills[0].imageURL = "characters/BSGComicStills/Nemesis_SwordChop.png";
+	this.skills[1].imageURL = "characters/BSGComicStills/Nemesis_SweepingStrike.png";
+	this.skills[2].imageURL = "characters/BSGComicStills/Nemesis_DefensiveStance.png";
+	this.skills[3].imageURL = "characters/BSGComicStills/Nemesis_Focus.png";
 
 	this.state = 
     {
