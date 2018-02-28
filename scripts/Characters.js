@@ -25,8 +25,9 @@ function BigSwordGuy()
 	
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
-	this.quote = "You're not cut out for this life...";
-    this.backstory = "A simple man with simple origins. A peaceful farmer forced to take up the sword to defend his family and livelihood. Big sword guy quickly found out he was a better swordsman than farmer, and began working as a sword for hire.";
+	this.quote = "You're not <em>cut</em> out for this life...";
+    this.backstory = "Once a peaceful farmer, forced to take up the sword to defend his family and livelihood.  Hobbe "
+	+ "quickly found out he was a better bladesman than farmer, and found work in the village as a sellsword.";
 	
 	this.damageImage = "characters/BSGComicStills/BSG-Damaged.jpg";
 	this.defeatImage = "characters/BSGComicStills/FRONT-Defeat.jpg";
@@ -40,7 +41,7 @@ function SniperGirl()
 	this.image = "snipergirl.png";
     this.colour = 0x9CFE9A;
 	this.type = CharacterType.Finesse;
-	this.alignment = "Good";
+	this.alignment = "Evil";
 
     this.skills = [ new Headshot(), new RicochetShot(), new TakeAim(), new Camouflage(), new Retreat() ];
 
@@ -60,7 +61,9 @@ function SniperGirl()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "Bullseye!";
-    this.backstory = "A military sniper war veteran that turned to freelance mercenary work after the war ended.";
+    this.backstory = "A crack-shot special forces veteran, this career soldier grew disinterested in civilian life after "
+	+ "the war and turned to mercenary work. If you can afford her rate, and you can find her, maybe you can hire "
+	+ "Artemis.";
 
 	this.damageImage = "characters/SniperGirlComicStills/SG-Damage.jpg";
 	this.defeatImage = "characters/SniperGirlComicStills/SG-Death.png";
@@ -94,7 +97,8 @@ function Mage()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "I cast SERPENTUS LIMBUS!";
-    this.backstory = "A woodland mage seeking to use their powers for profit.";
+    this.backstory = "This reclusive wizard had her first taste of fame and wealth after a quest to slay a dragon. "
+	+ "Now Zocoma has a taste for the spotlight and uses her powers for profiteering as a Cerotis mercenary.";
 }
 Mage.prototype = new Character();
 
@@ -138,7 +142,7 @@ function Cyborg()
 	this.image = "cyborg.png";
     this.colour = 0x8049D2;
 	this.type = CharacterType.Finesse;
-	this.alignment = "Evil";
+	this.alignment = "Good";
 
     this.skills = [ new IntegratedBattleSystem(), new ElectronicBarrier(), new NanobotRepairs(), new EnhancedCombatSystem(), new Retreat() ];
 
@@ -158,10 +162,11 @@ function Cyborg()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "Your actions are illogical.";
-    this.backstory = "A rogue scientist obsessed with furthering human evolution through the development of "
-		+ "technological body modifications. When he ran out of willing test subjects, he began augmenting his "
-		+ "own body. After years of replacing parts of his body one by one with his technology, there is nearly "
-		+ "nothing left of his human self.";
+    this.backstory = "After the hovertrain accident that killed his tycoon parents and left his body broken, He spent "
+	+ "months in intensive care, clawing at the last shreds of his life. With the help of an experimental "
+	+ "transhumanist program, Proto was offered a second chance. Now almost eighty percent cybernetic, Proto "
+	+ "uses his lightning fast synapses and near indestructible body to fight intergalactic crime, provided "
+	+ "justice pays up front.";
 }
 Cyborg.prototype = new Character();
 
@@ -228,7 +233,10 @@ function Caveman()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "Krorlaag like shiny... Krorlaag smashes!";
-    this.backstory = "";
+    this.backstory = "Dumb as rocks, Krorlaag makes up for his underdeveloped brain with more than enough brawn. "
+	+ "Krorlaag used to be one of his village’s best hunters. He was on one of his hunts when the world's dimensions "
+	+ "shifted, erasing all trace of his home and former life. Resigned to a nomadic existence, Krorlaag will do just "
+	+ "about anything for food or \"shinies\".";
 }
 Caveman.prototype = new Character();
 
@@ -258,8 +266,9 @@ function CowboyGuy()
 	
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
-	this.quote = "Look what the cat dragged in.";
-    this.backstory = "Quick-witted gunslinger with unusually good luck";
+	this.quote = "Lookee what the cat dragged in.";
+    this.backstory = "A quick-witted gunslinger with unusually good luck, \"Lucky\" Townsend earned his renown as a "
+	+ "bounty hunter in the Wild West. No space-time phenomenon will change his plan to retire as a rich man.";
 
 	this.damageImage = "characters/CowboyComicStills/cowboy_damage.png";
 	this.defeatImage = "characters/CowboyComicStills/cb_death2.png";
@@ -292,8 +301,10 @@ function Pirate()
 	
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
-	this.quote = "";
-    this.backstory = "Zeus but a pirate. Long flowing white hair and beard. Wields a rapier with a flintlock pistol built into the hilt. Surrounded by electrical energy.";
+	this.quote = "Yohohoho!";
+    this.backstory = "Captain of the Rusty Bucket Corsairs, cursed to eternally sail the stormy seas. Salvatore "
+	+ "never was much of a sailor however, and prefers dry land, taking an accursed stormcloud with him wherever "
+	+ "the wind blows. He figured out how to harness the energies of his curse and now considers it a blessing.";
 
 	this.damageImage = "characters/PirateComicStills/Pirate_Damage.png";
 	this.defeatImage = "characters/PirateComicStills/Pirate_Death.png";
@@ -303,7 +314,7 @@ Pirate.prototype = new Character();
 function HiveDrone()
 {
 	this.name = "HIVE DRONE";
-	this.realName = "Oryctolagus";
+	this.realName = "Oryctolagus Jigat";
 	this.image = "drone.png";
 	this.colour = 0xBD4038;
 	this.type = CharacterType.Physical;
@@ -326,8 +337,8 @@ function HiveDrone()
 	
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
-	this.quote = "Klikliklikliklikliklik!";
-    this.backstory = "Mindless worker";
+	this.quote = "Klikliklikliklikliklik! ELIMINATE! ELIMINATE!";
+    this.backstory = "One of thousands of mindless drones. This creature enacts the will of the hive with no thought of self-preservation.";
 }
 HiveDrone.prototype = new Character();
 
@@ -358,8 +369,10 @@ function SpaceGirl()
 	
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
-	this.quote = "";
-    this.backstory = "An astronaut from the Canadian Space Program, very smart, space-age technology";
+	this.quote = "Count down to your defeat!";
+    this.backstory = "An astronaut from the well funded and highly advanced Canadian Space Program, Zemanová "
+	+ "is a veteran of many scientific missions. She went AWOL after an attack on Moon Base Alpha, which was "
+	+ "orchestrated by a small group of mercenaries.";
 }
 SpaceGirl.prototype = new Character();
 
@@ -389,7 +402,9 @@ function Witch()
 	
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
-	this.quote = "";
-    this.backstory = "Purple and gold robed, wise, old";
+	this.quote = "Double, double, toil and trouble; Fire burn and cauldron bubble.";
+    this.backstory = "A red-robed witch from an ancient world who practices dangerous magic, brought to Cerotis by "
+	+ "the esoteric destruction wrought by the black hole. Quick to adapt to the new surroundings, Azalea set "
+	+ "out to establish her power.";
 }
 Witch.prototype = new Character();
