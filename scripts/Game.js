@@ -56,7 +56,7 @@ var Game =
 		{ background : "Underwater.png",	floor : "underwater.jpg",	sound : "",	arena : new THREE.CircleGeometry(50,100) },
 		{ background : "Forest.png",		floor : "log.jpg",			sound : "",	arena : new THREE.BoxGeometry(100,20,1) },
 		{ background : "Castle_dk.jpg",		floor : "drawbridge.jpg",	sound : "",	arena : new THREE.BoxGeometry(100,20,1) },
-		{ background : "galaxy.png",		floor : "planetoid.jpg",	sound : "",	arena : new THREE.CircleGeometry(50,100) }
+		{ background : "galaxy.png",		floor : "planetoid.png",	sound : "",	arena : new THREE.CircleGeometry(50,100) }
 	],
 	toggleSound : function()
 	{
