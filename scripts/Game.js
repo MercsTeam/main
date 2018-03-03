@@ -51,12 +51,12 @@ var Game =
 	},
     scenes : 
 	[ 
-		{ background : "mars.jpg", floor : "mars.jpg", sound : "" },
-		{ background : "Spacecity.png", floor : "spacecity.jpg", sound : "" },
-		{ background : "Underwater.png", floor : "underwater.jpg", sound : "" },
-		{ background : "Forest.png", floor : "log.jpg", sound : "" },
-		{ background : "Castle_dk.jpg", floor : "drawbridge.jpg", sound : "" },
-		{ background : "galaxy.png", floor : "planetoid.jpg", sound : "" }
+		{ background : "mars.jpg",			floor : "mars.jpg",			sound : "",	arena : new THREE.CircleGeometry(50,100) },
+		{ background : "Spacecity.png",		floor : "spacecity.jpg",	sound : "",	arena : new THREE.BoxGeometry(100,20,1)  },
+		{ background : "Underwater.png",	floor : "underwater.jpg",	sound : "",	arena : new THREE.CircleGeometry(50,100) },
+		{ background : "Forest.png",		floor : "log.jpg",			sound : "",	arena : new THREE.BoxGeometry(100,20,1) },
+		{ background : "Castle_dk.jpg",		floor : "drawbridge.jpg",	sound : "",	arena : new THREE.BoxGeometry(100,20,1) },
+		{ background : "galaxy.png",		floor : "planetoid.jpg",	sound : "",	arena : new THREE.CircleGeometry(50,100) }
 	],
 	toggleSound : function()
 	{
@@ -437,7 +437,8 @@ var Game =
 			backgroundScene.add(backgroundMesh);
 			
 			// Create the floor
-			var geometryFloor = new THREE.CircleGeometry(50, 100); //BoxGeometry(50,1,20);
+		  //new THREE.CircleGeometry(50,100); new THREE.BoxGeometry(100,20,1);
+			var geometryFloor = this.scenes[r].arena;
 			var textureFloor = new THREE.TextureLoader().load(string.format("images/floor/{0}", this.scenes[r].floor));
 			var materialFloor = new THREE.MeshLambertMaterial( { map : textureFloor } );
 			
