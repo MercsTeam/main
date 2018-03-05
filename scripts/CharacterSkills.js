@@ -394,7 +394,7 @@ function NanobotRepairs()
     this.duration = 2;
     this.description = "Repairs damage to his armour and adapts it to the situation, temporarily regenerating HP and increasing defence.";
 	this.cooldown = 2;
-	this.imageURL = "characters/CyborgComicStills/Cyborg_NanobotRepairs.png>";
+	this.imageURL = "characters/CyborgComicStills/Cyborg_NanobotRepairs.png";
 
 	this.doAction = function(self, target)
 	{
