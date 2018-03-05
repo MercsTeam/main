@@ -773,6 +773,7 @@ function PrimalRage()
 	this.effectDuration = 3;
 	this.description = "Tap into heart of survival instincts to temporarily boost attack and defence.";
 	this.cooldown = 3;
+	this.imageURL = "characters/CavemanComicStills/cavemanprimalRage1.png";
 	
 	this.doAction = function(self, target)
 	{
