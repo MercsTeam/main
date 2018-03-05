@@ -5,13 +5,23 @@ var SoundLibrary =
 	clickOff : "330049__paulmorek__beep-04-negative.mp3",
 	skill : "330063__paulmorek__swish-02-2015-06-21.mp3",
 	endRound : "346425__soneproject__ecofuture3.mp3",
-	swordChop : "MERCS_swordchop.mp3",
+	
+	swordChop : "BSG_SwordChop.mp3",
 	sweepStrike : "BSG_Sweepingstrike.mp3",
 	swordDraw : "BSG_Sworddraw.mp3",
+	
 	headShot : "Snipergirl_Headshot.mp3",
 	ricochetShotHit : "SniperGirl_RicochetShot_directhit.mp3",
 	ricochetShotMiss : "SniperGirl_RicochetShot_missedshot.mp3",
-	takeAim : "Snipergirl_TakeAim.mp3"
+	takeAim : "Snipergirl_TakeAim.mp3",
+	camouflage : "SniperGirl_Camouflage.mp3",
+	
+	fireBall : "Mage_Fireball.mp3",
+	lightningStorm : "Mage_LightningStorm.mp3",
+	poolMana : "Mage_PoolMana.mp3",
+	divineShield : "Mage_DivineShield.mp3",
+
+	lightningStrike : "Djinn_LightningStrike.mp3",
 };
 
 var soundPath = "https://raw.githubusercontent.com/MercsTeam/main/master/Mercs_sound_library";

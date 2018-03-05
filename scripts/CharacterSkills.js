@@ -195,6 +195,7 @@ function Camouflage()
     this.description = "Become harder to hit until your next shot is fired.";
 	this.cooldown = 1;
 	this.imageURL = "characters/SniperGirlComicStills/SG-Camouflage.jpg";
+	this.soundID = "camouflage";
 	
 	var counter = this.duration;
 	
@@ -234,6 +235,7 @@ function Fireball()
     this.burnProb = Probability.Low;
     this.description = "A fiery attack that may burn the enemy.";
 	this.imageURL = "characters/MageComicStills/MageFireball.png";
+	this.soundID = "fireBall";
 }
 Fireball.prototype = new Skill("Fireball");
 
@@ -245,6 +247,7 @@ function LightningStorm()
     this.stunProb = Probability.Low;
     this.description = "An electrical attack that strikes both enemies and may stun them.";
 	this.imageURL = "characters/MageComicStills/MageLightningStorm.png";
+	this.soundID = "lightningStorm";
 }
 LightningStorm.prototype = new Skill("Lightning Storm");
 
@@ -255,6 +258,7 @@ function DivineShield()
     this.description = "Protects from all damage this turn.";
 	this.cooldown = 1;
 	this.imageURL = "characters/MageComicStills/MageDivineShield.png";
+	this.soundID = "divineShield";
 }
 DivineShield.prototype = new Skill("Divine Shield");
 
@@ -266,6 +270,7 @@ function PoolMana()
     this.description = "Increases attack power for next turn.";
 	this.cooldown = 1;
 	this.imageURL = "characters/MageComicStills/MagePoolMana.png";
+	this.soundID = "poolMana";
 	
 	this.doAction = function(self, target)
 	{
@@ -280,7 +285,9 @@ function LightningStrike()
     this.type = SkillType.Offensive;
     this.attackValue = 25;
     this.interruptProb = 0.15;
-    this.description = "An electrical blow that may prevent the target from attacking.";	
+    this.description = "An electrical blow that may prevent the target from attacking.";
+	this.imageURL = "DjinnComicStills/Djinn_LightningStrike.png";
+	this.soundID = "lightningStrike";
 }
 LightningStrike.prototype = new Skill("Lightning Strike");
 
@@ -301,6 +308,7 @@ function Confidence()
 	this.selfImmunity = true;
 	this.description = "Manifests confidence to protect from all damage this turn, and temporarily blocks status effects";
 	this.cooldown = 1;
+	this.imageURL = "characters/DjinnComicStills/Djinn_Confidence.png";
 }
 Confidence.prototype = new Skill("Confidence");
 
