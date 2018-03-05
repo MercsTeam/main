@@ -163,10 +163,13 @@ function Cyborg()
 
 	this.quote = "Your actions are illogical.";
     this.backstory = "After the hovertrain accident that killed his tycoon parents and left his body broken, He spent "
-	+ "months in intensive care, clawing at the last shreds of his life. With the help of an experimental "
-	+ "transhumanist program, Proto was offered a second chance. Now almost eighty percent cybernetic, Proto "
-	+ "uses his lightning fast synapses and near indestructible body to fight intergalactic crime, provided "
-	+ "justice pays up front.";
+		+ "months in intensive care, clawing at the last shreds of his life. With the help of an experimental "
+		+ "transhumanist program, Proto was offered a second chance. Now almost eighty percent cybernetic, Proto "
+		+ "uses his lightning fast synapses and near indestructible body to fight intergalactic crime, provided "
+		+ "justice pays up front.";
+
+	this.damageImage = "characters/CyborgComicStills/Cyborg_damage.png";
+	this.defeatImage = "characters/CyborgComicStills/Cyborg_defeat.png";
 }
 Cyborg.prototype = new Character();
 

@@ -352,6 +352,7 @@ function IntegratedBattleSystem()
     this.attackValue = 50;
     this.randomDebuffProb = 0.25;
     this.description = "An attack that may randomly lower one of the enemy's stats.";
+	this.imageURL = "characters/CyborgComicStills/Cyborg_IntegratedBattleSystem.png";
 }
 IntegratedBattleSystem.prototype = new Skill("Integrated Battle System");
 
@@ -362,6 +363,7 @@ function ElectronicBarrier()
 	this.affectAlly = true;
     this.description = "Deploy a large energy barrier that reduces damage from all incoming attacks against allies.";
 	this.cooldown = 1;
+	this.imageURL = "characters/CyborgComicStills/Cyborg_ElectronicBarrier.png";
 
 	this.doAction = function(self, target)
 	{
@@ -392,6 +394,7 @@ function NanobotRepairs()
     this.duration = 2;
     this.description = "Repairs damage to his armour and adapts it to the situation, temporarily regenerating HP and increasing defence.";
 	this.cooldown = 2;
+	this.imageURL = "characters/CyborgComicStills/Cyborg_NanobotRepairs.png>";
 
 	this.doAction = function(self, target)
 	{
@@ -438,6 +441,7 @@ function EnhancedCombatSystem()
 	this.selfAttackMod = 3;
 	this.description = "Sacrifice half of health to dramatically increase attack power.";
 	this.cooldown = 2;
+	this.imageURL = "characters/CyborgComicStills/Cyborg_EnhancedCombatSystem.png";
 	
 	this.doAction = function(self, target)
 	{
