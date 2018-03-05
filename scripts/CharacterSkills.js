@@ -286,7 +286,7 @@ function LightningStrike()
     this.attackValue = 25;
     this.interruptProb = 0.15;
     this.description = "An electrical blow that may prevent the target from attacking.";
-	this.imageURL = "DjinnComicStills/Djinn_LightningStrike.png";
+	this.imageURL = "characters/DjinnComicStills/Djinn_LightningStrike.png";
 	this.soundID = "lightningStrike";
 }
 LightningStrike.prototype = new Skill("Lightning Strike");
