@@ -358,8 +358,8 @@ IntegratedBattleSystem.prototype = new Skill("Integrated Battle System");
 function ElectronicBarrier()
 {
     this.type = SkillType.Reusable;
-    this.multiTarget = true;
-    this.oppAttackMod = 0.8;
+    this.oppAttackMod = 0.75;
+	this.affectAlly = true;
     this.description = "Deploy a large energy barrier that reduces damage from all incoming attacks against allies.";
 	this.cooldown = 1;
 
@@ -372,10 +372,10 @@ function ElectronicBarrier()
 		{
 			oppMerc = opp.getCharacterByPosition(i);
 
-			if(oppMerc.target == self.position)
+			if(oppMerc.target != self.position)
 			{
-				oppMerc.accuracy.modifier = 0.5;
-				oppMerc.accuracy.duration = 1;
+				oppMerc.attack.modifier = this.oppAttackMod;
+				oppMerc.attack.duration = 1;
 				this.logAction(self, oppMerc, 0);
 			}
 		}
