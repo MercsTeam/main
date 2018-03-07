@@ -5,6 +5,7 @@ function Character()
 	this.player = null;
 	this.active = true;
 	this.canMove = true;
+	this.isBonus = false;
 	
 	this.blocksDamage = false;
 
