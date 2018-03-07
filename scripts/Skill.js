@@ -71,14 +71,27 @@ function Skill(n)
 	{ 
 		var detail = [];
 		var exclude = [ "description", "imageURL", "soundID", "selected" ];
+		var altText = "";
 		for(var attr in this)
 		{
 			if(this.hasOwnProperty(attr) && typeof this[attr] != "function" && exclude.indexOf(attr) == -1)
 			{
-				detail.push(string.format("<strong>{0}:</strong> {1}", attr, this[attr]));
+				if(attr == "detail")
+				{
+					altText = (this[attr] == 1 ? "Reusable" : (this[attr] == 2 ? "Defensive" : "Offensive"));
+					detail.push(string.format("<strong>{0}:</strong> {1}", attr, altText));
+				}
+				else if(attr.toLowerCase().contains("prob"))
+				{
+					detail.push(string.format("<strong>{0}:</strong> {1}%", attr, Math.round(this[attr] * 100)));
+				}
+				else
+				{
+					detail.push(string.format("<strong>{0}:</strong> {1}", attr, this[attr]));
+				}
 			}
 		}
-		return string.format("<strong>{0}</strong><br />{1}<br /><span style=\"font-size:small\">{2}</span>", this.name, this.description, detail.join("/")); 
+		return string.format("<strong>{0}</strong><br />{1}<br /><span style=\"font-size:medium\">{2}</span>", this.name, this.description, detail.join("&nbsp;")); 
 	};
 
 	this.toString = function()
