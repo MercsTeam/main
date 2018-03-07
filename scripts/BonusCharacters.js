@@ -5,6 +5,7 @@ function Nemesis()
     this.image = "nemesis.png";
     this.type = CharacterType.Physical;
 	this.alignment = "Evil";
+	this.isBonus = true;
 
     this.skills = [ new SwordChop(), new SweepingStrike(), new DefensiveStance(), new Focus(), new Retreat() ];
 	
@@ -47,6 +48,7 @@ function SamuraiGirl()
 	this.image = "samuraigirl.png";
 	this.type = CharacterType.Finesse;
 	this.alignment = "Good";
+	this.isBonus = true;
 
     this.skills = [ new YokoGiri(), new KesiGiri(), new OverheadCut(), new Nukitsuke(), new Retreat() ];
 
@@ -79,6 +81,7 @@ function DinoGirl()
 	this.image = "dinogirl.png";
 	this.type = CharacterType.Physical;
 	this.alignment = "Good";
+	this.isBonus = true;
 
     this.skills = [ new TailWhip(), new Snarl(), new HeatVision(), new RippingClaws(), new Retreat() ];
 
@@ -112,6 +115,7 @@ function Clown()
 	this.image = "clown.png";
 	this.type = CharacterType.Magic;
 	this.alignment = "Evil";
+	this.isBonus = true;
 
 	this.skills = [ new SeltzerBottle(), new ExplodingPie(), new BalloonAnimal(), new Honk(), new Retreat() ];
 
