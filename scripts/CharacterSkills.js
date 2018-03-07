@@ -605,7 +605,7 @@ function Abduction()
 
 	this.type = SkillType.Offensive;
 	this.duration = 3;
-	this.description = "Calls in a UFO to abduct the enemy for an instant KO, but leaves the user vulnerable for a few turns.";
+	this.description = "Calls in a UFO over 3 turns. Once they arrive, the enemy is abducted for a one-hit kill.";
 	this.cooldown = 6;
 	this.imageURL = "characters/AlienComicStills/Alien_Abduction_rough.png";
 
