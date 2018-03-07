@@ -69,7 +69,15 @@ function Skill(n)
 
 	this.getDescription = function() 
 	{ 
-		return string.format("<strong>{0}</strong><br />{1}", this.name, this.description); 
+		var detail = [];
+		for(var attr in this)
+		{
+			if(this.hasOwnProperty(attr) && typeof this[attr] != "function")
+			{
+				detail.push(string.format("<strong>{0}:</strong> {1}", attr, this[attr]));
+			}
+		}
+		return string.format("<strong>{0}</strong><br />{1}<br />{2}", this.name, this.description, detail.join("/")); 
 	};
 
 	this.toString = function()
