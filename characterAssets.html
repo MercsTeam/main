@@ -61,9 +61,12 @@
 			characters[14].assignedTo = "Kevin";
 			characters[15].assignedTo = "Kevin";
 
-			window.onload = function()
+			window.onload = loadPage;
+			
+			function loadPage()
 			{
 				var o = document.querySelector("#output");
+				var show = document.querySelector("#showBonus").checked;
 
 				var props1 = [ "damageImage", "defeatImage"];
 				var props2 = [ "imageURL", "soundID" ];
@@ -72,87 +75,90 @@
 
 				for(var h = 0; h < characters.length; h++)
 				{
-					compCount = 0;
-
-					img = document.createElement("IMG");
-					img.src = "characters/headshots/" + characters[h].image;
-
-					h2 = document.createElement("H2");
-					h2.innerHTML = characters[h].name;
-
-					h3 = document.createElement("H3");
-					h3.innerHTML = (characters[h].assignedTo || "Unassigned");
-
-					ul = document.createElement("UL");
-
-					for(var i = 0; i < props1.length; i++)
+					if(!characters[h].isBonus || (show && characters[h].isBonus))
 					{
-						sp = document.createElement("SPAN");
+						compCount = 0;
 
-						li = document.createElement("LI");
-						if(characters[h].hasOwnProperty(props1[i]))
+						img = document.createElement("IMG");
+						img.src = "characters/headshots/" + characters[h].image;
+
+						h2 = document.createElement("H2");
+						h2.innerHTML = characters[h].name;
+
+						h3 = document.createElement("H3");
+						h3.innerHTML = (characters[h].assignedTo || "Unassigned");
+
+						ul = document.createElement("UL");
+
+						for(var i = 0; i < props1.length; i++)
 						{
-							li.className = "complete";
+							sp = document.createElement("SPAN");
 
-							a = document.createElement("A");
-							a.target = "_new";
-							a.href = characters[h][props1[i]];
-							a.innerHTML = props1[i];
-							sp.appendChild(a);
-
-							compCount++;
-						}
-						else
-						{
-							li.className = "missing";
-							sp.innerHTML = props1[i];							
-						}
-						li.appendChild(sp);
-						ul.appendChild(li);
-					}
-					
-					for(var i = 0; i < characters[h].skills.length - 1; i++)
-					{	
-						ul2 = document.createElement("UL");
-						for(var j = 0; j < props2.length; j++)
-						{
-							sp = document.createElement("SPAN");							
-
-							li2 = document.createElement("LI");
-							if(characters[h].skills[i].hasOwnProperty(props2[j]))
+							li = document.createElement("LI");
+							if(characters[h].hasOwnProperty(props1[i]))
 							{
-								li2.className = "complete";
+								li.className = "complete";
 
 								a = document.createElement("A");
 								a.target = "_new";
-								if(props2[j] == "soundID")
-								{
-									soundID = characters[h].skills[i][props2[j]];
-									a.href = "Mercs_sound_library/" + SoundLibrary[soundID];
-								}
-								else
-								{
-									a.href = characters[h].skills[i][props2[j]];
-								}
-								a.innerHTML = props2[j];
+								a.href = characters[h][props1[i]];
+								a.innerHTML = props1[i];
 								sp.appendChild(a);
 
 								compCount++;
 							}
 							else
 							{
-								li2.className = "missing";
-								sp.innerHTML = props2[j];
+								li.className = "missing";
+								sp.innerHTML = props1[i];							
 							}
-							li2.appendChild(sp);
-							ul2.appendChild(li2);
+							li.appendChild(sp);
+							ul.appendChild(li);
 						}
 
-						li = document.createElement("LI");
-						li.className = "skill-name";
-						li.appendChild(document.createTextNode(characters[h].skills[i].name));
-						li.appendChild(ul2);
-						ul.appendChild(li);
+						for(var i = 0; i < characters[h].skills.length - 1; i++)
+						{	
+							ul2 = document.createElement("UL");
+							for(var j = 0; j < props2.length; j++)
+							{
+								sp = document.createElement("SPAN");							
+
+								li2 = document.createElement("LI");
+								if(characters[h].skills[i].hasOwnProperty(props2[j]))
+								{
+									li2.className = "complete";
+
+									a = document.createElement("A");
+									a.target = "_new";
+									if(props2[j] == "soundID")
+									{
+										soundID = characters[h].skills[i][props2[j]];
+										a.href = "Mercs_sound_library/" + SoundLibrary[soundID];
+									}
+									else
+									{
+										a.href = characters[h].skills[i][props2[j]];
+									}
+									a.innerHTML = props2[j];
+									sp.appendChild(a);
+
+									compCount++;
+								}
+								else
+								{
+									li2.className = "missing";
+									sp.innerHTML = props2[j];
+								}
+								li2.appendChild(sp);
+								ul2.appendChild(li2);
+							}
+
+							li = document.createElement("LI");
+							li.className = "skill-name";
+							li.appendChild(document.createTextNode(characters[h].skills[i].name));
+							li.appendChild(ul2);
+							ul.appendChild(li);
+						}
 					}
 
 					colour = mixColours(COMP_COLOUR, MISS_COLOUR, compCount/10);
@@ -228,6 +234,8 @@
     <body>
 		<h1>Character Assets</h1>
 		<div id="result"></div>
+	    	<input id="showBonus" type="checkbox" onclick="loadPage()" checked="checked" />
+	    	<label for="showBonus">Show Bonus</label>
 		<div id="output"></div>
     </body>
 </html>
