@@ -1,10 +1,10 @@
 var _credits = 
 { 
 	"Concept"		: [ "Thomas Burke" ],
-	"Production"	: [ "Jonathan Brenders" ],
+	"Production"		: [ "Jonathan Brenders" ],
 	"Design"		: [ "Thomas Burke", "John Mattys" ],
 	"Art"			: [ "Jaeden Laffey", "Kevin Pendergast", "Donna Phelps" ],
-	"Additional Character Visualization" : [ "Thomas Burke", "Nick Gustafson" ],
+	"Additional Character Visualization" : [ "Jonathan Brenders", "Thomas Burke", "Nick Gustafson" ],
 	"Sound"			: [ "Aidan Crawley" ],
 	"Technical"		: [ "Ryan Amalfitano", "Nick Gustafson" ]
 };	
