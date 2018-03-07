@@ -91,7 +91,7 @@ function Skill(n)
 				}
 			}
 		}
-		return string.format("<strong>{0}</strong><br />{1}<br /><span style=\"font-size:medium\">{2}</span>", this.name, this.description, detail.join("&nbsp;")); 
+		return string.format("<strong>{0}</strong><br />{1}<br /><span style=\"font-size:medium\">{2}</span>", this.name, this.description, detail.join("<br />")); 
 	};
 
 	this.toString = function()
