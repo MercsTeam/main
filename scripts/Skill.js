@@ -76,7 +76,7 @@ function Skill(n)
 		{
 			if(this.hasOwnProperty(attr) && typeof this[attr] != "function" && exclude.indexOf(attr) == -1)
 			{
-				if(attr == "detail")
+				if(attr == "type")
 				{
 					altText = (this[attr] == 1 ? "Reusable" : (this[attr] == 2 ? "Defensive" : "Offensive"));
 					detail.push(string.format("<strong>{0}:</strong> {1}", attr, altText));
