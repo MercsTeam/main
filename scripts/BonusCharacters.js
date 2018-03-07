@@ -1,7 +1,7 @@
 function Nemesis()
 {
     this.name = "NEMESIS";
-	this.realName = "";
+	this.realName = "Ebboh Rutra";
     this.image = "nemesis.png";
     this.type = CharacterType.Physical;
 	this.alignment = "Evil";
@@ -44,7 +44,7 @@ Nemesis.prototype = new Character();
 function SamuraiGirl()
 {
     this.name = "SAMURAI GIRL";
-	this.realName = "Tatsu Sasaki";
+	this.realName = "Akita Sasaki";
 	this.image = "samuraigirl.png";
 	this.type = CharacterType.Finesse;
 	this.alignment = "Good";
@@ -77,7 +77,7 @@ SamuraiGirl.prototype = new Character();
 function DinoGirl()
 {
     this.name = "DINOGIRL";
-	this.realName = "Qastra";
+	this.realName = "Zhylla";
 	this.image = "dinogirl.png";
 	this.type = CharacterType.Physical;
 	this.alignment = "Good";
@@ -111,7 +111,7 @@ DinoGirl.prototype = new Character();
 function Clown()
 {
 	this.name = "CLOWN";
-	this.realName = "Mr. Giggles";
+	this.realName = "Xoggoth, the Endless Nightmare";
 	this.image = "clown.png";
 	this.type = CharacterType.Magic;
 	this.alignment = "Evil";
@@ -135,7 +135,7 @@ function Clown()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 
-	this.quote = "";
+	this.quote = "Want to play?";
     this.backstory = "Once a carnival clown, Mr. Giggles has now cast off the laws of his new world, just as he cast off "
 	+ "the chains of mortality. Now he serves the Great Destroyer and plans to bring what remains of the tattered "
 	+ "universe to a dark and dreadful end, in the hope that one day he will be justly rewarded.";
