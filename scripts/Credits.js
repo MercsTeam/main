@@ -6,6 +6,7 @@ var _credits =
 	"Art"			: [ "Jaeden Laffey", "Kevin Pendergast", "Donna Phelps" ],
 	"Additional Character Visualization" : [ "Jonathan Brenders", "Thomas Burke", "Nick Gustafson" ],
 	"Sound"			: [ "Aidan Crawley" ],
+	"Character Vocalization" : [ "Nick Gustafson", "Kevin Pendergast", "Donna Phelps" ],
 	"Technical"		: [ "Ryan Amalfitano", "Nick Gustafson" ]
 };	
 

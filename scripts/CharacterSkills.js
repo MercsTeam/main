@@ -773,7 +773,7 @@ function PrimalRage()
 	this.effectDuration = 3;
 	this.description = "Tap into heart of survival instincts to temporarily boost attack and defence.";
 	this.cooldown = 3;
-	this.imageURL = "characters/CavemanComicStills/cm_primalrage.png";
+	this.imageURL = "characters/CavemanComicStills/caveman_primalrage.png";
 	
 	this.doAction = function(self, target)
 	{
@@ -794,7 +794,7 @@ function FireDance()
 	this.burnProb = Probability.VeryHigh;
 	this.selfDamage = true;
 	this.description = "A tribal dance that burns the user in order to grant better odds of inflicting status effects. Can't be used if already burned.";
-	this.imageURL = "characters/CavemanComicStills/cm_firedance.png";
+	this.imageURL = "characters/CavemanComicStills/caveman_firedance.png";
 	
 	this.doAction = function(self, target)
 	{

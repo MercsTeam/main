@@ -237,9 +237,12 @@ function Caveman()
 
 	this.quote = "Krorlaag like shiny... Krorlaag smashes!";
     this.backstory = "Dumb as rocks, Krorlaag makes up for his underdeveloped brain with more than enough brawn. "
-	+ "Krorlaag used to be one of his village’s best hunters. He was on one of his hunts when the world's dimensions "
-	+ "shifted, erasing all trace of his home and former life. Resigned to a nomadic existence, Krorlaag will do just "
-	+ "about anything for food or \"shinies\".";
+		+ "Krorlaag used to be one of his village’s best hunters. He was on one of his hunts when the world's dimensions "
+		+ "shifted, erasing all trace of his home and former life. Resigned to a nomadic existence, Krorlaag will do just "
+		+ "about anything for food or \"shinies\".";
+
+	this.damageImage = "characters/CavemanComicStills/caveman_damage.png";
+	this.defeatImage = "characters/CavemanComicStills/caveman_defeat.png";
 }
 Caveman.prototype = new Character();
 
@@ -271,7 +274,7 @@ function CowboyGuy()
 
 	this.quote = "Lookee what the cat dragged in.";
     this.backstory = "A quick-witted gunslinger with unusually good luck, \"Lucky\" Townsend earned his renown as a "
-	+ "bounty hunter in the Wild West. No space-time phenomenon will change his plan to retire as a rich man.";
+		+ "bounty hunter in the Wild West. No space-time phenomenon will change his plan to retire as a rich man.";
 
 	this.damageImage = "characters/CowboyComicStills/cowboy_damage.png";
 	this.defeatImage = "characters/CowboyComicStills/cb_death2.png";
@@ -306,8 +309,8 @@ function Pirate()
 
 	this.quote = "Yohohoho!";
     this.backstory = "Captain of the Rusty Bucket Corsairs, cursed to eternally sail the stormy seas. Salvatore "
-	+ "never was much of a sailor however, and prefers dry land, taking an accursed stormcloud with him wherever "
-	+ "the wind blows. He figured out how to harness the energies of his curse and now considers it a blessing.";
+		+ "never was much of a sailor however, and prefers dry land, taking an accursed stormcloud with him wherever "
+		+ "the wind blows. He figured out how to harness the energies of his curse and now considers it a blessing.";
 
 	this.damageImage = "characters/PirateComicStills/Pirate_Damage.png";
 	this.defeatImage = "characters/PirateComicStills/Pirate_Death.png";
@@ -374,8 +377,8 @@ function SpaceGirl()
 
 	this.quote = "Count down to your defeat!";
     this.backstory = "An astronaut from the well funded and highly advanced Canadian Space Program, Zemanová "
-	+ "is a veteran of many scientific missions. She went AWOL after an attack on Moon Base Alpha, which was "
-	+ "orchestrated by a small group of mercenaries.";
+		+ "is a veteran of many scientific missions. She went AWOL after an attack on Moon Base Alpha, which was "
+		+ "orchestrated by a small group of mercenaries.";
 }
 SpaceGirl.prototype = new Character();
 
@@ -407,7 +410,7 @@ function Witch()
 
 	this.quote = "Double, double, toil and trouble; Fire burn and cauldron bubble.";
     this.backstory = "A red-robed witch from an ancient world who practices dangerous magic, brought to Cerotis by "
-	+ "the esoteric destruction wrought by the black hole. Quick to adapt to the new surroundings, Azalea set "
-	+ "out to establish her power.";
+		+ "the esoteric destruction wrought by the black hole. Quick to adapt to the new surroundings, Azalea set "
+		+ "out to establish her power.";
 }
 Witch.prototype = new Character();
