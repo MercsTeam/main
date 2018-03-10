@@ -1057,6 +1057,7 @@ function PoisonApple()
 	this.type = SkillType.Offensive;
 	this.poisonProb = 0.5;
 	this.description = "Offers the enemy a cursed apple, which can either harm or heal them.";
+	this.imageURL = "characters/WitchComicStills/Poisoned_Apple.png";
 
 	this.doAction = function(self, target)
 	{
