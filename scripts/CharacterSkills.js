@@ -102,6 +102,7 @@ function Focus()
     this.description = "Increases attack power while in battle.";
 	this.cooldown = 1;
 	this.imageURL = "characters/BSGComicStills/FRONT-Focus.jpg";
+	this.soundID = "focus";
 }
 Focus.prototype = new Skill("Focus");
 
@@ -706,7 +707,7 @@ function SixShooter()
 	this.type = SkillType.Offensive;
 	this.attackValue = 30;
 	this.multiTarget = true;
-	this.description = "Unloads an entire cylinder on both enemies.”";
+	this.description = "Unloads an entire cylinder on both enemies.";
 	this.imageURL = "characters/CowboyComicStills/cb_six_shooter.png";
 }
 SixShooter.prototype = new Skill("Six-Shooter");
@@ -762,6 +763,7 @@ function PoisonSpear()
 	this.attackValue = 25;
 	this.poisonProb = Probability.Medium;
 	this.description = "A stab with a spear covered in toxic substances that may poison the enemy.";
+	this.imageURL = "characters/CavemanComicStills/caveman_poisonspear.png";
 }
 PoisonSpear.prototype = new Skill("Poison-Tipped Spear");
 
@@ -1024,6 +1026,7 @@ function Curse()
 	this.type = SkillType.Offensive;
 	this.randomDebuffProb = Probability.Medium;
 	this.description = "A bitter curse that wishes harm and affliction against the enemy.";
+	this.imageURL = "characters/WitchComicStills/Curse.png";
 }
 Curse.prototype = new Skill("Curse");
 
@@ -1036,6 +1039,7 @@ function Blessing()
 	this.affectsAlly = true;
 	this.multiTarget = true;
 	this.description = "A benevolent spell that helps protect self and allies by increasing defence temporarily.";
+	this.imageURL = "characters/WitchComicStills/Blessing.png";
 
 	this.doAction = function(self, target)
 	{

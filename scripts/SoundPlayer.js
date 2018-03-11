@@ -9,6 +9,8 @@ var SoundLibrary =
 	swordChop : "BSG_SwordChop.mp3",
 	sweepStrike : "BSG_Sweepingstrike.mp3",
 	swordDraw : "BSG_Sworddraw.mp3",
+	focus : "BSG_Focus.mp3",
+	bsgTag : "BSG_Tagline.mp3",
 	
 	headShot : "Snipergirl_Headshot.mp3",
 	ricochetShotHit : "SniperGirl_RicochetShot_directhit.mp3",
@@ -22,6 +24,8 @@ var SoundLibrary =
 	divineShield : "Mage_DivineShield.mp3",
 
 	lightningStrike : "Djinn_LightningStrike.mp3",
+
+	cowboyTag : "Cowboy_Tagline.mp3"
 };
 
 var soundPath = "https://raw.githubusercontent.com/MercsTeam/main/master/Mercs_sound_library";
@@ -29,6 +33,8 @@ var soundPath = "https://raw.githubusercontent.com/MercsTeam/main/master/Mercs_s
 
 function SoundPlayer(loop)
 {	
+	var sp = this;
+
 	this.soundObj = new Audio();
 	this.soundObj.autoplay = true;
 	this.soundObj.controls = false;
@@ -40,6 +46,23 @@ function SoundPlayer(loop)
 	{
 		this.soundObj.src = soundPath + "/" + SoundLibrary[name];
 		this.soundObj.play();
+	};
+
+	this.playSequence = function(seq)
+	{
+		var index = 0;
+
+		this.soundObj.src = soundPath + "/" + SoundLibrary[seq[index]];
+		this.soundObj.play();
+		this.soundObj.onended = function()
+		{
+			index++;
+			if(index < seq.length)
+			{
+				sp.soundObj.src = soundPath + "/" + SoundLibrary[seq[index]];
+				sp.soundObj.play();
+			}
+		};
 	};
 
 	this.mute = function(value) { this.soundObj.muted = value; };

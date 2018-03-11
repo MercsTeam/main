@@ -20,6 +20,7 @@
         <script>
 			const COMP_COLOUR = "#06B025";
 			const MISS_COLOUR = "#FF4040";
+			const ATTR_COUNT = 11;
 
 			var self, ally1, enemy1, enemy2;
 
@@ -70,7 +71,7 @@
 				
 				var show = document.querySelector("#showBonus").checked;
 
-				var props1 = [ "damageImage", "defeatImage"];
+				var props1 = [ "tagline", "damageImage", "defeatImage"];
 				var props2 = [ "imageURL", "soundID" ];
 
 				var h2, img, ul, li, ul2, li2, a, soundID, compCount;
@@ -157,13 +158,14 @@
 
 							li = document.createElement("LI");
 							li.className = "skill-name";
+							li.title = characters[h].skills[i].description;
 							li.appendChild(document.createTextNode(characters[h].skills[i].name));
 							li.appendChild(ul2);
 							ul.appendChild(li);
 						}
 					}
 
-					colour = mixColours(COMP_COLOUR, MISS_COLOUR, compCount/10);
+					colour = mixColours(COMP_COLOUR, MISS_COLOUR, compCount/ATTR_COUNT);
 					img.style.backgroundColor = colour;
 					h2.style.color = colour;
 
