@@ -70,7 +70,7 @@
 				
 				var show = document.querySelector("#showBonus").checked;
 
-				var props1 = [ "damageImage", "defeatImage"];
+				var props1 = [ "tagline", "damageImage", "defeatImage"];
 				var props2 = [ "imageURL", "soundID" ];
 
 				var h2, img, ul, li, ul2, li2, a, soundID, compCount;
@@ -157,6 +157,7 @@
 
 							li = document.createElement("LI");
 							li.className = "skill-name";
+							li.title = characters[h].skills[i].description;
 							li.appendChild(document.createTextNode(characters[h].skills[i].name));
 							li.appendChild(ul2);
 							ul.appendChild(li);
