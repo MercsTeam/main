@@ -92,6 +92,7 @@ function DefensiveStance()
     this.blocksDamage = true;
 	this.cooldown = 1;
 	this.imageURL = "characters/BSGComicStills/FRONT-Defensive_Stance.jpg";
+	this.soundID = "defensiveStance";
 }
 DefensiveStance.prototype = new Skill("Defensive Stance");
 

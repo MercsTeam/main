@@ -9,6 +9,7 @@ var SoundLibrary =
 	swordChop : "BSG_SwordChop.mp3",
 	sweepStrike : "BSG_Sweepingstrike.mp3",
 	swordDraw : "BSG_Sworddraw.mp3",
+	defensiveStance : "BSG_DefensiveStance.mp3",
 	focus : "BSG_Focus.mp3",
 	bsgTag : "BSG_Tagline.mp3",
 	
