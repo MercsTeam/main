@@ -754,6 +754,7 @@ function Club()
 	this.stunProb = Probability.VeryLow;
 	this.description = "A powerful blow to the head that may stun the enemy.";
 	this.cooldown = 1;
+	this.imageURL = "characters/CavemanComicStills/caveman_club.png";
 }
 Club.prototype = new Skill("Club");
 
