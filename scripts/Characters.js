@@ -100,7 +100,9 @@ function Mage()
 
 	this.quote = "I cast SERPENTUS LIMBUS!";
     this.backstory = "This reclusive wizard had her first taste of fame and wealth after a quest to slay a dragon. "
-	+ "Now Zocoma has a taste for the spotlight and uses her powers for profiteering as a Cerotis mercenary.";
+		+ "Now Zocoma has a taste for the spotlight and uses her powers for profiteering as a Cerotis mercenary.";
+
+	this.damageImage = "characters/MageComicStills/MageDamaged.png";
 }
 Mage.prototype = new Character();
 
@@ -416,5 +418,7 @@ function Witch()
     this.backstory = "A red-robed witch from an ancient world who practices dangerous magic, brought to Cerotis by "
 		+ "the esoteric destruction wrought by the black hole. Quick to adapt to the new surroundings, Azalea set "
 		+ "out to establish her power.";
+
+	this.damageImage = "characters/WitchComicStills/Damaged.png";
 }
 Witch.prototype = new Character();

@@ -18,6 +18,8 @@ var CharacterSelection =
 		if(Game.player1.isActive())
 		{
 			Game.player1.commit();
+
+			this.btnSelect[1].innerHTML = "Player 2: Pick 3";
 			
 			Game.player1.active = false;
 			Game.player2.active = true;
@@ -48,7 +50,10 @@ var CharacterSelection =
 	},
 	load : function()
 	{
+		this.btnSelect[0].innerHTML = "Player 1: Pick 3";
 		this.btnSelect[0].disabled = true;
+		
+		this.btnSelect[1].innerHTML = "Player 2: Wait";
 		this.btnSelect[1].disabled = true;
 
 		for(var i = 0; i < Game.availableCharacters.length; i++)
@@ -84,7 +89,9 @@ var CharacterSelection =
 					p.selectedCount--;
 				}
 				
-				CharacterSelection.btnSelect[(Game.player1.isActive() ? 0 : 1)].disabled = (p.selectedCount != 3);
+				var btn = CharacterSelection.btnSelect[(Game.player1.isActive() ? 0 : 1)];
+				btn.disabled = (p.selectedCount != 3);
+				if(!btn.disabled) btn.innerHTML = btn.innerHTML.replace("Pick 3", "Commit");
 			};
 			
 			img = document.createElement("IMG");
@@ -132,14 +139,14 @@ function HTMLRatingChart(powerRatings)
 	
 	var th = document.createElement('TH');
 	th.style.width = "50%";
-	th.innerHTML = "power ratings";
+	th.innerHTML = "&nbsp;";
 	tr.appendChild(th);
 
 	for(var i = 1; i <= SCALE_MAX; i++)
 	{
 		th = document.createElement('TH');
 		th.style.width = "5%";
-		th.innerHTML = i;
+		th.innerHTML = "";
 		tr.appendChild(th);
 	}
 
