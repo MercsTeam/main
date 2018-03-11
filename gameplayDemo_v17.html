@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+    <head>
+        <!--base href="https://mercsteam.github.io/main/" /-->
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <title>Merc TT Demo</title>
+		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Press Start 2P" />
+        <link rel="stylesheet" href="style/style.css" />
+        
+        <script src="scripts/util.js"></script>
+        <script src="scripts/Player.js"></script>
+        <script src="scripts/Character.js"></script>
+        <script src="scripts/Skill.js"></script>
+        <script src="scripts/CharacterSkills.js"></script>
+        
+        <script src="scripts/BonusCharacters.js"></script>
+        <script src="scripts/Characters.js"></script>
+        
+        <script src="scripts/Credits.js"></script>
+        <script src="scripts/SoundPlayer.js"></script>	
+
+		<script src="scripts/threejs/three.min.js"></script>
+		<script src="scripts/threejs/OrbitControls.js"></script>
+		<script src="scripts/threejs/Detector.js"></script>
+    </head>
+    <body>
+		<div id="msgbox-bkgrd">			
+			<div id="messageBox">
+				<div class="titlebar">
+					<span>MERCS</span>
+					<button class="btnClose" type="button" title="Close">&Chi;</button>
+				</div>
+				<div class="messageText"></div>
+				<div class="dialogButtons">
+					<button class="btnMsg" type="button">Ok</button>&nbsp;
+					<button class="btnMsg" type="button">No</button>
+				</div>
+			</div>
+		</div>
+
+		<div id="lgMsg"></div>
+
+        <div id="gamePlay">
+            <div id="titleScreen" onclick="Game.start()">
+                <img src="images/Mercs_Logo_2.0.jpg" width="100%" height="100%" border="0" alt="" />
+                <span>Click screen to start</span>
+            </div>
+            
+            <div id="sagaSell" onclick="Game.skipIntro()">
+                <div class="fade"></div>
+                <div class="star-wars">
+                    <div class="crawl">
+                        <p>A fight for control of Cerotis, a mysterious dimension that the solar system has become entangled within. Unnoticed for years, V616 Monocerotis, 
+						a black hole very near to the Sol system grew in size. One by one, stars winked out of the sky. When the expansion of this celestial body was discovered, 
+						a great exodus was planned.</p>
+
+                        <p>Narrowly escaping the unknown energies of the black hole, the human refugees were cast adrift in space. Meanwhile the eight planets of the Sol system 
+						were slowly dragged out of orbit, past the event horizon and plummeted into inky darkness. In the fall, the few who stayed behind on Earth noticed that 
+						they began to age less and less as time ceased to exist in this place. The next change occurred was a great cooling as the Sun dimmed. When it seemed 
+						like doom was here, V616 Monocerotis did something strange; it retreated, expelling all the worlds it had swallowed. With a thunderous roar, stars burned 
+						back to life. This reignition consecrated an entrance into a new era. Earth was spared, but everything had changed. The corruption of spacetime within 
+						the black hole had welded several dimensions together. Now timeless, deposited in an unknown region of space dubbed Cerotis, the fantastical battles the 
+						futuristic in...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="characterSelect" class="hide2">
+                <div class="innerDiv">
+                    <div class="player 1 active"><button class="smBtn" onclick="CharacterSelection.commit(this)" disabled="disabled">Player 1: Pick 3</button></div>
+                    <div class="player 2"><button class="smBtn" onclick="CharacterSelection.commit(this)" disabled="disabled">Player 2: Wait</button></div>
+                </div>
+            </div>
+            
+            <div id="dialog1" class="dialog hide1">
+                <div id="topPanel">
+                    <img id="active_img1" src="characters/nopic.png" border="0" alt="" />
+                    <div><span id="timeout">00:00</span></div>
+                    <div><button id="btnCommit" type="button" disabled="disabled" onclick="BattleMenu.commit()">Commit</button></div>
+                    <img id="active_img2" src="characters/nopic.png" border="0" alt="" />
+                </div>
+                <div id="battleMenu">
+                    <div id="character1" class="characterMenu active1">
+                        <div class="abilities">
+                            <button type="button"></button>
+                            <button type="button"></button>
+                            <button type="button"></button>
+                            <button type="button"></button>
+                            <button type="button">Retreat</button>
+                        </div>
+                    </div>
+                    <div id="skillOverlay1" class="skillOverlay inactive">
+                        <p class="skillDesc"></p>
+                        <div class="buttons">
+                            <button type="button"></button>
+                            <button type="button"></button>
+                            <button type="button">Back</button>
+                        </div>
+                    </div>
+					<div id="characterReady1" class="characterReady inactive">
+                        <div class="characterAction"></div>
+                        <div class="buttons">
+                            <button type="button">Back</button>
+                        </div>
+                    </div>
+
+                    <div id="character2" class="characterMenu active2">
+                        <div class="abilities">
+                            <button type="button"></button>
+                            <button type="button"></button>
+                            <button type="button"></button>
+                            <button type="button"></button>
+                            <button type="button">Retreat</button>
+                        </div>
+                    </div>             
+                    <div id="skillOverlay2" class="skillOverlay inactive">
+                        <p class="skillDesc"></p>
+                        <div class="buttons">
+                            <button type="button"></button>
+                            <button type="button"></button>
+                            <button type="button">Back</button>
+                        </div>
+                    </div>                 
+                    <div id="characterReady2" class="characterReady inactive">
+                        <div class="characterAction"></div>
+                        <div class="buttons">
+                            <button type="button">Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="imgViewer">
+                <span></span>
+            </div>
+			
+			<div class="reactView">
+                <span></span>
+            </div>
+
+			<div class="reactView">
+                <span></span>
+            </div>
+            
+            <div id="dialog3" class="dialog minimize3">
+                <div id="options">
+                    <div>
+                        <nav>
+                            <a onclick="BattleMenu.toggle()">Toggle Interface</a>
+                            <a onclick="Game.toggleSound()">Audio</a>
+                            <a onclick="Game.surrender()">Surrender</a>
+                        </nav>
+                    </div>
+                </div>
+                <a class="expandLink" onclick="expand3(this)"></a>
+            </div>
+            
+            <div id="dialog2" class="dialog minimize3">
+                <a class="expandLink" onclick="expand3(this)"></a>
+                <div id="battleLog">
+					<div></div>
+                </div>
+            </div>
+            
+            <div id="credits"></div>
+        </div>	
+
+		<script src="scripts/CharacterSelection.js"></script>
+		<script src="scripts/BattleMenu.js"></script>
+		<script src="scripts/MessageBox.js"></script>
+		<script src="scripts/Game.js"></script>		
+    </body>
+</html>
