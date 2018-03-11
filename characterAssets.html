@@ -20,6 +20,7 @@
         <script>
 			const COMP_COLOUR = "#06B025";
 			const MISS_COLOUR = "#FF4040";
+			const ATTR_COUNT = 11;
 
 			var self, ally1, enemy1, enemy2;
 
@@ -164,7 +165,7 @@
 						}
 					}
 
-					colour = mixColours(COMP_COLOUR, MISS_COLOUR, compCount/10);
+					colour = mixColours(COMP_COLOUR, MISS_COLOUR, compCount/ATTR_COUNT);
 					img.style.backgroundColor = colour;
 					h2.style.color = colour;
 
