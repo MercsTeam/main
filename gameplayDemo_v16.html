@@ -67,8 +67,8 @@
             
             <div id="characterSelect" class="hide2">
                 <div class="innerDiv">
-                    <div class="player active">Player 1: Pick 3 <button class="smBtn" onclick="CharacterSelection.commit(this)" disabled="disabled">Commit</button></div>
-                    <div class="player"><button class="smBtn" onclick="CharacterSelection.commit(this)" disabled="disabled">Commit</button> Player 2: Pick 3</div>
+                    <div class="player 1 active"><button class="smBtn" onclick="CharacterSelection.commit(this)" disabled="disabled">P1: Pick 3</button></div>
+                    <div class="player 2"><button class="smBtn" onclick="CharacterSelection.commit(this)" disabled="disabled">P2: Pick 3</button></div>
                 </div>
             </div>
             
@@ -142,8 +142,7 @@
                 <span></span>
             </div>
             
-            <div id="dialog3" class="dialog minimize2">
-                <a class="expandLink" onclick="expand2(this)">&lArr;</a>
+            <div id="dialog3" class="dialog minimize3">
                 <div id="options">
                     <div>
                         <nav>
@@ -153,10 +152,11 @@
                         </nav>
                     </div>
                 </div>
+                <a class="expandLink" onclick="expand3(this)"></a>
             </div>
             
-            <div id="dialog2" class="dialog minimize2">
-                <a class="expandLink" onclick="expand2(this)">Battle Log</a>
+            <div id="dialog2" class="dialog minimize3">
+                <a class="expandLink" onclick="expand3(this)"></a>
                 <div id="battleLog">
 					<div></div>
                 </div>

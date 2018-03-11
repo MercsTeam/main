@@ -1,7 +1,9 @@
-body { width:1920px; height:1080px;font-size:0;font-family:Arial,Helvetica,Sans;background-color:#000000; }
+@import url('https://fonts.googleapis.com/css?family=Bangers|Press+Start+2P');
+
+body { width:1920px; height:1080px; font-size: 0; font-family: Arial,Helvetica,Sans; background-color:#000000; }
 body, div, button { margin:0;padding:0; }
 
-#gamePlay { position:relative;width:100%;height:100%;background:#1A1A2F }
+#gamePlay { position:relative;width:100%;height:100%;background:#1A1A2F; overflow: hidden; }
 
 canvas { height:100%;width:100%;background:#33CC33 }
 
@@ -82,7 +84,7 @@ canvas { height:100%;width:100%;background:#33CC33 }
 	text-align:center;
 	font-size:40pt;
 	color:#ffffff;
-	font-family:'Press Start 2P';
+	font-family: 'Press Start 2P', cursive;
 	text-transform:uppercase;
 	text-decoration:blink;
 	animation-name: tostart;
@@ -90,58 +92,181 @@ canvas { height:100%;width:100%;background:#33CC33 }
 	animation-iteration-count: infinite;
 }
 
-#characterSelect
-{
-	position:absolute;
-	background-color:rgba(0,0,0,0.7);
-	border-radius:50px;
-	padding:50px;
-	top:14%;left:14%;
-	height:calc(72% - 100px);width:calc(72% - 100px);
+#characterSelect {
+    position: absolute;
+    top: 14%;
+    left: 14%;
+    
+    width: calc(72% - 100px);
+    height: calc(72% - 100px);
+    padding: 50px;
+    
+    background: url(../images/menu_assets/BookMenu.png) rgba(0,0,0,0.7) center center no-repeat;
+    background-size: cover;
+    border-radius: 50px;
     transition: transform 0.5s;
 }
 
-.player { display:inline-block;width:50%;height:5%;color:#ffffff;font-size:22pt;text-transform:uppercase; }
-.player.active { font-weight:bold }
-.player:nth-child(1) { color:#33CCFF;text-align:left }
-.player:nth-child(2) { color:#999966;text-align:right }
+#characterSelect .innerDiv {
+    padding: 0px 0px 50px;
+}
 
-figure { height:30%;width:22%;display:inline-block;margin:0.5% 1.5%;padding:0;border-radius:5%; }
-figure img { height:85%;width:95%;margin:0;padding:2% 2% 0 2%;border-radius:5%; }
-figcaption { color:#ffffff;text-align:center;font-size:large;margin:0;padding:0 2% 2% 2%;height:15%;width:100%; }
+.player { display:inline-block; width:50%; height:5%; color:#222; font-size:22pt; text-transform:uppercase; text-align: center; }
+.player.active { font-weight:bold }
+
+figure {
+    display: inline-block;
+    width: 18%;
+    height: 25%;
+    
+    margin: 0 3.5%;
+    padding: 0 0 15px;
+    
+    border-radius: 5%;
+}
+
+figure img {
+    width: 95%;
+    height: 85%;
+    
+    margin: 0;
+    padding: 2% 2% 0 2%;
+    
+    border-radius: 5%;
+}
+
+figcaption {
+    width: 100%;
+    height: 15%;
+    
+    margin: 0;
+    padding: 0 2% 2% 2%;
+    
+    font-family: "Bangers", cursive;
+    font-size: 20pt;
+    
+    color: #222;
+    text-align: center;
+}
 
 figure:hover { background-color:#66CC33; }
-figure.selected_player1, figure.selected_player1:hover { background-color:#33CCFF }
-figure.selected_player2, figure.selected_player2:hover { background-color:#999966 }
+figure.selected_player1, figure.selected_player1:hover { background-color:#47DDD9 }
+figure.selected_player2, figure.selected_player2:hover { background-color:#E6504D }
 figure.selected_player1 figcaption, figure.selected_player2 figcaption { color:#ffffff }
 figure.selected_player1 figcaption:before, figure.selected_player2 figcaption:before { content:'\2713 '; }
 
 .dialog { position:absolute;background-color:rgba(0,0,0,0.7);border-radius:10%;padding:3%; transition: transform 0.5s; }
-#dialog1 { top:10%;left:10%;height:calc(80% - 100px);width:calc(80% - 100px); }
-#dialog2 { bottom:0;right:0;height:calc(35% - 100px);width:calc(30% - 100px);padding:1%; }
-#dialog3 { top:0;left:2%;height:calc(35% - 100px);width:calc(20% - 100px);padding:1%; }
 
-#topPanel { height:20%;width:100%;background:red; }
+/* Battle Menu */
+#dialog1 {
+    top: 10%;
+    left: 10%;
+    
+    height: calc(80% - 100px);
+    width: calc(80% - 100px);
+    padding: 1% 3% 3%;
+    
+    font-family: 'Press Start 2P', cursive;
+    
+    background: url(../images/menu_assets/BookMenu.png) bottom center no-repeat;
+    background-size: cover;
+}
+
+/* Battle Log */
+#dialog2 {
+    bottom: 0;
+    right: 0;
+    
+    height: calc(55% - 90px);
+    width: calc(40% - 100px);
+    padding: 1%;
+    border-radius: 0px;
+    
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20pt;
+    
+    background: url(../images/menu_assets/BattleLogUp.png) bottom center no-repeat;
+    background-size: cover;
+    
+    transition: bottom 0.5s;
+}
+
+#dialog2.minimize3 {
+    bottom: -41%;
+}
+
+#battleLog {
+    height: 400px;
+    padding-top: 20px;
+}
+
+#battleLog div {
+    display: block;
+    
+    width: 98%;
+    height: 100%;
+    overflow-y: auto;
+    
+    margin: 2px;
+    padding: 2px;
+    
+    color: #222;
+    font-family: "Press Start 2P", monospace;
+    font-size: 12pt;
+    white-space: pre-line;
+}
+
+/* Options Menu */
+#dialog3 {
+    top: 0;
+    left: 2%;
+    
+    height: calc(35% + 60px);
+    width: calc(20% - 100px);
+    padding: 1%;
+    border-radius: 0px;
+    
+    font-family: 'Press Start 2P', cursive;
+    font-size: 20pt;
+    
+    background: url(../images/menu_assets/BookmarkDown.png) bottom center no-repeat;
+    background-size: cover;
+    
+    transition: top 0.5s;
+}
+
+#dialog3.minimize3 {
+    background-image: url(../images/menu_assets/BookmarkUp.png);
+    top: -30%;
+}
+
+#dialog2 a, #dialog3 a { background: none; padding: 0% 2% 10%; font-size: 20pt; }
+#dialog3 a+a { padding: 10% 2% }
+#dialog3 a.expandLink { height: 100px; width: 130px; padding: 100px 0px 0px; margin: auto; }
+#dialog3 a.audio-off { background-image: url('../images/muted.png'); background-repeat: no-repeat; background-position: center right; }
+
+#topPanel { height:20%;width:100%; }
 #topPanel img { height:100%;width:20%; }
 #topPanel div { height:100%;width:30%;display:inline-block;text-align:center;vertical-align:top;font-size:14pt; }
-#timeout { display:block;font-size:5em;margin:5% auto;font-weight:bold;background-color:purple; }
+#timeout { display:block;font-size:4em;margin:5% auto;font-weight:bold; }
 #topPanel button { margin:5% auto; }
 
 #battleMenu { height:calc(80% - 40px);width:calc(100% - 40px);font-size:14pt;padding:20px;position:relative }
 .characterMenu, .skillOverlay, .characterReady { position:absolute;top:0;height:100%;width:50%; }
-.active1, #skillOverlay1, #characterReady1 { left:0;background-color:blue; }
-.active2, #skillOverlay2, #characterReady2 { left:50%;background-color:aquamarine; }
+.skillOverlay { background: #333; border-radius: 20px; }
+.active1, #skillOverlay1, #characterReady1 { left:0; }
+.active2, #skillOverlay2, #characterReady2 { left:50%; }
 .inactive { visibility:hidden; }
 .hide1 { transform: rotateY(90deg); }
 .hide2 { transform: translateY(-1000px); }
 
 .abilities { padding:20px;text-align:center; }
 
-.skillDesc { font-size:1.5em;margin:10px 20px 5px 20px;padding:10px;min-height:22%;background-color:#ffffff;border-radius:10px; }
+.skillDesc { font-size:1.5em;margin:20px 20px 5px 20px;padding:10px;min-height:22%;background-color:#ffffff;border-radius:10px;font-family:Arial,Helvetica,sans-serif; }
 .skillDesc strong { text-transform:uppercase; }
 
-.characterReady { background-size:100%;background-repeat:no-repeat;filter: grayscale(80%); }
-.characterAction { margin:20px;font-size:3em;font-weight:bold;text-align:center;line-height:1.6em; }
+.characterReady { background-color:#333;background-size:100%;background-repeat:no-repeat;filter: grayscale(80%); border-radius: 20px; }
+.characterAction { margin:20px;font-size:3em;font-weight:bold;text-align:center;line-height:1.6em;text-shadow: 2px 2px 0px #FFF; }
 
 img.inactive-img
 {
@@ -169,41 +294,15 @@ button:active { box-shadow: 0px 0px 0px 2px #FFD700; }
 button.selected { color:gold; }
 button.selected:before { content:'\2713 ';color:gold; }
 
-.smBtn { height:1.2em;width:auto;font-size:0.5em;font-size:0.8em;padding:3%;background-color:#0033FF;line-height:0.3em; }
+.smBtn { height:2.5em;width:auto;font-family: "Bangers", cursive;font-size:1.2em;padding:4% 8%;background-color:#0033FF;line-height:0.3em; }
 
 textarea { font-size:12pt;padding:2px;height:auto;background-color:#000000;color:yellow;font-family:monospace; }
-
-#battleLog div
-{
-	display:block;
-
-	font-family:Monospace;
-	font-size:10pt;
-	
-	white-space:pre-line;
-	padding:2px;margin:2px;
-	width:98%;height:15em;
-	overflow-y:auto;
-	
-	background-color:#000000;
-	color:yellow;
-}
 
 .minimize { position:absolute;height:5% !important;overflow:hidden; }
 .minimize div { display: none; }
 
 #dialog2.minimize2 { height: auto; }
 #dialog3.minimize2 { height: auto; }
-
-#dialog2 #battleLog 
-{
-	height: 205px;
-	transform: scaleY(1);
-	transition: transform 0.5s,
-	height 1s;
-}
-
-#dialog2.minimize2 #battleLog { transform: scaleY(0); height: 0px; }
 
 #dialog3 #options 
 {
@@ -217,7 +316,6 @@ textarea { font-size:12pt;padding:2px;height:auto;background-color:#000000;color
 
 a { display:block;font-size:28pt;margin:0;padding:0;background:red;text-decoration:none;padding:2%; }
 nav a { padding:4% 2%;margin:2% 0; }
-a.audio-off { background-image:url('../images/muted.png');background-repeat:no-repeat;background-position:center right; }
 
 #imgViewer, .reactView
 {

@@ -561,6 +561,11 @@ function expand2(lnk)
 	lnk.parentElement.classList.toggle("minimize2");
 }
 
+function expand3(lnk)
+{
+	lnk.parentElement.classList.toggle("minimize3");
+}
+
 document.onkeydown = function(e)
 {
 	var keycode = (window.event ? window.event.keyCode : e.which);
