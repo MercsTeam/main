@@ -70,7 +70,7 @@ function Skill(n)
 	this.getDescription = function() 
 	{ 
 		var detail = [];
-		var exclude = [ "description", "imageURL", "soundID", "selected" ];
+		var exclude = [ "description", "imageURL", "soundID", "selected", "cooldownRem" ];
 		var altText = "";
 		for(var attr in this)
 		{
@@ -81,17 +81,18 @@ function Skill(n)
 					altText = (this[attr] == 1 ? "Reusable" : (this[attr] == 2 ? "Defensive" : "Offensive"));
 					detail.push(string.format("<strong>{0}:</strong> {1}", attr, altText));
 				}
-				else if(attr.toLowerCase().contains("prob"))
+				else if(attr == "accuracy" || attr.toLowerCase().contains("prob") || attr.toLowerCase().contains("mod"))
 				{
 					detail.push(string.format("<strong>{0}:</strong> {1}%", attr, Math.round(this[attr] * 100)));
 				}
 				else
 				{
-					detail.push(string.format("<strong>{0}:</strong> {1}", attr, this[attr]));
+					altText = (this[attr] === true ? "Yes" : (this[attr] === false ? "No" : this[attr]));
+					detail.push(string.format("<strong>{0}:</strong> {1}", attr, altText));
 				}
 			}
 		}
-		return string.format("<strong>{0}</strong><br />{1}<br /><span style=\"font-size:medium\">{2}</span>", this.name, this.description, detail.join("<br />")); 
+		return string.format("<strong>{0}</strong><br />{1}<br /><span class=\"attr-tag\">{2}</span>", this.name, this.description, detail.join("</span><span class=\"attr-tag\">")); 
 	};
 
 	this.toString = function()
@@ -185,6 +186,7 @@ function Skill(n)
 				{
 					if(this.type == SkillType.Offensive)
 					{
+						//alert(target[i].name + " blocks damage: " + target[i].blocksDamage);
 						if(target[i].blocksDamage) break;
 
 						if(this.oppAttackMod != 1.0) target[i].attack.modifier = this.oppAttackMod;
