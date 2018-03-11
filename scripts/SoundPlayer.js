@@ -18,6 +18,7 @@ var SoundLibrary =
 	ricochetShotMiss : "SniperGirl_RicochetShot_missedshot.mp3",
 	takeAim : "Snipergirl_TakeAim.mp3",
 	camouflage : "SniperGirl_Camouflage.mp3",
+	snipergirlTag : "Snipergirl_Tagline.mp3",
 	
 	fireBall : "Mage_Fireball.mp3",
 	lightningStorm : "Mage_LightningStorm.mp3",

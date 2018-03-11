@@ -63,6 +63,8 @@ function SniperGirl()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "Bullseye!";
+	this.tagline = "snipergirlTag";
+
     this.backstory = "A crack-shot special forces veteran, this career soldier grew disinterested in civilian life after "
 	+ "the war and turned to mercenary work. If you can afford her rate, and you can find her, maybe you can hire "
 	+ "Artemis.";
@@ -420,5 +422,6 @@ function Witch()
 		+ "out to establish her power.";
 
 	this.damageImage = "characters/WitchComicStills/Damaged.png";
+	this.defeatImage = "characters/WitchComicStills/Defeat.png";
 }
 Witch.prototype = new Character();
