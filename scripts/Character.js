@@ -28,6 +28,7 @@ function Character()
     this.type = CharacterType.NotSet;
 	this.alignment = "";
 	this.quote = "";
+	this.tagline = "";
 	
 	this.activeSprite = null;
 	this.defeatImage = "";
@@ -263,6 +264,7 @@ function Character()
 	*/
 	this.calculateDamage = function(attacker, bonus)
 	{
+		// alert(this.name + " blocks damage: " + this.blocksDamage);
 		if(this.blocksDamage) return 0;
 
 		var damage = ((attacker.attack.base * attacker.attack.modifier) + attacker.getSelectedSkill().attackValue) * bonus - (this.defence.base * this.defence.modifier);

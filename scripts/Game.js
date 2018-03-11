@@ -338,15 +338,11 @@ var Game =
 		this.uiSound.start("endRound");
 		if(this.player1.activeCharacterCount == 0)
 		{
-			Game.showMessage("<span>Player 2 Wins!</span><br /><a href=\"javascript:document.location.reload()\">Play Again?</a>");
-			Game.BattleLog.write("PLAYER 2 WINS!");
-			Game.over = true;
+			Game.endGame(this.player2);
 		}
 		else if(this.player2.activeCharacterCount == 0)
 		{
-			Game.showMessage("<span>Player 1 Wins!</span><br /><a href=\"javascript:document.location.reload()\">Play Again?</a>");
-			Game.BattleLog.write("PLAYER 1 WINS!");
-			Game.over = true;
+			Game.endGame(this.player1);
 		}
 		else 
 		{
@@ -367,6 +363,22 @@ var Game =
 				Game.over = true;
 			});
 		}
+	},
+	endGame : function(winner)
+	{
+		var seq = [];
+		for(var i = 0; i < winner.characters.length; i++)
+		{
+			if(winner.characters[i].active && winner.characters[i].tagline != "")
+			{
+				seq.push(winner.characters[i].tagline);
+			}
+		}
+		this.uiSound.playSequence(seq);
+
+		Game.showMessage(string.format("<span>Player {0} Wins!</span><br /><a href=\"javascript:document.location.reload()\">Play Again?</a>", (winner == Game.player1 ? 1 : 2)));;
+		Game.BattleLog.write(string.format("PLAYER {0} WINS!", (winner == Game.player1 ? 1 : 2)));
+		Game.over = true;
 	},
 	getTypeBonus : function(t1, t2)
 	{

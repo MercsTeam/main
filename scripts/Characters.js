@@ -26,6 +26,8 @@ function BigSwordGuy()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "You're not <em>cut</em> out for this life...";
+	this.tagline = "bsgTag";
+
     this.backstory = "Once a peaceful farmer, forced to take up the sword to defend his family and livelihood.  Hobbe "
 	+ "quickly found out he was a better bladesman than farmer, and found work in the village as a sellsword.";
 	
@@ -273,6 +275,8 @@ function CowboyGuy()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "Lookee what the cat dragged in.";
+	this.tagline = "cowboyTag";
+
     this.backstory = "A quick-witted gunslinger with unusually good luck, \"Lucky\" Townsend earned his renown as a "
 		+ "bounty hunter in the Wild West. No space-time phenomenon will change his plan to retire as a rich man.";
 
