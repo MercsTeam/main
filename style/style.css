@@ -481,3 +481,14 @@ figure.selected_player1:hover .rating-container, figure.selected_player2:hover .
 .tableHead th { color:#ffffff;font-size:8pt;font-weight:bold;padding-left:5px; }		
 .power_rating { font-weight:bold;font-size:large;background-color:#CAEEE2 !important;color:#2B5715 }
 .not_set { background-color:#2B5715; }	
+
+.attr-tag
+{
+	display:inline-block;
+	height:1.5em;width:auto;
+	margin:2px;padding:5px;
+	color:#ffffff;
+	background-color:#803C3C;
+	border-radius:10%;
+	font-size:medium;
+}
