@@ -30,13 +30,33 @@ var SoundLibrary =
 	sinisterDeal : "Djinn_SinisterDeal.mp3",
 	wish : "Djinn_Wish.mp3",
 	djinnTag : "Djinn_Tagline.mp3",	
-
-	cowboyTag : "Cowboy_Tagline.mp3",
-
+	
 	club : "cm_club.mp3",
 	poisonSpear : "cm_spear.mp3",
 	primalRage : "cm_screams.mp3",
-	fireDance : "cm_fire.mp3"
+	fireDance : "cm_fire.mp3",
+	cavemanTag : "Caveman_Tagline.mp3",
+
+	cowboyTag : "Cowboy_Tagline.mp3",
+	sixShooter : "Gun Fight-SoundBible.com-525344936.mp3",
+	draw : "Ricochet Of A Bullet-SoundBible.com-377161548.mp3",
+	lasso : "Whip-SoundBible.com-1988767601.mp3",
+	liquidCourage : "Bubbling-SoundBible.com-1684132696.mp3",
+
+	raygun : "Laser_Gun-Mike_Koenig-1975537935.mp3",
+	abduction : "Martian_Death_Ray-Mike_Koenig-937891031.mp3",
+	forceShield : "Electric Shock Zap-SoundBible.com-68983399.mp3",
+	telekinesis : "End_Fx-Mike_Devils-724852498.mp3",
+
+	intBattleSys : "Laser_Machine_Gun-Mike_Koenig-1194129298.mp3",
+	electronicBarrier : "Jump-SoundBible.com-1007297584.mp3",
+	nanobotRepairs : "Robot Computing-SoundBible.com-1094568858.mp3",
+	enhCombatSys : "Alien_Machine_Gun-Matt_Cutillo-2023875589.mp3",
+
+	stormStrike : "Thunder_HD-Mark_DiAngelo-587966950.mp3",
+	parry : "Swords Clashing-SoundBible.com-912903192.mp3",
+	singleShot : "Cannon-SoundBible.com-1661203605.mp3",
+	releaseKraken : "Monster_Gigante-Doberman-1334685792.mp3"
 };
 
 var soundPath = "https://raw.githubusercontent.com/MercsTeam/main/master/Mercs_sound_library";

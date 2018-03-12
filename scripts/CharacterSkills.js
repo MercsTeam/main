@@ -366,6 +366,7 @@ function IntegratedBattleSystem()
     this.randomDebuffProb = 0.25;
     this.description = "An attack that may randomly lower one of the enemy's stats.";
 	this.imageURL = "characters/CyborgComicStills/Cyborg_IntegratedBattleSystem.png";
+	this.soundID = "intBattleSys";
 }
 IntegratedBattleSystem.prototype = new Skill("Integrated Battle System");
 
@@ -377,6 +378,7 @@ function ElectronicBarrier()
     this.description = "Deploy a large energy barrier that reduces damage from all incoming attacks against allies.";
 	this.cooldown = 1;
 	this.imageURL = "characters/CyborgComicStills/Cyborg_ElectronicBarrier.png";
+	this.soundID = "electronicBarrier";
 
 	this.doAction = function(self, target)
 	{
@@ -408,6 +410,7 @@ function NanobotRepairs()
     this.description = "Repairs damage to his armour and adapts it to the situation, temporarily regenerating HP and increasing defence.";
 	this.cooldown = 2;
 	this.imageURL = "characters/CyborgComicStills/Cyborg_NanobotRepairs.png";
+	this.soundID = "nanobotRepairs";
 
 	this.doAction = function(self, target)
 	{
@@ -455,6 +458,7 @@ function EnhancedCombatSystem()
 	this.description = "Sacrifice half of health to dramatically increase attack power.";
 	this.cooldown = 2;
 	this.imageURL = "characters/CyborgComicStills/Cyborg_EnhancedCombatSystem.png";
+	this.soundID = "enhCombatSys";
 	
 	this.doAction = function(self, target)
 	{
@@ -478,6 +482,7 @@ function StormStrike()
 
 	this.description = "Attacks with a lightning imbued rapier, which may increase the user’s speed.";
 	this.imageURL = "characters/PirateComicStills/Pirate_StormStrike.png";
+	this.soundID = "stormStrike";
 }
 StormStrike.prototype = new Skill("Storm Strike");
 
@@ -487,6 +492,7 @@ function SingleShot()
 	this.attackValue = 40;
 	this.description = "An attack that deals extra damage to dying enemies. Finishing off an enemy this way increases speed and attack.";
 	this.imageURL = "characters/PirateComicStills/Pirate_SingleShot.png";
+	this.soundID = "singleShot";
 	this.cooldown = 1;
 
 	this.doAction = function(self, target)
@@ -518,6 +524,7 @@ function Parry()
 	this.description = "Takes a defensive posture to parry any incoming attacks, nullifying all damage with a chance of reflecting some back at the enemy.";
 	this.cooldown = 1;
 	this.imageURL = "characters/PirateComicStills/Pirate_Parry.png";
+	this.soundID = "parry";
 
 	this.doAction = function(self, target)
 	{
@@ -590,6 +597,7 @@ function ReleaseKraken()
 	this.description = "Summons the Kraken from the depths, smashing enemies with its tentacles and reducing their speed.";
 	this.cooldown = 4;
 	this.imageURL = "characters/PirateComicStills/Pirate_ReleaseTheKraken.png";
+	this.soundID = "releaseKraken";
 }
 ReleaseKraken.prototype = new Skill("Release the Kraken");
 
@@ -600,6 +608,7 @@ function RayGun()
 	this.stunProb = 0.1;
 	this.description = "A single shot with a mysterious beam that may stun the enemy.";
 	this.imageURL = "characters/AlienComicStills/Alien_Raygun.png";
+	this.soundID = "raygun";
 }
 RayGun.prototype = new Skill("Ray Gun");
 
@@ -613,6 +622,7 @@ function Abduction()
 	this.description = "Calls in a UFO over 3 turns. Once they arrive, the enemy is abducted for a one-hit kill.";
 	this.cooldown = 6;
 	this.imageURL = "characters/AlienComicStills/Alien_Abduction.png";
+	this.soundID = "abduction";
 
 	this.doAction = function(self, target)
 	{
@@ -656,6 +666,7 @@ function ForceShield()
 	this.description = "Creates a barrier that increases defence for a while.";
 	this.cooldown = 5;
 	this.imageURL = "characters/AlienComicStills/Alien_ForceShield.png";
+	this.soundID = "forceShield";
 
 	this.doAction = function(self, target)
 	{
@@ -672,6 +683,7 @@ function Telekinesis()
 	this.type = SkillType.Offensive;
 	this.description = "Uses psychic-like powers to force an enemy into the inactive position, if possible.";
 	this.imageURL = "characters/AlienComicStills/Alien_Telekinesis.png";
+	this.soundID = "telekinesis";
 
 	this.doAction = function(self, target) 
 	{ 
@@ -688,6 +700,7 @@ function Draw()
 	this.cooldown = 1;
 	this.description = "A dramatic showdown that deals double damage if it connects before the enemy attacks.";
 	this.imageURL = "characters/CowboyComicStills/cg_quickdraw.png";
+	this.soundID = "draw";
 	
 	this.doAction = function(self, target)
 	{
@@ -713,6 +726,7 @@ function SixShooter()
 	this.multiTarget = true;
 	this.description = "Unloads an entire cylinder on both enemies.";
 	this.imageURL = "characters/CowboyComicStills/cb_six_shooter.png";
+	this.soundID = "sixShooter";
 }
 SixShooter.prototype = new Skill("Six-Shooter");
 
@@ -725,6 +739,7 @@ function LiquidCourage()
 	this.selfDefenceMod = 2;	
 	this.description = "Take a long, strong drink. Sacrifices speed to dramatically increase defence.";
 	this.imageURL = "characters/CowboyComicStills/cb_liquid_courage.png";
+	this.soundID = "liquidCourage";
 	
 	this.doAction = function(self, target)
 	{
@@ -742,6 +757,7 @@ function Lasso()
 	this.type = SkillType.Offensive;
 	this.description = "Hogties the enemy and whips them into the inactive position, if possible.";
 	this.imageURL = "characters/CowboyComicStills/cb_lasso2.png";
+	this.soundID = "lasso";
 		
 	this.doAction = function(self, target) 
 	{ 

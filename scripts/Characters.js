@@ -245,6 +245,8 @@ function Caveman()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "Krorlaag like shiny... Krorlaag smashes!";
+	this.tagline = "cavemanTag";
+
     this.backstory = "Dumb as rocks, Krorlaag makes up for his underdeveloped brain with more than enough brawn. "
 		+ "Krorlaag used to be one of his village’s best hunters. He was on one of his hunts when the world's dimensions "
 		+ "shifted, erasing all trace of his home and former life. Resigned to a nomadic existence, Krorlaag will do just "
