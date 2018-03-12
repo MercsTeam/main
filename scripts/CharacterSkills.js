@@ -325,6 +325,7 @@ function SinisterDeal()
 	this.multiTarget = true;
 	this.affectAlly = true;
     this.description = "Summons high winds across the battlefield, making allies faster and enemies slower.";
+	this.imageURL = "characters/DjinnComicStills/Djinn_SinisterDeal.png";
 	this.soundID = "sinisterDeal";
 
 	this.doAction = function(self, target)
@@ -355,6 +356,7 @@ function Wish()
 	this.affectAlly = true;
     this.description = "Grants an ally increased attack, defence, speed, immunity from status effects, and minor healing.";
 	this.cooldown = 3;
+	this.imageURL = "characters/DjinnComicStills/Djinn_Wish.png";
 	this.soundID = "wish";
 }
 Wish.prototype = new Skill("Wish");
