@@ -105,6 +105,7 @@ function Mage()
 		+ "Now Zocoma has a taste for the spotlight and uses her powers for profiteering as a Cerotis mercenary.";
 
 	this.damageImage = "characters/MageComicStills/MageDamaged.png";
+	this.defeatImage = "characters/MageComicStills/MageDead.png";
 }
 Mage.prototype = new Character();
 
