@@ -26,6 +26,10 @@ var SoundLibrary =
 	divineShield : "Mage_DivineShield.mp3",
 
 	lightningStrike : "Djinn_LightningStrike.mp3",
+	confidence : "Djinn_Confidence.mp3",
+	sinisterDeal : "Djinn_SinisterDeal.mp3",
+	wish : "Djinn_Wish.mp3",
+	djinnTag : "Djinn_Tagline.mp3",	
 
 	cowboyTag : "Cowboy_Tagline.mp3"
 };

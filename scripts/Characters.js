@@ -136,6 +136,8 @@ function Djinn()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "Allow me to make an offer you cannot refuse.";
+	this.tagline = "djinnTag";
+
     this.backstory = "For those caught in desperation, Odesai offers easy alleviation, but always for a price."
 		+ "Odesai the Ancient Evil has appeared in story and myth all throughout human history. A true demon of pure greed, he offers his power and wealth to those in the hardest of times, to those who can not afford to decline his offer."
 		+ "Those who accept his offer live a life of luxury and fortune, and have all goals and aspirations met. But when it comes time to collect on his end of the deal, Odesai takes it all, and more.";
