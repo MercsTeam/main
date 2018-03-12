@@ -1066,7 +1066,7 @@ function Blessing()
 	this.affectsAlly = true;
 	this.multiTarget = true;
 	this.description = "A benevolent spell that helps protect self and allies by increasing defence temporarily.";
-	this.imageURL = "characters/WitchComicStills/Blessing.png";
+	this.imageURL = "characters/WitchComicStills/Blessings.png";
 
 	this.doAction = function(self, target)
 	{
