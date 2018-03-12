@@ -599,7 +599,7 @@ function RayGun()
 	this.attackValue = 40;
 	this.stunProb = 0.1;
 	this.description = "A single shot with a mysterious beam that may stun the enemy.";
-	this.imageURL = "characters/AlienComicStills/Alien_Raygun_rough.png";
+	this.imageURL = "characters/AlienComicStills/Alien_Raygun.png";
 }
 RayGun.prototype = new Skill("Ray Gun");
 
@@ -612,7 +612,7 @@ function Abduction()
 	this.duration = 3;
 	this.description = "Calls in a UFO over 3 turns. Once they arrive, the enemy is abducted for a one-hit kill.";
 	this.cooldown = 6;
-	this.imageURL = "characters/AlienComicStills/Alien_Abduction_rough.png";
+	this.imageURL = "characters/AlienComicStills/Alien_Abduction.png";
 
 	this.doAction = function(self, target)
 	{
@@ -655,7 +655,7 @@ function ForceShield()
 	this.effectDuration = 5;
 	this.description = "Creates a barrier that increases defence for a while.";
 	this.cooldown = 5;
-	this.imageURL = "characters/AlienComicStills/Alien_ForceShield_rough.png";
+	this.imageURL = "characters/AlienComicStills/Alien_ForceShield.png";
 
 	this.doAction = function(self, target)
 	{
@@ -671,7 +671,7 @@ function Telekinesis()
 {
 	this.type = SkillType.Offensive;
 	this.description = "Uses psychic-like powers to force an enemy into the inactive position, if possible.";
-	this.imageURL = "characters/AlienComicStills/Alien_Telekinesis_rough.png";
+	this.imageURL = "characters/AlienComicStills/Alien_Telekinesis.png";
 
 	this.doAction = function(self, target) 
 	{ 
@@ -759,6 +759,7 @@ function Club()
 	this.description = "A powerful blow to the head that may stun the enemy.";
 	this.cooldown = 1;
 	this.imageURL = "characters/CavemanComicStills/caveman_club.png";
+	this.soundID = "club";
 }
 Club.prototype = new Skill("Club");
 
@@ -769,6 +770,7 @@ function PoisonSpear()
 	this.poisonProb = Probability.Medium;
 	this.description = "A stab with a spear covered in toxic substances that may poison the enemy.";
 	this.imageURL = "characters/CavemanComicStills/caveman_poisonspear.png";
+	this.soundID = "poisonSpear";
 }
 PoisonSpear.prototype = new Skill("Poison-Tipped Spear");
 
@@ -781,6 +783,7 @@ function PrimalRage()
 	this.description = "Tap into heart of survival instincts to temporarily boost attack and defence.";
 	this.cooldown = 3;
 	this.imageURL = "characters/CavemanComicStills/caveman_primalrage.png";
+	this.soundID = "primalRage";
 	
 	this.doAction = function(self, target)
 	{
@@ -802,6 +805,7 @@ function FireDance()
 	this.selfDamage = true;
 	this.description = "A tribal dance that burns the user in order to grant better odds of inflicting status effects. Can't be used if already burned.";
 	this.imageURL = "characters/CavemanComicStills/caveman_firedance.png";
+	this.soundID = "fireDance";
 	
 	this.doAction = function(self, target)
 	{

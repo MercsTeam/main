@@ -213,8 +213,8 @@ function Alien()
 
 	this.AbductionSprite = "abduction.png";
 
-	this.damageImage = "characters/AlienComicStills/Alien_Damage_rough.png";
-	this.defeatImage = "characters/AlienComicStills/Alien_Defeat_rough.png";
+	this.damageImage = "characters/AlienComicStills/Alien_Damage.png";
+	this.defeatImage = "characters/AlienComicStills/Alien_Defeat.png";
 }
 Alien.prototype = new Character();
 

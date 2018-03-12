@@ -31,7 +31,12 @@ var SoundLibrary =
 	wish : "Djinn_Wish.mp3",
 	djinnTag : "Djinn_Tagline.mp3",	
 
-	cowboyTag : "Cowboy_Tagline.mp3"
+	cowboyTag : "Cowboy_Tagline.mp3",
+
+	club : "cm_club.mp3",
+	poisonSpear : "cm_spear.mp3",
+	primalRage : "cm_screams.mp3",
+	fireDance : "cm_fire.mp3"
 };
 
 var soundPath = "https://raw.githubusercontent.com/MercsTeam/main/master/Mercs_sound_library";
