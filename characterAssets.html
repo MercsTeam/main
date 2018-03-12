@@ -104,7 +104,15 @@
 
 								a = document.createElement("A");
 								a.target = "_new";
-								a.href = characters[h][props1[i]];
+								if(props1[i] == "tagline")
+								{
+									soundID = characters[h][props1[i]];
+									a.href = "Mercs_sound_library/" + SoundLibrary[soundID];
+								}
+								else
+								{
+									a.href = characters[h][props1[i]];
+								}
 								a.innerHTML = props1[i];
 								sp.appendChild(a);
 
