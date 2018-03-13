@@ -31,10 +31,10 @@ function Nemesis()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "";
-    this.backstory = "Nemesis is  ■ ■■■■■■■ ■■■ ■■ ■■■■■■■■■■■■■■ ■■■ ■■■■  Cerotis. ■ ■■■ ■■■■■■■■■ ■ ■■■■ ■■■■■ "
-	+ "■■■■■■■■■ ■■■■■■■■■■ ■■■■■. ■■■■■■■■■■■ ■■■■■ ■■■ dead ■■■■■■■■■■■ ■■■■■■■ ■■■ ■■■■■ ■ Killed. ■■■■■■■■ "
-	+ "■■■ ■■ ■■ ■■■■■■■■■■ ■■■■■ ■■■■■■ ■ ■■■■■■■■■■■ ■■■■■■■■■■ ■■■■■■■ ■■■ ■■ hunting ■■■■■■■ ■ ■■■■■■■■■ ■■■■ "
-	+ "■■■■■■ ■■ ■ ■■■■ ■■■ ■■ ■■■■■■■■■  ■■■■■ ■■■■■■■■■.";
+    this.backstory = "Ebboh Rutra is  ¦ ¦¦¦¦¦¦¦ ¦¦¦ ¦¦ ¦¦¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦ ¦¦¦¦  Cerotis. ¦ ¦¦¦ ¦¦¦¦¦¦¦¦¦ ¦ ¦¦¦¦ ¦¦¦¦¦ "
+		+ "¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦. ¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦ ¦¦¦ dead ¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦ ¦¦¦ ¦¦¦¦¦ ¦ killed. ¦¦¦¦¦¦¦¦ "
+		+ "¦¦¦ ¦¦ ¦¦ ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦ ¦¦¦¦¦¦ ¦ ¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦ ¦¦¦ ¦¦ hunting ¦¦¦¦¦¦¦ ¦ ¦¦¦¦¦¦¦¦¦ ¦¦¦¦ "
+		+ "¦¦¦¦¦¦ ¦¦ ¦ ¦¦¦¦ ¦¦¦ ¦¦ ¦¦¦¦¦¦¦¦¦  ¦¦¦¦¦ ¦¦¦¦¦¦¦¦¦.";
 	
 	this.damageImage = "characters/BSGComicStills/Nemesis_Damaged.png";
 	this.defeatImage = "characters/BSGComicStills/Nemesis_Defeat.png";
@@ -68,9 +68,9 @@ function SamuraiGirl()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "";
-    this.backstory = "Tatsu applies her samurai arts as a personal bodyguard for hire, working alone or as part of a "
-	+ "small team. On the battlefield, she relies on an overwhelming offence to deter would be attackers, although "
-	+ "she prefers to avoid conflicts when possible.";
+    this.backstory = "Akita applies her samurai arts as a personal bodyguard for hire, working alone or as part of a "
+		+ "small team. On the battlefield, she relies on an overwhelming offence to deter would be attackers, although "
+		+ "she prefers to avoid conflicts when possible.";
 }
 SamuraiGirl.prototype = new Character();
 
@@ -101,10 +101,10 @@ function DinoGirl()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "";
-    this.backstory = "Qastra is the living experiment of the mad scientist known as Doctor Jurassic, who made a "
-	+ "life-long career out of his ancient research and brutal cross-DNA mutation procedures. As these things "
-	+ "typically go, Qastra broke out of Jurassic’s laboratory and is struggling with the concept of humanity as "
-	+ "she fights her way to freedom.";
+    this.backstory = "Zhylla is the living experiment of the mad scientist known as Doctor Jurassic, who made a "
+		+ "life-long career out of his ancient research and brutal cross-DNA mutation procedures. As these things "
+		+ "typically go, Zhylla broke out of Jurassic’s laboratory and is struggling with the concept of humanity as "
+		+ "she fights her way to freedom.";
 }
 DinoGirl.prototype = new Character();
 
@@ -134,10 +134,9 @@ function Clown()
 	
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
-
 	this.quote = "Want to play?";
-    this.backstory = "Once a carnival clown, Mr. Giggles has now cast off the laws of his new world, just as he cast off "
-	+ "the chains of mortality. Now he serves the Great Destroyer and plans to bring what remains of the tattered "
-	+ "universe to a dark and dreadful end, in the hope that one day he will be justly rewarded.";
+    this.backstory = "Once a carnival clown, Xoggoth has now cast off the laws of his new world, just as he cast off "
+		+ "the chains of mortality. Now he serves the Great Destroyer and plans to bring what remains of the tattered "
+		+ "universe to a dark and dreadful end, in the hope that one day he will be justly rewarded.";
 }
 Clown.prototype = new Character();
