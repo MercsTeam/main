@@ -585,6 +585,12 @@ document.onkeydown = function(e)
 	{
 		showCredits();
 	}
+	else if (keycode == 83)
+	{
+		var p = (Game.player1.isActive() ? Game.player1 : Game.player2);
+		p.addCharacter(Dynaman);
+		p.selectedCount++;
+	}
 };
 
 // Thanks Stemkoski: https://stemkoski.github.io/Three.js/Texture-Animation.html

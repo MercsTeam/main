@@ -40,7 +40,7 @@ var SoundLibrary =
 	sixShooter : "Cowboy_Six-Shooter.mp3",
 	draw : "Cowboy_Draw.mp3",
 	lasso : "Cowboy_Lasso.mp3",
-	liquidCourage : "Bubbling-SoundBible.com-1684132696.mp3",
+	liquidCourage : "Cowboy_LiquidCourage.mp3",
 	cowboyTag : "Cowboy_Tagline.mp3",
 
 	raygun : "Laser_Gun-Mike_Koenig-1975537935.mp3",
@@ -59,7 +59,12 @@ var SoundLibrary =
 	parry : "Swords Clashing-SoundBible.com-912903192.mp3",
 	singleShot : "Cannon-SoundBible.com-1661203605.mp3",
 	releaseKraken : "Monster_Gigante-Doberman-1334685792.mp3",
-	pirateTag : "Pirate_Tagline.mp3"
+	pirateTag : "Pirate_Tagline.mp3",
+
+	dynaPunch : "Upper Cut-SoundBible.com-1272257235.mp3",
+	laserVision : "Laser Blasts-SoundBible.com-108608437.mp3",
+	dynaSpeed : "Swoosh 1-SoundBible.com-231145780.mp3",
+	dynaBreath : "Inflating Balloon-SoundBible.com-893635129.mp3"
 };
 
 var soundPath = "https://raw.githubusercontent.com/MercsTeam/main/master/Mercs_sound_library";

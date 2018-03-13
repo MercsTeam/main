@@ -399,7 +399,7 @@ function ElectronicBarrier()
 			}
 		}
 		this.logAction(self, target[0]);
-	}
+	};
 }
 ElectronicBarrier.prototype = new Skill("Electronic Barrier");
 
