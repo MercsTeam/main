@@ -8,7 +8,8 @@ var _credits =
 	"Sound"			: [ "Aidan Crawley" ],
 	"Character Vocalization" : [ "Nick Gustafson", "Kevin Pendergast", "Donna Phelps" ],
 	"Technical"		: [ "Ryan Amalfitano", "Nick Gustafson" ]
-};	
+};
+var loaded = false;
 
 function showCredits()
 {
@@ -16,11 +17,11 @@ function showCredits()
 	if(c.style.visibility == "visible")
 	{
 		c.style.visibility = "hidden";
-		c.innerHTML = "";						
+		//c.innerHTML = "";						
 	}
 	else
 	{
-		var h1 = document.createElement("H1");
+		/*var h1 = document.createElement("H1");
 		h1.innerHTML = "CREDITS";
 
 		var dl = document.createElement("DL");
@@ -46,7 +47,29 @@ function showCredits()
 		m.appendChild(h1);
 		m.appendChild(dl);
 		
-		c.appendChild(m);			
+		c.appendChild(m);*/
+		
 		c.style.visibility = "visible";
+		if(!loaded)
+		{
+			loaded = true;
+			
+			var w = document.querySelector(".wrapper");
+			var title, person;
+
+			for(var d in _credits)
+			{
+			    title = document.createElement("DIV");
+			    title.className = "job";
+			    title.innerHTML = d;
+
+			    person = document.createElement("DIV");
+			    person.className = "name";
+			    person.innerHTML = _credits[d].join("<br />");
+
+			    w.appendChild(title);
+			    w.appendChild(person);
+			}		
+		}		
 	}
 }
