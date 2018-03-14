@@ -343,7 +343,7 @@ nav a { padding:4% 2%;margin:2% 0; }
 
 .p1c2-reactImg, .p2c2-reactImg  { top:45%; }
 
-#credits
+/*#credits
 {
 	visibility:hidden;
 	position:absolute;
@@ -370,7 +370,7 @@ dl
 	margin:0;padding-bottom:50px;
 }
 dt { margin-top:20px;font-size:60%;font-weight:bold;text-transform:uppercase }
-dd { margin:0;padding:0 }
+dd { margin:0;padding:0 }*/
 
 #msgbox-bkgrd
 {
