@@ -14,18 +14,23 @@ var _credits =
 function showCredits()
 {
 	var c = document.getElementById('credits');
+	var w = c.querySelector(".wrapper");
+	
 	if(c.style.visibility == "visible")
 	{
 		c.style.visibility = "hidden";
-		c.innerHTML = "";						
+		w.innerHTML = "";						
 	}
 	else
 	{
-		c.style.visibility = "visible";
+		c.style.visibility = "visible";	
 		
-		var w = document.querySelector(".wrapper");
+		var movie = document.createElement("DIV");
+		movie.className = "movie";
+		movie.innerHTML = "mercs: triple threat";
+		w.appendChild(movie);
+		
 		var title, person;
-
 		for(var d in _credits)
 		{
 		    title = document.createElement("DIV");
