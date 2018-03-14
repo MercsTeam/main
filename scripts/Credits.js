@@ -6,10 +6,10 @@ var _credits =
 	"Art"			: [ "Jaeden Laffey", "Kevin Pendergast", "Donna Phelps" ],
 	"Additional Character Visualization" : [ "Jonathan Brenders", "Thomas Burke", "Nick Gustafson" ],
 	"Sound"			: [ "Aidan Crawley" ],
+	"Dialog"		: [ "Jonathan Brenders" ],
 	"Character Vocalization" : [ "Nick Gustafson", "Kevin Pendergast", "Donna Phelps" ],
 	"Technical"		: [ "Ryan Amalfitano", "Nick Gustafson" ]
 };
-var loaded = false;
 
 function showCredits()
 {
@@ -17,59 +17,27 @@ function showCredits()
 	if(c.style.visibility == "visible")
 	{
 		c.style.visibility = "hidden";
-		//c.innerHTML = "";						
+		c.innerHTML = "";						
 	}
 	else
 	{
-		/*var h1 = document.createElement("H1");
-		h1.innerHTML = "CREDITS";
+		c.style.visibility = "visible";
+		
+		var w = document.querySelector(".wrapper");
+		var title, person;
 
-		var dl = document.createElement("DL");
-		var dt, dd;
 		for(var d in _credits)
 		{
-			dt = document.createElement("DT");
-			dt.innerHTML = d;
-			dl.appendChild(dt);
+		    title = document.createElement("DIV");
+		    title.className = "job";
+		    title.innerHTML = d;
 
-			for(var i = 0; i < _credits[d].length; i++)
-			{
-				dd = document.createElement("DD");
-				dd.innerHTML = _credits[d][i];
-				dl.appendChild(dd);
-			}
-		}
+		    person = document.createElement("DIV");
+		    person.className = "name";
+		    person.innerHTML = _credits[d].join("<br />");
 
-		var m = document.createElement("MARQUEE");
-		m.setAttribute("behavior", "slide");
-		m.setAttribute("direction", "up");
-		m.setAttribute("scrollAmount", "7");
-		m.appendChild(h1);
-		m.appendChild(dl);
-		
-		c.appendChild(m);*/
-		
-		c.style.visibility = "visible";
-		if(!loaded)
-		{
-			loaded = true;
-			
-			var w = document.querySelector(".wrapper");
-			var title, person;
-
-			for(var d in _credits)
-			{
-			    title = document.createElement("DIV");
-			    title.className = "job";
-			    title.innerHTML = d;
-
-			    person = document.createElement("DIV");
-			    person.className = "name";
-			    person.innerHTML = _credits[d].join("<br />");
-
-			    w.appendChild(title);
-			    w.appendChild(person);
-			}		
+		    w.appendChild(title);
+		    w.appendChild(person);
 		}		
 	}
 }
