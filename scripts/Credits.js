@@ -14,12 +14,15 @@ var _credits =
 function showCredits()
 {
 	var c = document.getElementById('credits');
-	var w = c.querySelector(".wrapper");
+	c.innerHTML = "";
+	
+	var w = document.createElement("SECTION");
+	w.className = "wrapper";	
+	c.appendChild(w);
 	
 	if(c.style.visibility == "visible")
 	{
-		c.style.visibility = "hidden";
-		w.innerHTML = "";						
+		c.style.visibility = "hidden";			
 	}
 	else
 	{

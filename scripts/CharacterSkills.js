@@ -650,6 +650,19 @@ function Abduction()
 				var damage = oppMerc.health.base;
 				oppMerc.health.base = 0;
 
+				Game.skillImgArr.push({
+					player : self.player,
+					character : self,
+					label : string.format("Player {0}.{1} - {2}<br />{3} (ATTACK)",
+					(self.player == Game.player1 ? 1 : 2),
+					oppMerc.position,
+					oppMerc.name,
+					this.name),
+					url : this.imageURL,
+					sound : this.soundID,
+					reaction : []
+				});
+
 				this.logAction(self, oppMerc, damage);
 			}
 
@@ -924,7 +937,8 @@ function HiveMindHijack()
 				);
 			}
 			
-			this.logAction(self, t, damage);
+			//this.logAction(self, t, damage);
+			this.showReaction(t, damage);
 			Game.BattleLog.write(output);
 		}
 	};
@@ -995,6 +1009,19 @@ function BlastOff()
 					target[i].health.modifier = 0.95;
 					target[i].defence.modifier = 0.75;
 				}
+
+				Game.skillImgArr.push({
+					player : self.player,
+					character : self,
+					label : string.format("Player {0}.{1} - {2}<br />{3} (ATTACK)",
+					(self.player == Game.player1 ? 1 : 2),
+					target[i].position,
+					target[i].name,
+					this.name),
+					url : this.imageURL,
+					sound : this.soundID,
+					reaction : []
+				});
 
 				this.logAction(self, target[i], damage);
 			}

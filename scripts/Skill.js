@@ -103,7 +103,7 @@ function Skill(n)
 			this.description			
 		);
 		return output;
-	}
+	};
 
 	this.logAction = function(self, target, damage)
 	{
@@ -139,20 +139,25 @@ function Skill(n)
 				target.name,
 				damage
 			);
-			
-			if(damage > 0)
-			{
-				var slide = Game.skillImgArr[Game.skillImgArr.length - 1];
-
-				//show damaged image
-				if(slide)
-				{
-					slide.reaction.push({ player : target.player, label : string.format("Player {0}.{1} - {2}<br />{3} DAMAGE", (target.player == Game.player1 ? 1 : 2), target.position, target.name, damage), url : target.damageImage });
-				}
-			}
+		
+			this.showReaction(target, damage);
 		}		
 		Game.BattleLog.write(output);
-	}
+	};
+
+	this.showReaction = function(target, damage)
+	{
+		if(damage > 0)
+		{
+			var slide = Game.skillImgArr[Game.skillImgArr.length - 1];
+
+			//show damaged image
+			if(slide)
+			{
+				slide.reaction.push({ player : target.player, label : string.format("Player {0}.{1} - {2}<br />{3} DAMAGE", (target.player == Game.player1 ? 1 : 2), target.position, target.name, damage), url : target.damageImage });
+			}
+		}
+	};
 
 	this.doAction = function(self, target)
 	{
@@ -187,7 +192,7 @@ function Skill(n)
 					if(this.type == SkillType.Offensive)
 					{
 						//alert(target[i].name + " blocks damage: " + target[i].blocksDamage);
-						if(target[i].blocksDamage) break;
+						if(target[i].blocksDamage) continue;
 
 						if(this.oppAttackMod != 1.0) target[i].attack.modifier = this.oppAttackMod;
 						if(this.oppDefenceMod != 1.0) target[i].defence.modifier = this.oppDefenceMod;
@@ -269,6 +274,6 @@ function Skill(n)
 					}
 				}							
 			}			
-		}
+		};
 	}
 }

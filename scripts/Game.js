@@ -490,7 +490,7 @@ var Game =
 			this.m1 = new ActiveMarker(0x33CCFF);
 			scene.add(this.m1.circle);
 			
-			this.m2 = new ActiveMarker(0x999966);
+			this.m2 = new ActiveMarker(0xE6504D);
 			scene.add(this.m2.circle);
 			
 			var counter = 0;
