@@ -338,39 +338,10 @@ nav a { padding:4% 2%;margin:2% 0; }
 .p1-skillImg, .p1c1-reactImg, .p1c2-reactImg  { border:solid 4px #33CCFF;left:2%; }
 .p1-skillImg span, .p1c1-reactImg span, .p1c2-reactImg span { text-align:left;color:#33CCFF; }
 
-.p2-skillImg, .p2c1-reactImg, .p2c2-reactImg { border:solid 4px #999966;right:2%;transform: scaleX(-1); }
-.p2-skillImg span, .p2c1-reactImg span, .p2c2-reactImg span { text-align:right;color:#999966;transform: scaleX(-1); }
+.p2-skillImg, .p2c1-reactImg, .p2c2-reactImg { border:solid 4px #E6504D;right:2%;transform: scaleX(-1); }
+.p2-skillImg span, .p2c1-reactImg span, .p2c2-reactImg span { text-align:right;color:#E6504D;transform: scaleX(-1); }
 
 .p1c2-reactImg, .p2c2-reactImg  { top:45%; }
-
-/*#credits
-{
-	visibility:hidden;
-	position:absolute;
-	top:25%;left:25%;
-	border-radius:5%;
-
-	background-color:rgba(0,0,0,0.7);
-	padding:3%;	
-	
-	height:calc(50% - 80px);
-	width:calc(50% - 80px);
-}
-marquee
-{
-	height:100%;width:100%;
-	background-color:#000000;
-	color:#ffffff;
-	font-size:x-large;
-}
-h1 { font-size:90%;text-align:center;text-decoration:underline; }
-dl
-{
-	text-align:center;
-	margin:0;padding-bottom:50px;
-}
-dt { margin-top:20px;font-size:60%;font-weight:bold;text-transform:uppercase }
-dd { margin:0;padding:0 }*/
 
 #msgbox-bkgrd
 {
