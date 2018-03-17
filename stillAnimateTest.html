@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+    <head>
+		<!--base href="https://mercsteam.github.io/main/" /-->
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<title>Merc TT Demo</title>
+
+		<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Press Start 2P" />
+		<link rel="stylesheet" href="style/style.css" />
+
+		<style>
+			.p1-skillImg { animation: slide-left 8s; }	
+			.p2-skillImg { animation: slide-right 0.5s; }
+			.reactView
+			{
+				animation: shake 0.8s cubic-bezier(.36,.07,.19,.97) both;
+				transform: translate3d(0, 0, 0);
+				backface-visibility: hidden;
+				perspective: 1000px;
+			}
+
+			@keyframes slide-left
+			{ 
+				0% { left: -100%; }
+				10% { left: 2%; }
+				100% { left: -100%; } 
+			}
+			
+			@keyframes slide-right
+			{ 
+				0% { right: -100%; }
+				100% { right: 2%; } 
+			}
+			
+			@keyframes shake 
+			{
+				10%, 90% { transform: translate3d(-4px, -4px, 0); }
+				20%, 80% { transform: translate3d(8px, 8px, 0); }
+				30%, 50%, 70% { transform: translate3d(-16px, -16px, 0); }
+				40%, 60% { transform: translate3d(16px, 16px, 0); }
+			}
+		</style>
+    </head>
+    <body>  
+		<div id="gamePlay">
+            <div id="imgViewer" class="p1-skillImg" style="visibility:visible;background-image:url('characters/DynamanComicStills/Dynaman_DynaPunch.png')">
+                <span></span>
+            </div>
+			
+			<div class="reactView p2c1-reactImg" style="visibility:visible;background-image:url('characters/AlienComicStills/Alien_Damage.png')">
+                <span></span>
+            </div>
+
+			<div class="reactView p2c2-reactImg" style="visibility:visible;background-image:url('characters/CyborgComicStills/Cyborg_damage.png')">
+                <span></span>
+            </div>
+        </div>	
+    </body>
+</html>
