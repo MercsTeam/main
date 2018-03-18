@@ -177,8 +177,8 @@ figure.selected_player1 figcaption:before, figure.selected_player2 figcaption:be
     bottom: 0;
     right: 0;
     
-    height: calc(55% - 90px);
-    width: calc(40% - 100px);
+    height: calc(60% - 90px);
+    width: calc(42% - 90px);
     padding: 1%;
     border-radius: 0px;
     
@@ -192,7 +192,7 @@ figure.selected_player1 figcaption:before, figure.selected_player2 figcaption:be
 }
 
 #dialog2.minimize3 {
-    bottom: -41%;
+    bottom: -46%;
 }
 
 #battleLog {
