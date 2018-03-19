@@ -31,8 +31,8 @@ function BigSwordGuy()
     this.backstory = "Once a peaceful farmer, forced to take up the sword to defend his family and livelihood.  Hobbe "
 	+ "quickly found out he was a better bladesman than farmer, and found work in the village as a sellsword.";
 	
-	this.damageImage = "images/StillShapes/BSGStills/BSG-Damaged.png";
-	this.defeatImage = "images/StillShapes/BSGStills/FRONT-Defeat.png";
+	this.damageImage = "characters/BSGComicStills/BSG-Damaged.jpg";
+	this.defeatImage = "characters/BSGComicStills/FRONT-Defeat.jpg";
 }
 BigSwordGuy.prototype = new Character();
 
@@ -297,7 +297,7 @@ function CowboyGuy()
 		+ "bounty hunter in the Wild West. No space-time phenomenon will change his plan to retire as a rich man.";
 
 	this.damageImage = "characters/CowboyComicStills/cowboy_damage.png";
-	this.defeatImage = "characters/CowboyComicStills/cb_death2.png";
+	this.defeatImage = "characters/CowboyComicStills/cowboy_death.png";
 }
 CowboyGuy.prototype = new Character();
 
@@ -367,6 +367,8 @@ function HiveDrone()
 
 	this.quote = "Klikliklikliklikliklik! ELIMINATE! ELIMINATE!";
     this.backstory = "One of thousands of mindless drones. This creature enacts the will of the hive with no thought of self-preservation.";
+
+	this.defeatImage = "characters/HiveDroneComicStills/hivedrone_death.png";
 }
 HiveDrone.prototype = new Character();
 

@@ -68,7 +68,7 @@ function SwordChop()
     this.type = SkillType.Offensive;
     this.attackValue = 70;
     this.description = "A powerful blow to a lone target.";
-	this.imageURL = "images/StillShapes/BSGStills/FRONT-Sword_Chop.png";
+	this.imageURL = "characters/BSGComicStills/FRONT-Sword_Chop.jpg";
 	this.soundID = "swordChop";
 }
 SwordChop.prototype = new Skill("Sword Chop");
@@ -80,7 +80,7 @@ function SweepingStrike()
     this.description = "A broad strike at both opponents.";
     this.multiTarget = true;
 	this.cooldown = 1;
-	this.imageURL = "images/StillShapes/BSGStills/FRONT-Sweeping_Strike.png";
+	this.imageURL = "characters/BSGComicStills/FRONT-Sweeping_Strike.jpg";
 	this.soundID = "sweepStrike";
 }
 SweepingStrike.prototype = new Skill("Sweeping Strike");
@@ -91,7 +91,7 @@ function DefensiveStance()
     this.description = "Defends against attacks this round.";
     this.blocksDamage = true;
 	this.cooldown = 1;
-	this.imageURL = "images/StillShapes/BSGStills/FRONT-Defensive_Stance.png";
+	this.imageURL = "characters/BSGComicStills/FRONT-Defensive_Stance.jpg";
 	this.soundID = "defensiveStance";
 }
 DefensiveStance.prototype = new Skill("Defensive Stance");
@@ -102,7 +102,7 @@ function Focus()
     this.selfAttackMod = 1.5;
     this.description = "Increases attack power while in battle.";
 	this.cooldown = 1;
-	this.imageURL = "images/StillShapes/BSGStills/FRONT-Focus.png";
+	this.imageURL = "characters/BSGComicStills/FRONT-Focus.jpg";
 	this.soundID = "focus";
 }
 Focus.prototype = new Skill("Focus");
@@ -714,7 +714,7 @@ function Draw()
 	this.attackValue = 40;
 	this.cooldown = 1;
 	this.description = "A dramatic showdown that deals double damage if it connects before the enemy attacks.";
-	this.imageURL = "characters/CowboyComicStills/cg_quickdraw.png";
+	this.imageURL = "characters/CowboyComicStills/cowboy_quickdraw.png";
 	this.soundID = "draw";
 	
 	this.doAction = function(self, target)
@@ -740,7 +740,7 @@ function SixShooter()
 	this.attackValue = 30;
 	this.multiTarget = true;
 	this.description = "Unloads an entire cylinder on both enemies.";
-	this.imageURL = "characters/CowboyComicStills/cb_six_shooter.png";
+	this.imageURL = "characters/CowboyComicStills/cowboy_sixshooter.png";
 	this.soundID = "sixShooter";
 }
 SixShooter.prototype = new Skill("Six-Shooter");
@@ -753,7 +753,7 @@ function LiquidCourage()
 	this.selfSpeedMod = 0.5;
 	this.selfDefenceMod = 2;	
 	this.description = "Take a long, strong drink. Sacrifices speed to dramatically increase defence.";
-	this.imageURL = "characters/CowboyComicStills/cb_liquid_courage.png";
+	this.imageURL = "characters/CowboyComicStills/cowboy_liquidcourage.png";
 	this.soundID = "liquidCourage";
 	
 	this.doAction = function(self, target)
@@ -771,7 +771,7 @@ function Lasso()
 {
 	this.type = SkillType.Offensive;
 	this.description = "Hogties the enemy and whips them into the inactive position, if possible.";
-	this.imageURL = "characters/CowboyComicStills/cb_lasso2.png";
+	this.imageURL = "characters/CowboyComicStills/cowboy_lasso.png";
 	this.soundID = "lasso";
 		
 	this.doAction = function(self, target) 
