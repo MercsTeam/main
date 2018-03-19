@@ -105,6 +105,8 @@ function DinoGirl()
 		+ "life-long career out of his ancient research and brutal cross-DNA mutation procedures. As these things "
 		+ "typically go, Zhylla broke out of Jurassic’s laboratory and is struggling with the concept of humanity as "
 		+ "she fights her way to freedom.";
+
+	this.defeatImage = "characters/DinoGirlComicStills/DinoGirlDeath.png";
 }
 DinoGirl.prototype = new Character();
 
