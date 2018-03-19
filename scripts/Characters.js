@@ -31,8 +31,8 @@ function BigSwordGuy()
     this.backstory = "Once a peaceful farmer, forced to take up the sword to defend his family and livelihood.  Hobbe "
 	+ "quickly found out he was a better bladesman than farmer, and found work in the village as a sellsword.";
 	
-	this.damageImage = "images/StillShapes/BSGStills/BSG-Damaged.jpg";
-	this.defeatImage = "images/StillShapes/BSGStills/FRONT-Defeat.jpg";
+	this.damageImage = "images/StillShapes/BSGStills/BSG-Damaged.png";
+	this.defeatImage = "images/StillShapes/BSGStills/FRONT-Defeat.png";
 }
 BigSwordGuy.prototype = new Character();
 
