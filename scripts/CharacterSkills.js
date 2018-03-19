@@ -80,7 +80,7 @@ function SweepingStrike()
     this.description = "A broad strike at both opponents.";
     this.multiTarget = true;
 	this.cooldown = 1;
-	this.imageURL = "characters/BSGComicStills/FRONT-Sweeping_Strike.jpg";
+	this.imageURL = "images/StillShapes/BSGStills/FRONT-Sweeping_Strike.jpg";
 	this.soundID = "sweepStrike";
 }
 SweepingStrike.prototype = new Skill("Sweeping Strike");
@@ -91,7 +91,7 @@ function DefensiveStance()
     this.description = "Defends against attacks this round.";
     this.blocksDamage = true;
 	this.cooldown = 1;
-	this.imageURL = "characters/BSGComicStills/FRONT-Defensive_Stance.jpg";
+	this.imageURL = "images/StillShapes/BSGStills/FRONT-Defensive_Stance.jpg";
 	this.soundID = "defensiveStance";
 }
 DefensiveStance.prototype = new Skill("Defensive Stance");
@@ -102,7 +102,7 @@ function Focus()
     this.selfAttackMod = 1.5;
     this.description = "Increases attack power while in battle.";
 	this.cooldown = 1;
-	this.imageURL = "characters/BSGComicStills/FRONT-Focus.jpg";
+	this.imageURL = "images/StillShapes/BSGStills/FRONT-Focus.jpg";
 	this.soundID = "focus";
 }
 Focus.prototype = new Skill("Focus");
