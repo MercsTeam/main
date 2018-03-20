@@ -51,12 +51,13 @@ var Game =
 	},
     scenes : 
 	[ 
-		{ background : "mars.jpg",			floor : "mars.jpg",			sound : "",	arena : new THREE.CircleGeometry(50,100) },
+		{ background : "mars.jpg",		floor : "mars.jpg",		sound : "",	arena : new THREE.CircleGeometry(50,100) },
 		{ background : "Spacecity.png",		floor : "spacecity.jpg",	sound : "",	arena : new THREE.BoxGeometry(100,20,1)  },
 		{ background : "Underwater.png",	floor : "underwater.jpg",	sound : "",	arena : new THREE.CircleGeometry(50,100) },
-		{ background : "Forest.png",		floor : "log.jpg",			sound : "",	arena : new THREE.BoxGeometry(100,20,1) },
+		{ background : "Forest.png",		floor : "log.jpg",		sound : "",	arena : new THREE.BoxGeometry(100,20,1) },
 		{ background : "Castle_dk.jpg",		floor : "drawbridge.jpg",	sound : "",	arena : new THREE.BoxGeometry(100,20,1) },
-		{ background : "galaxy.png",		floor : "planetoid.png",	sound : "",	arena : new THREE.CircleGeometry(50,100) }
+		{ background : "galaxy.png",		floor : "planetoid.png",	sound : "",	arena : new THREE.CircleGeometry(50,100) },
+		{ background : "SpaceShip.png",		floor : "spaceship_floor.png",	sound : "",	arena : new THREE.BoxGeometry(100,20,1) }
 	],
 	toggleSound : function()
 	{
