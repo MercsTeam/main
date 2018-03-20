@@ -69,7 +69,8 @@ var CharacterSelection =
 				
 				this.classList.toggle(cName);
 				
-				if(this.className.indexOf("selected") != -1)
+				//if(this.className.indexOf("selected") != -1)
+				if(this.classList.contains(cName))
 				{
 					if(p.selectedCount < 3)
 					{
