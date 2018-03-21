@@ -10,10 +10,10 @@ function Nemesis()
     this.skills = [ new SwordChop(), new SweepingStrike(), new DefensiveStance(), new Focus(), new Retreat() ];
 	
 	//override BSG skill images
-	this.skills[0].imageURL = "characters/BSGComicStills/Nemesis_SwordChop.png";
-	this.skills[1].imageURL = "characters/BSGComicStills/Nemesis_SweepingStrike.png";
-	this.skills[2].imageURL = "characters/BSGComicStills/Nemesis_DefensiveStance.png";
-	this.skills[3].imageURL = "characters/BSGComicStills/Nemesis_Focus.png";
+	this.skills[0].imageURL = "images/StillShapes/BSGStills/Nemesis_SwordChop.png";
+	this.skills[1].imageURL = "images/StillShapes/BSGStills/Nemesis_SweepingStrike.png";
+	this.skills[2].imageURL = "images/StillShapes/BSGStills/Nemesis_DefensiveStance.png";
+	this.skills[3].imageURL = "images/StillShapes/BSGStills/Nemesis_Focus.png";
 
 	this.state = 
     {
@@ -36,8 +36,8 @@ function Nemesis()
 		+ "¦¦¦ ¦¦ ¦¦ ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦ ¦¦¦¦¦¦ ¦ ¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦ ¦¦¦ ¦¦ hunting ¦¦¦¦¦¦¦ ¦ ¦¦¦¦¦¦¦¦¦ ¦¦¦¦ "
 		+ "¦¦¦¦¦¦ ¦¦ ¦ ¦¦¦¦ ¦¦¦ ¦¦ ¦¦¦¦¦¦¦¦¦  ¦¦¦¦¦ ¦¦¦¦¦¦¦¦¦.";
 	
-	this.damageImage = "characters/BSGComicStills/Nemesis_Damaged.png";
-	this.defeatImage = "characters/BSGComicStills/Nemesis_Defeat.png";
+	this.damageImage = "images/StillShapes/BSGStills/Nemesis_Damaged.png";
+	this.defeatImage = "images/StillShapes/BSGStills/Nemesis_Defeat.png";
 }
 Nemesis.prototype = new Character();
 
@@ -106,7 +106,7 @@ function DinoGirl()
 		+ "typically go, Zhylla broke out of Jurassic’s laboratory and is struggling with the concept of humanity as "
 		+ "she fights her way to freedom.";
 
-	this.defeatImage = "characters/DinoGirlComicStills/DinoGirlDeath.png";
+	this.defeatImage = "images/StillShapes/DinoGirlStills/DinoGirlDeath.png";
 }
 DinoGirl.prototype = new Character();
 
