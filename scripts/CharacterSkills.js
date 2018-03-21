@@ -236,7 +236,7 @@ function Fireball()
     this.attackValue = 50;
     this.burnProb = Probability.Low;
     this.description = "A fiery attack that may burn the enemy.";
-	this.imageURL = "characters/MageComicStills/MageFireball.png";
+	this.imageURL = "images/StillShapes/MageStills/MageFireball.png";
 	this.soundID = "fireBall";
 }
 Fireball.prototype = new Skill("Fireball");
@@ -248,7 +248,7 @@ function LightningStorm()
     this.multiTarget = true;
     this.stunProb = Probability.Low;
     this.description = "An electrical attack that strikes both enemies and may stun them.";
-	this.imageURL = "characters/MageComicStills/MageLightningStorm.png";
+	this.imageURL = "images/StillShapes/MageStills/MageLightningStorm.png";
 	this.soundID = "lightningStorm";
 }
 LightningStorm.prototype = new Skill("Lightning Storm");
@@ -259,7 +259,7 @@ function DivineShield()
     this.blocksDamage = true;
     this.description = "Protects from all damage this turn.";
 	this.cooldown = 1;
-	this.imageURL = "characters/MageComicStills/MageDivineShield.png";
+	this.imageURL = "images/StillShapes/MageStills/MageDivineShield.png";
 	this.soundID = "divineShield";
 }
 DivineShield.prototype = new Skill("Divine Shield");
@@ -271,7 +271,7 @@ function PoolMana()
 	this.effectDuration = 2;
     this.description = "Increases attack power for next turn.";
 	this.cooldown = 1;
-	this.imageURL = "characters/MageComicStills/MagePoolMana.png";
+	this.imageURL = "images/StillShapes/MageStills/MagePoolMana.png";
 	this.soundID = "poolMana";
 	
 	this.doAction = function(self, target)
@@ -288,7 +288,7 @@ function LightningStrike()
     this.attackValue = 25;
     this.interruptProb = 0.15;
     this.description = "An electrical blow that may prevent the target from attacking.";
-	this.imageURL = "characters/DjinnComicStills/Djinn_LightningStrike.png";
+	this.imageURL = "images/StillShapes/DjinnStills/Djinn_LightningStrike.png";
 	this.soundID = "lightningStrike";
 }
 LightningStrike.prototype = new Skill("Lightning Strike");
@@ -310,7 +310,7 @@ function Confidence()
 	this.selfImmunity = true;
 	this.description = "Manifests confidence to protect from all damage this turn, and temporarily blocks status effects";
 	this.cooldown = 1;
-	this.imageURL = "characters/DjinnComicStills/Djinn_Confidence.png";
+	this.imageURL = "images/StillShapes/DjinnStills/Djinn_Confidence.png";
 	this.soundID = "confidence";
 }
 Confidence.prototype = new Skill("Confidence");
@@ -325,7 +325,7 @@ function SinisterDeal()
 	this.multiTarget = true;
 	this.affectAlly = true;
     this.description = "Summons high winds across the battlefield, making allies faster and enemies slower.";
-	this.imageURL = "characters/DjinnComicStills/Djinn_SinisterDeal.png";
+	this.imageURL = "images/StillShapes/DjinnStills/Djinn_SinisterDeal.png";
 	this.soundID = "sinisterDeal";
 
 	this.doAction = function(self, target)
@@ -356,7 +356,7 @@ function Wish()
 	this.affectAlly = true;
     this.description = "Grants an ally increased attack, defence, speed, immunity from status effects, and minor healing.";
 	this.cooldown = 3;
-	this.imageURL = "characters/DjinnComicStills/Djinn_Wish.png";
+	this.imageURL = "images/StillShapes/DjinnStills/Djinn_Wish.png";
 	this.soundID = "wish";
 }
 Wish.prototype = new Skill("Wish");
@@ -609,7 +609,7 @@ function RayGun()
 	this.attackValue = 40;
 	this.stunProb = 0.1;
 	this.description = "A single shot with a mysterious beam that may stun the enemy.";
-	this.imageURL = "characters/AlienComicStills/Alien_Raygun.png";
+	this.imageURL = "images/StillShapes/AlienStills/Alien_Raygun.png";
 	this.soundID = "raygun";
 }
 RayGun.prototype = new Skill("Ray Gun");
@@ -623,7 +623,7 @@ function Abduction()
 	this.duration = 3;
 	this.description = "Calls in a UFO over 3 turns. Once they arrive, the enemy is abducted for a one-hit kill.";
 	this.cooldown = 6;
-	this.imageURL = "characters/AlienComicStills/Alien_Abduction.png";
+	this.imageURL = "images/StillShapes/AlienStills/Alien_Abduction.png";
 	this.soundID = "abduction";
 
 	this.doAction = function(self, target)
@@ -681,7 +681,7 @@ function ForceShield()
 	this.effectDuration = 5;
 	this.description = "Creates a barrier that increases defence for a while.";
 	this.cooldown = 5;
-	this.imageURL = "characters/AlienComicStills/Alien_ForceShield.png";
+	this.imageURL = "images/StillShapes/AlienStills/Alien_ForceShield.png";
 	this.soundID = "forceShield";
 
 	this.doAction = function(self, target)
@@ -698,7 +698,7 @@ function Telekinesis()
 {
 	this.type = SkillType.Offensive;
 	this.description = "Uses psychic-like powers to force an enemy into the inactive position, if possible.";
-	this.imageURL = "characters/AlienComicStills/Alien_Telekinesis.png";
+	this.imageURL = "images/StillShapes/AlienStills/Alien_Telekinesis.png";
 	this.soundID = "telekinesis";
 
 	this.doAction = function(self, target) 
@@ -965,7 +965,7 @@ function BlastOff()
 	this.blocksDamage = true;
 	this.duration = 3;
 	this.description = "Leaves the battlefield temporarily in a rocket ship, damaging the enemy on both liftoff and re-entry.";
-	this.imageURL = "characters/SpaceGirlComicStills/Blast_Off.png";
+	this.imageURL = "images/StillShapes/SpaceGirlStills/Blast_Off.png";
 
 	var counter = 0;
 	var defaultState = null;
@@ -1079,7 +1079,7 @@ function Hex()
 	this.attackValue = 80;
 	this.type = SkillType.Offensive;
 	this.description = "An aggressive spell with nothing but pure malice behind it.";
-	this.imageURL = "characters/WitchComicStills/Hex.png";
+	this.imageURL = "images/StillShapes/WitchStills/Hex.png";
 }
 Hex.prototype = new Skill("Hex");
 
@@ -1089,7 +1089,7 @@ function Curse()
 	this.type = SkillType.Offensive;
 	this.randomDebuffProb = Probability.Medium;
 	this.description = "A bitter curse that wishes harm and affliction against the enemy.";
-	this.imageURL = "characters/WitchComicStills/Curse.png";
+	this.imageURL = "images/StillShapes/CurseStills/Curse.png";
 }
 Curse.prototype = new Skill("Curse");
 
@@ -1102,7 +1102,7 @@ function Blessing()
 	this.affectsAlly = true;
 	this.multiTarget = true;
 	this.description = "A benevolent spell that helps protect self and allies by increasing defence temporarily.";
-	this.imageURL = "characters/WitchComicStills/Blessings.png";
+	this.imageURL = "images/StillShapes/WitchStills/Blessings.png";
 
 	this.doAction = function(self, target)
 	{
@@ -1124,7 +1124,7 @@ function PoisonApple()
 	this.type = SkillType.Offensive;
 	this.poisonProb = 0.5;
 	this.description = "Offers the enemy a cursed apple, which can either harm or heal them.";
-	this.imageURL = "characters/WitchComicStills/Poisoned_Apple.png";
+	this.imageURL = "images/StillShapes/WitchStills/Poisoned_Apple.png";
 
 	this.doAction = function(self, target)
 	{
@@ -1210,7 +1210,7 @@ function TailWhip()
 	this.cooldown = 1;
 	this.accuracy = 0.5;
 	this.description = "A powerful bludgeoning attack with a significant chance of missing.";
-	this.imageURL = "characters/DinoGirlComicStills/TailWhip.png";
+	this.imageURL = "images/StillShapes/DinoGirlStills/TailWhip.png";
 }
 TailWhip.prototype = new Skill("Tail Whip");
 
