@@ -650,13 +650,14 @@ function Abduction()
 				var damage = oppMerc.health.base;
 				oppMerc.health.base = 0;
 
+				//add complete action still
 				Game.skillImgArr.push({
 					player : self.player,
 					character : self,
 					label : string.format("Player {0}.{1} - {2}<br />{3} (ATTACK)",
 					(self.player == Game.player1 ? 1 : 2),
-					oppMerc.position,
-					oppMerc.name,
+					self.position,
+					self.name,
 					this.name),
 					url : this.imageURL,
 					sound : this.soundID,
@@ -996,6 +997,22 @@ function BlastOff()
 			if(counter == 2)
 			{	
 				self.updateGameObject(null, defaultState);
+				
+				//add return action still
+				Game.skillImgArr.push({
+					player : self.player,
+					character : self,
+					label : string.format("Player {0}.{1} - {2}<br />{3} (ATTACK)",
+					(self.player == Game.player1 ? 1 : 2),
+					self.position,
+					self.name,
+					this.name),
+					url : this.imageURL,
+					sound : this.soundID,
+					reaction : []
+				});
+				
+				counter = 0;
 			}
 
 			for(var i = 0; i < target.length; i++)
@@ -1009,25 +1026,16 @@ function BlastOff()
 					target[i].burned = true;	
 					target[i].health.modifier = 0.95;
 					target[i].defence.modifier = 0.75;
-				}
-
-				Game.skillImgArr.push({
-					player : self.player,
-					character : self,
-					label : string.format("Player {0}.{1} - {2}<br />{3} (ATTACK)",
-					(self.player == Game.player1 ? 1 : 2),
-					target[i].position,
-					target[i].name,
-					this.name),
-					url : this.imageURL,
-					sound : this.soundID,
-					reaction : []
-				});
+				}			
 
 				this.logAction(self, target[i], damage);
 			}
 		}
-		counter++;
+		
+		if(counter != 2)
+		{
+			counter++;
+		}
 	};
 }
 BlastOff.prototype = new Skill("Blast Off!");
