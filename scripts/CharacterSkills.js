@@ -1011,8 +1011,6 @@ function BlastOff()
 					sound : this.soundID,
 					reaction : []
 				});
-				
-				counter = 0;
 			}
 
 			for(var i = 0; i < target.length; i++)
@@ -1035,6 +1033,10 @@ function BlastOff()
 		if(counter != 2)
 		{
 			counter++;
+		}
+		else
+		{
+			counter = 0;	
 		}
 	};
 }
