@@ -964,6 +964,7 @@ function BlastOff()
 	this.blocksDamage = true;
 	this.duration = 3;
 	this.description = "Leaves the battlefield temporarily in a rocket ship, damaging the enemy on both liftoff and re-entry.";
+	this.imageURL = "characters/SpaceGirlComicStills/Blast_Off.png";
 
 	var counter = 0;
 	var defaultState = null;
