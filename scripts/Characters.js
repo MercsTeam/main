@@ -296,8 +296,8 @@ function CowboyGuy()
     this.backstory = "A quick-witted gunslinger with unusually good luck, \"Lucky\" Townsend earned his renown as a "
 		+ "bounty hunter in the Wild West. No space-time phenomenon will change his plan to retire as a rich man.";
 
-	this.damageImage = "characters/CowboyComicStills/cowboy_damage.png";
-	this.defeatImage = "characters/CowboyComicStills/cowboy_death.png";
+	this.damageImage = "images/StillShapes/CowboyStills/cowboy_damage.png";
+	this.defeatImage = "images/StillShapes/CowboyStills/cowboy_death.png";
 }
 CowboyGuy.prototype = new Character();
 
