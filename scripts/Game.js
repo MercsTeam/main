@@ -350,7 +350,7 @@ var Game =
 		{
 			Game.confirm.show("Next round?", function() 
 			{
-				this.hide();
+				Game.confirm.hide();
 
 				Game.player1.active = true;
 				Game.player2.active = false;
@@ -361,7 +361,7 @@ var Game =
 				Game.round++;
 			}, function()
 			{
-				this.hide();
+				Game.confirm.hide();
 				//Game.over = true;
 				Game.surrender();
 			});
