@@ -367,7 +367,7 @@ function IntegratedBattleSystem()
     this.attackValue = 50;
     this.randomDebuffProb = 0.25;
     this.description = "An attack that may randomly lower one of the enemy's stats.";
-	this.imageURL = "characters/CyborgComicStills/Cyborg_IntegratedBattleSystem.png";
+	this.imageURL = "images/StillShapes/CyborgStills/Cyborg_IntegratedBattleSystem.png";
 	this.soundID = "intBattleSys";
 }
 IntegratedBattleSystem.prototype = new Skill("Integrated Battle System");
@@ -379,7 +379,7 @@ function ElectronicBarrier()
 	this.affectAlly = true;
     this.description = "Deploy a large energy barrier that reduces damage from all incoming attacks against allies.";
 	this.cooldown = 1;
-	this.imageURL = "characters/CyborgComicStills/Cyborg_ElectronicBarrier.png";
+	this.imageURL = "images/StillShapes/CyborgStills/Cyborg_ElectronicBarrier.png";
 	this.soundID = "electronicBarrier";
 
 	this.doAction = function(self, target)
@@ -411,7 +411,7 @@ function NanobotRepairs()
     this.duration = 2;
     this.description = "Repairs damage to his armour and adapts it to the situation, temporarily regenerating HP and increasing defence.";
 	this.cooldown = 2;
-	this.imageURL = "characters/CyborgComicStills/Cyborg_NanobotRepairs.png";
+	this.imageURL = "images/StillShapes/CyborgStills/Cyborg_NanobotRepairs.png";
 	this.soundID = "nanobotRepairs";
 
 	this.doAction = function(self, target)
@@ -459,7 +459,7 @@ function EnhancedCombatSystem()
 	this.selfAttackMod = 3;
 	this.description = "Sacrifice half of health to dramatically increase attack power.";
 	this.cooldown = 2;
-	this.imageURL = "characters/CyborgComicStills/Cyborg_EnhancedCombatSystem.png";
+	this.imageURL = "images/StillShapes/CyborgStills/yborg_EnhancedCombatSystem.png";
 	this.soundID = "enhCombatSys";
 	
 	this.doAction = function(self, target)
@@ -483,7 +483,7 @@ function StormStrike()
 	this.accuracy = 0.25;
 
 	this.description = "Attacks with a lightning imbued rapier, which may increase the user’s speed.";
-	this.imageURL = "characters/PirateComicStills/Pirate_StormStrike.png";
+	this.imageURL = "images/StillShapes/PirateStills/Pirate_StormStrike.png";
 	this.soundID = "stormStrike";
 }
 StormStrike.prototype = new Skill("Storm Strike");
@@ -493,7 +493,7 @@ function SingleShot()
 	this.type = SkillType.Offensive;
 	this.attackValue = 40;
 	this.description = "An attack that deals extra damage to dying enemies. Finishing off an enemy this way increases speed and attack.";
-	this.imageURL = "characters/PirateComicStills/Pirate_SingleShot.png";
+	this.imageURL = "images/StillShapes/PirateStills/Pirate_SingleShot.png";
 	this.soundID = "singleShot";
 	this.cooldown = 1;
 
@@ -525,7 +525,7 @@ function Parry()
 	this.accuracy = 0.25;
 	this.description = "Takes a defensive posture to parry any incoming attacks, nullifying all damage with a chance of reflecting some back at the enemy.";
 	this.cooldown = 1;
-	this.imageURL = "characters/PirateComicStills/Pirate_Parry.png";
+	this.imageURL = "images/StillShapes/PirateStills/Pirate_Parry.png";
 	this.soundID = "parry";
 
 	this.doAction = function(self, target)
@@ -558,7 +558,7 @@ function Maelstrom()
 	this.multiTarget = true;
 	this.description = "Summons a powerful storm that increases the user’s damage, may make allies faster, and will strike the healthiest enemy at the end of each turn.";
 	this.cooldown = 6;
-	this.imageURL = "characters/PirateComicStills/Pirate_Maelstrom.png";
+	this.imageURL = "images/StillShapes/PirateStills/Pirate_Maelstrom.png";
 	
 	this.doAction = function(self, target)
 	{
@@ -598,7 +598,7 @@ function ReleaseKraken()
 	this.multiTarget = true;
 	this.description = "Summons the Kraken from the depths, smashing enemies with its tentacles and reducing their speed.";
 	this.cooldown = 4;
-	this.imageURL = "characters/PirateComicStills/Pirate_ReleaseTheKraken.png";
+	this.imageURL = "images/StillShapes/PirateStills/Pirate_ReleaseTheKraken.png";
 	this.soundID = "releaseKraken";
 }
 ReleaseKraken.prototype = new Skill("Release the Kraken");
@@ -715,7 +715,7 @@ function Draw()
 	this.attackValue = 40;
 	this.cooldown = 1;
 	this.description = "A dramatic showdown that deals double damage if it connects before the enemy attacks.";
-	this.imageURL = "characters/CowboyComicStills/cowboy_quickdraw.png";
+	this.imageURL = "images/StillShapes/CowboyStills/cowboy_quickdraw.png";
 	this.soundID = "draw";
 	
 	this.doAction = function(self, target)
@@ -741,7 +741,7 @@ function SixShooter()
 	this.attackValue = 30;
 	this.multiTarget = true;
 	this.description = "Unloads an entire cylinder on both enemies.";
-	this.imageURL = "characters/CowboyComicStills/cowboy_sixshooter.png";
+	this.imageURL = "images/StillShapes/CowboyStills/cowboy_sixshooter.png";
 	this.soundID = "sixShooter";
 }
 SixShooter.prototype = new Skill("Six-Shooter");
@@ -754,7 +754,7 @@ function LiquidCourage()
 	this.selfSpeedMod = 0.5;
 	this.selfDefenceMod = 2;	
 	this.description = "Take a long, strong drink. Sacrifices speed to dramatically increase defence.";
-	this.imageURL = "characters/CowboyComicStills/cowboy_liquidcourage.png";
+	this.imageURL = "images/StillShapes/CowboyStills/cowboy_liquidcourage.png";
 	this.soundID = "liquidCourage";
 	
 	this.doAction = function(self, target)
@@ -772,7 +772,7 @@ function Lasso()
 {
 	this.type = SkillType.Offensive;
 	this.description = "Hogties the enemy and whips them into the inactive position, if possible.";
-	this.imageURL = "characters/CowboyComicStills/cowboy_lasso.png";
+	this.imageURL = "images/StillShapes/CowboyStills/cowboy_lasso.png";
 	this.soundID = "lasso";
 		
 	this.doAction = function(self, target) 
@@ -790,7 +790,7 @@ function Club()
 	this.stunProb = Probability.VeryLow;
 	this.description = "A powerful blow to the head that may stun the enemy.";
 	this.cooldown = 1;
-	this.imageURL = "characters/CavemanComicStills/caveman_club.png";
+	this.imageURL = "images/StillShapes/CavemanStills/caveman_club.png";
 	this.soundID = "club";
 }
 Club.prototype = new Skill("Club");
@@ -801,7 +801,7 @@ function PoisonSpear()
 	this.attackValue = 25;
 	this.poisonProb = Probability.Medium;
 	this.description = "A stab with a spear covered in toxic substances that may poison the enemy.";
-	this.imageURL = "characters/CavemanComicStills/caveman_poisonspear.png";
+	this.imageURL = "images/StillShapes/CavemanStills/caveman_poisonspear.png";
 	this.soundID = "poisonSpear";
 }
 PoisonSpear.prototype = new Skill("Poison-Tipped Spear");
@@ -814,7 +814,7 @@ function PrimalRage()
 	this.effectDuration = 3;
 	this.description = "Tap into heart of survival instincts to temporarily boost attack and defence.";
 	this.cooldown = 3;
-	this.imageURL = "characters/CavemanComicStills/caveman_primalrage.png";
+	this.imageURL = "images/StillShapes/CavemanStills/caveman_primalrage.png";
 	this.soundID = "primalRage";
 	
 	this.doAction = function(self, target)
@@ -836,7 +836,7 @@ function FireDance()
 	this.burnProb = Probability.VeryHigh;
 	this.selfDamage = true;
 	this.description = "A tribal dance that burns the user in order to grant better odds of inflicting status effects. Can't be used if already burned.";
-	this.imageURL = "characters/CavemanComicStills/caveman_firedance.png";
+	this.imageURL = "images/StillShapes/CavemanStills/caveman_firedance.png";
 	this.soundID = "fireDance";
 	
 	this.doAction = function(self, target)
