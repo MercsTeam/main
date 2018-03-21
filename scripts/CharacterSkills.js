@@ -113,7 +113,7 @@ function Headshot()
     this.attackValue = 100;
     this.accuracy = 0.4;
     this.description = "A tricky shot that deals great damage, but only if it connects.";
-	this.imageURL = "characters/SniperGirlComicStills/SG-Headshot.jpg";
+	this.imageURL = "images/StillShapes/SniperGirlStills/SG-Headshot.png";
 	this.soundID  = "headShot";
 
 	this.doAction = function(self, target)
@@ -141,7 +141,7 @@ function RicochetShot()
     this.accuracy = 0.2;
 	this.bleedProb = 1.0;
     this.description = "An incredibly difficult shot that damages both targets, if it connects. May create a wound with a penetrating shot.";
-	this.imageURL = "characters/SniperGirlComicStills/SG-Ricochet.jpg";
+	this.imageURL = "images/StillShapes/SniperGirlStills/SG-Ricochet.png";
 	this.soundID = "ricochetShotHit";
 	this.cooldown = 2;
 	
@@ -177,7 +177,7 @@ function TakeAim()
     this.selfAccuracyMod = 1.5;
 	this.effectDuration = 2;
     this.description = "Reduces chance of missing next turn.";
-	this.imageURL = "characters/SniperGirlComicStills/SG-TakeAim.jpg";
+	this.imageURL = "images/StillShapes/SniperGirlStills/SG-TakeAim.png";
 	this.soundID = "takeAim";
 
 	this.doAction = function(self, target)
@@ -196,7 +196,7 @@ function Camouflage()
     this.duration = 3;
     this.description = "Become harder to hit until your next shot is fired.";
 	this.cooldown = 1;
-	this.imageURL = "characters/SniperGirlComicStills/SG-Camouflage.jpg";
+	this.imageURL = "images/StillShapes/SniperGirlStills/SG-Camouflage.png";
 	this.soundID = "camouflage";
 	
 	var counter = this.duration;
