@@ -350,7 +350,7 @@ var Game =
 		{
 			Game.confirm.show("Next round?", function() 
 			{
-				Game.confirm.hide();
+				this.hide();
 
 				Game.player1.active = true;
 				Game.player2.active = false;
@@ -361,8 +361,9 @@ var Game =
 				Game.round++;
 			}, function()
 			{
-				Game.confirm.hide();
-				Game.over = true;
+				this.hide();
+				//Game.over = true;
+				Game.surrender();
 			});
 		}
 	},
@@ -406,8 +407,9 @@ var Game =
 		}
 		else
 		{
-		}
-		Game.over = true;*/
+		}*/
+		Game.over = true;
+		document.location.reload();
 	},                
 	loadArena : function()
 	{
