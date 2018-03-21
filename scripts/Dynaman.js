@@ -36,8 +36,8 @@ function Dynaman()
 		+ "Later in his career, Dynaman encountered the Questors, a group of super-heroes from a future alternate-Earth who were doing battle with his older counterpart who had become a villain known as Dominion.  Although they possessed the same "
 		+ "abilities, Dominion was considerably more ruthless and experienced, and would have defeated him without the help of the surviving members of the RCLH.";
 	
-	this.damageImage = "characters/DynamanComicStills/Dynaman_Damage.png";
-	this.defeatImage = "characters/DynamanComicStills/Dynaman_Defeat.png";
+	this.damageImage = "images/StillShapes/DynamanStills/Dynaman_Damage.png";
+	this.defeatImage = "images/StillShapes/DynamanStills/Dynaman_Defeat.png";
 }
 Dynaman.prototype = new Character();
 
@@ -46,7 +46,7 @@ function DynaPunch()
 	this.type = SkillType.Offensive;
 	this.attackValue = 75;
 	this.description = "Super-strength powered punch inflicts high damage against opponent.";
-	this.imageURL = "characters/DynamanComicStills/Dynaman_DynaPunch.png";
+	this.imageURL = "images/StillShapes/DynamanStills/Dynaman_DynaPunch.png";
 	this.soundID = "dynaPunch";
 }
 DynaPunch.prototype = new Skill("Dyna-Punch");
@@ -57,7 +57,7 @@ function LaserVision()
 	this.attackValue = 150;
 	this.cooldown = 3;
 	this.description = "Projects laser beams from eyes to inflict extreme damage against opponent.";
-	this.imageURL = "characters/DynamanComicStills/Dynaman_LaserVision.png";
+	this.imageURL = "images/StillShapes/DynamanStills/Dynaman_LaserVision.png";
 	this.soundID = "laserVision";
 }
 LaserVision.prototype = new Skill("Laser Vision");
@@ -69,7 +69,7 @@ function DynaSpeed()
 	this.effectDuration = 3;
 	this.cooldown = 3;
 	this.description = "Doubles speed for three rounds.";
-	this.imageURL = "characters/DynamanComicStills/Dynaman_DynaSpeed.png";
+	this.imageURL = "images/StillShapes/DynamanStills/Dynaman_DynaSpeed.png";
 	this.soundID = "dynaSpeed";
 
 	this.doAction = function(self, target)
@@ -88,7 +88,7 @@ function DynaBreath()
 	this.oppAttackMod = 0.5;
 	this.oppSpeedMod = 0.5;
 	this.description = "Unleash super-breath to reduce opponent speed and ability to attack.";
-	this.imageURL = "characters/DynamanComicStills/Dynaman_DynaBreath.png";
+	this.imageURL = "images/StillShapes/DynamanStills/Dynaman_DynaBreath.png";
 	this.soundID = "dynaBreath";
 
 	this.doAction = function(self, target)
