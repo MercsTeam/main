@@ -890,6 +890,7 @@ function Exoskeleton()
 	this.selfDefenceMod = 1.5;
 	this.effectDuration = 2;
 	this.description = "Hardens the outer shell to increase defence temporarily.";
+	this.imageURL = "characters/HiveDroneComicStills/hivedrone_exoskeleton.png";
 }
 Exoskeleton.prototype = new Skill("Exoskeleton");
 
@@ -965,7 +966,7 @@ function BlastOff()
 	this.blocksDamage = true;
 	this.duration = 3;
 	this.description = "Leaves the battlefield temporarily in a rocket ship, damaging the enemy on both liftoff and re-entry.";
-	this.imageURL = "images/StillShapes/SpaceGirlStills/Blast_Off.png";
+	this.imageURL = "characters/SpaceGirlComicStills/Blast_Off.png";
 
 	var counter = 0;
 	var defaultState = null;
@@ -1036,7 +1037,7 @@ function BlastOff()
 		}
 		else
 		{
-			counter = 0;	
+			counter = 0;
 		}
 	};
 }

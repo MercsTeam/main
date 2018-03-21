@@ -94,7 +94,14 @@ function Character()
 			if(!this.poisoned) 
 			{
 				this.health.modifier = 1.0;
-				this.setEffectIndicator(Game.NoEffect, 0);
+				this.setEffectIndicator(Game.NoEffect, 0);				
+			}
+
+			//regenerate health for retreated character
+			if(this.health.base < this.defaultHealth)
+			{
+				this.health.base = Math.min(this.defaultHealth, (this.health.base + this.defaultHealth * 0.05));
+				this.updateHealthBar();
 			}
 
 			for(var i = 1; i < attributes.length; i++) 
