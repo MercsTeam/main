@@ -88,7 +88,7 @@ function DynaBreath()
 	this.oppAttackMod = 0.5;
 	this.oppSpeedMod = 0.5;
 	this.description = "Unleash super-breath to reduce opponent speed and ability to attack.";
-	this.imageURL = "images/StillShapes/DynamanStills/Dynaman_DynaBreath.png";
+	this.imageURL = "images/StillShapes/DynamanStills/Dynaman_Dynabreath.png";
 	this.soundID = "dynaBreath";
 
 	this.doAction = function(self, target)
