@@ -104,8 +104,8 @@ function Mage()
     this.backstory = "This reclusive wizard had her first taste of fame and wealth after a quest to slay a dragon. "
 		+ "Now Zocoma has a taste for the spotlight and uses her powers for profiteering as a Cerotis mercenary.";
 
-	this.damageImage = "characters/MageComicStills/MageDamaged.png";
-	this.defeatImage = "characters/MageComicStills/MageDead.png";
+	this.damageImage = "images/StillShapes/MageStills/MageDamaged.png";
+	this.defeatImage = "images/StillShapes/MageStills/MageDead.png";
 }
 Mage.prototype = new Character();
 
@@ -142,8 +142,8 @@ function Djinn()
 		+ "Odesai the Ancient Evil has appeared in story and myth all throughout human history. A true demon of pure greed, he offers his power and wealth to those in the hardest of times, to those who can not afford to decline his offer."
 		+ "Those who accept his offer live a life of luxury and fortune, and have all goals and aspirations met. But when it comes time to collect on his end of the deal, Odesai takes it all, and more.";
 
-	this.damageImage = "characters/DjinnComicStills/Djinn_Damage.png";
-	this.defeatImage = "characters/DjinnComicStills/Djinn_Death.png";
+	this.damageImage = "images/StillShapes/DjinnStills/Djinn_Damage.png";
+	this.defeatImage = "images/StillShapes/DjinnStills/Djinn_Death.png";
 }
 Djinn.prototype = new Character();
 
@@ -220,8 +220,8 @@ function Alien()
 
 	this.AbductionSprite = "abduction.png";
 
-	this.damageImage = "characters/AlienComicStills/Alien_Damage.png";
-	this.defeatImage = "characters/AlienComicStills/Alien_Defeat.png";
+	this.damageImage = "images/StillShapes/AlienStills/Alien_Damage.png";
+	this.defeatImage = "images/StillShapes/AlienStills/Alien_Defeat.png";
 }
 Alien.prototype = new Character();
 
@@ -368,7 +368,7 @@ function HiveDrone()
 	this.quote = "Klikliklikliklikliklik! ELIMINATE! ELIMINATE!";
     this.backstory = "One of thousands of mindless drones. This creature enacts the will of the hive with no thought of self-preservation.";
 
-	this.defeatImage = "characters/HiveDroneComicStills/hivedrone_death.png";
+	this.defeatImage = "images/StillShapes/HiveDroneStills/hivedrone_death.png";
 }
 HiveDrone.prototype = new Character();
 
@@ -437,7 +437,7 @@ function Witch()
 		+ "the esoteric destruction wrought by the black hole. Quick to adapt to the new surroundings, Azalea set "
 		+ "out to establish her power.";
 
-	this.damageImage = "characters/WitchComicStills/Damaged.png";
-	this.defeatImage = "characters/WitchComicStills/Defeat.png";
+	this.damageImage = "images/StillShapes/WitchStills/Damaged.png";
+	this.defeatImage = "images/StillShapes/WitchStills/Defeat.png";
 }
 Witch.prototype = new Character();
