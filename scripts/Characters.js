@@ -69,8 +69,8 @@ function SniperGirl()
 	+ "the war and turned to mercenary work. If you can afford her rate, and you can find her, maybe you can hire "
 	+ "Artemis.";
 
-	this.damageImage = "characters/SniperGirlComicStills/SG-Damage.jpg";
-	this.defeatImage = "characters/SniperGirlComicStills/SG-Death.png";
+	this.damageImage = "images/StillShapes/SniperGirlStills/SG-Damage.png";
+	this.defeatImage = "images/StillShapes/SniperGirlStills/SG-Death.png";
 }
 SniperGirl.prototype = new Character();
 
