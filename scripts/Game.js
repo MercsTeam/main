@@ -57,7 +57,8 @@ var Game =
 		{ background : "Forest.png",		floor : "log.jpg",		sound : "",	arena : new THREE.BoxGeometry(100,20,1) },
 		{ background : "Castle_dk.jpg",		floor : "drawbridge.jpg",	sound : "",	arena : new THREE.BoxGeometry(100,20,1) },
 		{ background : "galaxy.png",		floor : "planetoid.png",	sound : "",	arena : new THREE.CircleGeometry(50,100) },
-		{ background : "SpaceShip.png",		floor : "spaceship_floor.png",	sound : "",	arena : new THREE.BoxGeometry(100,20,1) }
+		{ background : "SpaceShip.png",		floor : "spaceship_floor.png",	sound : "",	arena : new THREE.BoxGeometry(100,20,1) },
+		{ background : "bg_desert.png",		floor : "desertPlatform.png",	sound : "",	arena : new THREE.BoxGeometry(100,20,1) }
 	],
 	toggleSound : function()
 	{
