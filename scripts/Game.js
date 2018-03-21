@@ -400,13 +400,13 @@ var Game =
 	},
 	surrender : function()
 	{
-		if(this.player1.isActive())
+		/*if(this.player1.isActive())
 		{
 		}
 		else
 		{
 		}
-		Game.over = true;
+		Game.over = true;*/
 	},                
 	loadArena : function()
 	{
