@@ -182,8 +182,8 @@ function Cyborg()
 		+ "uses his lightning fast synapses and near indestructible body to fight intergalactic crime, provided "
 		+ "justice pays up front.";
 
-	this.damageImage = "characters/CyborgComicStills/Cyborg_damage.png";
-	this.defeatImage = "characters/CyborgComicStills/Cyborg_defeat.png";
+	this.damageImage = "images/StillShapes/CyborgStills/Cyborg_damage.png";
+	this.defeatImage = "images/StillShapes/CyborgStills/Cyborg_defeat.png";
 }
 Cyborg.prototype = new Character();
 
@@ -259,8 +259,8 @@ function Caveman()
 		+ "shifted, erasing all trace of his home and former life. Resigned to a nomadic existence, Krorlaag will do just "
 		+ "about anything for food or \"shinies\".";
 
-	this.damageImage = "characters/CavemanComicStills/caveman_damage.png";
-	this.defeatImage = "characters/CavemanComicStills/caveman_defeat.png";
+	this.damageImage = "images/StillShapes/CavemanStills/caveman_damage.png";
+	this.defeatImage = "images/StillShapes/CavemanStills/aveman_defeat.png";
 }
 Caveman.prototype = new Character();
 
@@ -334,8 +334,8 @@ function Pirate()
 		+ "never was much of a sailor however, and prefers dry land, taking an accursed stormcloud with him wherever "
 		+ "the wind blows. He figured out how to harness the energies of his curse and now considers it a blessing.";
 
-	this.damageImage = "characters/PirateComicStills/Pirate_Damage.png";
-	this.defeatImage = "characters/PirateComicStills/Pirate_Death.png";
+	this.damageImage = "images/StillShapes/PirateStills/Pirate_Damage.png";
+	this.defeatImage = "images/StillShapes/PirateStills/Pirate_Death.png";
 }
 Pirate.prototype = new Character();
 
