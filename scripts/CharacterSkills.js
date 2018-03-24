@@ -1213,7 +1213,7 @@ function TailWhip()
 	this.cooldown = 1;
 	this.accuracy = 0.5;
 	this.description = "A powerful bludgeoning attack with a significant chance of missing.";
-	this.imageURL = "images/StillShapes/DinoGirlStills/TailWhip.png";
+	this.imageURL = "characters/DinoGirlComicStills/TailWhip.png";
 }
 TailWhip.prototype = new Skill("Tail Whip");
 
