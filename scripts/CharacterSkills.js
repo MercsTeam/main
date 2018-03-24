@@ -1314,7 +1314,7 @@ function KesiGiri()
 		}
 
 		var damage = target[0].calculateDamage(self, Game.getTypeBonus(self.type, target[0].type));
-		target[i].health.base = Math.max(0, target[0].health.base - damage);
+		target[0].health.base = Math.max(0, target[0].health.base - damage);
 		this.logAction(self, target[0], damage);
 	};
 }

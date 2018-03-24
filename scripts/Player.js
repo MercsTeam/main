@@ -1,7 +1,6 @@
 function Player(a, cnt)
 {
 	this.score = 0;
-	this.winner = false;
 	this.active = a;
 
 	this.selectedCount = 0;
@@ -11,7 +10,6 @@ function Player(a, cnt)
 
 	this.activeCharacterCount = cnt;
 
-	this.isWinner = function() { return this.winner; };
 	this.isActive = function() { return this.active; };
 
 	this.addCharacter = function(c)
@@ -55,10 +53,9 @@ function Player(a, cnt)
 
 	this.reset = function()
 	{
-		this.winner = false;
 		this.active = false;
 		this.selectedCount = 0;
 	
-		this.characters = null;
+		this.characters = [];
 	};
 }

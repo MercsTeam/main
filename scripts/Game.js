@@ -1,3 +1,5 @@
+var Session = "";
+
 var Game =
 {
 	CHARACTERS_PER_TEAM : 3,
@@ -15,7 +17,7 @@ var Game =
 	title : document.querySelector("#titleScreen"),
 	audioLnk : document.querySelector("nav a:nth-child(2)"),
 	arena : document.querySelector("#gamePlay"),
-	availableCharacters : [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, Alien, Caveman, CowboyGuy, HiveDrone, SpaceGirl, Witch ], //, Clown, DinoGirl, SamuraiGirl, Nemesis ],
+	availableCharacters : [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, Alien, Caveman, CowboyGuy, HiveDrone, SpaceGirl, Witch, Clown, DinoGirl, SamuraiGirl, Nemesis ],
 	skillImgArr : null,
 	DeadSprite : "tombstone.png",	
 	NoEffect : "blank.png",
@@ -51,12 +53,12 @@ var Game =
 	},
     scenes : 
 	[ 
-		{ background : "mars.jpg",		floor : "mars.jpg",		sound : "",	arena : new THREE.CircleGeometry(50,100) },
-		{ background : "Spacecity.png",		floor : "spacecity.jpg",	sound : "",	arena : new THREE.BoxGeometry(100,20,1)  },
-		{ background : "Underwater.png",	floor : "underwater.jpg",	sound : "",	arena : new THREE.CircleGeometry(50,100) },
-		{ background : "Forest.png",		floor : "log.jpg",		sound : "",	arena : new THREE.BoxGeometry(100,20,1) },
-		{ background : "Castle_dk.jpg",		floor : "drawbridge.jpg",	sound : "",	arena : new THREE.BoxGeometry(100,20,1) },
-		{ background : "galaxy.png",		floor : "planetoid.png",	sound : "",	arena : new THREE.CircleGeometry(50,100) },
+		{ background : "mars.jpg",			floor : "mars.jpg",				sound : "",	arena : new THREE.CircleGeometry(50,100) },
+		{ background : "Spacecity.png",		floor : "spacecity.jpg",		sound : "",	arena : new THREE.BoxGeometry(100,20,1)  },
+		{ background : "Underwater.png",	floor : "underwater.jpg",		sound : "",	arena : new THREE.CircleGeometry(50,100) },
+		{ background : "Forest.png",		floor : "log.jpg",				sound : "",	arena : new THREE.BoxGeometry(100,20,1) },
+		{ background : "Castle_dk.jpg",		floor : "drawbridge.jpg",		sound : "",	arena : new THREE.BoxGeometry(100,20,1) },
+		{ background : "galaxy.png",		floor : "planetoid.png",		sound : "",	arena : new THREE.CircleGeometry(50,100) },
 		{ background : "SpaceShip.png",		floor : "spaceship_floor.png",	sound : "",	arena : new THREE.BoxGeometry(100,20,1) },
 		{ background : "bg_desert.png",		floor : "desertPlatform.png",	sound : "",	arena : new THREE.BoxGeometry(100,20,1) }
 	],
@@ -69,6 +71,19 @@ var Game =
 	},
 	init : function()
 	{
+		if(sessionStorage.record)
+		{
+			Session = JSON.parse(sessionStorage.record);
+		}
+		else
+		{
+			Session = 
+			{ 
+				"P1" : { "wins" : 0, "loses" : 0 },
+				"P2" : { "wins" : 0, "loses" : 0 }
+			};
+		}
+
 		Game.music = new SoundPlayer(true);
 		Game.music.start("mainTheme");
 		Game.music.setVolume(60);
@@ -335,15 +350,26 @@ var Game =
 		this.message.style.visibility = "visible";
 		this.message.innerHTML = text;
 	},
+	hideMessage : function(text)
+	{
+		this.message.style.visibility = "hidden";
+		this.message.innerHTML = "";
+	},
 	endRound : function()
 	{				
 		this.uiSound.start("endRound");
 		if(this.player1.activeCharacterCount == 0)
 		{
+			Session.P1.loses++;
+			Session.P2.wins++;
+
 			Game.endGame(this.player2);
 		}
 		else if(this.player2.activeCharacterCount == 0)
 		{
+			Session.P1.wins++;
+			Session.P2.loses++;			
+
 			Game.endGame(this.player1);
 		}
 		else 
@@ -369,6 +395,8 @@ var Game =
 	},
 	endGame : function(winner)
 	{
+		Game.music.setVolume(10);
+
 		var seq = [];
 		for(var i = 0; i < winner.characters.length; i++)
 		{
@@ -379,8 +407,8 @@ var Game =
 		}
 		this.uiSound.playSequence(seq);
 
-		Game.showMessage(string.format("<span>Player {0} Wins!</span><br /><a href=\"javascript:document.location.reload()\">Play Again?</a>", (winner == Game.player1 ? 1 : 2)));;
-		Game.BattleLog.write(string.format("PLAYER {0} WINS!", (winner == Game.player1 ? 1 : 2)));
+		Game.showMessage(string.format("<span>Player {0} Wins!</span><br /><a href=\"javascript:Game.playAgain()\">Play Again?</a>", (winner == Game.player1 ? 1 : 2)));;
+		Game.BattleLog.write(string.format("PLAYER {0} WINS!", (winner == Game.player1 ? 1 : 2)));		
 		Game.over = true;
 	},
 	getTypeBonus : function(t1, t2)
@@ -402,15 +430,21 @@ var Game =
 	},
 	surrender : function()
 	{
-		/*if(this.player1.isActive())
-		{
-		}
-		else
-		{
-		}*/
 		Game.over = true;
+		Game.playAgain();
+	},   
+	playAgain : function()
+	{
+		/*Game.player1.reset();
+		Game.player2.reset();
+
+		Game.hideMessage();
+		
+		CharacterSelection.reload();*/
+
+		sessionStorage.setItem("record", JSON.stringify(Session));
 		document.location.reload();
-	},                
+	},
 	loadArena : function()
 	{
 		if (Detector.webgl)

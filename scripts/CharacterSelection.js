@@ -56,13 +56,22 @@ var CharacterSelection =
 		this.btnSelect[1].innerHTML = "Player 2: Wait";
 		this.btnSelect[1].disabled = true;
 
+		var btn;
+
 		for(var i = 0; i < Game.availableCharacters.length; i++)
 		{
 			c = new Game.availableCharacters[i]();
 			
-			f = document.createElement("FIGURE");
-			f.dataset.cindex = i;
-			f.onclick = function()
+			/*f = document.createElement("FIGURE");
+			f.dataset.cindex = i;*/
+
+			btn = document.createElement("BUTTON");
+			btn.className = "char-button";
+			btn.type = "button";
+			btn.dataset.cindex = i;
+
+			//f.onclick = function()
+			btn.onclick = function()
 			{
 				var cName = (Game.player1.isActive() ? "selected_player1" : "selected_player2");
 				var p = (Game.player1.isActive() ? Game.player1 : Game.player2);
@@ -100,8 +109,11 @@ var CharacterSelection =
 			img.border = 0;
 			img.alt = "";
 			
-			fcap = document.createElement("FIGCAPTION");
-			fcap.innerHTML = c.name;
+			//fcap = document.createElement("FIGCAPTION");
+			//fcap.innerHTML = c.name;
+
+			sp = document.createElement("SPAN");
+			sp.innerHTML = c.name;
 
 			rdiv = document.createElement("DIV");
 			rdiv.className = "rating-container";
@@ -113,11 +125,25 @@ var CharacterSelection =
 				"SPEED"		: getRating(c.speed, this.MAX_SPEED)
 			}));
 			
-			f.appendChild(img);
+			/*f.appendChild(img);
 			f.appendChild(fcap);
 			f.appendChild(rdiv);
 			
-			this.container.appendChild(f);
+			this.container.appendChild(f);*/
+
+			btn.appendChild(img);
+			btn.appendChild(sp);
+
+			if(c.isBonus && !(Session.P1.wins >= 3 || Session.P2.wins >= 3))
+			{
+				btn.disabled = true;
+			}
+			else
+			{
+				btn.appendChild(rdiv);
+			}
+			
+			this.container.appendChild(btn);
 		}
 	}
 };
