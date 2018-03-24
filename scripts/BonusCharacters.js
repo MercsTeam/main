@@ -59,7 +59,7 @@ function SamuraiGirl()
     };
 	
 	this.health = { base : 150, modifier : 1.0 };
-	this.baseHealth = 150;
+	this.defaultHealth = 150;
 	
 	this.defence = { base : 30, modifier : 1.0, duration : -1 };
 	this.attack = { base : 60, modifier : 1.0, duration : -1 };
@@ -92,7 +92,7 @@ function DinoGirl()
     };
 	
 	this.health = { base : 250, modifier : 1.0 };
-	this.baseHealth = 250;
+	this.defaultHealth = 250;
 	
 	this.defence = { base : 50, modifier : 1.0, duration : -1 };
 	this.attack = { base : 50, modifier : 1.0, duration : -1 };
@@ -128,7 +128,7 @@ function Clown()
     };
 	
 	this.health = { base : 200, modifier : 1.0 };
-	this.baseHealth = 200;
+	this.defaultHealth = 200;
 	
 	this.defence = { base : 10, modifier : 1.0, duration : -1 };
 	this.attack = { base : 10, modifier : 1.0, duration : -1 };
