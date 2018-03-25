@@ -1083,6 +1083,7 @@ function Hex()
 	this.type = SkillType.Offensive;
 	this.description = "An aggressive spell with nothing but pure malice behind it.";
 	this.imageURL = "images/StillShapes/WitchStills/Hex.png";
+	this.soundID = "hex";
 }
 Hex.prototype = new Skill("Hex");
 
@@ -1093,6 +1094,7 @@ function Curse()
 	this.randomDebuffProb = Probability.Medium;
 	this.description = "A bitter curse that wishes harm and affliction against the enemy.";
 	this.imageURL = "images/StillShapes/CurseStills/Curse.png";
+	this.soundID = "curse";
 }
 Curse.prototype = new Skill("Curse");
 
@@ -1106,6 +1108,7 @@ function Blessing()
 	this.multiTarget = true;
 	this.description = "A benevolent spell that helps protect self and allies by increasing defence temporarily.";
 	this.imageURL = "images/StillShapes/WitchStills/Blessings.png";
+	this.soundID = "blessing";
 
 	this.doAction = function(self, target)
 	{
@@ -1128,6 +1131,7 @@ function PoisonApple()
 	this.poisonProb = 0.5;
 	this.description = "Offers the enemy a cursed apple, which can either harm or heal them.";
 	this.imageURL = "images/StillShapes/WitchStills/Poisoned_Apple.png";
+	this.soundID = "poisonApple";
 
 	this.doAction = function(self, target)
 	{

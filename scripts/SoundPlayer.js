@@ -61,6 +61,11 @@ var SoundLibrary =
 	releaseKraken : "Monster_Gigante-Doberman-1334685792.mp3",
 	pirateTag : "Pirate_Tagline.mp3",
 
+	curse : "Witch_Curse2.mp3",
+	hex : "Witch_Hex.mp3",
+	blessing : "Witch_Blessing.mp3",
+	poisonApple : "Witch_PoisonApple.mp3",
+
 	dynaPunch : "Upper Cut-SoundBible.com-1272257235.mp3",
 	laserVision : "Laser Blasts-SoundBible.com-108608437.mp3",
 	dynaSpeed : "Swoosh 1-SoundBible.com-231145780.mp3",
