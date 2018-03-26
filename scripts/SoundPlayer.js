@@ -24,6 +24,7 @@ var SoundLibrary =
 	lightningStorm : "Mage_LightningStorm.mp3",
 	poolMana : "Mage_PoolMana.mp3",
 	divineShield : "Mage_DivineShield.mp3",
+	mageTag : "Mage_Tagline.mp3",
 
 	lightningStrike : "Djinn_LightningStrike.mp3",
 	confidence : "Djinn_Confidence.mp3",

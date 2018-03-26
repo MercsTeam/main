@@ -101,6 +101,8 @@ function Mage()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "I cast SERPENTUS LIMBUS!";
+	this.tagline = "mageTag";
+
     this.backstory = "This reclusive wizard had her first taste of fame and wealth after a quest to slay a dragon. "
 		+ "Now Zocoma has a taste for the spotlight and uses her powers for profiteering as a Cerotis mercenary.";
 
