@@ -1059,6 +1059,7 @@ function Jetpack()
 	this.selfSpeedMod = 1.5;
 	this.effectDuration = 3;
 	this.description = "Uses the power of advanced thrust mechanics to increase the user's speed temporarily.";
+	this.imageURL = "characters/SpaceGirlComicStills/Jetpack.png";
 	this.soundID = "jetpack";
 
 	this.doAction = function(self, target)
