@@ -66,6 +66,11 @@ var SoundLibrary =
 	blessing : "Witch_Blessing.mp3",
 	poisonApple : "Witch_PoisonApple.mp3",
 
+	blastOff : "SpaceGirl_BlastOff.mp3",
+	deathRay : "SpaceGirl_DeathRay.mp3",
+	jetpack : "SpaceGirl_JetPack.mp3",
+	gravityGun : "SpaceGirl_GravityGun.mp3",
+
 	dynaPunch : "Upper Cut-SoundBible.com-1272257235.mp3",
 	laserVision : "Laser Blasts-SoundBible.com-108608437.mp3",
 	dynaSpeed : "Swoosh 1-SoundBible.com-231145780.mp3",

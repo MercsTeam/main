@@ -954,6 +954,7 @@ function DeathRay()
 	this.cooldown = 1;
 	this.burnProb = Probability.Low;
 	this.description = "A powerful energy beam using advanced technology that may burn the enemy.";
+	this.soundID = "deathRay";
 }
 DeathRay.prototype = new Skill("Death Ray");
 
@@ -967,6 +968,7 @@ function BlastOff()
 	this.duration = 3;
 	this.description = "Leaves the battlefield temporarily in a rocket ship, damaging the enemy on both liftoff and re-entry.";
 	this.imageURL = "characters/SpaceGirlComicStills/Blast_Off.png";
+	this.soundID = "blastOff";
 
 	var counter = 0;
 	var defaultState = null;
@@ -1049,6 +1051,7 @@ function Jetpack()
 	this.selfSpeedMod = 1.5;
 	this.effectDuration = 3;
 	this.description = "Uses the power of advanced thrust mechanics to increase the user's speed temporarily.";
+	this.soundID = "jetpack";
 
 	this.doAction = function(self, target)
 	{
@@ -1066,6 +1069,7 @@ function GravityGun()
 	this.oppSpeedMod = 0.5;
 	this.effectDuration = 3;
 	this.description = "Bombards the enemy with gravitons to make them heavier, lowering their speed significantly.";
+	this.soundID = "gravityGun";
 
 	this.doAction = function(self, target)
 	{
