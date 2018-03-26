@@ -961,6 +961,7 @@ function DeathRay()
 	this.cooldown = 1;
 	this.burnProb = Probability.Low;
 	this.description = "A powerful energy beam using advanced technology that may burn the enemy.";
+	this.imageURL = "characters/SpaceGirlComicStills/Death_Ray.png";
 	this.soundID = "deathRay";
 }
 DeathRay.prototype = new Skill("Death Ray");
