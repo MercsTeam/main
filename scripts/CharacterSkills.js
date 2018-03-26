@@ -1243,6 +1243,7 @@ function Snarl()
 	this.selfDefenceMod = 1.5;
 	this.effectDuration = 3;
 	this.description = "Tap into primal aggression to temporarily raise attack and defence.";
+	this.imageURL = "characters/DinoGirlComicStills/Snarl.png";
 	
 	this.doAction = function(self, target)
 	{
@@ -1262,6 +1263,7 @@ function HeatVision()
 	this.type = SkillType.Defensive;
 	this.effectDuration = 2;
 	this.description = "Adjusts the user’s eyes to focus on their prey better, reducing likelihood of missing.";
+	this.imageURL = "characters/DinoGirlComicStills/HeatVision.png";
 	
 	this.doAction = function(self, target)
 	{
@@ -1279,6 +1281,7 @@ function RippingClaws()
 	this.accuracy = 0.5;
 	this.cooldown = 1;
 	this.description = "A devastating attack with powerful claws which may cause bleeding, with a significant chance of missing.";
+	this.imageURL = "characters/DinoGirlComicStills/RippingClaws.png";
 }
 RippingClaws.prototype = new Skill("Ripping Claws");
 

@@ -106,6 +106,7 @@ function DinoGirl()
 		+ "typically go, Zhylla broke out of Jurassic’s laboratory and is struggling with the concept of humanity as "
 		+ "she fights her way to freedom.";
 
+	this.damageImage = "characters/DinoGirlComicStills/Damaged.png";
 	this.defeatImage = "characters/DinoGirlComicStills/DinoGirlDeath.png";
 }
 DinoGirl.prototype = new Character();
