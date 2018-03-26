@@ -70,6 +70,7 @@ var SoundLibrary =
 	deathRay : "SpaceGirl_DeathRay.mp3",
 	jetpack : "SpaceGirl_JetPack.mp3",
 	gravityGun : "SpaceGirl_GravityGun.mp3",
+	spacegirlTag : "SpaceGirl_Tagline.mp3",
 
 	explodingPie : "Clown_ExplodingPie.mp3",
 	seltzerBottle : "Clown_SeltzerBottle.mp3",

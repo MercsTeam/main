@@ -402,6 +402,8 @@ function SpaceGirl()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "Count down to your defeat!";
+	this.tagline = "spacegirlTag";
+
     this.backstory = "An astronaut from the well funded and highly advanced Canadian Space Program, Zemanová "
 		+ "is a veteran of many scientific missions. She went AWOL after an attack on Moon Base Alpha, which was "
 		+ "orchestrated by a small group of mercenaries.";
