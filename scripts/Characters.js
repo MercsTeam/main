@@ -409,6 +409,8 @@ function SpaceGirl()
     this.backstory = "An astronaut from the well funded and highly advanced Canadian Space Program, Zemanová "
 		+ "is a veteran of many scientific missions. She went AWOL after an attack on Moon Base Alpha, which was "
 		+ "orchestrated by a small group of mercenaries.";
+
+	this.defeatImage = "characters/SpaceGirlComicStills/Defeat.png";
 }
 SpaceGirl.prototype = new Character();
 
