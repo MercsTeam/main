@@ -77,6 +77,12 @@ var SoundLibrary =
 	balloonAnimal : "Clown_BalloonAnimal.mp3",
 	clownTag : "Clown_Tagline.mp3",
 
+	bite : "HiveDrone_Bite.mp3",
+	sting : "HiveDrone_Sting.mp3",
+	exoskeleton : "HiveDrone_Exoskeleton.mp3",
+	hiveMindHijack : "HiveDrone_HivemindHijack.mp3",
+	droneTag : "Hivedrone_Tagline.mp3",
+
 	dynaPunch : "Upper Cut-SoundBible.com-1272257235.mp3",
 	laserVision : "Laser Blasts-SoundBible.com-108608437.mp3",
 	dynaSpeed : "Swoosh 1-SoundBible.com-231145780.mp3",

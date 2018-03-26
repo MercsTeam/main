@@ -873,6 +873,7 @@ function Sting()
 	this.poisonProb = Probability.Medium;
 	this.description = "A stabbing attack with an anatomical weapon, with a chance of poisoning the enemy.";
 	this.imageURL = "characters/HiveDroneComicStills/hivedrone_sting.png";
+	this.soundID = "sting";
 }
 Sting.prototype = new Skill("Sting");
 
@@ -883,6 +884,7 @@ function Bite()
 	this.poisonProb = Probability.High;
 	this.description = "A bite with venomous fangs that is very likely to poison the enemy.";
 	this.imageURL = "characters/HiveDroneComicStills/hivedrone_bite.png";
+	this.soundID = "bite";
 }
 Bite.prototype = new Skill("Bite");
 
@@ -893,6 +895,7 @@ function Exoskeleton()
 	this.effectDuration = 2;
 	this.description = "Hardens the outer shell to increase defence temporarily.";
 	this.imageURL = "characters/HiveDroneComicStills/hivedrone_exoskeleton.png";
+	this.soundID = "exoskeleton";
 }
 Exoskeleton.prototype = new Skill("Exoskeleton");
 
@@ -901,6 +904,7 @@ function HiveMindHijack()
 	this.type = SkillType.Offensive;
 	this.cooldown = 1;
 	this.description = "Manipulates a poisoned enemy into attacking either their ally or themselves if they are alone.";
+	this.soundID = "hiveMindHijack";
 
 	this.doAction = function(self, target)
 	{

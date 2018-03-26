@@ -366,9 +366,11 @@ function HiveDrone()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "Klikliklikliklikliklik! ELIMINATE! ELIMINATE!";
+	this.tagline = "droneTag";
+
     this.backstory = "One of thousands of mindless drones. This creature enacts the will of the hive with no thought of self-preservation.";
 
-	this.defeatImage = "images/StillShapes/HiveDroneStills/hivedrone_death.png";
+	this.defeatImage = "characters/HiveDroneComicStills/hivedrone_death.png";
 }
 HiveDrone.prototype = new Character();
 
