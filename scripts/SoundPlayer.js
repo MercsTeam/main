@@ -71,6 +71,12 @@ var SoundLibrary =
 	jetpack : "SpaceGirl_JetPack.mp3",
 	gravityGun : "SpaceGirl_GravityGun.mp3",
 
+	explodingPie : "Clown_ExplodingPie.mp3",
+	seltzerBottle : "Clown_SeltzerBottle.mp3",
+	honk : "Clown_Honk.mp3",
+	balloonAnimal : "Clown_BalloonAnimal.mp3",
+	clownTag : "Clown_Tagline.mp3",
+
 	dynaPunch : "Upper Cut-SoundBible.com-1272257235.mp3",
 	laserVision : "Laser Blasts-SoundBible.com-108608437.mp3",
 	dynaSpeed : "Swoosh 1-SoundBible.com-231145780.mp3",

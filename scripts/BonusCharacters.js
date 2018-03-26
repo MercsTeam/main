@@ -137,6 +137,8 @@ function Clown()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "Want to play?";
+	this.tagline = "clownTag";
+
     this.backstory = "Once a carnival clown, Xoggoth has now cast off the laws of his new world, just as he cast off "
 		+ "the chains of mortality. Now he serves the Great Destroyer and plans to bring what remains of the tattered "
 		+ "universe to a dark and dreadful end, in the hope that one day he will be justly rewarded.";
