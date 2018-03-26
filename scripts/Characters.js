@@ -439,6 +439,8 @@ function Witch()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "Double, double, toil and trouble; Fire burn and cauldron bubble.";
+	this.tagline = "witchTag";
+
     this.backstory = "A red-robed witch from an ancient world who practices dangerous magic, brought to Cerotis by "
 		+ "the esoteric destruction wrought by the black hole. Quick to adapt to the new surroundings, Azalea set "
 		+ "out to establish her power.";

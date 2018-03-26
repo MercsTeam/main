@@ -904,6 +904,7 @@ function HiveMindHijack()
 	this.type = SkillType.Offensive;
 	this.cooldown = 1;
 	this.description = "Manipulates a poisoned enemy into attacking either their ally or themselves if they are alone.";
+	this.imageURL = "characters/HiveDroneComicStills/hivedrone_hijack.png";
 	this.soundID = "hiveMindHijack";
 
 	this.doAction = function(self, target)

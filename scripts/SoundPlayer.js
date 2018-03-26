@@ -66,6 +66,7 @@ var SoundLibrary =
 	hex : "Witch_Hex.mp3",
 	blessing : "Witch_Blessing.mp3",
 	poisonApple : "Witch_PoisonApple.mp3",
+	witchTag : "Witch_Tagline.mp3",
 
 	blastOff : "SpaceGirl_BlastOff.mp3",
 	deathRay : "SpaceGirl_DeathRay.mp3",
