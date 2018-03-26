@@ -1077,6 +1077,7 @@ function GravityGun()
 	this.oppSpeedMod = 0.5;
 	this.effectDuration = 3;
 	this.description = "Bombards the enemy with gravitons to make them heavier, lowering their speed significantly.";
+	this.imageURL = "characters/SpaceGirlComicStills/Gravity_Gun.png";
 	this.soundID = "gravityGun";
 
 	this.doAction = function(self, target)
