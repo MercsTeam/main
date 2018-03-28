@@ -118,7 +118,7 @@ var Game =
 	doIntro : function(index)
 	{
 		var s = Game.introSlides[index];
-		var o = parseFloat(s.style.opacity, 10);
+		var o = parseFloat(s.style.opacity);
 
 		var d = 100;
 
@@ -128,7 +128,7 @@ var Game =
 			if(s.style.opacity == 1)
 			{
 				s.dataset.dir = "out";	
-				d = 2000;
+				d = (parseFloat(s.dataset.syl) / 4) * 1000;
 			}
 		}
 		else
