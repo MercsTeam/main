@@ -7,7 +7,13 @@ var _credits =
 	"Additional Character Visualization" : [ "Jonathan Brenders", "Thomas Burke", "Nick Gustafson" ],
 	"Sound"			: [ "Aidan Crawley" ],
 	"Dialog"		: [ "Jonathan Brenders" ],
-	"Character Vocalization" : [ "Nick Gustafson", "Kevin Pendergast", "Donna Phelps" ],
+	"Voice Cast" : [ 
+		{ actor : "Serena Atallah", roles : "Mage,Witch" }, 
+		{ actor : "Nick Gustafson", roles : "Alien,Big Sword Guy,Caveman,Djinn,Hive Drone,Pirate,Clown,Nemesis" }, 
+		{ actor : "Kevin Pendergast", roles : "Cowboy,Cyborg" }, 
+		{ actor : "Donna Phelps", roles : "Sniper Girl" }, 
+		{ actor : "Ellen Thornton", roles : "Space Girl" }
+	],
 	"Technical"		: [ "Ryan Amalfitano", "Nick Gustafson" ]
 };
 
@@ -33,19 +39,54 @@ function showCredits()
 		movie.innerHTML = "mercs: triple threat";
 		w.appendChild(movie);
 		
-		var title, person;
+		var title, person, tbl, tr, td, r;
 		for(var d in _credits)
 		{
-		    title = document.createElement("DIV");
-		    title.className = "job";
-		    title.innerHTML = d;
+			if(d == "Voice Cast")
+			{
+				title = document.createElement("DIV");
+				title.className = "job";
+				title.innerHTML = d;
 
-		    person = document.createElement("DIV");
-		    person.className = "name";
-		    person.innerHTML = _credits[d].join("<br />");
+				person = document.createElement("DIV");
+				person.className = "name";
 
-		    w.appendChild(title);
-		    w.appendChild(person);
+				tbl = document.createElement("TABLE");
+
+				for(var i = 0; i <  _credits[d].length; i++)
+				{
+					r = _credits[d][i].roles.split(",");
+
+					tr = tbl.insertRow();
+
+					td = tr.insertCell();
+					td.innerHTML = _credits[d][i].actor;
+					td.rowSpan = r.length;
+
+					for(var j = 0; j < r.length; j++)
+					{
+						td = tr.insertCell();
+						td.innerHTML = r[j];
+
+						if(j < r.length - 1) tr = tbl.insertRow();
+					}
+				}
+				person.appendChild(tbl);
+			}
+			else
+			{
+				title = document.createElement("DIV");
+				title.className = "job";
+				title.innerHTML = d;
+
+				person = document.createElement("DIV");
+				person.className = "name";
+				person.innerHTML = _credits[d].join("<br />");
+
+				
+			}
+			w.appendChild(title);
+			w.appendChild(person);
 		}		
 	}
 }

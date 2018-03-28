@@ -1,4 +1,4 @@
-var Session = "";
+var Session = null;
 
 var Game =
 {
@@ -12,7 +12,8 @@ var Game =
 	"alert" : null,
 	"confirm" : null,
 	message : document.querySelector("#lgMsg"),
-	intro : document.querySelector("#sagaSell"),
+	intro : document.querySelector("#intro"),
+	introSlides : document.querySelectorAll(".introSlide"),
 	tmrIntro : null,
 	title : document.querySelector("#titleScreen"),
 	audioLnk : document.querySelector("nav a:nth-child(2)"),
@@ -101,7 +102,8 @@ var Game =
 
 		Game.BattleLog.flush();
 				
-		Game.tmrIntro = setTimeout("Game.skipIntro()", 25000);
+		//Game.tmrIntro = setTimeout("Game.skipIntro()", 25000);
+		Game.doIntro(0);
 
 		CharacterSelection.load();
 	},
@@ -112,6 +114,37 @@ var Game =
 		
 		Game.music.setVolume(25);
 		Game.uiSound.start("clickOn");
+	},
+	doIntro : function(index)
+	{
+		var s = Game.introSlides[index];
+		var o = parseFloat(s.style.opacity, 10);
+
+		var d = 100;
+
+		if(o < 1 && s.dataset.dir == "in")
+		{
+			s.style.opacity = o + 0.2;
+			if(s.style.opacity == 1)
+			{
+				s.dataset.dir = "out";	
+				d = 2000;
+			}
+		}
+		else
+		{
+			s.style.opacity = o - 0.2;
+			if(s.style.opacity == 0) index++;
+		}
+
+		if(index == Game.introSlides.length)
+		{
+			Game.skipIntro();
+		}
+		else
+		{
+			Game.tmrIntro = setTimeout("Game.doIntro(" + index + ")", d);
+		}
 	},
 	skipIntro : function()
 	{
@@ -307,7 +340,7 @@ var Game =
 			
 			v.className = (slide.player == this.player1 ? "p1-skillImg" : "p2-skillImg");
 			v.style.visibility = "visible";
-			v.style.backgroundImage = string.format("url('{0}?v=20180128')", slide.url);
+			v.style.backgroundImage = string.format("url('{0}?v=20180326')", slide.url);
 			
 			v.querySelector("span").innerHTML = slide.label;
 
@@ -322,7 +355,7 @@ var Game =
 				{
 					rv[i].className = string.format("reactView p{0}c{1}-reactImg", (slide.reaction[i].player == this.player1 ? 1 : 2), (i+1));
 					rv[i].style.visibility = "visible";
-					rv[i].style.backgroundImage = string.format("url('{0}?v=20180212')", slide.reaction[i].url);
+					rv[i].style.backgroundImage = string.format("url('{0}?v=20180326')", slide.reaction[i].url);
 					
 					rv[i].querySelector("span").innerHTML = slide.reaction[i].label;
 				}
@@ -360,15 +393,15 @@ var Game =
 		this.uiSound.start("endRound");
 		if(this.player1.activeCharacterCount == 0)
 		{
-			Session.P1.loses++;
-			Session.P2.wins++;
+			Session["P1"].loses++;
+			Session["P2"].wins++;
 
 			Game.endGame(this.player2);
 		}
 		else if(this.player2.activeCharacterCount == 0)
 		{
-			Session.P1.wins++;
-			Session.P2.loses++;			
+			Session["P1"].wins++;
+			Session["P2"].loses++;			
 
 			Game.endGame(this.player1);
 		}
