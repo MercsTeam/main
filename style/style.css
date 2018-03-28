@@ -7,89 +7,16 @@ body, div, button { margin:0;padding:0; }
 
 canvas { height:100%;width:100%;background:#33CC33 }
 
-@keyframes tostart 
-{
-	0% { color: #FFFFFF; }
-	50% { color: #191919; }
-	0% { color: #FFFFFF; }
-}
-
-.fade 
-{
-	position: relative;
-	width: 100%;
-	min-height: 40vh;
-	top: -25px;
-	background-image:linear-gradient(0deg, transparent, black 75%);
-	z-index: 1;
-}
-
-#sagaSell { position:absolute;top:0;left:0;background-color:rgba(0,0,0,0.9);height:1080px;overflow:hidden;font-size:12pt;z-index:100 }
-.star-wars 
-{
-	display: flex;
-	justify-content: center;
-	position: relative;
-	height: 800px;
-	color: #feda4a;
-	font-family: 'Pathway Gothic One', sans-serif;
-	font-size: 500%;
-	font-weight: 600;
-	letter-spacing: 6px;
-	line-height: 150%;
-	perspective: 400px;
-	text-align: justify;
-}
-
-.crawl 
-{
-	position: relative;
-	top: 9999px;
-	transform-origin: 50% 100%;
-	animation: crawl 30s linear;
-}
-
-.crawl > .title 
-{
-	font-size: 90%;
-	text-align: center;
-}
-
-.crawl > .title h1 
-{
-	margin: 0 0 100px;
-	text-transform: uppercase;
-}
-
-@keyframes crawl 
-{
-	0% 
-	{
-		top: 0;
-		transform: rotateX(20deg)  translateZ(0);
-	}
-	100% 
-	{
-		top: -6000px;
-		transform: rotateX(25deg) translateZ(-2500px);
-	}
-}
-
 #titleScreen { position:absolute;top:0;left:0;height:100%;width:100%;z-index:90 }
-#titleScreen span
-{
-	display:block;
-	position:absolute;bottom:10%;
-	left:0;width:100%;
-	text-align:center;
-	font-size:40pt;
+#intro { position:absolute;top:0;left:0;background-color:#000000;height:1080px;width:1920px;z-index:100 }
+.introSlide 
+{ 
+	font-size:60pt;
 	color:#ffffff;
-	font-family: 'Press Start 2P', cursive;
-	text-transform:uppercase;
-	text-decoration:blink;
-	animation-name: tostart;
-	animation-duration: 3s;
-	animation-iteration-count: infinite;
+	position:absolute;
+	top:0;left:0;
+	text-align:center;
+	margin:20% 10%;
 }
 
 #characterSelect {
@@ -114,7 +41,6 @@ canvas { height:100%;width:100%;background:#33CC33 }
 .player { display:inline-block; width:50%; height:5%; color:#222; font-size:22pt; text-transform:uppercase; text-align: center; }
 .player.active { font-weight:bold }
 
-/*figure {*/
 .char-button
 {
     display: inline-block;
@@ -130,7 +56,6 @@ canvas { height:100%;width:100%;background:#33CC33 }
 	border:none;
 }
 
-/*figure img {*/
 .char-button img
 {
     width: 95%;
@@ -143,7 +68,6 @@ canvas { height:100%;width:100%;background:#33CC33 }
 }
 .char-button:disabled img { filter: grayscale(95%); }
 
-/*figcaption {*/
 .char-button span
 {
     width: 100%;
@@ -159,12 +83,6 @@ canvas { height:100%;width:100%;background:#33CC33 }
     text-align: center;
 }
 .char-button:disabled span { color:#404040; }
-
-/*figure:hover { background-color:#66CC33; }
-figure.selected_player1, figure.selected_player1:hover { background-color:#47DDD9 }
-figure.selected_player2, figure.selected_player2:hover { background-color:#E6504D }
-figure.selected_player1 figcaption, figure.selected_player2 figcaption { color:#ffffff }
-figure.selected_player1 figcaption:before, figure.selected_player2 figcaption:before { content:'\2713 '; }*/
 
 .char-button:not([disabled]):hover { background-color:#66CC33; }
 button.selected_player1, button.selected_player1:hover { background-color:#47DDD9 }
@@ -458,11 +376,6 @@ nav a { padding:4% 2%;margin:2% 0; }
 	text-shadow: 2px 2px #000000;
 }
 #lgMsg a { display:inline;background:none;position:relative;font-family:'Press Start 2P';color:#ff0000; }
-
-/*figure { position:relative; }
-figure .rating-container { display:none;position:absolute;bottom:-300px;left:0;height:300px;width:100%;z-index:1000; }
-figure:hover .rating-container { display:block; }
-figure.selected_player1:hover .rating-container, figure.selected_player2:hover .rating-container { display:none }*/
 
 .char-button { position:relative; }
 button .rating-container { display:none;position:absolute;bottom:-300px;left:0;height:300px;width:100%;z-index:1000; }

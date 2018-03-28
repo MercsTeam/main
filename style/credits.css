@@ -13,8 +13,8 @@
 {
 	position: absolute;
 	top: 100%;
-	left: 50%;
-	width: 400px;
+	left: 45%;
+	width: 600px;
 	margin-left: -200px;
 	font-weight: 300;
 	font-size:60px;
@@ -48,3 +48,8 @@
 	0% { top:  100%; }
 	100% { top: -500%; }
 }
+
+table { width:100%; }
+td { text-align:left;vertical-align:top; }
+tr :nth-child(1) { width:55% }
+tr :nth-child(2) { width:45% }
