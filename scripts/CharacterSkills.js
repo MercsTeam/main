@@ -459,7 +459,7 @@ function EnhancedCombatSystem()
 	this.selfAttackMod = 3;
 	this.description = "Sacrifice half of health to dramatically increase attack power.";
 	this.cooldown = 2;
-	this.imageURL = "images/StillShapes/CyborgStills/yborg_EnhancedCombatSystem.png";
+	this.imageURL = "images/StillShapes/CyborgStills/Cyborg_EnhancedCombatSystem.png";
 	this.soundID = "enhCombatSys";
 	
 	this.doAction = function(self, target)

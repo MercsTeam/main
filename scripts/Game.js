@@ -112,7 +112,7 @@ var Game =
 		Game.title.classList.toggle("inactive");
 		CharacterSelection.toggle();
 		
-		Game.music.setVolume(25);
+		Game.music.setVolume(20);
 		Game.uiSound.start("clickOn");
 	},
 	doIntro : function(index)
@@ -291,6 +291,7 @@ var Game =
 							all[i].name,
 							s.name,
 							(s.type == SkillType.Offensive ? "ATTACK" : "DEFEND")),
+							abilityType : (s.type == SkillType.Offensive ? "ATTACK" : "DEFEND"),
 							url : s.imageURL,
 							sound : s.soundID,
 							reaction : []
@@ -324,7 +325,7 @@ var Game =
 		
 		var rv = document.querySelectorAll(".reactView");
 		for(var i = 0; i < rv.length; i++) rv[i].style.visibility = "hidden";
-
+		
 		if(index <= this.skillImgArr.length - 1)
 		{
 			var slide = this.skillImgArr[index];
@@ -338,7 +339,9 @@ var Game =
 				this.uiSound.start("skill");
 			}
 			
-			v.className = (slide.player == this.player1 ? "p1-skillImg" : "p2-skillImg");
+			if (slide.label.contains("DEFEATED")) slide.abilityType = "DEATH";
+			
+			v.className = (slide.player == this.player1 ? "p1-skillImg "+slide.abilityType+" p1" : "p2-skillImg "+slide.abilityType+" p2");
 			v.style.visibility = "visible";
 			v.style.backgroundImage = string.format("url('{0}?v=20180326')", slide.url);
 			
@@ -353,7 +356,7 @@ var Game =
 			{				
 				for(var i = 0; i < slide.reaction.length; i++)
 				{
-					rv[i].className = string.format("reactView p{0}c{1}-reactImg", (slide.reaction[i].player == this.player1 ? 1 : 2), (i+1));
+					rv[i].className = string.format("reactView p{0}c{1}-reactImg DAMAGE p{2}" , (slide.reaction[i].player == this.player1 ? 1 : 2), (i+1), (slide.reaction[i].player == this.player1 ? 1 : 2));
 					rv[i].style.visibility = "visible";
 					rv[i].style.backgroundImage = string.format("url('{0}?v=20180326')", slide.reaction[i].url);
 					
@@ -416,6 +419,10 @@ var Game =
 				
 				BattleMenu.load();
 				BattleMenu.toggle();
+				
+				document.querySelector("#imgViewer").className = "";
+				var rViews = document.querySelectorAll(".reactView");
+				for(var i = 0; i < rViews.length; i++) rViews[i].className = "reactView";
 				
 				Game.round++;
 			}, function()

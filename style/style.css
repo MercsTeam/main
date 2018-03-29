@@ -252,11 +252,10 @@ textarea { font-size:12pt;padding:2px;height:auto;background-color:#000000;color
 a { display:block;font-size:28pt;margin:0;padding:0;background:red;text-decoration:none;padding:2%; }
 nav a { padding:4% 2%;margin:2% 0; }
 
-#imgViewer, .reactView
-{
+#imgViewer, .reactView {
 	visibility:hidden;
 	position:absolute;
-	top:10%;
+	top: 10%;
 
 	/*background-color:rgba(0,0,0,0.7);*/
 	padding:3%;	
@@ -266,7 +265,11 @@ nav a { padding:4% 2%;margin:2% 0; }
 	
 	background-size:100%;
 	background-repeat:no-repeat;
+    
+    background-color:rgba(255,255,255,0.0);
 }
+
+#imgViewer.DEATH, .reactView.DEATH { opacity: 0; }
 
 #imgViewer span, .reactView span { font-size:large;font-weight:bold;display:inline-block;width:100%; }
 
@@ -277,6 +280,94 @@ nav a { padding:4% 2%;margin:2% 0; }
 .p2-skillImg span, .p2c1-reactImg span, .p2c2-reactImg span { text-align:right;color:#E6504D;transform: scaleX(-1); }
 
 .p1c2-reactImg, .p2c2-reactImg  { top:45%; }
+
+#imgViewer.ATTACK, .reactView.ATTACK { animation: attackEffect1 2.5s infinite; }
+@keyframes attackEffect1 {
+    0%   { background-color:rgba(255,0,0,0.0); left: -50%; }
+    25%  { background-color:rgba(255,0,0,0.0); left: 2%; }
+    50%  { background-color:rgba(255,0,0,0.9); left: 2%; }
+    75%  { background-color:rgba(255,0,0,0.0); left: 2%; }
+    100% { background-color:rgba(255,0,0,0.0); left: -50%; }
+}
+
+#imgViewer.ATTACK.p2, .reactView.ATTACK.p2 { animation: attackEffect2 2.5s infinite; }
+@keyframes attackEffect2 {
+    0%   { background-color:rgba(255,0,0,0.0); right: -50%; }
+    25%  { background-color:rgba(255,0,0,0.0); right: 2%; }
+    50%  { background-color:rgba(255,0,0,0.9); right: 2%; }
+    75%  { background-color:rgba(255,0,0,0.0); right: 2%; }
+    100% { background-color:rgba(255,0,0,0.0); right: -50%; }
+}
+
+#imgViewer.DEFEND, .reactView.DEFEND { animation: defendEffect1 2.5s infinite; }
+@keyframes defendEffect1 {
+    0%   { background-color:rgba(255,255,255,0.0); left: -50%; }
+    25%  { background-color:rgba(255,255,255,0.0); left: 2%; }
+    50%  { background-color:rgba(255,255,255,0.9); left: 2%; }
+    75%  { background-color:rgba(255,255,255,0.0); left: 2%; }
+    100% { background-color:rgba(255,255,255,0.0); left: -50%; }
+}
+
+#imgViewer.DEFEND.p2, .reactView.DEFEND.p2 { animation: defendEffect2 2.5s infinite; }
+@keyframes defendEffect2 {
+    0%   { background-color:rgba(255,255,255,0.0); right: -50%; }
+    25%  { background-color:rgba(255,255,255,0.0); right: 2%; }
+    50%  { background-color:rgba(255,255,255,0.9); right: 2%; }
+    75%  { background-color:rgba(255,255,255,0.0); right: 2%; }
+    100% { background-color:rgba(255,255,255,0.0); right: -50%; }
+}
+
+#imgViewer.DAMAGE, .reactView.DAMAGE{ animation: damageEffect1 2.5s infinite; }
+@keyframes damageEffect1 {
+    0%    { transform: rotateZ(0deg); left: -50%; }
+    25%   { transform: rotateZ(0deg); left: 2%; }
+    27.5% { transform: rotateZ(2deg); }
+    30%   { transform: rotateZ(-2deg); }
+    32.5% { transform: rotateZ(2deg); }
+    35%   { transform: rotateZ(-2deg); }
+    37.5% { transform: rotateZ(2deg); }
+    40%   { transform: rotateZ(-2deg); }
+    42.5% { transform: rotateZ(2deg); }
+    45%   { transform: rotateZ(-2deg); }
+    47.5% { transform: rotateZ(2deg); }
+    50%   { transform: rotateZ(0deg); }
+    75%   { transform: rotateZ(0deg); left: 2%; }
+    100%  { transform: rotateZ(0deg); left: -50%; }
+}
+
+#imgViewer.DAMAGE.p2, .reactView.DAMAGE.p2 { animation: damageEffect2 2.5s infinite; }
+@keyframes damageEffect2 {
+    0%    { transform: scaleX(-1) rotateZ(0deg); right: -50%; }
+    25%   { transform: scaleX(-1) rotateZ(0deg); right: 2%; }
+    27.5% { transform: scaleX(-1) rotateZ(2deg); }
+    30%   { transform: scaleX(-1) rotateZ(-2deg); }
+    32.5% { transform: scaleX(-1) rotateZ(2deg); }
+    35%   { transform: scaleX(-1) rotateZ(-2deg); }
+    37.5% { transform: scaleX(-1) rotateZ(2deg); }
+    40%   { transform: scaleX(-1) rotateZ(-2deg); }
+    42.5% { transform: scaleX(-1) rotateZ(2deg); }
+    45%   { transform: scaleX(-1) rotateZ(-2deg); }
+    47.5% { transform: scaleX(-1) rotateZ(2deg); }
+    50%   { transform: scaleX(-1) rotateZ(0deg); }
+    75%   { transform: scaleX(-1) rotateZ(0deg); right: 2%; }
+    100%  { transform: scaleX(-1) rotateZ(0deg); right: -50%; }
+}
+
+#imgViewer.DEATH, .reactView.DEATH { animation: deathEffect1 2.5s infinite; }
+@keyframes deathEffect1 {
+    0%  { opacity: 1; top: 10%; left: -50%; }
+    25% { opacity: 1; top: 10%; left: 2%; }
+    50% { opacity: 1; top: 10%; }
+    75% { opacity: 0; top: 5%; }
+}
+
+#imgViewer.DEATH.p2, .reactView.DEATH.p2 { animation: deathEffect2 2.5s infinite; }
+@keyframes deathEffect2 {
+    0%  { opacity: 1; top: 10%; right: -50%; }
+    25% { opacity: 1; top: 10%; right: 2%; }
+    50% { opacity: 1; top: 10%; }
+    75% { opacity: 0; top: 5%; }
+}
 
 #msgbox-bkgrd
 {
