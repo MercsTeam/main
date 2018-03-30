@@ -56,7 +56,7 @@ function Character()
 	this.getHealthPct = function()
 	{
 		return this.health.base / this.defaultHealth;
-	}	
+	};
 
 	this.getAlly = function()
 	{
@@ -163,7 +163,8 @@ function Character()
 				{
 					this.setEffectIndicator(Game.NoEffect, i);
 				}
-			}			
+			}
+			this.updateHealthBar();
 		}
 	};
 
@@ -172,7 +173,7 @@ function Character()
 		if(!this.active || this.position == 3) return;
 
 		this.health.base *= (this.immune && this.health.modifier < 1.0 ? 1.0 : this.health.modifier);
-		this.updateHealthBar();
+		//this.updateHealthBar();
 
 		if(this.health.base == 0) 
 		{
