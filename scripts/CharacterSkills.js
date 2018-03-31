@@ -1173,7 +1173,8 @@ function SeltzerBottle()
 {
 	this.type = SkillType.Offensive;
 	this.attackValue = 10;
-	this.description = "Sprays water at the enemy. May do serious damage if it hits the opponent in the eye.";
+	this.description = "Sprays water at the enemy. May do serious damage if it hits the opponent in the eye.";	
+	this.imageURL = "characters/ClownComicStills/c_seltzer.png";
 	this.soundID = "seltzerBottle";
 
 	this.doAction = function(self, target)
@@ -1195,6 +1196,7 @@ function ExplodingPie()
 	this.multiTarget = true;
 	this.selfDamage = true;
 	this.description = "A classic piece of cartoonish slapstick that damages both the user and the enemy.";
+	this.imageURL = "characters/ClownComicStills/c_pie.png";
 	this.soundID = "explodingPie";
 	
 	this.doAction = function(self, target)
@@ -1216,6 +1218,7 @@ function BalloonAnimal()
 {
 	this.type = SkillType.Defensive;
 	this.description = "The user taps into the power of latex creatures to raise all stats by 0%.";
+	this.imageURL = "characters/ClownComicStills/c_balloon.png";
 	this.soundID = "balloonAnimal";
 }
 BalloonAnimal.prototype = new Skill("Balloon Animal");
@@ -1224,6 +1227,7 @@ function Honk()
 {
 	this.type = SkillType.Reusable;
 	this.description = "Makes a funny noise. Honk! Honk!";
+	this.imageURL = "characters/ClownComicStills/c_honk.png";
 	this.soundID = "honk";
 }
 Honk.prototype = new Skill("Honk");
