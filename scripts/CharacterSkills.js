@@ -1240,6 +1240,7 @@ function TailWhip()
 	this.accuracy = 0.5;
 	this.description = "A powerful bludgeoning attack with a significant chance of missing.";
 	this.imageURL = "characters/DinoGirlComicStills/TailWhip.png";
+	this.soundID = "tailWhip";
 }
 TailWhip.prototype = new Skill("Tail Whip");
 
@@ -1251,6 +1252,7 @@ function Snarl()
 	this.effectDuration = 3;
 	this.description = "Tap into primal aggression to temporarily raise attack and defence.";
 	this.imageURL = "characters/DinoGirlComicStills/Snarl.png";
+	this.soundID = "snarl";
 	
 	this.doAction = function(self, target)
 	{
@@ -1271,6 +1273,7 @@ function HeatVision()
 	this.effectDuration = 2;
 	this.description = "Adjusts the user’s eyes to focus on their prey better, reducing likelihood of missing.";
 	this.imageURL = "characters/DinoGirlComicStills/HeatVision.png";
+	this.soundID = "heatVision";
 	
 	this.doAction = function(self, target)
 	{
@@ -1289,6 +1292,7 @@ function RippingClaws()
 	this.cooldown = 1;
 	this.description = "A devastating attack with powerful claws which may cause bleeding, with a significant chance of missing.";
 	this.imageURL = "characters/DinoGirlComicStills/RippingClaws.png";
+	this.soundID = "rippingClaws";
 }
 RippingClaws.prototype = new Skill("Ripping Claws");
 
@@ -1300,6 +1304,7 @@ function YokoGiri()
 	this.bleedProb = Probability.High;
 	this.description = "A horizontal slash at both enemies with a significant chance of causing bleeding.";
 	this.imageURL = "characters/SamuraiGirlComicStills/SamuraiGirl_YokoGiri.png";
+	this.soundID = "yokoGiri";
 	
 	this.doAction = function(self, target)
 	{
@@ -1331,6 +1336,7 @@ function KesiGiri()
 	this.bleedProb = Probability.Medium;
 	this.description = "A diagonal strike at a lone target with a significant chance of causing bleeding.";
 	this.imageURL = "characters/SamuraiGirlComicStills/SamuraiGirl_KesiGiri.png";
+	this.soundID = "kesiGiri";
 	
 	this.doAction = function(self, target)
 	{
@@ -1358,6 +1364,7 @@ function OverheadCut()
 	this.cooldown = 2;
 	this.description = "A powerful, two-handed vertical slashing attack.";
 	this.imageURL = "characters/SamuraiGirlComicStills/SamuraiGirl_OverheadCut.png";
+	this.soundID = "overheadCut";
 }
 OverheadCut.prototype = new Skill("Overhead Cut");
 
@@ -1367,5 +1374,6 @@ function Nukitsuke()
 	this.selfDefenceMod = 1.5;
 	this.description = "Assume an intimidating position that increases attack and makes causing bleeding more likely.";
 	this.imageURL = "characters/SamuraiGirlComicStills/SamuraiGirl_Nukitsuke.png";
+	this.soundID = "nukitsuke";
 }
 Nukitsuke.prototype = new Skill("Nukitsuke");

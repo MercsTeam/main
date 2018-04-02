@@ -86,6 +86,16 @@ var SoundLibrary =
 	hiveMindHijack : "HiveDrone_HivemindHijack.mp3",
 	droneTag : "Hivedrone_Tagline.mp3",
 
+	tailWhip : "Whip Crack-SoundBible.com-330576409.mp3",
+	snarl : "Dinosaur Roar-SoundBible.com-605392672.mp3",
+	heatVision : "Halogen Light-SoundBible.com-1664817471.mp3",
+	rippingClaws : "Tearing Into Flesh-SoundBible.com-1013883910.mp3",
+
+	yokoGiri : "Swords Clashing-SoundBible.com-912903192.mp3",
+	kesiGiri : "Sword Strike And Clash-SoundBible.com-1345262316.mp3",
+	overheadCut : "Swords_Collide-Sound_Explorer-2015600826.mp3",
+	nukitsuke : "Elevator Shaft Or Tunnel-SoundBible.com-1359236004.mp3",
+
 	dynaPunch : "Upper Cut-SoundBible.com-1272257235.mp3",
 	laserVision : "Laser Blasts-SoundBible.com-108608437.mp3",
 	dynaSpeed : "Swoosh 1-SoundBible.com-231145780.mp3",
