@@ -30,7 +30,7 @@ function Nemesis()
 	
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
-	this.quote = "";
+	this.quote = "I AM YOUR NEMESIS.";
     this.backstory = "Ebboh Rutra is  ¦ ¦¦¦¦¦¦¦ ¦¦¦ ¦¦ ¦¦¦¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦ ¦¦¦¦  Cerotis. ¦ ¦¦¦ ¦¦¦¦¦¦¦¦¦ ¦ ¦¦¦¦ ¦¦¦¦¦ "
 		+ "¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦. ¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦ ¦¦¦ dead ¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦ ¦¦¦ ¦¦¦¦¦ ¦ killed. ¦¦¦¦¦¦¦¦ "
 		+ "¦¦¦ ¦¦ ¦¦ ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦ ¦¦¦¦¦¦ ¦ ¦¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦¦¦¦ ¦¦¦¦¦¦¦ ¦¦¦ ¦¦ hunting ¦¦¦¦¦¦¦ ¦ ¦¦¦¦¦¦¦¦¦ ¦¦¦¦ "
@@ -67,7 +67,7 @@ function SamuraiGirl()
 	
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
-	this.quote = "";
+	this.quote = "Bones mend.  Wounds heal.  Only dishonour is eternal.";
     this.backstory = "Akita applies her samurai arts as a personal bodyguard for hire, working alone or as part of a "
 		+ "small team. On the battlefield, she relies on an overwhelming offence to deter would be attackers, although "
 		+ "she prefers to avoid conflicts when possible.";
@@ -103,7 +103,7 @@ function DinoGirl()
 	
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
-	this.quote = "";
+	this.quote = "Who's the extinct one now?";
     this.backstory = "Zhylla is the living experiment of the mad scientist known as Doctor Jurassic, who made a "
 		+ "life-long career out of his ancient research and brutal cross-DNA mutation procedures. As these things "
 		+ "typically go, Zhylla broke out of Jurassic’s laboratory and is struggling with the concept of humanity as "
@@ -140,7 +140,7 @@ function Clown()
 	
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
-	this.quote = "Want to play?";
+	this.quote = "Who wants to play?";
 	this.tagline = "clownTag";
 
     this.backstory = "Once a carnival clown, Xoggoth has now cast off the laws of his new world, just as he cast off "
