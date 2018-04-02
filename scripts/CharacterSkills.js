@@ -1299,6 +1299,7 @@ function YokoGiri()
 	this.multiTarget = true;
 	this.bleedProb = Probability.High;
 	this.description = "A horizontal slash at both enemies with a significant chance of causing bleeding.";
+	this.imageURL = "characters/SamuraiGirlComicStills/SamuraiGirl_YokoGiri.png";
 	
 	this.doAction = function(self, target)
 	{
@@ -1329,6 +1330,7 @@ function KesiGiri()
 	this.attackValue = 60;
 	this.bleedProb = Probability.Medium;
 	this.description = "A diagonal strike at a lone target with a significant chance of causing bleeding.";
+	this.imageURL = "characters/SamuraiGirlComicStills/SamuraiGirl_KesiGiri.png";
 	
 	this.doAction = function(self, target)
 	{
@@ -1355,6 +1357,7 @@ function OverheadCut()
 	this.attackValue = 90;
 	this.cooldown = 2;
 	this.description = "A powerful, two-handed vertical slashing attack.";
+	this.imageURL = "characters/SamuraiGirlComicStills/SamuraiGirl_OverheadCut.png";
 }
 OverheadCut.prototype = new Skill("Overhead Cut");
 
@@ -1363,5 +1366,6 @@ function Nukitsuke()
 	this.type = SkillType.Defensive;
 	this.selfDefenceMod = 1.5;
 	this.description = "Assume an intimidating position that increases attack and makes causing bleeding more likely.";
+	this.imageURL = "characters/SamuraiGirlComicStills/SamuraiGirl_Nukitsuke.png";
 }
 Nukitsuke.prototype = new Skill("Nukitsuke");

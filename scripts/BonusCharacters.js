@@ -71,6 +71,9 @@ function SamuraiGirl()
     this.backstory = "Akita applies her samurai arts as a personal bodyguard for hire, working alone or as part of a "
 		+ "small team. On the battlefield, she relies on an overwhelming offence to deter would be attackers, although "
 		+ "she prefers to avoid conflicts when possible.";
+
+	this.damageImage = "characters/SamuraiGirlComicStills/SamuraiGirl_Damage.png";
+	this.defeatImage = "characters/SamuraiGirlComicStills/SamuraiGirl_Defeat.png";
 }
 SamuraiGirl.prototype = new Character();
 
