@@ -961,7 +961,7 @@ function DeathRay()
 	this.cooldown = 1;
 	this.burnProb = Probability.Low;
 	this.description = "A powerful energy beam using advanced technology that may burn the enemy.";
-	this.imageURL = "characters/SpaceGirlComicStills/Death_Ray.png";
+	this.imageURL = "images/StillShapes/SpaceGirlStills/Death_Ray.png";
 	this.soundID = "deathRay";
 }
 DeathRay.prototype = new Skill("Death Ray");
@@ -975,7 +975,7 @@ function BlastOff()
 	this.blocksDamage = true;
 	this.duration = 3;
 	this.description = "Leaves the battlefield temporarily in a rocket ship, damaging the enemy on both liftoff and re-entry.";
-	this.imageURL = "characters/SpaceGirlComicStills/Blast_Off.png";
+	this.imageURL = "images/StillShapes/SpaceGirlStills/Blast_Off.png";
 	this.soundID = "blastOff";
 
 	var counter = 0;
@@ -984,6 +984,7 @@ function BlastOff()
 	this.doAction = function(self, target)
 	{
 		this.selected = true;
+		//alert("BlastOff: " + counter + "\nSprite: " + (defaultState ? defaultState.img : ""));
 
 		var r = Math.random();
 		var damage = 0;		
@@ -1026,6 +1027,8 @@ function BlastOff()
 
 			for(var i = 0; i < target.length; i++)
 			{
+				if(!target[i].active) continue;
+
 				damage = target[i].calculateDamage(self, Game.getTypeBonus(self.type, target[i].type));
 				target[i].health.base = Math.max(0, target[i].health.base - damage);
 				
@@ -1059,7 +1062,7 @@ function Jetpack()
 	this.selfSpeedMod = 1.5;
 	this.effectDuration = 3;
 	this.description = "Uses the power of advanced thrust mechanics to increase the user's speed temporarily.";
-	this.imageURL = "characters/SpaceGirlComicStills/Jetpack.png";
+	this.imageURL = "images/StillShapes/SpaceGirlStills/Jetpack.png";
 	this.soundID = "jetpack";
 
 	this.doAction = function(self, target)
@@ -1078,7 +1081,7 @@ function GravityGun()
 	this.oppSpeedMod = 0.5;
 	this.effectDuration = 3;
 	this.description = "Bombards the enemy with gravitons to make them heavier, lowering their speed significantly.";
-	this.imageURL = "characters/SpaceGirlComicStills/Gravity_Gun.png";
+	this.imageURL = "images/StillShapes/SpaceGirlStills/Gravity_Gun.png";
 	this.soundID = "gravityGun";
 
 	this.doAction = function(self, target)

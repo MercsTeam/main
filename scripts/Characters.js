@@ -411,8 +411,8 @@ function SpaceGirl()
 		+ "is a veteran of many scientific missions. She went AWOL after an attack on Moon Base Alpha, which was "
 		+ "orchestrated by a small group of mercenaries.";
 
-	this.damageImage = "characters/SpaceGirlComicStills/Damaged.png";
-	this.defeatImage = "characters/SpaceGirlComicStills/Defeat.png";
+	this.damageImage = "images/StillShapes/SpaceGirlStills/Damaged.png";
+	this.defeatImage = "images/StillShapes/SpaceGirlStills/Defeat.png";
 }
 SpaceGirl.prototype = new Character();
 
