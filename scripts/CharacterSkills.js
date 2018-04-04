@@ -1110,7 +1110,7 @@ function Curse()
 	this.type = SkillType.Offensive;
 	this.randomDebuffProb = Probability.Medium;
 	this.description = "A bitter curse that wishes harm and affliction against the enemy.";
-	this.imageURL = "images/StillShapes/CurseStills/Curse.png";
+	this.imageURL = "images/StillShapes/WitchStills/Curse.png";
 	this.soundID = "curse";
 }
 Curse.prototype = new Skill("Curse");
