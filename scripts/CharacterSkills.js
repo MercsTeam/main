@@ -872,7 +872,7 @@ function Sting()
 	this.cooldown = 2;
 	this.poisonProb = Probability.Medium;
 	this.description = "A stabbing attack with an anatomical weapon, with a chance of poisoning the enemy.";
-	this.imageURL = "characters/HiveDroneComicStills/hivedrone_sting.png";
+	this.imageURL = "images/StillShapes/HiveDroneStills/hivedrone_sting.png";
 	this.soundID = "sting";
 }
 Sting.prototype = new Skill("Sting");
@@ -883,7 +883,7 @@ function Bite()
 	this.type = SkillType.Offensive;
 	this.poisonProb = Probability.High;
 	this.description = "A bite with venomous fangs that is very likely to poison the enemy.";
-	this.imageURL = "characters/HiveDroneComicStills/hivedrone_bite.png";
+	this.imageURL = "images/StillShapes/HiveDroneStills/hivedrone_bite.png";
 	this.soundID = "bite";
 }
 Bite.prototype = new Skill("Bite");
@@ -894,7 +894,7 @@ function Exoskeleton()
 	this.selfDefenceMod = 1.5;
 	this.effectDuration = 2;
 	this.description = "Hardens the outer shell to increase defence temporarily.";
-	this.imageURL = "characters/HiveDroneComicStills/hivedrone_exoskeleton.png";
+	this.imageURL = "images/StillShapes/HiveDroneStills/hivedrone_exoskeleton.png";
 	this.soundID = "exoskeleton";
 }
 Exoskeleton.prototype = new Skill("Exoskeleton");
@@ -904,7 +904,7 @@ function HiveMindHijack()
 	this.type = SkillType.Offensive;
 	this.cooldown = 1;
 	this.description = "Manipulates a poisoned enemy into attacking either their ally or themselves if they are alone.";
-	this.imageURL = "characters/HiveDroneComicStills/hivedrone_hijack.png";
+	this.imageURL = "images/StillShapes/HiveDroneStills/hivedrone_hijack.png";
 	this.soundID = "hiveMindHijack";
 
 	this.doAction = function(self, target)
@@ -1177,7 +1177,7 @@ function SeltzerBottle()
 	this.type = SkillType.Offensive;
 	this.attackValue = 10;
 	this.description = "Sprays water at the enemy. May do serious damage if it hits the opponent in the eye.";	
-	this.imageURL = "characters/ClownComicStills/c_seltzer.png";
+	this.imageURL = "images/StillShapes/ClownStills/c_seltzer.png";
 	this.soundID = "seltzerBottle";
 
 	this.doAction = function(self, target)
@@ -1199,7 +1199,7 @@ function ExplodingPie()
 	this.multiTarget = true;
 	this.selfDamage = true;
 	this.description = "A classic piece of cartoonish slapstick that damages both the user and the enemy.";
-	this.imageURL = "characters/ClownComicStills/c_pie.png";
+	this.imageURL = "images/StillShapes/ClownStills/c_pie.png";
 	this.soundID = "explodingPie";
 	
 	this.doAction = function(self, target)
@@ -1221,7 +1221,7 @@ function BalloonAnimal()
 {
 	this.type = SkillType.Defensive;
 	this.description = "The user taps into the power of latex creatures to raise all stats by 0%.";
-	this.imageURL = "characters/ClownComicStills/c_balloon.png";
+	this.imageURL = "images/StillShapes/ClownStills/c_balloon.png";
 	this.soundID = "balloonAnimal";
 }
 BalloonAnimal.prototype = new Skill("Balloon Animal");
@@ -1230,7 +1230,7 @@ function Honk()
 {
 	this.type = SkillType.Reusable;
 	this.description = "Makes a funny noise. Honk! Honk!";
-	this.imageURL = "characters/ClownComicStills/c_honk.png";
+	this.imageURL = "images/StillShapes/ClownStills/c_honk.png";
 	this.soundID = "honk";
 }
 Honk.prototype = new Skill("Honk");
@@ -1242,7 +1242,7 @@ function TailWhip()
 	this.cooldown = 1;
 	this.accuracy = 0.5;
 	this.description = "A powerful bludgeoning attack with a significant chance of missing.";
-	this.imageURL = "characters/DinoGirlComicStills/TailWhip.png";
+	this.imageURL = "images/StillShapes/DinoGirlStills/TailWhip.png";
 	this.soundID = "tailWhip";
 }
 TailWhip.prototype = new Skill("Tail Whip");
@@ -1254,7 +1254,7 @@ function Snarl()
 	this.selfDefenceMod = 1.5;
 	this.effectDuration = 3;
 	this.description = "Tap into primal aggression to temporarily raise attack and defence.";
-	this.imageURL = "characters/DinoGirlComicStills/Snarl.png";
+	this.imageURL = "images/StillShapes/DinoGirlStills/Snarl.png";
 	this.soundID = "snarl";
 	
 	this.doAction = function(self, target)
@@ -1275,7 +1275,7 @@ function HeatVision()
 	this.type = SkillType.Defensive;
 	this.effectDuration = 2;
 	this.description = "Adjusts the user’s eyes to focus on their prey better, reducing likelihood of missing.";
-	this.imageURL = "characters/DinoGirlComicStills/HeatVision.png";
+	this.imageURL = "images/StillShapes/DinoGirlStills/HeatVision.png";
 	this.soundID = "heatVision";
 	
 	this.doAction = function(self, target)
@@ -1294,7 +1294,7 @@ function RippingClaws()
 	this.accuracy = 0.5;
 	this.cooldown = 1;
 	this.description = "A devastating attack with powerful claws which may cause bleeding, with a significant chance of missing.";
-	this.imageURL = "characters/DinoGirlComicStills/RippingClaws.png";
+	this.imageURL = "images/StillShapes/DinoGirlStills/RippingClaws.png";
 	this.soundID = "rippingClaws";
 }
 RippingClaws.prototype = new Skill("Ripping Claws");
@@ -1306,7 +1306,7 @@ function YokoGiri()
 	this.multiTarget = true;
 	this.bleedProb = Probability.High;
 	this.description = "A horizontal slash at both enemies with a significant chance of causing bleeding.";
-	this.imageURL = "characters/SamuraiGirlComicStills/SamuraiGirl_YokoGiri.png";
+	this.imageURL = "images/StillShapes/SamuraiGirlStills/SamuraiGirl_YokoGiri.png";
 	this.soundID = "yokoGiri";
 	
 	this.doAction = function(self, target)
@@ -1338,7 +1338,7 @@ function KesiGiri()
 	this.attackValue = 60;
 	this.bleedProb = Probability.Medium;
 	this.description = "A diagonal strike at a lone target with a significant chance of causing bleeding.";
-	this.imageURL = "characters/SamuraiGirlComicStills/SamuraiGirl_KesiGiri.png";
+	this.imageURL = "images/StillShapes/SamuraiGirlStills/SamuraiGirl_KesiGiri.png";
 	this.soundID = "kesiGiri";
 	
 	this.doAction = function(self, target)
@@ -1366,7 +1366,7 @@ function OverheadCut()
 	this.attackValue = 90;
 	this.cooldown = 2;
 	this.description = "A powerful, two-handed vertical slashing attack.";
-	this.imageURL = "characters/SamuraiGirlComicStills/SamuraiGirl_OverheadCut.png";
+	this.imageURL = "images/StillShapes/SamuraiGirlStills/SamuraiGirl_OverheadCut.png";
 	this.soundID = "overheadCut";
 }
 OverheadCut.prototype = new Skill("Overhead Cut");
@@ -1376,7 +1376,7 @@ function Nukitsuke()
 	this.type = SkillType.Defensive;
 	this.selfDefenceMod = 1.5;
 	this.description = "Assume an intimidating position that increases attack and makes causing bleeding more likely.";
-	this.imageURL = "characters/SamuraiGirlComicStills/SamuraiGirl_Nukitsuke.png";
+	this.imageURL = "images/StillShapes/SamuraiGirlStills/SamuraiGirl_Nukitsuke.png";
 	this.soundID = "nukitsuke";
 }
 Nukitsuke.prototype = new Skill("Nukitsuke");

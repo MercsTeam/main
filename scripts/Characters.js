@@ -372,8 +372,8 @@ function HiveDrone()
 
     this.backstory = "One of thousands of mindless drones. This creature enacts the will of the hive with no thought of self-preservation.";
 
-	this.damageImage = "characters/HiveDroneComicStills/hivedrone_damage.png";
-	this.defeatImage = "characters/HiveDroneComicStills/hivedrone_death.png";
+	this.damageImage = "images/StillShapes/HiveDroneStills/hivedrone_damage.png";
+	this.defeatImage = "images/StillShapes/HiveDroneStills/hivedrone_death.png";
 }
 HiveDrone.prototype = new Character();
 

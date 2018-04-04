@@ -72,8 +72,8 @@ function SamuraiGirl()
 		+ "small team. On the battlefield, she relies on an overwhelming offence to deter would be attackers, although "
 		+ "she prefers to avoid conflicts when possible.";
 
-	this.damageImage = "characters/SamuraiGirlComicStills/SamuraiGirl_Damage.png";
-	this.defeatImage = "characters/SamuraiGirlComicStills/SamuraiGirl_Defeat.png";
+	this.damageImage = "images/StillShapes/SamuraiGirlStills/SamuraiGirl_Damage.png";
+	this.defeatImage = "images/StillShapes/SamuraiGirlStills/SamuraiGirl_Defeat.png";
 }
 SamuraiGirl.prototype = new Character();
 
@@ -109,8 +109,8 @@ function DinoGirl()
 		+ "typically go, Zhylla broke out of Jurassic’s laboratory and is struggling with the concept of humanity as "
 		+ "she fights her way to freedom.";
 
-	this.damageImage = "characters/DinoGirlComicStills/Damaged.png";
-	this.defeatImage = "characters/DinoGirlComicStills/DinoGirlDeath.png";
+	this.damageImage = "images/StillShapes/DinoGirlStills/Damaged.png";
+	this.defeatImage = "images/StillShapes/DinoGirlStills/DinoGirlDeath.png";
 }
 DinoGirl.prototype = new Character();
 
@@ -147,7 +147,7 @@ function Clown()
 		+ "the chains of mortality. Now he serves the Great Destroyer and plans to bring what remains of the tattered "
 		+ "universe to a dark and dreadful end, in the hope that one day he will be justly rewarded.";
 
-	this.damageImage = "characters/ClownComicStills/c_damage.png";
-	this.defeatImage = "characters/ClownComicStills/c_defeat.png";
+	this.damageImage = "images/StillShapes/ClownStills/c_damage.png";
+	this.defeatImage = "images/StillShapes/ClownStills/c_defeat.png";
 }
 Clown.prototype = new Character();
