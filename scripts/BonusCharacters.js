@@ -70,7 +70,7 @@ function SamuraiGirl()
 	this.accuracy = { modifier : 1.0, duration : -1 };
 
 	this.quote = "Bones mend.  Wounds heal.  Only dishonour is eternal.";
-	this.tagline = "samuraigirlTag";
+	this.tagline = "samuraiGirlTag";
 
     this.backstory = "Akita applies her samurai arts as a personal bodyguard for hire, working alone or as part of a "
 		+ "small team. On the battlefield, she relies on an overwhelming offence to deter would be attackers, although "
