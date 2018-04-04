@@ -12,6 +12,7 @@ var SoundLibrary =
 	defensiveStance : "BSG_DefensiveStance.mp3",
 	focus : "BSG_Focus.mp3",
 	bsgTag : "BSG_Tagline.mp3",
+	nemesisTag : "Nemesis_Tagline.mp3",
 	
 	headShot : "Snipergirl_Headshot.mp3",
 	ricochetShotHit : "SniperGirl_RicochetShot_directhit.mp3",
@@ -87,14 +88,16 @@ var SoundLibrary =
 	droneTag : "Hivedrone_Tagline.mp3",
 
 	tailWhip : "Whip Crack-SoundBible.com-330576409.mp3",
-	snarl : "Dinosaur Roar-SoundBible.com-605392672.mp3",
-	heatVision : "Halogen Light-SoundBible.com-1664817471.mp3",
+	snarl : "DinoGirl_Snarl.mp3",
+	heatVision : "DinoGirl_HeatVision.mp3",
 	rippingClaws : "Tearing Into Flesh-SoundBible.com-1013883910.mp3",
+	dinogirlTag : "DinoGirl_Tagline.mp3",
 
 	yokoGiri : "Swords Clashing-SoundBible.com-912903192.mp3",
 	kesiGiri : "Sword Strike And Clash-SoundBible.com-1345262316.mp3",
 	overheadCut : "Swords_Collide-Sound_Explorer-2015600826.mp3",
 	nukitsuke : "Elevator Shaft Or Tunnel-SoundBible.com-1359236004.mp3",
+	samuraiGirlTag : "SamuraiGirl_Tagline.mp3",
 
 	dynaPunch : "Upper Cut-SoundBible.com-1272257235.mp3",
 	laserVision : "Laser Blasts-SoundBible.com-108608437.mp3",

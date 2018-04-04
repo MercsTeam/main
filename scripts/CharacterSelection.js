@@ -134,7 +134,7 @@ var CharacterSelection =
 			btn.appendChild(img);
 			btn.appendChild(sp);
 
-			if(c.isBonus && !(Session.P1.wins >= 3 || Session.P2.wins >= 3))
+			if(c.isBonus && !(Session["P1"].wins >= 3 || Session["P2"].wins >= 3))
 			{
 				btn.disabled = true;
 			}
@@ -184,11 +184,13 @@ function HTMLRatingChart(powerRatings)
 
 		td = tr.insertCell(-1);
 		td.className = "power_rating";
+		td.style.width = "50%";
 		td.innerHTML = "&nbsp;" + value;
 		
 		for(var i = 1; i <= SCALE_MAX; i++)
 		{
 			td = tr.insertCell(-1);
+			td.style.width = "5%";
 			td.className = (i <= powerRatings[value] ? "power_rating" : "not_set");
 		}
 	}

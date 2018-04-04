@@ -7,9 +7,11 @@ var _credits =
 	"Additional Character Visualization" : [ "Jonathan Brenders", "Thomas Burke", "Nick Gustafson" ],
 	"Sound"			: [ "Aidan Crawley" ],
 	"Dialog"		: [ "Jonathan Brenders" ],
-	"Voice Cast" : [ 
-		{ actor : "Serena Atallah", roles : "Mage,Witch" }, 
-		{ actor : "Nick Gustafson", roles : "Alien,Big Sword Guy,Caveman,Djinn,Hive Drone,Pirate,Clown,Nemesis" }, 
+	"Voice Cast" : 
+	[ 
+		{ actor : "Serena Atallah", roles : "Mage,Witch" },
+		{ actor : "Cindy Cheng", roles : "Dinogirl,Samurai Girl" },
+		{ actor : "Nick Gustafson", roles : "Alien,Big Sword Guy,Caveman,Clown,Djinn,Hive Drone,Nemesis,Pirate" }, 
 		{ actor : "Kevin Pendergast", roles : "Cowboy,Cyborg" }, 
 		{ actor : "Donna Phelps", roles : "Sniper Girl" }, 
 		{ actor : "Ellen Thornton", roles : "Space Girl" }
