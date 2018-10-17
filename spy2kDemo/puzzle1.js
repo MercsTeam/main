@@ -9,30 +9,25 @@ function startPuzzle1()
 	window.moves = 0;
 	
 	// Reorder squares to pre-dermined positions (must be the same for each image to make it fair for all players)
-	var arr = [14,2,10,6,12,13,9,7,15,8,5,11,4,1,3,16];
-	//var strClass = "";
+	var arr = [14, 2, 10, 6, 12, 13, 9, 7, 15, 8, 5, 11, 4, 1, 3, 16];
+	//var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 11, 13, 14, 12, 16];
 	var p;
 
 	for(i=0; i<arr.length; i++)
 	{		
-		//$("#image").append('<div id="pos' + (i +1) + '" class="sq' + arr[i] + strClass +'"></div>');
-
 		p = document.createElement("DIV");
 		p.id = "pos" + (i + 1);
 		p.className = "sq" + arr[i] + (i == arr.length - 1 ? " pointer" : "");
 		document.querySelector("#image").appendChild(p);
 	}
-	//$("#counter span").html("0");
-	//$("#clock span").html("00:00");
-
 	document.querySelector("#counter span").innerHTML = "0";
 	document.querySelector("#clock span").innerHTML = "00:00";
 	
 	var index;
 	window.index = 0;
-	var obj
+	var obj;
 	window.obj = new Timer();
-	window.obj.Interval = 1000
+	window.obj.Interval = 1000;
 	window.obj.Tick = timer_tick;
 	window.obj.Start();	
 	
@@ -51,7 +46,6 @@ function movePiece()
 			{
 				var moveTo = this.id.toString().replace("pos", "");
 				var pointer = document.querySelector(".pointer").id.toString().replace("pos", "");
-				//alert(pointer);
 
 				if(validMove(pointer, moveTo))
 				{
@@ -61,8 +55,6 @@ function movePiece()
 	
 					var aClass = a.className;
 					var bClass = b.className;
-
-					//alert("aClass: " + aClass + "\nbClass: " + bClass);
 	
 					a.className = bClass;
 					b.className = aClass;
@@ -76,32 +68,6 @@ function movePiece()
 			}
 		};
 	}
-
-	/*$("#image div").on("click",function(){
-		if(!$(this).hasClass("pointer"))
-		{
-			var $moveTo = $(this).attr("id").replace("pos","");
-			var $pointer = $(".pointer").attr("id").replace("pos","");
-			
-			if(validMove($pointer,$moveTo))
-			{
-				// Swap classes
-				var a = $(this);
-				var b = $(".pointer");
-				var aClass = a.attr("class");
-				var bClass = b.attr("class");
-				a.removeClass(aClass).addClass(bClass);
-				b.removeClass(bClass).addClass(aClass);
-				
-				window.moves++;
-				$("#counter span").html(window.moves);
-				
-				// Check if the puzzle is complete
-				if(parseInt($moveTo) == 16)
-					isGameOver();
-			}
-		}
-	});*/	
 }
 
 // Validate user's move
@@ -160,34 +126,27 @@ function validMove(id, move)
 			arr = [12,15];
 			break;
 	}
-	//alert(id + "," + arr.join(","));
-
-	//if($.inArray(parseInt(move),arr) > -1)
 	if(arr.indexOf(parseInt(move)) != -1)	return true;
 }
 
 // Work out if game is over
 function isGameOver()
 {
-	for(i=1; i<=16; i++)
+	for(i = 1; i <= 16; i++)
 	{
-		if(!$("#image #pos" + i).hasClass("sq" + i))
+		if(!document.querySelector("#image #pos" + i).classList.contains("sq" + i))
 		{
 			break;
 		} 
-		else 
+		else if(i == 16)
 		{
-			if(i == 16)
-			{
-				//$("#pos16").removeClass("pointer");
-				document.querySelector("#pos16").classList.remove("pointer");
-				
-				//$("#image div").off("click");
-				var p = document.querySelectorAll("#image div");
-				for(var i = 0; i < p.length; p++) p[i].onclick = null;
+			document.querySelector("#pos16").classList.remove("pointer");
+			
+			var p = document.querySelectorAll("#image div");
+			for(var j = 0; j < p.length; j++) p[j].onclick = null;
 
-				window.obj.Stop();
-			}				
+			window.obj.Stop();
+			alert("You finished the game!");
 		}
 	}
 }
@@ -199,7 +158,7 @@ var Timer = function()
     this.Interval = 1000;
     
     // Property: Whether the timer is enable or not
-    this.Enable = new Boolean(false);
+    this.Enable = false;
     
     // Event: Timer tick
     this.Tick;
@@ -213,7 +172,7 @@ var Timer = function()
     // Function: Start the timer
     this.Start = function()
     {
-        this.Enable = new Boolean(true);
+        this.Enable = true;
 
         thisObject = this;
         if (thisObject.Enable)
@@ -239,7 +198,6 @@ var Timer = function()
 function timer_tick()
 {
 	window.index = window.index + 1;
-	//$("#clock span").html(secondsTimeSpanToHMS(window.index));
 	document.querySelector("#clock span").innerHTML = (secondsTimeSpanToHMS(window.index));
 }
 
