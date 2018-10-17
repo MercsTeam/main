@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<html lang="en-ca">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>spY2K Interface Demo</title>
+		<link rel="stylesheet" href="puzzle1.css" />
+		<link rel="stylesheet" href="puzzle2.css" />
+		<style>
+			body { width:100%;height:100%;margin:0;padding:0;background-color:#000000;font-size:0;font-family:Verdana, Arial, Sans;text-align:center;overflow:hidden; }
+			
+			.box { width:1920px;height:1080px;margin:0;padding:0;background-color:#00898B;position:relative; }
+			
+			#p1, #p2, #missions { display:inline-block;height:100%;margin:0;padding:0;vertical-align:top; }			
+			#p1, #p2 { width:45%; }
+			#missions { width:10%; }
+
+			.agents-bar { width:calc(100% - 20px);height:calc(15% - 20px);margin:5px;padding:5px; }
+			.agents-bar div { display:inline-block;width:calc(25% - 10px);height:100%;margin:0 5px;background-color:rgba(192,192,192,1);font-size:100px;border-radius:7%; }
+			.agents-bar div[data-active=false] { filter:brightness(50%); }
+			
+			#p1 .agents-bar div.active { background-color:#ff0000; }
+			#p2 .agents-bar div.active { background-color:#ffff00; }
+
+			#p1_Super, #p2_Super { position:absolute;top:20px;height:200px;width:225px;border-radius:7%;z-index:10000;font-size:100px;background-color:rgba(192,192,192,1); }
+			#p1_Super { left:20px; }
+			#p2_Super { right:20px; }
+
+			.game-bar { width:calc(100% - 20px);height:calc(85% - 20px);margin:5px;padding:5px; background-color:rgba(192,192,192,0.7);border-radius:3%;font-size:150px; }
+			
+			#missions div { width:calc(100% - 60px);height:calc(33% - 60px - 25px);margin:20px;padding:5px;background-color:rgba(192,192,192,1);font-size:100px;position:relative;overflow:hidden;border-radius:7%;border:solid 5px transparent; }
+			#missions div[data-winner=p1] { border-color:#ff0000; }
+			#missions div[data-winner=p2] { border-color:#ffff00; }
+			#missions div span { display:block;height:150%;width:150%;position:absolute;position:top;top:-25%; }
+			#missions div span[data-complete=false] { visibility:hidden; }
+			#missions div .p1-complete { background-color:rgba(255,0,0,0.4);transform:rotate(23deg);left:-107%; }
+			#missions div .p2-complete { background-color:rgba(255,255,0,0.4);transform:rotate(23deg);left:56%; }	
+			
+			#menu { height:80px !important;font-size:45px !important; }
+		</style>
+		<script src="puzzle1.js"></script>
+		<script src="puzzle2.js"></script>
+		<script>
+			//https://w3c.github.io/gamepad/
+			var gamepads = null;
+
+			var bmap = 
+			[
+				{ p1key : 71, p2key : 98, desc : "Bottom button in right cluster" }, //g or num2
+				{ p1key : 89, p2key : 102, desc : "Right button in right cluster" }, //y or num6
+				{ p1key : 70, p2key : 97, desc : "Left button in right cluster" }, //f or num1
+				{ p1key : 84, p2key : 101, desc : "Top button in right cluster" }, //t or num5
+				{ p1key : 49, p2key : 96, desc : "Top left front button" }, //1 or num0
+				{ p1key : 50, p2key : 110, desc : "Top right front button" }, //2 or numDec
+				{ p1key : 90, p2key : 103, desc : "Bottom left front button" }, //z or num7
+				{ p1key : 88, p2key : 104, desc : "Bottom right front button" }, //x or num8
+				{ p1key : 18, p2key : 107, desc : "Left button in center cluster" }, //alt or numPlus
+				{ p1key : 32, p2key : 13, desc : "Right button in center cluster" }, //space or numRet
+				{ p1key : "", p2key : "", desc : "Left stick pressed button" },
+				{ p1key : "", p2key : "", desc : "Right stick pressed button" },
+				{ p1key : 87, p2key : 38, desc : "Top button in left cluster" }, //w or up arrow
+				{ p1key : 83, p2key : 40, desc : "Bottom button in left cluster" }, //s or down arrow
+				{ p1key : 68, p2key : 39, desc : "Right button in left cluster" }, //d or right arrow
+				{ p1key : 65, p2key : 37, desc : "Left button in left cluster" } //a or left arrow
+			];
+
+			var amap = 
+			[
+				{ p1key : "", p2key : "", desc : "Horizontal axis for left stick (negative left/positive right)" },
+				{ p1key : "", p2key : "", desc : "Vertical axis for left stick (negative up/positive down)" },
+				{ p1key : "", p2key : "", desc : "Horizontal axis for right stick (negative left/positive right)" },
+				{ p1key : "", p2key : "", desc : "Vertical axis for right stick (negative up/positive down)" }
+			];
+
+			window.onload = function()
+			{
+				gamepads = navigator.getGamepads();
+
+				if(!gamepads || gamepads.length == 0 || gamepads[0] == null)
+				{
+					//Use keyboard
+					window.onkeydown = function(e) 
+					{
+						var e = e ? e : event;
+
+						var key = undefined;
+						var possible = [ e.key, e.keyIdentifier, e.keyCode, e.which ];
+
+						while (key === undefined && possible.length > 0) key = possible.pop();
+						
+						var c = String.fromCharCode(key).toLowerCase();
+
+						for(var i = 0; i < bmap.length; i++)
+						{
+							if(bmap[i].p1key == key)
+							{
+								doButtonClick(1, i);
+							}
+							else if(bmap[i].p2key == key)
+							{
+								doButtonClick(2, i);
+							}
+						}
+						e.preventDefault();	
+					};
+				}
+				else
+				{
+					//Use controllers
+					setInterval(gameLoop, 100);
+				}
+			};
+
+			function gameLoop() 
+			{
+				for(var i = 0; i < gamepads.length; i++)
+				{
+					for(var j = 0; j < gamepads[i].buttons.length; j++)
+					{
+						if(gamepads[i].buttons[j].pressed)
+						{
+							doButtonClick(i + 1, j);
+						}
+					}
+
+					for(var j = 0; j < gamepads[i].axes.length; j++)
+					{
+						if(gamepads[i].axes[j] != 0)
+						{
+							doAxisMove(i + 1, j);
+						}
+					}
+				}
+			}
+
+			function doButtonClick(player, index)
+			{
+				switch(index)
+				{
+					case 0:
+						var a1 = document.querySelector("#p" + player + "_a1");
+						a1.classList.toggle("active");
+						break;
+					case 1:
+						var a2 = document.querySelector("#p" + player + "_a2");
+						a2.classList.toggle("active");
+						break;
+					case 2:
+						var a3 = document.querySelector("#p" + player + "_a3");
+						a3.classList.toggle("active");
+						break;
+					case 3:
+						var a4 = document.querySelector("#p" + player + "_a4");
+						if(a4.dataset.active == "true") a4.classList.toggle("active");
+						break;
+					case 4:
+					case 5:
+					case 6:
+					case 7:
+					case 8:
+					case 9:
+					case 10:
+					case 11:
+						alert("Player " + player + " clicked " + bmap[index].desc);
+						break;
+					case 12:
+						var active = document.querySelector("#p" + player + "_Game").innerHTML.substring(9);
+						var m = document.querySelector("#m" + active + " .p" + player + "-complete").parentElement;
+						if(m.dataset.winner == "") m.dataset.winner = "p" + player;
+						break;
+					case 13:
+						var m2 = document.querySelector("#m2 .p" + player + "-complete");
+						m2.dataset.complete = "true";
+						document.querySelector("#p" + player + "_Game").innerHTML = "Mission #2"
+						break;
+					case 14:
+						var m3 = document.querySelector("#m3 .p" + player + "-complete");
+						m3.dataset.complete = "true";
+						document.querySelector("#p" + player + "_Game").innerHTML = "Mission #3"
+						break;
+					case 15:
+						var m1 = document.querySelector("#m1 .p" + player + "-complete");
+						m1.dataset.complete = "true";
+						document.querySelector("#p" + player + "_Game").innerHTML = "Mission #1"
+						break;
+				}
+			}
+
+			function doAxisMove(player, index)
+			{
+				alert("Player " + player + " moved " + amap[index].desc);
+			}
+		</script>
+	</head>
+	<body>
+		<div class="box">
+			<div id="p1">
+				<div id="p1_Super" data-active="false">5</div>				
+				<div id="p1_Game" class="game-bar">
+					<a href="javascript:startPuzzle1()" id="start1">Click to start</a>
+
+					<div id="image"></div>
+					<div id="counter" hidden="true">Moves made <span></span></div>
+					<div id="clock" hidden="true">Time elapsed <span></span></div>	
+				</div>
+				<div id="p1_Agents" class="agents-bar">
+					<div id="p1_a1" data-active="true">1</div>
+					<div id="p1_a2" data-active="true">2</div>
+					<div id="p1_a3" data-active="true">3</div>
+					<div id="p1_a4" data-active="true">4</div>					
+				</div>
+			</div>
+			<div id="missions">
+				<div id="menu">Menu</div>
+				<div id="m1" data-winner="">1<span data-start="false" data-complete="true" class="p1-complete"></span><span data-start="false" data-complete="false" class="p2-complete"></span></div>
+				<div id="m2" data-winner="">2<span data-start="false" data-complete="false" class="p1-complete"></span><span data-start="false" data-complete="true" class="p2-complete"></span></div>
+				<div id="m3" data-winner="">3<span data-start="false" data-complete="false" class="p1-complete"></span><span data-start="false" data-complete="false" class="p2-complete"></span></div>
+			</div>
+			<div id="p2">
+				<div id="p2_Super" data-active="false">5</div>
+				<div id="p2_Game" class="game-bar">
+					<a href="javascript:startPuzzle2()" id="start2">Click to start</a>
+					<div id="lightcontainer">						
+   						<canvas id="lightpanel" width="500" height="500"></canvas>
+					</div>
+				</div>
+				<div id="p2_Agents" class="agents-bar">
+					<div id="p2_a1" data-active="true">1</div>
+					<div id="p2_a2" data-active="true">2</div>
+					<div id="p2_a3" data-active="true">3</div>
+					<div id="p2_a4" data-active="true">4</div>							
+				</div>				
+			</div>
+		</div>
+	</body>
+</html>
