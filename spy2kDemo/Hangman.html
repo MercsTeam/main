@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html lang="en-ca">
+<head>
+    <meta charset="utf-8" />
+    <title>Spy2K Hangman Password Hacking</title>
+    <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet">
+    <style>
+        #screen {
+            background-color: #000000;
+            color: #13a248;
+            border: solid 2px #ffffff;
+            font-family:'Orbitron', sans-serif;
+            letter-spacing:0.2em;
+            text-align:center;
+            padding:22px;
+
+            width:500px;
+            height:250px;
+        }
+
+        .pwd-letter {
+            display: inline-block;
+            background-color: #000000;
+            color: #13a248;
+            border: solid 1px #13a248;
+            height: 80px;
+            width: 30px;
+            margin:2px;
+            vertical-align:middle;
+            font-size:xx-large;
+        }
+
+        #keyboard {
+            background-color: #fcddc1;
+            border: solid 4px #b5a16f;
+            padding: 20px;
+
+            width:500px;
+            font-size:0;
+            text-align:center;
+        }
+
+        #keyboard button {
+            background-color: #fcddc1;
+            color:#000000;
+            border: solid 4px #b5a16f;
+            font-family: Arial;
+            margin:0 0 0 0 !important;padding:2px;
+            height:45px;width:45px;
+            font-size:large;
+        }
+        #keyboard button:active {
+            border: solid 4px #d71a21 !important;
+        }
+    </style>
+    <script>
+        var vocabulary =
+        [
+            "Burned",
+            "Cobbler",
+            "Codebook",
+            "Controller",
+            "Enigma",
+            "Funkspiel",
+            "Infiltration",
+            "Legend",
+            "Microdots",
+            "Nightcrawler",
+            "Plaintext",
+            "Playback",
+            "Provocateur",
+            "Safehouse",
+            "Sleeper",
+            "Steganography",
+            "Throwaway",
+            "Tradecraft",
+            "Trigger",
+            "UNSUB"
+        ];
+
+        var pwd = null;
+        var boxes = null;
+
+        var selectedWords = [];
+        var guessedLetters = [];
+
+        var numLives = 5;
+        var wordCount = -1;
+
+        var solved = false;
+        var showAll = true;
+
+        window.onload = function ()
+        {
+            pwd = document.querySelector("#password");
+
+            //get three random words from vocab
+            for (var i = 0; i < 3; i++)
+            {
+                selectedWords.push(vocabulary[Math.floor(Math.random() * vocabulary.length) + 1].toUpperCase());
+            }
+            nextWord();
+
+            //set handlers for keyboard buttons
+            var btns = document.querySelectorAll("#keyboard button");
+            for (var i = 0; i < btns.length; i++)
+            {
+                btns[i].onclick = function () {
+                    checkLetter(this.innerHTML);
+                };
+            }
+        };
+
+        //show/hide all found letters when space pressed
+        window.onkeydown = function (event)
+        {
+            if (event.keyCode == 32)
+            {
+                toggleFoundLetters();
+                event.preventDefault();
+            }
+        };
+
+        function toggleFoundLetters()
+        {
+            for (var i = 0; i < boxes.length; i++)
+            {
+                if (boxes[i].innerHTML != "")
+                {
+                    boxes[i].innerHTML = (showAll ? selectedWords[wordCount][i] : "*");
+                }
+            }
+            showAll = !showAll;
+        }
+
+        function nextWord()
+        {
+            //increment
+            wordCount++;
+
+            if (wordCount == selectedWords.length)
+            {
+                solved = true;
+                alert("Congratulations! You solved all three passwords!");
+
+                showAll = false;
+                toggleFoundLetters();
+            }
+            else
+            {
+                pwd.title = "The word is " + selectedWords[wordCount];
+
+                //remove previous boxes
+                while (pwd.firstChild) pwd.removeChild(pwd.firstChild);
+
+                var ltr;
+                for (var i = 0; i < selectedWords[wordCount].length; i++) {
+                    ltr = document.createElement("div");
+                    ltr.className = "pwd-letter";
+                    pwd.appendChild(ltr);
+                }
+                boxes = document.querySelectorAll(".pwd-letter");
+
+                //reset
+                guessedLetters = [];
+                showAll = true;
+            }
+        }
+
+        function loseLife()
+        {
+            numLives--;
+
+            if (numLives == 0)
+            {
+                //reset puzzle
+                numLives = 5;
+                wordCount = -1;
+                nextWord();
+            }
+
+            document.querySelector("h4 span").innerHTML = numLives;
+        }
+
+        function checkLetter(letter)
+        {
+            if (!solved)
+            {
+                if (guessedLetters.indexOf(letter) != -1)
+                {
+                    loseLife();
+                }
+                else
+                {
+                    guessedLetters.push(letter);
+
+                    if (selectedWords[wordCount].indexOf(letter) == -1)
+                    {
+                        loseLife();
+                    }
+                    else
+                    {
+                        //var boxes = document.querySelectorAll(".pwd-letter");
+                        var empty = 0;
+                        for (var i = 0; i < boxes.length; i++)
+                        {
+                            if (selectedWords[wordCount][i] == letter)
+                            {
+                                boxes[i].innerHTML = letter;
+                            }
+                            else if (boxes[i].innerHTML != "")
+                            {
+                                boxes[i].innerHTML = "*";
+                            }
+                            else
+                            {
+                                empty++;
+                            }
+                        }
+
+                        if (empty == 0) nextWord();
+                    }
+                }
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div id="screen">
+        <h1>Password:</h1>
+        <div id="password"></div>
+        <h4>Lives Remaining: <span>5</span></h4>
+    </div>
+    <div id="keyboard">
+        <div class="kb-row">
+            <button type="button">Q</button>
+            <button type="button">W</button>
+            <button type="button">E</button>
+            <button type="button">R</button>
+            <button type="button">T</button>
+            <button type="button">Y</button>
+            <button type="button">U</button>
+            <button type="button">I</button>
+            <button type="button">O</button>
+            <button type="button">P</button>
+        </div>
+        <div class="kb-row">
+            <button type="button">A</button>
+            <button type="button">S</button>
+            <button type="button">D</button>
+            <button type="button">F</button>
+            <button type="button">G</button>
+            <button type="button">H</button>
+            <button type="button">J</button>
+            <button type="button">K</button>
+            <button type="button">L</button>
+        </div>
+        <div class="kb-row">
+            <button type="button">Z</button>
+            <button type="button">X</button>
+            <button type="button">C</button>
+            <button type="button">V</button>
+            <button type="button">B</button>
+            <button type="button">N</button>
+            <button type="button">M</button>
+        </div>
+    </div>
+</body>
+</html>
