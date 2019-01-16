@@ -11,6 +11,8 @@
 			var cipherText = "";
 			var offset = 0;
 
+			var pos = 0;
+
 			var debugMode = false;
 
 			function rotate(img, e) 
@@ -37,6 +39,14 @@
 
 				routeCipher(false);
 			}	
+
+			function lock(button)
+			{
+				button.innerHTML = "&#128274;";
+				button.previousSibling.style.filter = "grayscale(100%)";
+
+				cipherText = document.querySelector("#message").innerText;
+			}
 			
 			window.onload = function()
 			{
@@ -52,6 +62,8 @@
 			#imgOut { z-index:99;top:0;left:0;transform:rotate(-5deg) }
 			#message { white-space:preserve;margin:20px;padding:10px;font-family:monospace;height:auto;width:400px;background-color:#E2E2E2;font-size:13pt; }
 			div { display:inline-block;vertical-align:top; }
+			.box { border:solid 2px #00E12D;padding:2px;display:inline-block;margin:5px;font-size:x-large;width:1.5em;height:1.5em;text-align:center;vertical-align:middle;background-color:#000000;color:#00E12D;border-radius:5px; }
+			button { height:1.5em;width:1.5em;padding:2px;font-size:xx-large;border:none;background:transparent; }
 		</style>
 	</head>
 	<body>
@@ -67,7 +79,12 @@
 		</div>
 
 		<div id="message">
-6ur brn4 v5 emml n0q 6rpu01y1tb n0q 6ur o75v0r55r5 6un6 4ryb 10 v6 n4r o11zv0t n6 6ur s14rs4106 1s 6uv5 uvtu6rpu 914yq 4r5vqr5 n t4rn6 0146ur40 p17064b svyyrq 9v6u znwr56vp 9vyqyvsr 524n9yv0t pv6vr5 n0q n0 no70qn0pr 1s 18r4n21y1tr6vp pv6vcr05 10 6ur p766v0t rqtr 1s 6uv5 p17064b5 nq8n0przr06 n4r 5r8r4ny nyyp1057zv0t p14214n6v105 6ur 6rpu zn07snp674r4 5yn22yr 6ur n22yvn0pr p1z2n0b st 6ur on0xv0t p10ty1zr4n6r p0o 6ur 6ryrp1z p1z2n0b q41615 p1zz70vpn6v105 n0q 6ur 5unq19b 14tn0vcn6v10 x0190 n5 6ur oynpx9ro py756r4 v0 6ur zvq56 1s 6uv5 0146ur40 p14214n6r 2n4nqv5r 6ur5r p1z2n0vr5 5vz7y6n0r175yb znxr n 6r44voyr qv5p18r4b 6urv4 5b56rz5 q1 016 5722146 qn6r5 2n56 emmm n0q v056rnq 1s t1v0t 61 6ur brn4 fddd 6urb 917yq v056rnq 41yy 18r4 onpx 61 6ur brn4 emdd vs 6uv5 v557r v5 016 4r51y8rq nyy zn00r4 1s pun15 917yq r057r 6rpu01y1tb 917yq 4rt4r55 edd brn4 nyy 6ur z10rb v0 nyy 6ur on0x5 v0 6ur 914yq 917yq 59n2 4n0q1zyb n0q u175ru1yq n22yvn0pr5 917yq 52106n0r175yb p1zo756 61 24r8r06 6uv5 n21pnyb25r rnpu p1z2n0b p1zzv65 61 nqn26v0t 6urv4 5b56rz5 s14 6ur p1zv0t zvyyr00vn u19r8r4 r8r0 n4zntrqq10 q1r5 016 1769rvtu 2412r4 o75v0r55 24np6vpr n0q 01 np67ny 914x pn0 or q10r 706vy zn4xr6 4r5rn4pu v5 p1z2yr6rq 
+k85 p51i 9j s00z 1e4 k538efcf7p 1e4 k85 2lj9e5jj5j k81k i5cp fe 9k 1i5 2ffd9e7 1k k85 6fi56ifek f6 k89j 8978k538 nfic4 i5j945j 1 7i51k efik85ie 3flekip 69cc54 n9k8 d1a5jk93 n9c4c965 jgi1nc9e7 39k95j 1e4 1e 12le41e35 f6 fm5i1gfcf75k93 39k9q5ej fe k85 3lkk9e7 5475 f6 k89j 3flekipj 14m1e35d5ek 1i5 j5m5i1c 1cc3fejld9e7 3figfi1k9fej k85 k538 d1el613kli5i jc1ggc5 k85 1ggc91e35 3fdg1ep 67 k85 21eb9e7 3fe7cfd5i1k5 3e2 k85 k5c53fd 3fdg1ep 4ifkfj 3fddle931k9fej 1e4 k85 j814fnp fi71e9q1k9fe befne 1j k85 2c13bn52 3cljk5i 9e k85 d94jk f6 k89j efik85ie 3figfi1k5 g1i149j5 k85j5 3fdg1e95j j9dlck1e5fljcp d1b5 1 k5ii92c5 49j3fm5ip k859i jpjk5dj 4f efk jlggfik 41k5j g1jk s000 1e4 9ejk514 f6 7f9e7 kf k85 p51i trrr k85p nflc4 9ejk514 ifcc fm5i 213b kf k85 p51i s0rr 96 k89j 9jjl5 9j efk i5jfcm54 1cc d1ee5i f6 381fj nflc4 5ejl5 k538efcf7p nflc4 i57i5jj srr p51i 1cc k85 dfe5p 9e 1cc k85 21ebj 9e k85 nfic4 nflc4 jn1g i1e4fdcp 1e4 8flj58fc4 1ggc91e35j nflc4 jgfek1e5fljcp 3fd2ljk kf gi5m5ek k89j 1gf31cpgj5 5138 3fdg1ep 3fdd9kj kf 141gk9e7 k859i jpjk5dj 6fi k85 3fd9e7 d9cc5ee91 8fn5m5i 5m5e 1id17544fe 4f5j efk flkn5978 gifg5i 2lj9e5jj gi13k935 1e4 ef 13kl1c nfib 31e 25 4fe5 lek9c d1ib5k i5j51i38 9j 3fdgc5k54
 		</div>
+
+		<span class="box">7</span><button class="unlocked" type="button" onclick="lock(this)">&#128275;</button>
+		<span class="box">19</span><button class="unlocked" type="button" onclick="lock(this)">&#128275;</button>
+		<span class="box">24</span><button class="unlocked" type="button" onclick="lock(this)">&#128275;</button>
+		<span class="box">13</span><button class="unlocked" type="button" onclick="lock(this)">&#128275;</button>
 	</body>
 </html>
