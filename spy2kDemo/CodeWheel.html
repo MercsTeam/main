@@ -9,10 +9,10 @@
 		const LETTERS_IN_ALPHABET = 26;
 		const MS_IN_SECOND = 1000.0;
 		const ASCII_OFFSET = 65;
+		const CTRL_KEY = 17;
 
         var increment = DEGREES_IN_CIRCLE / LETTERS_IN_ALPHABET;
 
-        var Controls = { "Player1": "A", "Player2": "L" };
         var Counter = { "Player1": 0, "Player2": 0 };
 		var Rotation = { "Player1" : 0, "Player2" : 0 };
 
@@ -51,23 +51,22 @@
                 var img = document.querySelector("#imgIn");
                 var r = parseFloat(img.style.transform.replace("rotate(", "").replace(")", ""));
 
-				var p1Progress = document.querySelector("#player1Progress");
-				var p2Progress = document.querySelector("#player2Progress");
-
                 if (r1 > r2) 
 				{
 					r += increment;
 
-					p1Progress.value += increment;
-					p2Progress.value -= increment;
+					Rotation.Player1 += increment;
+					Rotation.Player2 -= increment;
 				}
                 else if (r1 < r2)
 				{
 					r -= increment;
 
-					p2Progress.value += increment;
-					p1Progress.value -= increment;
+					Rotation.Player2 += increment;
+					Rotation.Player1 -= increment;
 				}
+				document.querySelector("#player1Progress").value = Rotation.Player1;
+				document.querySelector("#player2Progress").value = Rotation.Player2;
 
                 if (r < 0) r = DEGREES_IN_CIRCLE - Math.abs(r);
                 else if (r >= DEGREES_IN_CIRCLE) r = r - DEGREES_IN_CIRCLE;
@@ -86,11 +85,7 @@
 				routeCipher(false, 0);
 
 				if (offset == LETTERS_IN_ALPHABET / 2) {
-					//var winner = "****PLAYER " + (p1Progress.value > p2Progress.value ? "1" : "2") + " WINS!****\n";
-					alert("PLAYER " + (p1Progress.value > p2Progress.value ? "1" : "2") + " WINS!");
-
-					//var msg = document.querySelector("#message");
-					//msg.insertBefore(document.createTextNode(winner), msg.childNodes[0]);
+					alert("PLAYER " + (Rotation.Player1 > Rotation.Player2 ? "1" : "2") + " WINS!");
 
                     clearInterval(intvl);
                 }				
@@ -98,10 +93,9 @@
         }
 
         window.onkeydown = function (e) {
-            var keyPressed = String.fromCharCode(e.keyCode);
-
-            if (keyPressed == Controls.Player1) Counter.Player1++;
-            else if (keyPressed == Controls.Player2) Counter.Player2++;
+			if(e.keyCode == CTRL_KEY) {
+				Counter["Player" + e.location] += 1;
+			}
         };
     </script>
     <style>
