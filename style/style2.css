@@ -1,0 +1,482 @@
+@import url('https://fonts.googleapis.com/css?family=Bangers|Press+Start+2P');
+
+body { width:1920px; height:1080px; font-size: 0; font-family: Arial,Helvetica,Sans; background-color:#000000; }
+body, div, button { margin:0;padding:0; }
+
+#gamePlay { position:relative;width:100%;height:100%;background-image:url('../images/backgrounds/galaxy.png'); overflow: hidden; }
+
+canvas { height:100%;width:100%;background:#33CC33 }
+
+#titleScreen 
+{ 
+	position:absolute;top:0;left:0;height:100%;width:100%;
+	background-image:url('../images/Mercs_Logo_2.0.png');
+	background-repeat:no-repeat;
+	background-position:center center;
+	background-size:70%;
+	background-color:rgba(0,0,0,0.7);
+	position:relative;
+}
+#optionsMenu
+{
+	position:absolute;
+	top:0;left:0;
+	height:100%;width:100%;
+	margin:0;padding:2%;
+	background-color:rgba(0,0,0,0.7);
+	z-index:1000;
+}
+.title-options
+{
+	position:absolute;
+	left:calc(50% - 200px);bottom:50px;
+	height:300px;width:400px;
+}
+.optionsList
+{
+	position:absolute;
+	top:50px;left:50px;
+	height:300px;width:400px;
+}
+.optionsPane
+{
+	position:absolute;
+	top:50px;left:475px;
+	height:75%;width:calc(90% - 500px);
+	/*height:80%;width:calc(80% - 300px; } */
+	background-color:rgba(0,0,0,0.4);
+	margin:5px;padding:2%;
+	border-radius:5px;
+
+	font-family: "Bangers", cursive;
+	color:#ffffff;
+	font-size:60pt;
+}
+.title-options span, .optionsList span
+{
+	display:inline-block;
+	height:90px;width:100%;
+	font-family: "Bangers", cursive;
+	background-color:rgba(255,255,255,0.4); 
+	color:#ffffff;
+	border-radius:5px;
+	font-size:60pt;
+	text-align:center;
+	margin:5px 0;
+
+    /*animation:blinkingText 2s infinite;*/
+}
+.title-options .selected, .optionsList .selected { background-color:rgba(0,0,0,0.4); }
+.option p { font-size:24pt;font-family:Arial;text-align:justify; }
+.option p.first::first-letter { font-size:5em;float:left;margin-right:15px;font-family: "Bangers", cursive; }
+
+label { display:inline-block;width:300px; }
+.meter { height:70px;width:900px;background-color:rgba(255,255,255,0.4);position:relative;display:inline-block; }
+.meter span 
+{ 
+	position:absolute;
+	top:1px;left:1px;
+	height:68px;
+	background-image:url('../images/vol_meter.png');
+	background-repeat:no-repeat;
+}
+
+.option table { font-size:50pt; }
+.option table tr:nth-child(1) td { text-align:center; }
+td.input { width:40% !important;font-size:40pt;background-color:rgba(255,255,255,0.4);text-align:center; }
+
+@keyframes blinkingText{
+    0%{     color: #ffffff;    }
+    49%{    color: transparent; }
+    50%{    color: transparent; }
+    99%{    color:transparent;  }
+    100%{   color: #ffffff;    }
+}
+
+#characterSelect {
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    width: 100%;
+    height: 100%;
+    padding: 125px 5px 0 5px;
+    
+	background-color:rgba(0,0,0,0.7);
+    
+    transition: transform 0.5s;
+	z-index:900;
+}
+
+.characterView { display:inline-block;height:900px;width:calc(28% - 5px);margin:0;padding:0;position:relative;vertical-align:top;z-index:500; }
+#hsContainer { display:inline-block;height:900px;width:44%;margin:0;padding:0;vertical-align:top;position:relative; }
+#headshots { position:absolute;top:0;z-index:1000;  }
+
+.characterView .characterImg { position:absolute;bottom:0;width:683px;height:993px; }
+.characterView .characterName 
+{ 
+	position:absolute;
+	display:block;
+	bottom:60px;
+	background:rgba(255,255,255,0.25);
+	height:1.3em;width:90%;
+	
+	color:#ffffff;
+	font-size:48pt;line-height:1.2em;
+	font-family: "Bangers", cursive; 
+	text-align:center;
+	z-index:1000;
+}
+#player1Character .characterImg, #player1Character .characterName { left:-5px; }
+#player2Character .characterImg, #player2Character .characterName  { right:-5px; }
+
+.characterLock
+{
+	position:absolute;
+	top:50%;left:50%;
+	display:none;
+}
+.disabled .characterImg { filter: brightness(0%); }
+.disabled .characterLock { display:block; }
+
+.player { display:inline-block; width:50%; height:5%; color:#222; font-size:22pt; text-transform:uppercase; text-align: center; }
+.player.active { font-weight:bold }
+
+.char-button
+{
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    
+    margin: 5px;
+    padding: 0;
+
+	background-color:rgba(255,255,255,0.25);
+	border:none;
+	position:relative;
+}
+
+.p1_indicator, .p2_indicator 
+{ 
+	position:absolute;bottom:2px;
+	display:block;
+	height:30px;width:30px;
+	border-radius:50%;
+	visibility:hidden;
+	color:#FFFFFF;
+	font-size:28pt;
+	font-weight:bold;
+	line-height:30px;
+	text-align:center; 
+}
+.p1_indicator { left:2px;background-color:#416BCF;  }
+.p2_indicator { right:2px;background-color:#E6504D; }
+
+.char-button img
+{
+    width: 200px;
+    height: 200px;
+    
+    margin: 0;
+    padding: 0;    
+}
+.char-button.disabled img { filter: brightness(0%); }
+
+.selected_player1 { background-color:#416BCF }
+.selected_player2 { background-color:#E6504D }
+.selected_player1.selected_player2 { background: linear-gradient(to bottom right, #416BCF 0%, #416BCF 50%, #E6504D 50%); }
+
+.dialog { position:absolute;background-color:rgba(0,0,0,0.7);border-radius:10%;padding:3%; transition: transform 0.5s; }
+
+/* Battle Menu */
+#battleMenu 
+{
+	position: absolute;
+    top: 0;
+    left: 0;
+    
+    width: 100%;
+    height: 100%;
+
+	background-color:rgba(0,0,0,0.7);
+}
+.cmenu-side { width:50%;height:100%;margin:0;padding:0;position:relative;display:inline-block; }
+.skills { height:50%;width:50%;position:absolute;margin:0;padding:0 !important; }
+
+#character1 .menu-characters { left:0;top:0; }
+#character2 .menu-characters { left:0;top:0; }
+#character1 .skills { left:0;bottom:0; }
+#character2 .skills { right:0;bottom:0; }
+
+.cmenuImg1 { position:absolute;right:2%;top:5%;filter: brightness(40%); }
+.cmenuImg2 { position:absolute;left:2%;top:5%;filter: brightness(40%); }
+.cmenuImg3 { position:absolute;left:calc(50% - 546px / 2);top:-5%;filter: brightness(20%); }
+
+.menu-characters img.active { filter:brightness(100%); }
+
+.skill 
+{ 
+	width:calc(100% - 10px);height:calc(20% - 10px); 
+	margin:5px;
+	background:rgba(255, 255, 255, 0.4);
+	color:#ffffff;
+	font-size:50pt;line-height:1.4em;
+	font-family: "Bangers", cursive; 
+	text-align:center;
+	vertical-align:middle !important;	
+	border-radius:10px;
+}
+.skill .longName { font-size:60%;  }
+.skill.active { background-color:rgba(0,0,0,0.4); }
+.skill.disabled { color:#808080;background-color:rgba(128,128,128,0.4); }
+.skill-desc 
+{ 
+	position:absolute;top:50%;
+	height:calc(48% - 48px);width:calc(50% - 50px);
+	margin:5px;padding:20px;
+	font-family: "Bangers", cursive;
+	font-size:24pt;
+	background:rgba(0, 0, 0, 0.4);
+	color:#ffffff; 
+	vertical-align:middle;
+	border-radius:10px;
+}
+#character1 .skill-desc { right:0; }
+#character2 .skill-desc { left:0; }
+
+.marker1, .marker2 { display:block;height:300px;width:300px;border-radius:50%;position:absolute;bottom:10%;transform:rotateX(70deg);perspective: 1000px; }
+#character1 .marker1, #character1 .marker2 { background: radial-gradient(#A7BBE9, #203C7D);box-shadow: 0 0 40px 20px #203C7D; }
+#character2 .marker1, #character2 .marker2 { background: radial-gradient(#F4B7B5, #841613);box-shadow: 0 0 40px 20px #841613; }
+.marker1 { right:15%; }
+.marker2 { left:15%; }
+
+.target1, .target2 { position:absolute;top:30%;opacity:0.7; }
+.target1 { right:20%; }
+.target2 { left:20%; }
+
+#imgViewer, .reactView 
+{
+	position:absolute;
+	top: 10%;
+
+	padding:3%;	
+
+	height:calc(27% - 50px);
+	width:calc(30% - 50px);
+	
+	background-size:100%;
+	background-repeat:no-repeat;
+    
+    background-color:rgba(255,255,255,0.0);	
+}
+
+#imgViewer.DEATH, .reactView.DEATH { opacity: 0; }
+
+#imgViewer span, .reactView span { font-family: "Bangers", cursive;font-size:28pt;font-weight:bold;display:inline-block;width:100%; }
+
+.p1-skillImg, .p1c1-reactImg, .p1c2-reactImg  { left:2%; }
+.p1-skillImg span, .p1c1-reactImg span, .p1c2-reactImg span { text-align:left;color:rgba(186,201,237,0.7); }
+
+.p2-skillImg, .p2c1-reactImg, .p2c2-reactImg { right:2%;transform: scaleX(-1); }
+.p2-skillImg span, .p2c1-reactImg span, .p2c2-reactImg span { text-align:right;color:rgba(244,185,184,0.7);transform: scaleX(-1); }
+
+.p1c2-reactImg, .p2c2-reactImg  { top:45%; }
+
+#imgViewer.ATTACK, .reactView.ATTACK { animation: attackEffect1 2.5s infinite; }
+@keyframes attackEffect1 {
+    0%   { background-color:rgba(255,0,0,0.0); left: -50%; }
+    25%  { background-color:rgba(255,0,0,0.0); left: 2%; }
+    50%  { background-color:rgba(255,0,0,0.9); left: 2%; }
+    75%  { background-color:rgba(255,0,0,0.0); left: 2%; }
+    100% { background-color:rgba(255,0,0,0.0); left: -50%; }
+}
+
+#imgViewer.ATTACK.p2, .reactView.ATTACK.p2 { animation: attackEffect2 2.5s infinite; }
+@keyframes attackEffect2 {
+    0%   { background-color:rgba(255,0,0,0.0); right: -50%; }
+    25%  { background-color:rgba(255,0,0,0.0); right: 2%; }
+    50%  { background-color:rgba(255,0,0,0.9); right: 2%; }
+    75%  { background-color:rgba(255,0,0,0.0); right: 2%; }
+    100% { background-color:rgba(255,0,0,0.0); right: -50%; }
+}
+
+#imgViewer.DEFEND, .reactView.DEFEND { animation: defendEffect1 2.5s infinite; }
+@keyframes defendEffect1 {
+    0%   { background-color:rgba(255,255,255,0.0); left: -50%; }
+    25%  { background-color:rgba(255,255,255,0.0); left: 2%; }
+    50%  { background-color:rgba(255,255,255,0.9); left: 2%; }
+    75%  { background-color:rgba(255,255,255,0.0); left: 2%; }
+    100% { background-color:rgba(255,255,255,0.0); left: -50%; }
+}
+
+#imgViewer.DEFEND.p2, .reactView.DEFEND.p2 { animation: defendEffect2 2.5s infinite; }
+@keyframes defendEffect2 {
+    0%   { background-color:rgba(255,255,255,0.0); right: -50%; }
+    25%  { background-color:rgba(255,255,255,0.0); right: 2%; }
+    50%  { background-color:rgba(255,255,255,0.9); right: 2%; }
+    75%  { background-color:rgba(255,255,255,0.0); right: 2%; }
+    100% { background-color:rgba(255,255,255,0.0); right: -50%; }
+}
+
+#imgViewer.DAMAGE, .reactView.DAMAGE{ animation: damageEffect1 2.5s infinite; }
+@keyframes damageEffect1 {
+    0%    { transform: rotateZ(0deg); left: -50%; }
+    25%   { transform: rotateZ(0deg); left: 2%; }
+    27.5% { transform: rotateZ(2deg); }
+    30%   { transform: rotateZ(-2deg); }
+    32.5% { transform: rotateZ(2deg); }
+    35%   { transform: rotateZ(-2deg); }
+    37.5% { transform: rotateZ(2deg); }
+    40%   { transform: rotateZ(-2deg); }
+    42.5% { transform: rotateZ(2deg); }
+    45%   { transform: rotateZ(-2deg); }
+    47.5% { transform: rotateZ(2deg); }
+    50%   { transform: rotateZ(0deg); }
+    75%   { transform: rotateZ(0deg); left: 2%; }
+    100%  { transform: rotateZ(0deg); left: -50%; }
+}
+
+#imgViewer.DAMAGE.p2, .reactView.DAMAGE.p2 { animation: damageEffect2 2.5s infinite; }
+@keyframes damageEffect2 {
+    0%    { transform: scaleX(-1) rotateZ(0deg); right: -50%; }
+    25%   { transform: scaleX(-1) rotateZ(0deg); right: 2%; }
+    27.5% { transform: scaleX(-1) rotateZ(2deg); }
+    30%   { transform: scaleX(-1) rotateZ(-2deg); }
+    32.5% { transform: scaleX(-1) rotateZ(2deg); }
+    35%   { transform: scaleX(-1) rotateZ(-2deg); }
+    37.5% { transform: scaleX(-1) rotateZ(2deg); }
+    40%   { transform: scaleX(-1) rotateZ(-2deg); }
+    42.5% { transform: scaleX(-1) rotateZ(2deg); }
+    45%   { transform: scaleX(-1) rotateZ(-2deg); }
+    47.5% { transform: scaleX(-1) rotateZ(2deg); }
+    50%   { transform: scaleX(-1) rotateZ(0deg); }
+    75%   { transform: scaleX(-1) rotateZ(0deg); right: 2%; }
+    100%  { transform: scaleX(-1) rotateZ(0deg); right: -50%; }
+}
+
+#imgViewer.DEATH, .reactView.DEATH { animation: deathEffect1 2.5s infinite; }
+@keyframes deathEffect1 {
+    0%  { opacity: 1; top: 10%; left: -50%; }
+    25% { opacity: 1; top: 10%; left: 2%; }
+    50% { opacity: 1; top: 10%; }
+    75% { opacity: 0; top: 5%; }
+}
+
+#imgViewer.DEATH.p2, .reactView.DEATH.p2 { animation: deathEffect2 2.5s infinite; }
+@keyframes deathEffect2 {
+    0%  { opacity: 1; top: 10%; right: -50%; }
+    25% { opacity: 1; top: 10%; right: 2%; }
+    50% { opacity: 1; top: 10%; }
+    75% { opacity: 0; top: 5%; }
+}
+
+#lgMsg
+{	
+	position:absolute;
+	z-index:1000;
+	height:100%;width:1920px;
+	background-color:rgba(0,0,0,0.7);
+}
+#lgMsg div
+{
+	font-family: "Bangers", cursive; 
+	color:#ffffff;
+	font-size:200pt;
+	position:absolute;
+	top:35%;
+	width:100%;
+	text-align:center;
+	text-shadow: 2px 2px #000000;
+}
+#lgMsg span 
+{ 
+	display:block;
+	position:absolute;
+	bottom:35%;
+	height:90px;width:400px;
+	font-family: "Bangers", cursive;
+	background-color:rgba(255,255,255,0.4); 
+	color:#ffffff;
+	border-radius:5px;
+	font-size:60pt;
+	text-align:center;
+}
+#lgMsg span:nth-child(2) { left:calc(50% - 405px); }
+#lgMsg span:nth-child(3) { right:calc(50% - 405px); }
+#lgMsg span.selected { background-color:rgba(0,0,0,0.4); } 
+
+.characterStats { display:inline-block;width:625px;height:250px;background-color:rgba(255,255,255,0.4);position:relative;border-radius:10px; }
+.option span.disabled { color:#4F4F4F; }
+.cStatName { position:absolute;top:10px;left:10px;font-size:36pt; }
+.cStatImg { position:absolute;top:22px;left:10px;width:200px;height:200px;background-color:rgba(0,0,0,0.4);border-radius:15%; }
+.powerRatings { position:absolute;top:5px;right:20px;width:375px; }
+.rating { font-size:25pt;height:50px;line-height:45px;color:#ffffff;background-image: linear-gradient(#000000, #3C3C3C);background-repeat:no-repeat;background-positon:center;margin:5px 0;padding:2px 0 0 5px; }
+
+.attr-tag
+{
+	display:inline-block;
+	height:1.5em;width:auto;
+	margin:2px;padding:5px;
+	color:#ffffff;
+	background-color:#803C3C;
+	border-radius:5px;
+	font-family:Arial;
+	font-size:medium;
+}
+.attr-tag strong { text-transform:uppercase; }
+
+.readyMsg
+{
+	position:absolute;
+	top:0;	
+	width:50%;
+	height:100%;
+	z-index:1000;
+}
+.readyMsg span 
+{ 
+	display:block;
+	height:100px;width:300px;
+	position:absolute;
+	top:calc(50% - 50px);left:calc(50% - 150px);
+	font-size:100pt;
+	text-align:center;
+	font-family: "Bangers", cursive; 
+	color:#ffffff;
+}
+#p1Ready { left:0; }
+#p2Ready { right:0; }
+#p1Ready span { color:#416BCF; }
+#p2Ready span { color:#E6504D; }
+
+.timer-container { position:absolute;top:10px;left:calc(50% - 50px);z-index:1000; }
+.timer 
+{
+    background: linear-gradient(to right, #000000 50%, #808080 50%);
+    border-radius: 100%;
+    height: 100px;
+    position: relative;
+    width: 100px;
+}
+.mask 
+{
+    border-radius: 100% 0 0 100% / 50% 0 0 50%;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 50%;
+    transform-origin: 100% 50%;
+}
+.timer-container span
+{
+	display:block;
+	height:50px;width:50px;
+	font-size:40pt;
+	font-family: "Bangers", cursive; 
+	text-align:center;
+	position:absolute;
+	top:calc(50% - 25px);
+	left:calc(50% - 25px);
+	color:#FFFFFF;
+}
