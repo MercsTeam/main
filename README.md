@@ -4,7 +4,7 @@
 <h2>Development</h2>
 
 <ul>
-  <li><a href="https://mercsteam.github.io/main/game_v19.html">Current Demo Version</a></li>
+  <li><a href="https://mercsteam.github.io/main/game_v19.html">Current Version</a> [Updated 2019-03-30]</li>
   <li><a href="https://mercsteam.github.io/main/skillTest.html">Skill Test</a></li>
   <li><a href="https://mercsteam.github.io/main/stillAnimateTest.html">Still Animation Test</a></li>
   
