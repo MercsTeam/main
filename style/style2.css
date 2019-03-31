@@ -81,8 +81,8 @@ label { display:inline-block;width:300px; }
 	background-repeat:no-repeat;
 }
 
-.option table { font-size:50pt; }
-.option table tr:nth-child(1) td { text-align:center; }
+.control-table { font-size:50pt; }
+.control-table tr:nth-child(1) td { text-align:center; }
 td.input { width:40% !important;font-size:40pt;background-color:rgba(255,255,255,0.4);text-align:center; }
 
 @keyframes blinkingText{

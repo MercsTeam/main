@@ -1,25 +1,15 @@
-#credits
-{
-	visibility:hidden;
-	position:absolute;
-	top:0;left:0;
-	background-color:#000000;	
-	width:1920px; height:1080px;
-}
-
 .wrapper 
 {
 	position: absolute;
 	top: 100%;
-	left: 45%;
-	width: 600px;
-	margin-left: -200px;
+	left: 0;
+	width: 100%;
 	font-weight: 300;
 	font-size:60px;
 	font-family: "Bangers", cursive; 
 	text-align: center;
 	color: #fff;
-	animation: 90s credits linear infinite;
+	animation: 90s credits linear 1;
 }
 
 .movie 
@@ -39,6 +29,7 @@
 	margin-bottom: 50px;
 	font-size: 55px;
 }
+.name span { font-size:20pt; }
 
 @keyframes credits 
 {
@@ -46,7 +37,7 @@
 	100% { top: -500%; }
 }
 
-.credits-table { width:100%; }
+.credits-table { width:60%;margin:0 20%; }
 .credits-table td { text-align:left;vertical-align:top; }
-.credits-table tr :nth-child(1) { width:55% }
-.credits-table tr :nth-child(2) { width:45% }
+.credits-table tr :nth-child(1) { width:55%; }
+.credits-table tr :nth-child(2) { width:45%; }
