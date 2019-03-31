@@ -188,7 +188,8 @@ function Character()
 				Game.skillImgArr.push({ 
 					player : this.player, 
 					character : this,
-					label : string.format("Player {0}.{1} - {2}<br />DEFEATED", (this.player == Game.player1 ? 1 : 2), this.position, this.name), 
+					//label : string.format("Player {0}.{1} - {2}<br />DEFEATED", (this.player == Game.player1 ? 1 : 2), this.position, this.name), 
+					label : "DEFEATED!",
 					url : this.defeatImage, 
 					sound : null, 
 					reaction : [] 
@@ -354,7 +355,7 @@ function Character()
 		}
 		catch(exception)
 		{
-			//Game.BattleLog.write("Character.updateHealthBar: " + exception.message);
+			////console.log("Character.updateHealthBar: " + exception.message);
 		}
 	};
 
@@ -383,7 +384,7 @@ function Character()
 		}
 		catch(exception)
 		{
-			//Game.BattleLog.write("Character.setEffectIndicator: " + exception.message);
+			////console.log("Character.setEffectIndicator: " + exception.message);
 		}
 	};
 	
@@ -426,7 +427,7 @@ function Character()
 		}
 		catch(exception)
 		{
-			//Game.BattleLog.write("Character.updateGameObject: " + exception.message);
+			////console.log("Character.updateGameObject: " + exception.message);
 		}
 	};
 

@@ -105,8 +105,8 @@ var SoundLibrary =
 	dynaBreath : "Inflating Balloon-SoundBible.com-893635129.mp3"
 };
 
-var soundPath = "https://raw.githubusercontent.com/MercsTeam/main/master/Mercs_sound_library";
-//var soundPath = "http://nickcomics.ca/Brock/Mercs/sounds";
+//var soundPath = "https://raw.githubusercontent.com/MercsTeam/main/master/Mercs_sound_library";
+var soundPath = "/Brock/mercs/sounds";
 
 function SoundPlayer(loop)
 {	
@@ -148,6 +148,10 @@ function SoundPlayer(loop)
 	this.pause = function() { this.soundObj.pause(); };
 	this.isPaused = function() { return this.soundObj.paused; };
 
-	this.setVolume = function(value) { this.soundObj.volume = value/100.0; };
+	this.setVolume = function(value) 
+	{ 
+		this.soundObj.volume = value/100.0; 
+		Game.volMeter.style.width = value + "%";
+	};
 	this.hasEnded = function() { return this.soundObj.hasEnded; };
 }

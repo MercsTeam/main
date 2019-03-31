@@ -3,22 +3,36 @@ var Session = null;
 var Game =
 {
 	CHARACTERS_PER_TEAM : 3,
+	STAT_PER_PAGE : 6,
 	round : 1,
 	over : false,
+	isUnlocked : false,
 	player1 : null,
 	player2 : null,
 	music : null,
     uiSound : null,
 	"alert" : null,
 	"confirm" : null,
-	message : document.querySelector("#lgMsg"),
-	intro : document.querySelector("#intro"),
-	introSlides : document.querySelectorAll(".introSlide"),
-	tmrIntro : null,
 	title : document.querySelector("#titleScreen"),
-	audioLnk : document.querySelector("nav a:nth-child(2)"),
+	titleOpts : document.querySelectorAll(".title-options span"),
+	ttlOptIndex : 0,
+	optMenu : document.querySelector("#optionsMenu"),
+	optMenuOpts : document.querySelectorAll(".optionsList span"),
+	optOptIndex : 0,
+	optContent : document.querySelectorAll(".optionsPane .option"),
+	volMeter : document.querySelector(".meter span"),
+	volume : 0,
+	message : document.querySelector("#lgMsg"),
+	messageText : document.querySelector("#lgMsg div"),
+	messageOpts : document.querySelectorAll("#lgMsg .msg-option"),
+	msgOptIndex : 0,
+	characterStats : document.querySelectorAll(".characterStats"),
+	cStatIndex : 0,
+	cStatMaxPg : 2,
+	scrL : document.querySelector(".scrLeft"),
+	scrR : document.querySelector(".scrRight"),
 	arena : document.querySelector("#gamePlay"),
-	availableCharacters : [ BigSwordGuy, SniperGirl, Mage, Djinn, Cyborg, Pirate, Alien, Caveman, CowboyGuy, HiveDrone, SpaceGirl, Witch, Clown, DinoGirl, SamuraiGirl, Nemesis ],
+	availableCharacters : [ Alien, BigSwordGuy, Caveman, Clown, CowboyGuy, Cyborg, DinoGirl, Djinn, HiveDrone, Mage, Nemesis, Pirate, SamuraiGirl, SniperGirl, SpaceGirl, Witch ],
 	skillImgArr : null,
 	DeadSprite : "tombstone.png",	
 	NoEffect : "blank.png",
@@ -41,17 +55,6 @@ var Game =
 	TypeBonus : { Ineffective : 0.75, None : 1.0, Effective : 1.25 },	
 	m1 : null, 
 	m2 : null,
-	BattleLog :
-	{
-		console : document.querySelector("#battleLog div"),
-		lineFeed : function() { this.console.scrollTop = this.console.scrollHeight; },
-		write : function(text) 
-		{ 
-			this.console.appendChild(document.createTextNode(text + "\n")); 
-			this.lineFeed();	
-		},
-        flush : function() { this.console.innerHTML = ""; }
-	},
     scenes : 
 	[ 
 		{ background : "mars.jpg",			floor : "mars.jpg",				sound : "",	arena : new THREE.CircleGeometry(50,100) },
@@ -75,6 +78,7 @@ var Game =
 		if(sessionStorage.record)
 		{
 			Session = JSON.parse(sessionStorage.record);
+			Game.isUnlocked = (Session["P1"].wins >= 3 || Session["P2"].wins >= 3);
 		}
 		else
 		{
@@ -87,73 +91,32 @@ var Game =
 
 		Game.music = new SoundPlayer(true);
 		Game.music.start("mainTheme");
-		Game.music.setVolume(60);
+		Game.volume = 60;
+		Game.music.setVolume(Game.volume);
 
 		Game.uiSound = new SoundPlayer(false);
 
 		Game.player1 = new Player(true, Game.CHARACTERS_PER_TEAM);
 		Game.player1.characterCoords = { First : new THREE.Vector3(-10, 2, -5), Second : new THREE.Vector3(-10, 2, 5), Third : new THREE.Vector3(-17, 2, 0) };
 		
-		Game.player2 = new Player(false, Game.CHARACTERS_PER_TEAM);
+		Game.player2 = new Player(false, Game.CHARACTERS_PER_TEAM);		
 		Game.player2.characterCoords = { First : new THREE.Vector3(10, 2, 5), Second : new THREE.Vector3(10, 2, -5), Third : new THREE.Vector3(17, 2, 0) };		
-		
-		Game.alert = new MessageBox(document.getElementById('messageBox'), MessageType.ALERT),
-		Game.confirm = new MessageBox(document.getElementById('messageBox'), MessageType.CONFIRM),
 
-		Game.BattleLog.flush();
-				
-		//Game.tmrIntro = setTimeout("Game.skipIntro()", 25000);
-		Game.doIntro(0);
+		Game.player1.controls = { Left : "KeyA", Up : "KeyW", Right : "KeyD", Down : "KeyS", Fire1 : "ControlLeft", Jump : "KeyR" };		
+		Game.player2.controls = { Left : "ArrowLeft", Up : "ArrowUp", Right : "ArrowRight", Down : "ArrowDown", Fire1 : "ControlRight", Jump : "KeyP" };
 
 		CharacterSelection.load();
-	},
-	start : function()
-	{
-		Game.title.classList.toggle("inactive");
-		CharacterSelection.toggle();
-		
-		Game.music.setVolume(20);
-		Game.uiSound.start("clickOn");
-	},
-	doIntro : function(index)
-	{
-		var s = Game.introSlides[index];
-		var o = parseFloat(s.style.opacity);
 
-		var d = 100;
-
-		if(o < 1 && s.dataset.dir == "in")
-		{
-			s.style.opacity = o + 0.2;
-			if(s.style.opacity == 1)
-			{
-				s.dataset.dir = "out";	
-				d = (parseFloat(s.dataset.syl) / 4) * 1000;
-			}
-		}
-		else
-		{
-			s.style.opacity = o - 0.2;
-			if(s.style.opacity == 0) index++;
-		}
-
-		if(index == Game.introSlides.length)
-		{
-			Game.skipIntro();
-		}
-		else
-		{
-			Game.tmrIntro = setTimeout("Game.doIntro(" + index + ")", d);
-		}
+		Keyboard.init();
+		setInterval(Game.gameLoop, 100);
 	},
-	skipIntro : function()
+	isActive : function(obj)
 	{
-		clearTimeout(Game.tmrIntro);
-		Game.intro.classList.toggle("inactive");
+		return !obj.classList.contains("inactive");
 	},
 	startRound : function()
 	{
-		this.BattleLog.write(string.format("\nROUND {0} - FIGHT!!\n========================", this.round));
+		//console.log(string.format("\nROUND {0} - FIGHT!!\n========================", this.round));
 		
 		var retreaters = [];
 		var defenders = [];
@@ -285,13 +248,14 @@ var Game =
 						this.skillImgArr.push({
 							player : p,
 							character : all[i],
-							label : string.format("Player {0}.{1} - {2}<br />{3} ({4})",
+							/*label : string.format("Player {0}.{1} - {2}<br />{3} ({4})",
 							(p == this.player1 ? 1 : 2),
 							all[i].position,
 							all[i].name,
 							s.name,
 							(s.type == SkillType.Offensive ? "ATTACK" : "DEFEND")),
-							abilityType : (s.type == SkillType.Offensive ? "ATTACK" : "DEFEND"),
+							skillType : (s.type == SkillType.Offensive ? "ATTACK" : "DEFEND"),*/
+							label : s.name + "!",
 							url : s.imageURL,
 							sound : s.soundID,
 							reaction : []
@@ -324,7 +288,7 @@ var Game =
 		var v = document.querySelector("#imgViewer");
 		
 		var rv = document.querySelectorAll(".reactView");
-		for(var i = 0; i < rv.length; i++) rv[i].style.visibility = "hidden";
+		for(var i = 0; i < rv.length; i++) rv[i].hidden = true; //style.visibility = "hidden";
 		
 		if(index <= this.skillImgArr.length - 1)
 		{
@@ -339,10 +303,10 @@ var Game =
 				this.uiSound.start("skill");
 			}
 			
-			if (slide.label.contains("DEFEATED")) slide.abilityType = "DEATH";
+			if (slide.label.contains("DEFEATED")) slide.skillType = "DEATH";
 			
-			v.className = (slide.player == this.player1 ? "p1-skillImg "+slide.abilityType+" p1" : "p2-skillImg "+slide.abilityType+" p2");
-			v.style.visibility = "visible";
+			v.className = (slide.player == this.player1 ? "p1-skillImg "+slide.skillType+" p1" : "p2-skillImg "+slide.skillType+" p2");
+			v.hidden = false; //style.visibility = "visible";
 			v.style.backgroundImage = string.format("url('{0}?v=20180326')", slide.url);
 			
 			v.querySelector("span").innerHTML = slide.label;
@@ -357,7 +321,7 @@ var Game =
 				for(var i = 0; i < slide.reaction.length; i++)
 				{
 					rv[i].className = string.format("reactView p{0}c{1}-reactImg DAMAGE p{2}" , (slide.reaction[i].player == this.player1 ? 1 : 2), (i+1), (slide.reaction[i].player == this.player1 ? 1 : 2));
-					rv[i].style.visibility = "visible";
+					rv[i].hidden = false; //style.visibility = "visible";
 					rv[i].style.backgroundImage = string.format("url('{0}?v=20180326')", slide.reaction[i].url);
 					
 					rv[i].querySelector("span").innerHTML = slide.reaction[i].label;
@@ -369,7 +333,8 @@ var Game =
 		}
 		else
 		{
-			v.style.visibility = "hidden";			
+			//v.style.visibility = "hidden";
+			v.hidden = true;
 
 			for(var i = 0; i < Game.CHARACTERS_PER_TEAM; i++)
 			{
@@ -381,15 +346,22 @@ var Game =
 			setTimeout("Game.endRound()", 1000);
 		}
 	},	
-	showMessage : function(text)
+	showMessage : function(text, opts)
 	{
-		this.message.style.visibility = "visible";
-		this.message.innerHTML = text;
+		this.message.hidden = false;
+		this.messageText.innerHTML = text;
+
+		this.messageOpts[0].classList.add("selected");
+		this.messageOpts[0].innerHTML = opts[0];
+
+		this.messageOpts[1].classList.remove("selected");
+		this.messageOpts[1].innerHTML = opts[1];
+
+		this.msgOptIndex = 0;
 	},
 	hideMessage : function(text)
 	{
-		this.message.style.visibility = "hidden";
-		this.message.innerHTML = "";
+		this.message.hidden = true;
 	},
 	endRound : function()
 	{				
@@ -410,32 +382,13 @@ var Game =
 		}
 		else 
 		{
-			Game.confirm.show("Next round?", function() 
-			{
-				Game.confirm.hide();
-
-				Game.player1.active = true;
-				Game.player2.active = false;
-				
-				BattleMenu.load();
-				BattleMenu.toggle();
-				
-				document.querySelector("#imgViewer").className = "";
-				var rViews = document.querySelectorAll(".reactView");
-				for(var i = 0; i < rViews.length; i++) rViews[i].className = "reactView";
-				
-				Game.round++;
-			}, function()
-			{
-				Game.confirm.hide();
-				//Game.over = true;
-				Game.surrender();
-			});
+			Game.showMessage("NEXT ROUND?", ["Continue", "Surrender"]);
 		}
 	},
 	endGame : function(winner)
 	{
-		Game.music.setVolume(10);
+		Game.volume = 10;
+		Game.music.setVolume(Game.volume);
 
 		var seq = [];
 		for(var i = 0; i < winner.characters.length; i++)
@@ -447,8 +400,8 @@ var Game =
 		}
 		this.uiSound.playSequence(seq);
 
-		Game.showMessage(string.format("<span>Player {0} Wins!</span><br /><a href=\"javascript:Game.playAgain()\">Play Again?</a>", (winner == Game.player1 ? 1 : 2)));;
-		Game.BattleLog.write(string.format("PLAYER {0} WINS!", (winner == Game.player1 ? 1 : 2)));		
+		Game.showMessage(string.format("Player {0} Wins!", (winner == Game.player1 ? 1 : 2)), ["Play Again", "Credits"]);
+		//console.log(string.format("PLAYER {0} WINS!", (winner == Game.player1 ? 1 : 2)));		
 		Game.over = true;
 	},
 	getTypeBonus : function(t1, t2)
@@ -475,15 +428,332 @@ var Game =
 	},   
 	playAgain : function()
 	{
-		/*Game.player1.reset();
-		Game.player2.reset();
-
-		Game.hideMessage();
-		
-		CharacterSelection.reload();*/
-
 		sessionStorage.setItem("record", JSON.stringify(Session));
 		document.location.reload();
+	},
+	gameLoop : function()
+	{
+		if(Keyboard.isKeyDown("KeyC")) showCredits();
+		if(Keyboard.isKeyDown("Space")) Game.optMenu.hidden = false;
+		if(Keyboard.isKeyDown("KeyU")) 
+		{
+			Game.isUnlocked = true;
+			var b = document.querySelectorAll(".char-button.disabled");
+			for(var i = 0; i < b.length; i++) b[i].classList.remove("disabled");
+		}
+
+		if(!Game.optMenu.hidden)
+		{
+			var p, h, v, c, action, index;
+			for(var i = 1; i <= 2; i++)
+			{
+				p = Game["player" + i];
+				h = p.getAxis("Horizontal");
+				v = p.getAxis("Vertical");
+
+				if(v != 0)
+				{
+					Game.optOptIndex = (Game.optOptIndex + v).clamp(0, 4);
+
+					for(var j = 0; j < Game.optMenuOpts.length; j++)
+					{
+						action = (Game.optOptIndex == j ? "add" : "remove");
+						Game.optMenuOpts[j].classList[action]("selected");
+						
+						Game.optContent[j].hidden = (Game.optOptIndex != j);
+					}
+
+					if(Game.optOptIndex == 3)
+					{
+						Game.cStatIndex = 0;
+						
+						Game.scrL.classList.add("disabled");
+						Game.scrR.classList.remove("disabled");
+
+						for(var k = 0; k < Game.characterStats.length; k++)
+						{
+							showCharacterRating(Game.characterStats[k], new Game.availableCharacters[k]());
+						}
+					}
+				}
+
+				if(h != 0)
+				{
+					switch(Game.optOptIndex)
+					{
+						case 0:
+							Game.volume = (Game.volume + h * 10).clamp(0, 100);									
+							Game.music.setVolume(Game.volume);
+							break;
+						case 3:
+							Game.cStatIndex = (Game.cStatIndex + h).clamp(0, 2);
+
+							if(Game.cStatIndex == 0)
+							{
+								Game.scrL.classList.add("disabled");
+							}
+							else if(Game.cStatIndex == Game.cStatMaxPg)
+							{
+								Game.scrR.classList.add("disabled");
+							}
+							else
+							{
+								Game.scrL.classList.remove("disabled");
+								Game.scrR.classList.remove("disabled");
+							}
+
+							for(var j = 0; j < Game.characterStats.length; j++)
+							{
+								index = Game.cStatIndex * Game.STAT_PER_PAGE + j;
+								if(index > Game.availableCharacters.length - 1)
+								{
+									Game.characterStats[j].style.visibility = "hidden";
+								}
+								else
+								{
+									showCharacterRating(Game.characterStats[j], new Game.availableCharacters[index]());
+									Game.characterStats[j].style.visibility = "visible";
+								}
+							}
+							break;
+					}
+				}
+
+				if(Keyboard.isKeyDown(p.controls.Fire1))
+				{
+					switch(Game.optOptIndex)
+					{
+						case 0:
+							//to do
+							//volume
+							break;
+						case 1:
+							//to do 
+							//backstory							
+							break;
+						case 2:
+							//to do
+							//controls
+							break;
+						case 3:
+							//to do 
+							//stats							
+							break;
+						case 4:
+							//Game.title.hidden = false;
+							Game.optMenu.hidden = true;
+							break;
+					}
+				}
+			}
+		}
+		else if(!Game.title.hidden)
+		{
+			var p, v, action;
+			for(var i = 1; i <= 2; i++)
+			{
+				p = Game["player" + i];
+				v = p.getAxis("Vertical");
+
+				if(v != 0)
+				{
+					Game.ttlOptIndex = (Game.ttlOptIndex + v).clamp(0, 2);
+
+					for(var j = 0; j < Game.titleOpts.length; j++)
+					{
+						action = (Game.ttlOptIndex == j ? "add" : "remove");
+						Game.titleOpts[j].classList[action]("selected");
+					}
+				}
+
+				if(Keyboard.isKeyDown(p.controls.Fire1))
+				{
+					switch(Game.ttlOptIndex)
+					{
+						case 0:
+							Game.volume = 20;
+							Game.music.setVolume(Game.volume);
+							Game.uiSound.start("clickOn");
+
+							Game.title.hidden = true;
+							CharacterSelection.setActive(true);
+							break;
+						case 1:
+							//Game.title.hidden = true;
+							Game.optMenu.hidden = false;
+							break;
+						case 2:
+							//go to project page
+							document.location.href = "https://mercsteam.github.io/main/";
+							break;
+					}
+				}
+			}
+		}
+		else if(!Game.message.hidden)
+		{
+			var p, h, action;
+			for(var i = 1; i <= 2; i++)
+			{
+				p = Game["player" + i];
+				h = p.getAxis("Horizontal");
+
+				if(h != 0)
+				{
+					Game.msgOptIndex = (Game.msgOptIndex + h).clamp(0, 1);
+
+					for(var j = 0; j < Game.optMenuOpts.length; j++)
+					{
+						action = (Game.msgOptIndex == j ? "add" : "remove");
+						Game.messageOpts[j].classList[action]("selected");
+					}
+				}
+
+				if(Keyboard.isKeyDown(p.controls.Fire1))
+				{
+					switch(Game.msgOptIndex)
+					{
+						case 0:
+							var text0 = Game.messageOpts[0].innerHTML;
+							if(text0 == "Continue")
+							{
+								Game.hideMessage();
+								
+								BattleMenu.load();
+								BattleMenu.setActive(true);
+								
+								document.querySelector("#imgViewer").className = "";
+								var rViews = document.querySelectorAll(".reactView");
+								for(var i = 0; i < rViews.length; i++) rViews[i].className = "reactView";
+								
+								Game.round++;
+							}
+							else
+							{
+								Game.playAgain();
+							}
+							break;
+						case 1:
+							var text1 = Game.messageOpts[1].innerHTML;
+							if(text1 == "Surrender")
+							{
+								Game.surrender();
+							}
+							else
+							{		
+								Game.hideMessage();
+								showCredits();
+							}
+							break;
+					}
+				}
+			}
+		}
+		else if(CharacterSelection.isActive())
+		{
+			var p, h, v;
+			for(var i = 1; i <= 2; i++)
+			{
+				p = Game["player" + i];
+				
+				h = p.getAxis("Horizontal");
+				v = p.getAxis("Vertical");
+				
+				if(h != 0 || v != 0)
+				{
+					if(h != 0)
+					{
+						p.position.X = (p.position.X + h).clamp(0, 3);
+					}
+					else
+					{
+						p.position.Y = (p.position.Y + v).clamp(0, 3);
+					}
+					CharacterSelection.movePlayer(p);
+				}
+				if(Keyboard.isKeyDown(p.controls.Fire1))
+				{
+					CharacterSelection.select(p);
+				}
+				if(Keyboard.isKeyDown(p.controls.Jump))
+				{
+					CharacterSelection.unselect(p);
+				}
+			}
+
+			if(Keyboard.isKeyDown("ShiftLeft"))
+			{
+				CharacterSelection.addBonusCharacter(Game.player1);
+			}
+
+			if(Keyboard.isKeyDown("ShiftRight"))
+			{
+				CharacterSelection.addBonusCharacter(Game.player2);
+			}
+
+			if(Keyboard.isKeyDown("KeyM"))
+			{
+				CharacterSelection.addSecretCharacter(Game.player1, { name : "M. Palmer", image : "m_palmer" });
+			}
+
+			if(Keyboard.isKeyDown("KeyN"))
+			{
+				CharacterSelection.addSecretCharacter(Game.playerw, { name : "P. Williams", image : "p_williams" });
+			}
+
+			if(CharacterSelection.isReady())
+			{
+				Game.player1.commit();
+				Game.player2.commit();
+
+				CharacterSelection.setActive(false);
+				Game.loadArena();		
+				
+				window.setTimeout( function() {
+					BattleMenu.setActive(true);
+					BattleMenu.load();
+				}, 1500);
+			}
+		}
+		else if(BattleMenu.isActive())
+		{
+			var p, h, v;
+			for(var i = 1; i <= 2; i++)
+			{
+				p = Game["player" + i];
+				
+				h = p.getAxis("Horizontal");
+				v = p.getAxis("Vertical");
+				
+				if(h != 0)
+				{
+					p.position.X = (p.position.X + h).clamp(0, 1);
+					BattleMenu.moveTarget(p);
+				}		
+				else if(v != 0)
+				{
+					p.position.Y = (p.position.Y + v).clamp(0, 4);
+					BattleMenu.moveSkill(p);
+				}				
+
+				if(Keyboard.isKeyDown(p.controls.Fire1))
+				{
+					BattleMenu.select(p);					
+				}
+				if(Keyboard.isKeyDown(p.controls.Jump))
+				{
+					BattleMenu.unselect(p);
+				}
+			}
+
+			if(BattleMenu.isReady())
+			{
+				BattleMenu.reset();
+				BattleMenu.setActive(false);
+
+				Game.startRound();
+			}
+		}
 	},
 	loadArena : function()
 	{
@@ -565,7 +835,7 @@ var Game =
 			}
 			geometry.uvsNeedUpdate = true;
 			
-			this.m1 = new ActiveMarker(0x33CCFF);
+			this.m1 = new ActiveMarker(0x203C7D);
 			scene.add(this.m1.circle);
 			
 			this.m2 = new ActiveMarker(0xE6504D);
@@ -635,41 +905,11 @@ var Game =
 		}
 		else
 		{
-			Game.BattleLog.write(Detector.getWebGLErrorMessage());
+			//console.log(Detector.getWebGLErrorMessage());
 		}
 	}          
 };
 window.onload = Game.init;
-
-function expand(lnk)
-{
-	lnk.parentElement.classList.toggle("minimize");
-}
-
-function expand2(lnk)
-{
-	lnk.parentElement.classList.toggle("minimize2");
-}
-
-function expand3(lnk)
-{
-	lnk.parentElement.classList.toggle("minimize3");
-}
-
-document.onkeydown = function(e)
-{
-	var keycode = (window.event ? window.event.keyCode : e.which);
-	if(keycode == 67)
-	{
-		showCredits();
-	}
-	else if (keycode == 83)
-	{
-		var p = (Game.player1.isActive() ? Game.player1 : Game.player2);
-		p.addCharacter(Dynaman);
-		p.selectedCount++;
-	}
-};
 
 // Thanks Stemkoski: https://stemkoski.github.io/Three.js/Texture-Animation.html
 function TextureAnimator(texture, tilesHoriz, tilesVert, numTiles, tileDispDuration)

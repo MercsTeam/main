@@ -3,10 +3,30 @@ function Player(a, cnt)
 	this.score = 0;
 	this.active = a;
 
+	this.controls = { Left : "", Up : "", Right : "", Down : "", Fire1 : "", Jump : "" };
+	this.position = { X : 0, Y : 0 };
+
+	this.getAxis = function(axis)
+	{
+		if(axis == "Horizontal")
+		{
+			return (Keyboard.isKeyDown(this.controls.Left) ? -1 : (Keyboard.isKeyDown(this.controls.Right) ? 1 : 0));
+		}
+		else
+		{
+			return (Keyboard.isKeyDown(this.controls.Up) ? -1 : (Keyboard.isKeyDown(this.controls.Down) ? 1 : 0));
+		}
+	};
+
 	this.selectedCount = 0;
 	
 	this.characters = null;	
 	this.characterCoords = null;
+	this.selectionReady = false;
+
+	this.characterPos = 1;
+	this.activeSkill = null;
+	this.battleReady = false;
 
 	this.activeCharacterCount = cnt;
 
@@ -32,6 +52,20 @@ function Player(a, cnt)
 			}
 		}
 	};
+
+	this.hasCharacter = function(c)
+	{
+		if(!this.characters) return false;
+
+		for(var i = 0; i < this.characters.length; i++)
+		{
+			if(this.characters[i] instanceof c) 
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
 	this.getOpponent = function()
 	{

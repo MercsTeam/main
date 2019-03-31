@@ -1,33 +1,10 @@
 var BattleMenu =
 {
-	container : document.querySelector("#dialog1"),
-	btnCommit : document.querySelector("#btnCommit"),
-	active1 : 
-	{ 
-		btns : document.querySelectorAll(".active1 button"), 
-		img : document.querySelector("#active_img1"),
-		skill : document.querySelector("#skillOverlay1"),
-		skillDesc : document.querySelector("#skillOverlay1 .skillDesc"),
-		btnAlly : document.querySelector(".active2 button:last-child"),
-		toggleSkill : function() { this.skill.classList.toggle("inactive"); },
-		ready : document.querySelector("#characterReady1"),
-		toggleReady : function() { this.ready.classList.toggle("inactive"); },
-		targetBtns : document.querySelectorAll("#skillOverlay1 button"),
-		action : document.querySelector("#characterReady1 .characterAction")
-	},
-	active2 : 
-	{ 
-		btns : document.querySelectorAll(".active2 button"), 
-		img : document.querySelector("#active_img2"),
-		skill : document.querySelector("#skillOverlay2"),
-		skillDesc : document.querySelector("#skillOverlay2 .skillDesc"),
-		btnAlly : document.querySelector(".active1 button:last-child"),
-		toggleSkill : function() { this.skill.classList.toggle("inactive"); },
-		ready : document.querySelector("#characterReady2"),
-		toggleReady : function() { this.ready.classList.toggle("inactive"); },
-		targetBtns : document.querySelectorAll("#skillOverlay2 button"),
-		action : document.querySelector("#characterReady2 .characterAction")
-	},
+	container : document.querySelector("#battleMenu"),
+	p1ReadyMsg : document.querySelector("#p1Ready"),
+	p2ReadyMsg : document.querySelector("#p2Ready"),
+	isActive : function() { return !this.container.hidden; },
+	setActive : function(value) { this.container.hidden = !value; },
 	toggle : function()
 	{
 		if(CharacterSelection.isVisible() && !Game.over)
@@ -37,277 +14,324 @@ var BattleMenu =
 	},	
 	Timeout :
 	{
-		label : document.querySelector("#timeout"),
-		intvl : null,
+		intv : null,
+		tmr : document.querySelector(".timer"), 
+		msk : document.querySelector(".mask"),
+		lbl : document.querySelector(".timer-container span"),
+		trot : 0, 
+		mrot : 0,
+		secs : 60,
 		start : function()
 		{
-			this.label.innerHTML = "00:60";
-			this.intvl = setInterval("BattleMenu.Timeout.countdown()", 1000);
+			this.trot = 0;
+			this.mrot = 0;
+			this.secs = 60;
+
+			this.intv = setInterval("BattleMenu.Timeout.countdown()", 1000);
 		},
 		countdown : function()
 		{
-			var r = parseInt(this.label.innerHTML.substring(3));
-			r--;
+			this.secs--;
+			this.lbl.innerHTML = this.secs;
+
+			this.trot += 6;
+			this.tmr.style.transform = "rotate(" + this.trot + "deg)";
+
+			this.mrot -= 6;					
+			this.msk.style.transform = "rotate(" + this.mrot + "deg)";
+			this.msk.style.backgroundColor = (this.trot > 180 ? "#000000" : "#808080");
 			
-			if(r > -1)
-			{
-				this.label.innerHTML = "00:" + (r < 10 ? "0" : "") + r;
-			}
-			else
+			if(this.mrot == -180) this.mrot = 0;
+			if(this.trot == 360)
 			{
 				this.stop();
-				BattleMenu.commit();
+
+				BattleMenu.reset();
+				BattleMenu.setActive(false);
+
+				Game.startRound();
 			}
 		},
 		stop : function()
 		{
-			clearInterval(this.intvl);
+			clearInterval(this.intv);
 		}
 	},
 	load : function()
 	{
 		this.Timeout.start();
-		
-		var p = (Game.player1.isActive() ? Game.player1 : Game.player2);
-		var btns;
-		var retreatIndex = 4;
-		var immobileCount = 0;
-		
-		for(var i = 0; i < p.characters.length; i++)
+
+		var p = null;
+		for(var i = 1; i <= 2; i++)
 		{
-			p.characters[i].retreat = false;
-
-			if(p.characters[i].position == 1 || p.characters[i].position == 2)
+			p = Game["player" + i];			
+			for(var j = 1; j <= p.characters.length; j++)
 			{
-				if(!p.characters[i].active || !p.characters[i].canMove) immobileCount++;
-				
-				if(p.characters[i].position == 1)
-				{
-					btns = this.active1.btns;
-					this.active1.img.src = "characters/headshots/" + (p.characters[i].active ? p.characters[i].image : "inactive.png");
-				}
-				else
-				{
-					btns = this.active2.btns;
-					this.active2.img.src = "characters/headshots/" + (p.characters[i].active ? p.characters[i].image : "inactive.png");
-				}
-				
-				//if less than 3 characters, disable retreat
-				if(p.activeCharacterCount < Game.CHARACTERS_PER_TEAM) 
-				{
-					btns[retreatIndex].disabled = true;
-				}
-				
-				for(var j = 0; j < btns.length; j++)
-				{
-					p.characters[i].skills[j].selected = false;
-					
-					btns[j].innerHTML = p.characters[i].skills[j].name;
-					
-					if(p.characters[i].skills[j].cooldownRem != 0)
-					{
-						btns[j].disabled = true;
-						p.characters[i].skills[j].cooldownRem--;
-					}
-					else
-					{
-						btns[j].disabled = (!p.characters[i].active || (!p.characters[i].canMove && j < retreatIndex) || (p.activeCharacterCount < Game.CHARACTERS_PER_TEAM && j == retreatIndex));
-					}
-					
-					btns[j].onclick = function()
-					{
-						Game.uiSound.start("clickOn");
-						var index = -1;
-						
-						var btns = this.parentElement.querySelectorAll("button");
-						for(var k = 0; k < btns.length; k++)
-						{
-							if(btns[k] == this)
-							{
-								btns[k].classList.add("selected");
-								index = k;
-							}
-							else
-							{
-								btns[k].classList.remove("selected");
-							}
-						}
-						
-						var pos = (this.parentElement.parentElement.classList.contains("active1") ? 1 : 2);
-						var character = p.getCharacterByPosition(pos);
-						
-						if(this.innerHTML == "Retreat")
-						{
-							character.retreat = !character.retreat;
-							if(!character.retreat)
-							{
-								this.classList.remove("selected");
-							}
-							else
-							{
-								BattleMenu.showSkill(character, index, pos, -1);
-							}
-						}
-						else
-						{
-							var skill = character.skills[index];
-							if(skill.multiTarget)
-							{
-								BattleMenu.showSkill(character, index, pos, -1);
-							}
-							else if(skill.type != SkillType.Offensive)
-							{
-								BattleMenu.showSkill(character, index, pos, (skill.affectAlly ? character.getAlly().position : pos));
-							}
-							else
-							{
-								BattleMenu.showSkill(character, index, pos, 0);
-							}
-						}
-					};					
-				}
+				document.querySelector("#character" + i + " .cmenuImg" + j).src = "images/sprites/" + p.getCharacterByPosition(j).state.IDLE_FRONT.img;
 			}
-		}
 
-		if(immobileCount == 2) this.btnCommit.disabled = false;
+			if(this.skipCharacter(p)) 
+			{
+				p.characterPos = 2;
+				this.switchCharacter(p);
+			}
+			this.showSkills(p);
+		}
 	},
 	reset : function()
 	{
-		var b = document.querySelectorAll(".abilities button");
-		for(var i = 0; i < b.length; i++)
-		{
-			b[i].disabled = false;
-			b[i].classList.remove("selected");
-		}
+		Game.player1.characterPos = 1;
+		Game.player1.position = { X : 0, Y : 0 };
+		Game.player1.activeSkill = null;
+		Game.player1.battleReady = false;
 		
-		var f = document.querySelectorAll(".skillOverlay, .characterReady");
-		for(var i = 0; i < f.length; i++)
+		Game.player2.characterPos = 1;
+		Game.player2.position = { X : 0, Y : 0 };
+		Game.player2.activeSkill = null;
+		Game.player2.battleReady = false;
+		
+		this.p1ReadyMsg.hidden = true;
+		this.p2ReadyMsg.hidden = true;
+
+		var id = "";
+		for(var i = 1; i <= 2; i++)
 		{
-			f[i].classList.add("inactive");
+			id = "#character" + i;
+
+			document.querySelector(id + " .cmenuImg1").classList.add("active");
+			document.querySelector(id + " .marker1").style.visibility = "visible";
+				
+			document.querySelector(id + " .cmenuImg2").classList.remove("active");
+			document.querySelector(id + " .marker2").style.visibility = "hidden";
 		}
 		
 		this.Timeout.stop();
-		this.btnCommit.disabled = true;
 	},	
-	showSkill : function(character, index, pos, target)
+	skipCharacter : function(p)
 	{
-		var sType = character.skills[index].type;
+		var character = p.getCharacterByPosition(p.characterPos);
+		return (!character.active || !character.canMove);
+	},
+	switchCharacter : function(p)
+	{
+		var id = (p == Game.player1 ? "#character1" : "#character2");
 		
-		var which = (pos == 1 ? this.active1 : this.active2);
-		which.toggleSkill();		
-		which.skillDesc.innerHTML = character.skills[index].getDescription();
+		document.querySelector(id + " .cmenuImg1").classList.remove("active");
+		document.querySelector(id + " .marker1").style.visibility = "hidden";
+		
+		document.querySelector(id + " .cmenuImg2").classList.add("active");
+		document.querySelector(id + " .marker2").style.visibility = "visible";
+	},
+	showSkills : function(p)
+	{
+		p.position = { X : 0, Y : 0 };
 
-		var btns = which.targetBtns;		
-		if(target != 0)
+		var id = "#character" + (p == Game.player1 ? 1 : 2);
+		var c = p.getCharacterByPosition(p.characterPos);
+		var a = document.querySelectorAll(id + " .skill");
+		var s = null;
+
+		var noRetreat = (p.activeCharacterCount < Game.CHARACTERS_PER_TEAM);
+
+		for(var k = 0; k < c.skills.length; k++)
 		{
-			btns[0].innerHTML = "Continue";
-			btns[0].className = "continue-btn";
-			btns[0].style.color = "#ffffff";
-			btns[0].style.backgroundImage = "";
-			btns[0].style.display = "block";
-			btns[0].onclick = function() { BattleMenu.showReady(character, index, pos, target); };
-			btns[0].disabled = false;
-			
-			btns[1].className = "hidden-btn";
-			btns[1].style.display = "none";
-			
-			if(character.retreat) which.btnAlly.disabled = true;
-		}
-		else
-		{
-			btns[0].className = "target-btn";
-			btns[0].innerHTML = "&oplus;";
-			btns[0].style.display = "inline-block";
-			btns[0].onclick = function() { BattleMenu.showReady(character, index, pos, 1); };
-			
-			btns[1].className = "target-btn";
-			btns[1].innerHTML = "&oplus;";
-			btns[1].style.display = "inline-block";
-			btns[1].onclick = function() { BattleMenu.showReady(character, index, pos, 2); };
-			
-			if(sType == SkillType.Offensive)
+			s = c.skills[k];
+
+			isLongName = (s.name.length > 16);
+			a[k].innerHTML = (isLongName ? "<span class=\"longName\">" : "") + s.name + (isLongName ? "</span>" : "");
+			if(s.name == "Retreat" && noRetreat) a[k].classList.add("disabled");
+
+			if(s.cooldownRem != 0)
 			{
-				var opp = character.player.getOpponent();				
-				
-				btns[0].style.color = "#ff0000";
-				btns[0].style.backgroundImage = string.format("url(\"characters/headshots/{0}\")", opp.getCharacterByPosition(1).image);
-				btns[0].disabled = (!opp.getCharacterByPosition(1).active);
-
-				btns[1].style.color = "#ff0000";
-				btns[1].style.backgroundImage = string.format("url(\"characters/headshots/{0}\")", opp.getCharacterByPosition(2).image);
-				btns[1].disabled = (!opp.getCharacterByPosition(2).active);
+				a[k].classList.add("disabled");
+				s.cooldownRem--;
 			}
 			else
 			{
-				var ally = character.getAlly();
+				a[k].classList.remove("disabled");
+			}
 
-				btns[0].style.color = "#00CC66";
-				btns[0].style.backgroundImage = string.format("url(\"characters/headshots/{0}\")", (pos == 1 ? character : ally).image);				
-				btns[0].disabled = (ally.position == 1 && !ally.active);
+			if(k == 0)
+			{
+				a[k].classList.add("active");
 
-				btns[1].style.color = "#00CC66";
-				btns[1].style.backgroundImage = string.format("url(\"characters/headshots/{0}\")", (pos == 2 ? character : ally).image);
-				btns[1].disabled = (ally.position == 2 && !ally.active);
+				if(!a[k].classList.contains("disabled"))
+				{
+					document.querySelector(id + " .skill-desc").innerHTML = s.getDescription();
+					
+					s.selected = true;
+					this.setTarget(p);
+				}
+				else
+				{
+					document.querySelector(id + " .skill-desc").innerHTML = "Not Available";
+				}
+			}
+			else
+			{
+				a[k].classList.remove("active");
+				s.selected = false;
 			}
 		}
-		
-		btns[2].onclick = function()
-		{
-			Game.uiSound.start("clickOff");
-			
-			which.toggleSkill();
-			which.btnAlly.disabled = (character.player.activeCharacterCount < Game.CHARACTERS_PER_TEAM);
-		};
 	},
-	showReady : function(character, index, pos, target)
+	moveSkill : function(p)
 	{
-		Game.uiSound.start("clickOn");
+		if(p.battleReady) return;
 
-		var s = character.skills[index];
-		s.selected = true;
+		var id = (p == Game.player1 ? "#character1" : "#character2");
+		var skills = document.querySelectorAll(id + " .skill");
+		var s = null;
 
-		character.target = target;
-
-		var which = (pos == 1 ? this.active1 : this.active2);
-		var overlay = which.ready;
-		overlay.classList.toggle("inactive");
-		overlay.style.backgroundImage = string.format("url('characters/{0}')", character.image);
-
-		which.action.innerHTML = (!character.retreat
-			? s.name.toUpperCase() + "<br />" + (s.type == SkillType.Offensive
-			? "<span>against</span><br />" + (target == -1 ? "ENEMY 1 + 2" : "ENEMY " + target)
-			: "<span>on</span><br />" + (target == -1 ? "SELF + ALLY" : (pos == target  ? "SELF" : "ALLY " + target)))
-			: "RETREAT");
-
-		this.btnCommit.disabled = !this.isComplete();
-		if(!character.getAlly().active || !character.getAlly().canMove) this.btnCommit.disabled = false;
-
-		overlay.querySelector("button").onclick = function()
+		for(var i = 0; i < skills.length; i++)
 		{
-			Game.uiSound.start("clickOff");
-			s.selected = false;
-			character.target = null;
-			which.toggleReady();
+			s = p.getCharacterByPosition(p.characterPos).skills[i];
 
-			BattleMenu.btnCommit.disabled = true;
-		};
+			if(i == p.position.Y)
+			{				
+				skills[i].classList.add("active");
+
+				if(!skills[i].classList.contains("disabled"))
+				{
+					s.selected = true
+					
+					//set description
+					document.querySelector(id + " .skill-desc").innerHTML = s.getDescription();
+
+					//toggle targets
+					this.setTarget(p);
+				}
+				else
+				{
+					document.querySelector(id + " .skill-desc").innerHTML = "Not available";
+				}
+			}
+			else
+			{
+				skills[i].classList.remove("active");
+				s.selected = false;
+			}
+		}
 	},
-	isComplete : function() { return (document.querySelectorAll(".characterReady.inactive").length == 0); },
-	commit : function()
+	setTarget : function(p)
 	{
-		Game.uiSound.start("clickOn");
-		this.reset();
+		var character = p.getCharacterByPosition(p.characterPos);
+
+		var skill = character.getSelectedSkill();
+		var targets = document.querySelectorAll((p == Game.player1 ? "#character2" : "#character1") + " [class^='target']");
+
+		var oppActive = [ p.getOpponent().getCharacterByPosition(1).active, p.getOpponent().getCharacterByPosition(2).active ];
 		
-		if(Game.player1.isActive())
+		for(var j = 0; j < targets.length; j++)
 		{
-			Game.player1.active = false;
-			Game.player2.active = true;
-			this.load();
+			if(skill.type != SkillType.Offensive || !oppActive[j])
+			{
+				targets[j].hidden = true;
+			}
+			else if(skill.multiTarget && oppActive[0] && oppActive[1])
+			{
+				targets[j].hidden = false;
+			}
+			else 
+			{
+				if(oppActive[0])
+				{
+					targets[0].hidden = false;
+					targets[1].hidden = true;
+				}
+				else
+				{
+					targets[0].hidden = true;
+					targets[1].hidden = false;
+				}
+				break;
+			}
+		}
+	},
+	getTarget : function(c)
+	{
+		var skill = c.getSelectedSkill();
+		////console.log("getTarget says: " + c.name + "=>" + skill.name);
+		c.retreat = (skill.name == "Retreat");
+		
+		if(c.retreat || skill.multiTarget)
+		{
+			return -1;
+		}
+		else if(skill.type != SkillType.Offensive)
+		{
+			return (skill.affectAlly ? c.getAlly() : c).position;
 		}
 		else
 		{
-			this.toggle();
-			Game.startRound();
+			var targets = document.querySelectorAll((c.player == Game.player1 ? "#character2" : "#character1") + " [class^='target']");
+			for(var j = 0; j < targets.length; j++)
+			{
+				if(!targets[j].hidden)
+				{
+					return j + 1;
+				}
+			}
 		}
+	},
+	moveTarget : function(p)
+	{
+		if(p.battleReady) return;
+
+		var character = p.getCharacterByPosition(p.characterPos);
+		var skill = character.getSelectedSkill();
+		if(skill.type != SkillType.Offensive) return;
+
+		var id = (p == Game.player1 ? "#character2" : "#character1");
+		var targets = document.querySelectorAll(id + " [class^='target']");
+		
+		for(var i = 0; i < targets.length; i++)
+		{
+			if(i == p.position.X)
+			{
+				targets[i].hidden = true;
+			}
+			else
+			{
+				targets[i].hidden = false;
+			}
+		}
+	},
+	select : function(p)
+	{
+		var c = p.getCharacterByPosition(p.characterPos);
+		if(!c.getSelectedSkill()) return;
+
+		Game.uiSound.start("clickOn");
+				
+		c.target = this.getTarget(c);		
+		////console.log("select says: " + c.target);
+
+		if(p.characterPos == 1)
+		{
+			p.characterPos = 2;
+			if(this.skipCharacter(p))
+			{
+				p.battleReady = true;
+			}
+			else
+			{
+				this.switchCharacter(p);
+				this.showSkills(p);	
+			}
+		}
+		else
+		{
+			p.battleReady = true;
+		}
+	},
+	unselect : function(p)
+	{
+	},
+	isReady : function()
+	{
+		if(Game.player1.battleReady) this.p1ReadyMsg.hidden = false;
+		if(Game.player2.battleReady) this.p2ReadyMsg.hidden = false;
+
+		return Game.player1.battleReady && Game.player2.battleReady;
 	}
 };

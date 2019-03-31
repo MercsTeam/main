@@ -262,7 +262,7 @@ function Caveman()
 		+ "about anything for food or \"shinies\".";
 
 	this.damageImage = "images/StillShapes/CavemanStills/caveman_damage.png";
-	this.defeatImage = "images/StillShapes/CavemanStills/aveman_defeat.png";
+	this.defeatImage = "images/StillShapes/CavemanStills/caveman_defeat.png";
 }
 Caveman.prototype = new Character();
 

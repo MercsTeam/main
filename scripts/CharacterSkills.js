@@ -45,7 +45,7 @@ function Retreat()
 				ally.defence.modifier = 0.5;
 			}
 
-			Game.BattleLog.write(string.format("PLAYER{0}: {1} retreats!", (self.player == Game.player1 ? 1 : 2), self.name));
+			//console.log(string.format("PLAYER{0}: {1} retreats!", (self.player == Game.player1 ? 1 : 2), self.name));
 		}
 	};
 }
@@ -654,11 +654,12 @@ function Abduction()
 				Game.skillImgArr.push({
 					player : self.player,
 					character : self,
-					label : string.format("Player {0}.{1} - {2}<br />{3} (ATTACK)",
+					/*label : string.format("Player {0}.{1} - {2}<br />{3} (ATTACK)",
 					(self.player == Game.player1 ? 1 : 2),
 					self.position,
 					self.name,
-					this.name),
+					this.name),*/
+					label : this.name + "!",
 					url : this.imageURL,
 					sound : this.soundID,
 					reaction : []
@@ -896,13 +897,6 @@ function Exoskeleton()
 	this.description = "Hardens the outer shell to increase defence temporarily.";
 	this.imageURL = "images/StillShapes/HiveDroneStills/hivedrone_exoskeleton.png";
 	this.soundID = "exoskeleton";
-	
-	this.doAction = function(self, target)
-	{
-		self.defence.modifier = this.selfDefenceMod;
-		self.defence.duration = this.effectDuration;
-		this.logAction(self, target[0]);
-	};
 }
 Exoskeleton.prototype = new Skill("Exoskeleton");
 
@@ -955,7 +949,7 @@ function HiveMindHijack()
 			
 			//this.logAction(self, t, damage);
 			this.showReaction(t, damage);
-			Game.BattleLog.write(output);
+			//console.log(output);
 		}
 	};
 }
@@ -1021,11 +1015,12 @@ function BlastOff()
 				Game.skillImgArr.push({
 					player : self.player,
 					character : self,
-					label : string.format("Player {0}.{1} - {2}<br />{3} (ATTACK)",
+					/*label : string.format("Player {0}.{1} - {2}<br />{3} (ATTACK)",
 					(self.player == Game.player1 ? 1 : 2),
 					self.position,
 					self.name,
-					this.name),
+					this.name),*/
+					label : this.name + "!",
 					url : this.imageURL,
 					sound : this.soundID,
 					reaction : []

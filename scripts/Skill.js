@@ -92,7 +92,7 @@ function Skill(n)
 				}
 			}
 		}
-		return string.format("<strong>{0}</strong><br />{1}<br /><span class=\"attr-tag\">{2}</span>", this.name, this.description, detail.join("</span><span class=\"attr-tag\">")); 
+		return string.format("<p>{0}</p><span class=\"attr-tag\">{1}</span>", this.description, detail.join("</span><span class=\"attr-tag\">")); 
 	};
 
 	this.toString = function()
@@ -108,9 +108,11 @@ function Skill(n)
 	this.logAction = function(self, target, damage)
 	{
 		var ally = self.getAlly();
-		var output = "";
+		//var output = "";
 
-		if(target == self)
+		if(target != self && target != ally) this.showReaction(target, damage.toFixed(2));
+
+		/*if(target == self)
 		{
 			output = string.format("PLAYER{0}: {1} uses {2} on SELF. {3} {4}", 
 				(self.player == Game.player1 ? "1" : "2"),
@@ -137,12 +139,12 @@ function Skill(n)
 				self.name, 
 				this.name.toUpperCase(),
 				target.name,
-				damage
-			);
+				damage.toFixed(2)
+			)
 		
-			this.showReaction(target, damage);
-		}		
-		Game.BattleLog.write(output);
+			this.showReaction(target, damage.toFixed(2));
+		};*/		
+		//console.log(output);
 	};
 
 	this.showReaction = function(target, damage)
@@ -154,7 +156,8 @@ function Skill(n)
 			//show damaged image
 			if(slide)
 			{
-				slide.reaction.push({ player : target.player, label : string.format("Player {0}.{1} - {2}<br />{3} DAMAGE", (target.player == Game.player1 ? 1 : 2), target.position, target.name, damage), url : target.damageImage });
+				//slide.reaction.push({ player : target.player, label : string.format("Player {0}.{1} - {2}<br />{3} DAMAGE", (target.player == Game.player1 ? 1 : 2), target.position, target.name, damage), url : target.damageImage });
+				slide.reaction.push({ player : target.player, label : damage + " DAMAGE!", url : target.damageImage });
 			}
 		}
 	};

@@ -54,6 +54,7 @@ function showCredits()
 				person.className = "name";
 
 				tbl = document.createElement("TABLE");
+				tbl.className = "credits-table";
 
 				for(var i = 0; i <  _credits[d].length; i++)
 				{
