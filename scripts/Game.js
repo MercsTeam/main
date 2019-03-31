@@ -473,10 +473,6 @@ var Game =
 							showCharacterRating(Game.characterStats[k], new Game.availableCharacters[k]());
 						}
 					}
-					else if(Game.optOptIndex == 4)
-					{
-						showCredits();
-					}
 				}
 
 				if(h != 0)
