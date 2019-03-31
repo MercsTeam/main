@@ -897,6 +897,13 @@ function Exoskeleton()
 	this.description = "Hardens the outer shell to increase defence temporarily.";
 	this.imageURL = "images/StillShapes/HiveDroneStills/hivedrone_exoskeleton.png";
 	this.soundID = "exoskeleton";
+
+	this.doAction = function(self, target)
+	{
+		self.defence.modifier = this.selfDefenceMod;
+		self.defence.duration = this.effectDuration;
+		this.logAction(self, target[0]);
+	};
 }
 Exoskeleton.prototype = new Skill("Exoskeleton");
 

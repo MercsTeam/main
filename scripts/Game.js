@@ -66,13 +66,6 @@ var Game =
 		{ background : "SpaceShip.png",		floor : "spaceship_floor.png",	sound : "",	arena : new THREE.BoxGeometry(100,20,1) },
 		{ background : "bg_desert.png",		floor : "desertPlatform.png",	sound : "",	arena : new THREE.BoxGeometry(100,20,1) }
 	],
-	toggleSound : function()
-	{
-		this.audioLnk.classList.toggle("audio-off");
-		
-		this.music.mute(!this.music.isMuted());
-		this.uiSound.mute(!this.uiSound.isMuted());
-	},
 	init : function()
 	{
 		if(sessionStorage.record)
@@ -253,9 +246,9 @@ var Game =
 							all[i].position,
 							all[i].name,
 							s.name,
-							(s.type == SkillType.Offensive ? "ATTACK" : "DEFEND")),
-							skillType : (s.type == SkillType.Offensive ? "ATTACK" : "DEFEND"),*/
+							(s.type == SkillType.Offensive ? "ATTACK" : "DEFEND")),*/
 							label : s.name + "!",
+							skillType : (s.type == SkillType.Offensive ? "ATTACK" : "DEFEND"),							
 							url : s.imageURL,
 							sound : s.soundID,
 							reaction : []
@@ -400,9 +393,14 @@ var Game =
 		}
 		this.uiSound.playSequence(seq);
 
-		Game.showMessage(string.format("Player {0} Wins!", (winner == Game.player1 ? 1 : 2)), ["Play Again", "Credits"]);
+		Game.showMessage(string.format("Player {0} Wins!", (winner == Game.player1 ? 1 : 2)), ["Play Again", "Quit"]);
 		//console.log(string.format("PLAYER {0} WINS!", (winner == Game.player1 ? 1 : 2)));		
 		Game.over = true;
+	},
+	quit : function()
+	{
+		//go to project page
+		document.location.href = "https://mercsteam.github.io/main/";
 	},
 	getTypeBonus : function(t1, t2)
 	{
@@ -433,7 +431,7 @@ var Game =
 	},
 	gameLoop : function()
 	{
-		if(Keyboard.isKeyDown("KeyC")) showCredits();
+		//if(Keyboard.isKeyDown("KeyC")) showCredits();
 		if(Keyboard.isKeyDown("Space")) Game.optMenu.hidden = false;
 		if(Keyboard.isKeyDown("KeyU")) 
 		{
@@ -453,7 +451,7 @@ var Game =
 
 				if(v != 0)
 				{
-					Game.optOptIndex = (Game.optOptIndex + v).clamp(0, 4);
+					Game.optOptIndex = (Game.optOptIndex + v).clamp(0, 5);
 
 					for(var j = 0; j < Game.optMenuOpts.length; j++)
 					{
@@ -474,6 +472,10 @@ var Game =
 						{
 							showCharacterRating(Game.characterStats[k], new Game.availableCharacters[k]());
 						}
+					}
+					else if(Game.optOptIndex == 4)
+					{
+						showCredits();
 					}
 				}
 
@@ -540,6 +542,10 @@ var Game =
 							//stats							
 							break;
 						case 4:
+							//to do 
+							//credits							
+							break;						
+						case 5:
 							//Game.title.hidden = false;
 							Game.optMenu.hidden = true;
 							break;
@@ -579,12 +585,10 @@ var Game =
 							CharacterSelection.setActive(true);
 							break;
 						case 1:
-							//Game.title.hidden = true;
 							Game.optMenu.hidden = false;
 							break;
 						case 2:
-							//go to project page
-							document.location.href = "https://mercsteam.github.io/main/";
+							Game.quit();
 							break;
 					}
 				}
@@ -641,8 +645,7 @@ var Game =
 							}
 							else
 							{		
-								Game.hideMessage();
-								showCredits();
+								Game.quit();
 							}
 							break;
 					}

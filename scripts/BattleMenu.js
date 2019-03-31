@@ -61,13 +61,16 @@ var BattleMenu =
 	{
 		this.Timeout.start();
 
-		var p = null;
+		var p, c;
 		for(var i = 1; i <= 2; i++)
 		{
 			p = Game["player" + i];			
 			for(var j = 1; j <= p.characters.length; j++)
 			{
-				document.querySelector("#character" + i + " .cmenuImg" + j).src = "images/sprites/" + p.getCharacterByPosition(j).state.IDLE_FRONT.img;
+				c = p.getCharacterByPosition(j);
+				c.retreat = false;
+
+				document.querySelector("#character" + i + " .cmenuImg" + j).src = "images/sprites/" + c.state.IDLE_FRONT.img;
 			}
 
 			if(this.skipCharacter(p)) 
