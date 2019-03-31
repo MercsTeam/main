@@ -602,7 +602,7 @@ var Game =
 				{
 					Game.msgOptIndex = (Game.msgOptIndex + h).clamp(0, 1);
 
-					for(var j = 0; j < Game.optMenuOpts.length; j++)
+					for(var j = 0; j < Game.messageOpts.length; j++)
 					{
 						action = (Game.msgOptIndex == j ? "add" : "remove");
 						Game.messageOpts[j].classList[action]("selected");
