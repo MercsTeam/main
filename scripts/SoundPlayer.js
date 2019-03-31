@@ -105,8 +105,8 @@ var SoundLibrary =
 	dynaBreath : "Inflating Balloon-SoundBible.com-893635129.mp3"
 };
 
-//var soundPath = "https://raw.githubusercontent.com/MercsTeam/main/master/Mercs_sound_library";
-var soundPath = "/Brock/mercs/sounds";
+var soundPath = "https://raw.githubusercontent.com/MercsTeam/main/master/Mercs_sound_library";
+//var soundPath = "/Brock/mercs/sounds";
 
 function SoundPlayer(loop)
 {	
