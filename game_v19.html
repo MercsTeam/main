@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+    <head>
+		<!--base href="https://mercsteam.github.io/main/" /-->
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<meta content="yes" name="mobile-web-app-capable" />
+		<meta name="viewport" content="width=device-width, user-scalable=no" />
+		<title>Mercs: Triple Threat</title>
+
+		<link rel="stylesheet" href="style/style2.css" />
+		<link rel="stylesheet" href="style/credits.css" />
+
+		<script src="scripts/util.js"></script>
+		<script src="scripts/Keyboard.js"></script>
+		<script src="scripts/Player.js"></script>
+		<script src="scripts/Character.js"></script>
+		<script src="scripts/Skill.js"></script>
+		<script src="scripts/CharacterSkills.js"></script>
+
+		<script src="scripts/Dynaman.js"></script>
+		<script src="scripts/BonusCharacters.js"></script>
+		<script src="scripts/Characters.js"></script>
+
+		<script src="scripts/Credits.js"></script>
+		<script src="scripts/SoundPlayer.js"></script>	
+
+		<script src="scripts/threejs/three.min.js"></script>
+		<script src="scripts/threejs/OrbitControls.js"></script>
+		<script src="scripts/threejs/Detector.js"></script>
+    </head>
+    <body>
+		<div id="lgMsg" hidden="hidden">
+			<div>PLAYER {0} WINS!</div>
+			<span class="msg-option selected">Play Again</span>
+			<span class="msg-option">Quit</span>
+		</div>
+
+        <div id="gamePlay">
+            <div id="titleScreen">
+				<div class="title-options">
+					<span class="selected">Start</span>
+					<span>Options</span>
+					<span>Quit</span>
+				</div>
+            </div>
+
+			<div id="optionsMenu" hidden="hidden">
+				<div class="optionsList">
+					<span class="selected">Audio</span>
+					<span>Backstory</span>
+					<span>Controls</span>
+					<span>Stats</span>
+					<span>Back</span>
+				</div>
+				<div class="optionsPane">
+					<div class="option">
+						<label>Volume</label><div class="meter"><span></span></div>
+					</div>
+					<div class="option" hidden="hidden">
+						<p class="first">A fight for control of Cerotis, a mysterious dimension that the solar system has become entangled within. Unnoticed for years, V616 Monocerotis, 
+						a black hole very near to the Sol system grew in size. One by one, stars winked out of the sky. When the expansion of this celestial body was discovered, 
+						a great exodus was planned.</p>
+
+                        <p>Narrowly escaping the unknown energies of the black hole, the human refugees were cast adrift in space. Meanwhile the eight planets of the Sol system 
+						were slowly dragged out of orbit, past the event horizon and plummeted into inky darkness. In the fall, the few who stayed behind on Earth noticed that 
+						they began to age less and less as time ceased to exist in this place. The next change occurred was a great cooling as the Sun dimmed. When it seemed 
+						like doom was here, V616 Monocerotis did something strange; it retreated, expelling all the worlds it had swallowed. With a thunderous roar, stars burned 
+						back to life. This reignition consecrated an entrance into a new era. Earth was spared, but everything had changed. The corruption of spacetime within 
+						the black hole had welded several dimensions together. Now timeless, deposited in an unknown region of space dubbed Cerotis, the fantastical battles the 
+						futuristic in...</p>
+
+						<img src="images/mercs_logo_2.0.png" width="611" height="175" border="0" alt="" />
+					</div>
+					<div class="option" hidden="hidden">
+						<table width="98%" cellpadding="5" cellspacing="5">
+							<tr>
+								<td>&nbsp;</td>
+								<td>Player 1</td>
+								<td>Player 2</td>
+							</tr>
+							<tr>
+								<td>Fire</td>
+								<td class="input">ControlLeft</td>
+								<td class="input">ControlRight</td>
+							</tr>
+							<tr>
+								<td>Jump</td>
+								<td class="input">R</td>
+								<td class="input">P</td>
+							</tr>
+							<tr>
+								<td>Left</td>
+								<td class="input">A</td>
+								<td class="input">ArrowLeft</td>
+							</tr>
+							<tr>
+								<td>Up</td>
+								<td class="input">W</td>
+								<td class="input">ArrowUp</td>
+							</tr>
+							<tr>
+								<td>Right</td>
+								<td class="input">D</td>
+								<td class="input">ArrowRight</td>
+							</tr>
+							<tr>
+								<td>Down</td>
+								<td class="input">S</td>
+								<td class="input">ArrowDown</td>
+							</tr>
+						</table>
+					</div>
+					<div class="option" hidden="hidden">
+						<div class="characterStats">
+							<img class="cStatImg" src="" border="0" alt="" />
+							<div class="powerRatings">
+								<div class="rating">HEALTH</div>
+								<div class="rating">ATTACK</div>
+								<div class="rating">DEFEND</div>
+								<div class="rating">SPEED</div>
+							</div>		
+						</div>
+						<div class="characterStats">
+							<img class="cStatImg" src="" border="0" alt="" />
+							<div class="powerRatings">
+								<div class="rating">HEALTH</div>
+								<div class="rating">ATTACK</div>
+								<div class="rating">DEFEND</div>
+								<div class="rating">SPEED</div>
+							</div>						
+						</div>
+						<div class="characterStats">
+							<img class="cStatImg" src="" border="0" alt="" />
+							<div class="powerRatings">
+								<div class="rating">HEALTH</div>
+								<div class="rating">ATTACK</div>
+								<div class="rating">DEFEND</div>
+								<div class="rating">SPEED</div>
+							</div>	
+						</div>
+						<div class="characterStats">
+							<img class="cStatImg" src="" border="0" alt="" />
+							<div class="powerRatings">
+								<div class="rating">HEALTH</div>
+								<div class="rating">ATTACK</div>
+								<div class="rating">DEFEND</div>
+								<div class="rating">SPEED</div>
+							</div>	
+						</div>
+						<div class="characterStats">
+							<img class="cStatImg" src="" border="0" alt="" />
+							<div class="powerRatings">
+								<div class="rating">HEALTH</div>
+								<div class="rating">ATTACK</div>
+								<div class="rating">DEFEND</div>
+								<div class="rating">SPEED</div>
+							</div>	
+						</div>
+						<div class="characterStats">
+							<img class="cStatImg" src="" border="0" alt="" />
+							<div class="powerRatings">
+								<div class="rating">HEALTH</div>
+								<div class="rating">ATTACK</div>
+								<div class="rating">DEFEND</div>
+								<div class="rating">SPEED</div>
+							</div>	
+						</div>
+						<span class="scrLeft disabled">&#9668;</span><span class="scrRight">&#9658;</span>
+					</div>
+					<div class="option" hidden="hidden"></div>
+				</div>
+			</div>
+            
+            <div id="characterSelect" hidden="hidden">
+                <div id="player1Character" class="characterView">
+					<img class="characterImg" src="images/sprites/alien_idle_front.png" alt="" />
+					<img class="characterLock" src="images/locked.png" alt="" />
+					<span class="characterName">Alien</span>
+				</div>
+
+				<div id="hsContainer">
+					<div id="headshots"></div>
+				</div>
+
+				<div id="player2Character" class="characterView">
+					<img class="characterImg" src="images/sprites/alien_idle_front.png" alt="" />
+					<img class="characterLock" src="images/locked.png" alt="" />
+					<span class="characterName">Alien</span>
+				</div>
+            </div>
+            
+            <div id="battleMenu" hidden="hidden">
+                <div class="timer-container">
+					<div class="timer"><div class="mask"></div></div>
+					<span>60</span>
+				</div>
+
+				<div id="character1" class="cmenu-side">
+					<div class="menu-characters">
+						<img class="cmenuImg3" src="images/sprites/alien_idle_front.png" alt="" />
+
+						<span class="marker1"></span>
+						<span class="marker2" style="visibility:hidden"></span>
+
+						<img class="cmenuImg1 active" src="images/sprites/caveman_idle_front.png" alt="" />
+						<img class="cmenuImg2" src="images/sprites/bsg_idle_front.png" alt="" />
+						
+						<img class="target1" src="images/p2_target.png" alt="" />
+						<img class="target2" src="images/p2_target.png" alt="" hidden="hidden" />
+					</div>
+					<div class="skills">
+						<div class="skill">Sword Chop</div>
+						<div class="skill">Sweeping Strike</div>
+						<div class="skill">Defensive Stance</div>
+						<div class="skill">Focus</div>
+						<div class="skill">Retreat</div>
+					</div>
+					<div class="skill-desc"></div>
+				</div>
+
+				<div id="character2" class="cmenu-side">
+					<div class="menu-characters">
+						<img class="cmenuImg3" src="images/sprites/witch_idle_front.png" alt="" />	
+						
+						<span class="marker1"></span>
+						<span class="marker2" style="visibility:hidden"></span>
+
+						<img class="cmenuImg1 active" src="images/sprites/spacegirl_idle_front.png" alt="" />	
+						<img class="cmenuImg2" src="images/sprites/snipergirl_idle_front.png" alt="" />						
+						
+						<img class="target1" src="images/p1_target.png?v=987654321" alt="" />
+						<img class="target2" src="images/p1_target.png?v=123456789" alt="" hidden="hidden" />
+					</div>
+					<div class="skill-desc"></div>
+					<div class="skills">
+						<div class="skill">Headshot</div>
+						<div class="skill">Ricochet Shot</div>
+						<div class="skill">Take Aim</div>
+						<div class="skill">Camouflage</div>
+						<div class="skill">Retreat</div>						
+					</div>
+				</div>            
+			</div>
+            
+            <div id="imgViewer" hidden="hidden">
+                <span></span>
+            </div>
+			
+			<div class="reactView" hidden="hidden">
+                <span></span>
+            </div>
+
+			<div class="reactView" hidden="hidden">
+                <span></span>
+            </div>
+
+			<div id="p1Ready" class="readyMsg" hidden="hidden"><span>Ready</span></div>
+			<div id="p2Ready" class="readyMsg" hidden="hidden"><span>Ready</span></div>
+            
+			<div id="credits"></div>
+        </div>	
+
+		<script src="scripts/CharacterSelection2.js"></script>
+		<script src="scripts/BattleMenu.js"></script>
+		<script src="scripts/Game.js"></script>		
+    </body>
+</html>
