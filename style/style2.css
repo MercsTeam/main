@@ -10,7 +10,7 @@ canvas { height:100%;width:100%;background:#33CC33 }
 #titleScreen 
 { 
 	position:absolute;top:0;left:0;height:100%;width:100%;
-	background-image:url('../images/Mercs_Logo_2.0.png');
+	background-image:url('../images/Mercs_Logo_3.0.png');
 	background-repeat:no-repeat;
 	background-position:center center;
 	background-size:70%;
