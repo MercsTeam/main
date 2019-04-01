@@ -6,7 +6,7 @@ var Keyboard =
 	keys : {},					
 	setkeydown : function(e)
 	{	
-		if (event.preventDefaulted)  return; // Do nothing if event already handled
+		if (e.preventDefaulted)  return; // Do nothing if event already handled
 		
 		//console.log(e.code + " Down");
 		Keyboard.keys[e.code] = { state : KeyState.Down };
