@@ -432,6 +432,8 @@ var Game =
 	gameLoop : function()
 	{
 		//if(Keyboard.isKeyDown("KeyC")) showCredits();
+
+		if(Keyboard.isKeyDown("Digit2") && Keyboard.isKeyDown("KeyK")) Game.music.start("spy2KTheme");
 		if(Keyboard.isKeyDown("Space")) Game.optMenu.hidden = false;
 		if(Keyboard.isKeyDown("KeyU")) 
 		{
@@ -693,11 +695,13 @@ var Game =
 			if(Keyboard.isKeyDown("KeyM"))
 			{
 				CharacterSelection.addSecretCharacter(Game.player1, { name : "M. Palmer", image : "m_palmer" });
+				Game.uiSound.start("palmerTag");
 			}
 
 			if(Keyboard.isKeyDown("KeyN"))
 			{
 				CharacterSelection.addSecretCharacter(Game.playerw, { name : "P. Williams", image : "p_williams" });
+				Game.uiSound.start("williamsTag");
 			}
 
 			if(CharacterSelection.isReady())

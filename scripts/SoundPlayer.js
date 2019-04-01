@@ -102,7 +102,11 @@ var SoundLibrary =
 	dynaPunch : "Upper Cut-SoundBible.com-1272257235.mp3",
 	laserVision : "Laser Blasts-SoundBible.com-108608437.mp3",
 	dynaSpeed : "Swoosh 1-SoundBible.com-231145780.mp3",
-	dynaBreath : "Inflating Balloon-SoundBible.com-893635129.mp3"
+	dynaBreath : "Inflating Balloon-SoundBible.com-893635129.mp3",
+
+	spy2KTheme : "Spy2K_GameplayFinal.mp3",
+	palmerTag : "Slapple_AgencySelect.mp3",
+	williamsTag : "DroComm_AgencySelect.mp3"
 };
 
 var soundPath = "https://raw.githubusercontent.com/MercsTeam/main/master/Mercs_sound_library";
