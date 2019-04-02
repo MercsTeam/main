@@ -5,10 +5,10 @@
 
 <ul>
   <li><a href="https://mercsteam.github.io/main/game_v19.html">Current Version</a> [Updated 2019-03-30]</li>
-  <li><a href="https://mercsteam.github.io/main/skillTest.html">Skill Test</a></li>
-  <li><a href="https://mercsteam.github.io/main/stillAnimateTest.html">Still Animation Test</a></li>
+  <li><a href="https://mercsteam.github.io/main/test/skillTest.html">Skill Test</a></li>
+  <li><a href="https://mercsteam.github.io/main/test/stillAnimateTest.html">Still Animation Test</a></li>
   
-  <li><a href="https://mercsteam.github.io/main/characterAssets.html">Character Assets</a></li>
+  <li><a href="https://mercsteam.github.io/main/test/characterAssets.html">Character Assets</a></li>
   <li><a href="https://mercsteam.github.io/main/characters">Character Info</a></li>
   <li><a href="https://mercsteam.github.io/main/images/wallpaper.png">Wallpaper</a></li>
   
