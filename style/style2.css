@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Bangers|Press+Start+2P');
 
-body { width:1920px; height:1080px; font-size: 0; font-family: Arial,Helvetica,Sans; background-color:#000000; }
+body { width:1920px; height:1080px; font-size: 0; font-family: Arial,Helvetica,Sans; background-color:#000000; overflow: hidden; }
 body, div, button { margin:0;padding:0; }
 
-#gamePlay { position:relative;width:100%;height:100%;background-image:url('../images/backgrounds/galaxy.png'); overflow: hidden; }
+#gamePlay { position:relative;width:100%;height:100%;background-image:url('../images/backgrounds/galaxy.png'); }
 
 canvas { height:100%;width:100%;background:#33CC33 }
 
@@ -392,7 +392,7 @@ td.input { width:40% !important;font-size:40pt;background-color:rgba(255,255,255
 { 
 	display:block;
 	position:absolute;
-	bottom:35%;
+	bottom:30%;
 	height:90px;width:400px;
 	font-family: "Bangers", cursive;
 	background-color:rgba(255,255,255,0.4); 
