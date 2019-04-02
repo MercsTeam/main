@@ -6,6 +6,7 @@ var CharacterSelection =
 	MAX_ATTACK : 66,
 	MAX_DEFENCE : 75,
 	MAX_SPEED : 135,
+	hshots : document.querySelector("#headshots"),
 	container : document.querySelector("#characterSelect"),	
 	p1Character : document.querySelector("#player1Character"),
 	p2Character : document.querySelector("#player2Character"),
@@ -25,33 +26,33 @@ var CharacterSelection =
 	},
 	load : function()
 	{
-		var btn;
+		var h, sp;
 		for(var i = 0; i < Game.availableCharacters.length; i++)
 		{
 			c = new Game.availableCharacters[i]();
 
-			btn = document.createElement("DIV");
-			btn.classList.add("char-button");
-			if(i == 0) btn.classList.add("selected_player1", "selected_player2");
-			if(c.isBonus && !Game.isUnlocked) btn.classList.add("disabled");
+			h = document.createElement("DIV");
+			h.classList.add("char-button");
+			if(i == 0) h.classList.add("selected_player1", "selected_player2");
+			if(c.isBonus && !Game.isUnlocked) h.classList.add("disabled");
 			
 			img = document.createElement("IMG");
 			img.src = "characters/headshots2/" + c.image;
 			img.border = 0;
 			img.alt = "";
-			btn.appendChild(img);
+			h.appendChild(img);
 
 			sp = document.createElement("SPAN");
 			sp.className = "p1_indicator";
 			sp.innerHTML = "+";
-			btn.appendChild(sp);
+			h.appendChild(sp);
 
 			sp = document.createElement("SPAN");
 			sp.className = "p2_indicator";
 			sp.innerHTML = "+";
-			btn.appendChild(sp);			
+			h.appendChild(sp);			
 			
-			document.querySelector("#headshots").appendChild(btn);
+			CharacterSelection.hshots.appendChild(h);
 		}
 
 		CharacterSelection.p1Indicators = document.querySelectorAll(".p1_indicator");
