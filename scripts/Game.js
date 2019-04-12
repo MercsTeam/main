@@ -453,7 +453,7 @@ var Game =
 
 				if(v != 0)
 				{
-					Game.optOptIndex = (Game.optOptIndex + v).clamp(0, 5);
+					Game.optOptIndex = (Game.optOptIndex + v).clamp(0, 6);
 
 					for(var j = 0; j < Game.optMenuOpts.length; j++)
 					{
@@ -542,8 +542,12 @@ var Game =
 						case 4:
 							//to do 
 							//credits							
-							break;						
+							break;		
 						case 5:
+							//to do 
+							//video							
+							break;								
+						case 6:
 							//Game.title.hidden = false;
 							Game.optMenu.hidden = true;
 							break;
