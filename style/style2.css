@@ -69,6 +69,7 @@ canvas { height:100%;width:100%;background:#33CC33 }
 .title-options .selected, .optionsList .selected { background-color:rgba(0,0,0,0.4); }
 .option p { font-size:24pt;font-family:Arial;text-align:justify; }
 .option p.first::first-letter { font-size:5em;float:left;margin-right:15px;font-family: "Bangers", cursive; }
+.option i { color:#ffffff;font-size:36pt; }
 
 label { display:inline-block;width:300px; }
 .meter { height:70px;width:900px;background-color:rgba(255,255,255,0.4);position:relative;display:inline-block; }
