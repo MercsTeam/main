@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-CA">
     <head>
-		<!--base href="https://mercsteam.github.io/main/" /-->
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<meta content="yes" name="mobile-web-app-capable" />
 		<meta name="viewport" content="width=device-width, user-scalable=no" />
@@ -9,6 +8,7 @@
 
 		<link rel="stylesheet" href="style/style2.css" />
 		<link rel="stylesheet" href="style/credits.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 
 		<script src="scripts/util.js"></script>
 		<script src="scripts/Keyboard.js"></script>
@@ -50,6 +50,7 @@
 					<span>Controls</span>
 					<span>Stats</span>
 					<span>Credits</span>
+					<span>Preview</span>
 					<span>Back</span>
 				</div>
 				<div class="optionsPane">
@@ -57,9 +58,9 @@
 						<label>Volume</label><div class="meter"><span></span></div>
 					</div>
 					<div class="option" hidden="hidden">
-						<p class="first">A fight for control of Cerotis, a mysterious dimension that the solar system has become entangled within. Unnoticed for years, V616 Monocerotis, 
-						a black hole very near to the Sol system grew in size. One by one, stars winked out of the sky. When the expansion of this celestial body was discovered, 
-						a great exodus was planned.</p>
+						<p class="first">A fight for control of Cerotis, a mysterious dimension that the solar system has become entangled within. Unnoticed for years, V616 
+						Monocerotis, a black hole very near to the Sol system grew in size. One by one, stars winked out of the sky. When the expansion of this celestial body 
+						was discovered, a great exodus was planned.</p>
 
                         <p>Narrowly escaping the unknown energies of the black hole, the human refugees were cast adrift in space. Meanwhile the eight planets of the Sol system 
 						were slowly dragged out of orbit, past the event horizon and plummeted into inky darkness. In the fall, the few who stayed behind on Earth noticed that 
@@ -282,10 +283,16 @@
 								<span>SPY2K (and all related characters) &copy; 2019 Peek Performance.  Used by permission.</span>								
 							</div>
 							
-							<div class="name">
-								<img src="images/Mercs_Logo_3.0.png" width="25%" border="0" alt="" />
-							</div>
+							<div class="name"><img src="images/Mercs_Logo_3.0.png" width="25%" border="0" alt="" /></div>
 						</div>	
+					</div>
+					<div class="option" hidden="hidden">
+						<span>Spy2K <small>by Peek Performance</small></span>
+						<iframe width="960" height="640" src="https://www.youtube.com/embed/r6zK-Yob8pI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe><br />
+						
+						<span><a href="http://spy2k.cfdh.ca/social2k/" title="Web"><i class="fa fa-desktop"></i></a></span>
+						<span><a href="https://www.facebook.com/spy2kgame/" title="Facebook"><i class="fa fa-facebook-square"></i></a></span>
+						<span><a href="https://twitter.com/Spy2KGame" title="Twitter"><i class="fa fa-twitter-square"></i></a></span>
 					</div>
 					<div class="option" hidden="hidden"><img src="images/wallpaper.png" width="100%" border="0" alt="" /></div>
 				</div>
@@ -298,9 +305,7 @@
 					<span class="characterName">Alien</span>
 				</div>
 
-				<div id="hsContainer">
-					<div id="headshots"></div>
-				</div>
+				<div id="hsContainer"><div id="headshots"></div></div>
 
 				<div id="player2Character" class="characterView">
 					<img class="characterImg" src="images/sprites/alien_idle_front.png" alt="" />
@@ -362,22 +367,12 @@
 				</div>            
 			</div>
             
-            <div id="imgViewer" hidden="hidden">
-                <span></span>
-            </div>
-			
-			<div class="reactView" hidden="hidden">
-                <span></span>
-            </div>
-
-			<div class="reactView" hidden="hidden">
-                <span></span>
-            </div>
+            <div id="imgViewer" hidden="hidden"><span></span></div>			
+			<div class="reactView" hidden="hidden"><span></span></div>
+			<div class="reactView" hidden="hidden"><span></span></div>
 
 			<div id="p1Ready" class="readyMsg" hidden="hidden"><span>Ready</span></div>
 			<div id="p2Ready" class="readyMsg" hidden="hidden"><span>Ready</span></div>
-            
-			<!--div id="credits"></div-->
         </div>	
 
 		<script src="scripts/CharacterSelection2.js"></script>
