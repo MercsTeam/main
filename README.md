@@ -4,7 +4,12 @@
 <h2>Development</h2>
 
 <ul>
-  <li><a href="https://mercsteam.github.io/main/game_v19.html">Current Version</a> [Updated 2019-03-30]</li>
+  <li>Current Version:
+    <ul>
+      <li><a href="https://mercsteam.github.io/main/game_v19.html">Keyboard</a></li>
+      <li><a href="https://mercsteam.github.io/main/game_v20.html">XBOX Controllers</a></li>
+    </ul>
+  </li>
   <li><a href="https://mercsteam.github.io/main/test/skillTest.html">Skill Test</a></li>
   <li><a href="https://mercsteam.github.io/main/test/stillAnimateTest.html">Still Animation Test</a></li>
   
